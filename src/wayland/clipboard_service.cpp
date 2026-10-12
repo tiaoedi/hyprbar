@@ -1958,7 +1958,7 @@ std::string ClipboardService::stateDirectory() {
   if (!dir.empty()) {
     return dir + "/clipboard";
   }
-  return "/tmp/noctalia-clipboard";
+  return "/tmp/hyprbar-clipboard";
 }
 
 std::string ClipboardService::manifestPath() { return stateDirectory() + "/index.enc"; }

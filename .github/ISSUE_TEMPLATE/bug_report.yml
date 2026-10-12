@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a bug or regression in Noctalia
+description: Report a bug or regression in Hyprbar
 title: "[BUG] "
 labels: ["bug"]
 
@@ -12,7 +12,7 @@ body:
       options:
         - label: I have searched existing issues and confirmed this is not a duplicate.
           required: true
-        - label: I am using the latest available version of Noctalia.
+        - label: I am using the latest available version of Hyprbar.
           required: true
 
   - type: textarea
@@ -59,10 +59,8 @@ body:
       description: |
         Paste any relevant logs, terminal output, or stack traces here.
 
-        If Noctalia crashed, include the complete output from the terminal where it was started, if available. Do not
+        If Hyprbar crashed, include the complete output from the terminal where it was started, if available. Do not
         paste only `Segmentation fault`; that does not include the useful diagnostic output.
-
-        If a maintainer asks for an ASan report, follow the [ASan crash-report instructions](https://github.com/noctalia-dev/noctalia/blob/main/CONTRIBUTING.md#asan-crash-reports).
 
         Examples:
         - journalctl output
@@ -73,10 +71,10 @@ body:
       render: text
 
   - type: input
-    id: noctalia-version
+    id: hyprbar-version
     attributes:
-      label: Noctalia version
-      description: Enter the version shown by Noctalia, or the commit hash if you are running a development build.
+      label: Hyprbar version
+      description: Enter the version shown by Hyprbar, or the commit hash if you are running a development build.
       placeholder: "v5.x.x (commit hash)"
     validations:
       required: true

@@ -164,14 +164,14 @@ void PluginShortcut::reloadScript(bool notifyUser) {
   if (code.empty()) {
     kLog.warn("shortcut '{}': failed to reload '{}'", m_entryId, m_sourcePath.string());
     if (notifyUser) {
-      notify::error("Noctalia", i18n::tr("bar.widgets.scripted.reload-failed"), name);
+      notify::error("Hyprbar", i18n::tr("bar.widgets.scripted.reload-failed"), name);
     }
     return;
   }
   if (m_runtime == nullptr) {
     kLog.warn("shortcut '{}': runtime unavailable for reload", m_entryId);
     if (notifyUser) {
-      notify::error("Noctalia", i18n::tr("bar.widgets.scripted.reload-failed"), name);
+      notify::error("Hyprbar", i18n::tr("bar.widgets.scripted.reload-failed"), name);
     }
     return;
   }
@@ -184,7 +184,7 @@ void PluginShortcut::reloadScript(bool notifyUser) {
   PanelManager::instance().refresh();
   kLog.info("hot reload: reloaded shortcut '{}'", m_entryId);
   if (notifyUser) {
-    notify::info("Noctalia", i18n::tr("bar.widgets.scripted.reloaded"), name);
+    notify::info("Hyprbar", i18n::tr("bar.widgets.scripted.reloaded"), name);
   }
 }
 

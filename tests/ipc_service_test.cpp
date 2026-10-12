@@ -184,7 +184,7 @@ int main() {
   TEST_CHECK(updatedHelp.contains("Toggle a panel by id"));
 
   TEST_CHECK(ipc.start());
-  const auto socketPath = runtimeDir / ("noctalia-" + std::string(kWaylandDisplay) + ".sock");
+  const auto socketPath = runtimeDir / ("hyprbar-" + std::string(kWaylandDisplay) + ".sock");
   TEST_CHECK(sendRaw(ipc, socketPath, "status line1\nline2\nline3") == "status:line1\nline2\nline3\n");
   return 0;
 }

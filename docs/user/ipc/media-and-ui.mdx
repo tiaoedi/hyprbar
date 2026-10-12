@@ -17,7 +17,7 @@ These commands control user-facing shell features that are not tied to one persi
 | Disable Do Not Disturb | <IpcCommand command="notification-dnd-set off" /> | Allow new notification toasts; hidden or suppressed toasts are not replayed. |
 | Toggle Do Not Disturb | <IpcCommand command="notification-dnd-toggle" /> | Toggle notification toast suppression. Notification history still fills. |
 | Show Do Not Disturb status | <IpcCommand command="notification-dnd-status" /> | Print the current Do Not Disturb state. |
-| Send internal notification | <IpcCommand command="notification-show <summary>" /> | Create a Noctalia-origin notification with the provided summary text. |
+| Send internal notification | <IpcCommand command="notification-show <summary>" /> | Create a Hyprbar-origin notification with the provided summary text. |
 | Invoke latest notification | <IpcCommand command="notification-invoke-latest" /> | Invoke the default action of the most recent active notification (raises/focuses the source app), mirroring a toast left-click. |
 | Clear active notifications | <IpcCommand command="notification-clear-active" /> | Dismiss all currently visible active notifications. Dismissed notifications stay in control-center history. |
 | Clear notification history | <IpcCommand command="notification-clear-history" /> | Remove all entries from notification history. |
@@ -27,8 +27,8 @@ DND enable/disable IPC commands show a short OSD for the new state.
 `notification-show` accepts a summary, and CLI usage can pass body as a second argument:
 
 ```sh
-noctalia msg notification-show "Build finished"
-noctalia msg notification-show "Build finished" "All tests passed"
+hyprbar msg notification-show "Build finished"
+hyprbar msg notification-show "Build finished" "All tests passed"
 ```
 
 When a body argument is passed, the CLI forwards it as structured payload (`summary` + `body`) to the IPC handler.
@@ -36,17 +36,17 @@ When a body argument is passed, the CLI forwards it as structured payload (`summ
 For full control, pass a JSON payload object:
 
 ```sh
-noctalia msg notification-show '{"app_name":"Noctalia","summary":"Build finished","body":"All tests passed","urgency":"low","timeout_ms":4000,"icon":"circle-check"}'
+hyprbar msg notification-show '{"app_name":"Hyprbar","summary":"Build finished","body":"All tests passed","urgency":"low","timeout_ms":4000,"icon":"circle-check"}'
 ```
 
 Supported JSON fields:
 
-- `app_name` (string): application label shown for the notification (default `Noctalia`)
+- `app_name` (string): application label shown for the notification (default `Hyprbar`)
 - `summary` (string, required for JSON mode): notification title text
 - `body` (string): body text
 - `urgency` (string): one of `low`, `normal`, `critical`
 - `timeout_ms` (integer): auto-dismiss timeout in milliseconds (`0` keeps it persistent)
-- `icon` (string): icon hint. Plain names are treated as Noctalia glyphs (for example `circle-check`), while paths and URLs are treated as image icons.
+- `icon` (string): icon hint. Plain names are treated as Hyprbar glyphs (for example `circle-check`), while paths and URLs are treated as image icons.
 - `category` (string): freedesktop category
 - `desktop_entry` (string): desktop entry id
 
@@ -56,7 +56,7 @@ Supported JSON fields:
 |--------|---------|-------------|
 | Clear clipboard history | <IpcCommand command="clipboard-clear" /> | Clear clipboard history without opening the panel. Pinned entries survive, so with nothing pinned this clears everything. Does not ask for confirmation. The live selection is untouched; pasting still works until something else is copied. |
 | Copy text to clipboard | <IpcCommand command="clipboard-copy <text>" /> | Set the clipboard selection to `<text>`. Everything after the verb is the payload, so spaces and newlines are kept verbatim. Payloads are capped at 64 KiB by the IPC transport. |
-| Print clipboard text | <IpcCommand command="clipboard-text" /> | Print the most recent clipboard text on stdout with no trailing newline. Pinned entries and images are skipped, so this matches what pasting into a Noctalia input would insert. Prints nothing when the history holds no text. |
+| Print clipboard text | <IpcCommand command="clipboard-text" /> | Print the most recent clipboard text on stdout with no trailing newline. Pinned entries and images are skipped, so this matches what pasting into a Hyprbar input would insert. Prints nothing when the history holds no text. |
 
 ## Media
 
@@ -88,7 +88,7 @@ Supported JSON fields:
 
 Wallpaper paths accept an image path (`~` expanded) or `color:#RRGGBB` / `color:#RRGGBBAA`. Non-color paths must exist at call time.
 
-The CLI forwards everything after the command as one string (`noctalia msg wallpaper-set ...`), so `noctalia msg wallpaper-set DP-1 /home/you/My Pictures/wall.jpg` still yields a correct path when the shell passes separate arguments after the command.
+The CLI forwards everything after the command as one string (`hyprbar msg wallpaper-set ...`), so `hyprbar msg wallpaper-set DP-1 /home/you/My Pictures/wall.jpg` still yields a correct path when the shell passes separate arguments after the command.
 
 ## Theme
 
@@ -97,20 +97,20 @@ The CLI forwards everything after the command as one string (`noctalia msg wallp
 | Get theme mode | <IpcCommand command="theme-mode-get" /> | Print the current resolved theme mode: `dark` or `light` (from `[theme].mode` or from the `[location]` schedule when mode is `auto`). |
 | Toggle theme mode | <IpcCommand command="theme-mode-toggle" /> | Switch between dark and light theme mode (same as the bar control when `[theme].mode` is not `auto`). |
 | Set theme mode | <IpcCommand command="theme-mode-set dark" /> | Persist `[theme].mode` in `settings.toml` and reload. Pass `dark`, `light`, or `auto` (example shows `dark`). |
-| Get color scheme | <IpcCommand command="color-scheme-get" /> | Print the active palette selection as two tokens: `builtin Noctalia`, `wallpaper m3-content`, `community Oxocarbon`, or `custom MyScheme`. |
-| Set color scheme | <IpcCommand command="color-scheme-set builtin Noctalia" /> | Persist `[theme].source` and the palette for that source, then reload. |
+| Get color scheme | <IpcCommand command="color-scheme-get" /> | Print the active palette selection as two tokens: `builtin Hyprbar`, `wallpaper m3-content`, `community Oxocarbon`, or `custom MyScheme`. |
+| Set color scheme | <IpcCommand command="color-scheme-set builtin Hyprbar" /> | Persist `[theme].source` and the palette for that source, then reload. |
 | Apply templates | <IpcCommand command="templates-apply" /> | Rerender the enabled configured theme templates for the current palette without changing theme mode or firing shell palette hooks. |
 
 `color-scheme-set` accepts these source kinds:
 
-- **builtin** - built-in palette name, such as `Noctalia`
+- **builtin** - built-in palette name, such as `Hyprbar`
 - **wallpaper** - generator scheme, such as `m3-tonal-spot`, `m3-content`, `m3-fruit-salad`, `m3-rainbow`, `m3-monochrome`, `vibrant`, `faithful`, `soft`, `dysfunctional`, or `muted`
 - **community** - community palette id
-- **custom** - palette file name without `.json` under `~/.config/noctalia/palettes/`
+- **custom** - palette file name without `.json` under `~/.config/hyprbar/palettes/`
 
 ## Screenshots
 
-Requires compositor support for `wlr-screencopy-unstable-v1`. Uses the global `[shell.screenshot]` output policy (directory, filename pattern, freeze, save to file, clipboard, pipe command). See [Shell settings](/noctalia/configuration/shell/#shell-settings).
+Requires compositor support for `wlr-screencopy-unstable-v1`. Uses the global `[shell.screenshot]` output policy (directory, filename pattern, freeze, save to file, clipboard, pipe command). See [Shell settings](/hyprbar/configuration/shell/#shell-settings).
 
 | Action | Command | Description |
 |--------|---------|-------------|
@@ -129,7 +129,7 @@ In picker mode, choose a connector from the top bar on any screen, or click the 
 
 Annotation tool keys (no modifier): **`m`** move, **`b`** brush, **`h`** highlighter, **`l`** line, **`a`** arrow, **`s`** rectangle, **`o`** circle, **`t`** text, **`n`** numbering, **`u`** blur, **`e`** eraser, **`c`** crop, **`f`** freeze (live overlay), **`p`** toggle the captured pointer, **`[`** and **`]`** change the current tool's size. **`Ctrl+Z`** undoes, **`Ctrl+Shift+Z`** and **`Ctrl+Y`** redo, **`[keybinds].copy`** copies, **`[keybinds].save`** saves.
 
-The pointer button and **P** work the same in region, fullscreen, and frozen-screen editing. `[shell.screenshot].show_cursor` sets the initial choice; toggling does not change that setting. Only the pointer recorded inside the captured area can appear. Noctalia captures the cursor separately through `ext-image-copy-capture-v1` and composites it over the same cursor-free background for both choices. When separate cursor capture is unsupported or fails, the ordinary screenshot keeps the configured pointer choice, the button is disabled with an explanatory tooltip, and **P** shows the same explanation. In live annotation, freeze with **F** first.
+The pointer button and **P** work the same in region, fullscreen, and frozen-screen editing. `[shell.screenshot].show_cursor` sets the initial choice; toggling does not change that setting. Only the pointer recorded inside the captured area can appear. Hyprbar captures the cursor separately through `ext-image-copy-capture-v1` and composites it over the same cursor-free background for both choices. When separate cursor capture is unsupported or fails, the ordinary screenshot keeps the configured pointer choice, the button is disabled with an explanatory tooltip, and **P** shows the same explanation. In live annotation, freeze with **F** first.
 
 `[shell.screenshot].close_on_copy` and `[shell.screenshot].close_on_save` default to `true`: a successful **Copy** or **Ctrl+C** (including a custom **`[keybinds].copy`** binding) and a successful **Save** or **Ctrl+S** (including **`[keybinds].save`**) close the editor. Set either to `false` to keep editing after that action. Failed copies and failed saves leave the editor open.
 

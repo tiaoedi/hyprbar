@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Hyprbar">
+  <defs>
+    <linearGradient id="tile" x1="14" y1="12" x2="114" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#77d5f5"/>
+      <stop offset="1" stop-color="#8d78e8"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="116" height="116" rx="30" fill="#111827"/>
+  <rect x="10" y="10" width="108" height="108" rx="27" fill="url(#tile)"/>
+  <path d="M34 31h15v26h30V31h15v66H79V71H49v26H34z" fill="#101522"/>
+</svg>

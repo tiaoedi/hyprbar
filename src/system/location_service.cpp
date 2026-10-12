@@ -285,17 +285,17 @@ bool LocationService::coordinatesValid(double latitude, double longitude) noexce
 }
 
 std::filesystem::path LocationService::transportCacheDir() {
-  return std::filesystem::path("/tmp") / "noctalia-location";
+  return std::filesystem::path("/tmp") / "hyprbar-location";
 }
 
 std::filesystem::path LocationService::stateCacheFilePath() {
   if (const char* xdg = std::getenv("XDG_CACHE_HOME"); xdg != nullptr && xdg[0] != '\0') {
-    return std::filesystem::path(xdg) / "noctalia" / "location.json";
+    return std::filesystem::path(xdg) / "hyprbar" / "location.json";
   }
   if (const char* home = std::getenv("HOME"); home != nullptr && home[0] != '\0') {
-    return std::filesystem::path(home) / ".cache" / "noctalia" / "location.json";
+    return std::filesystem::path(home) / ".cache" / "hyprbar" / "location.json";
   }
-  return std::filesystem::path("/tmp") / "noctalia-location-cache.json";
+  return std::filesystem::path("/tmp") / "hyprbar-location-cache.json";
 }
 
 std::string LocationService::compactLocationLabel(const std::string& name, const std::string& country) {

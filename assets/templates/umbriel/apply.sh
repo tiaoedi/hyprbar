@@ -17,7 +17,7 @@ resolve_config_home() {
 
 config_dir="$(resolve_config_home)/umbriel"
 config_file="$config_dir/config.toml"
-include_line='files = ["noctalia.toml"]'
+include_line='files = ["hyprbar.toml"]'
 
 mkdir -p "$config_dir"
 
@@ -31,7 +31,7 @@ trap 'rm -f "$tmp_file"' EXIT
 
 awk '
     function add_optional_files() {
-        print "files = [\"noctalia.toml\"]"
+        print "files = [\"hyprbar.toml\"]"
     }
 
     # Offset of the first ch at or after start that is real array syntax: not
@@ -60,7 +60,7 @@ awk '
     }
 
     # Rebuild a complete "files = [ ... ]" statement (buf may span lines),
-    # dropping any existing noctalia.toml entry and appending it last so it
+    # dropping any existing hyprbar.toml entry and appending it last so it
     # overrides earlier includes. Handles single-line and multi-line arrays.
     function build_optional(buf,   open, endp, head, inner, tail, test, multiline, indent) {
         open = find_syntax(buf, 1, "[")
@@ -73,9 +73,9 @@ awk '
         inner = substr(buf, open + 1, endp - open - 1)
         tail  = substr(buf, endp)
 
-        gsub(/"noctalia\.toml"[[:space:]]*,[[:space:]]*/, "", inner)
-        gsub(/,[[:space:]]*"noctalia\.toml"/, "", inner)
-        gsub(/"noctalia\.toml"/, "", inner)
+        gsub(/"hyprbar\.toml"[[:space:]]*,[[:space:]]*/, "", inner)
+        gsub(/,[[:space:]]*"hyprbar\.toml"/, "", inner)
+        gsub(/"hyprbar\.toml"/, "", inner)
 
         test = inner
         gsub(/[[:space:]]/, "", test)
@@ -86,23 +86,23 @@ awk '
             if (match(inner, /\n[ \t]*"/))
                 indent = substr(inner, RSTART + 1, RLENGTH - 2)
             if (test == "")
-                return head "\n" indent "\"noctalia.toml\",\n" tail
+                return head "\n" indent "\"hyprbar.toml\",\n" tail
             sub(/[[:space:]]+$/, "", inner)
             if (inner !~ /,$/)
                 inner = inner ","
-            return head inner "\n" indent "\"noctalia.toml\",\n" tail
+            return head inner "\n" indent "\"hyprbar.toml\",\n" tail
         }
 
         if (test == "")
-            return head "\"noctalia.toml\"" tail
+            return head "\"hyprbar.toml\"" tail
         sub(/[[:space:]]+$/, "", inner)
-        return head inner ", \"noctalia.toml\"" tail
+        return head inner ", \"hyprbar.toml\"" tail
     }
 
     # Remove the generated include from the mandatory section written by older
-    # Noctalia versions while preserving every user-owned include.
+    # Hyprbar versions while preserving every user-owned include.
     function build_required(buf,   open, endp, head, inner, tail) {
-        if (index(buf, "\"noctalia.toml\"") == 0)
+        if (index(buf, "\"hyprbar.toml\"") == 0)
             return buf
 
         open = find_syntax(buf, 1, "[")
@@ -114,9 +114,9 @@ awk '
         inner = substr(buf, open + 1, endp - open - 1)
         tail  = substr(buf, endp)
 
-        gsub(/"noctalia\.toml"[[:space:]]*,[[:space:]]*/, "", inner)
-        gsub(/,[[:space:]]*"noctalia\.toml"/, "", inner)
-        gsub(/"noctalia\.toml"/, "", inner)
+        gsub(/"hyprbar\.toml"[[:space:]]*,[[:space:]]*/, "", inner)
+        gsub(/,[[:space:]]*"hyprbar\.toml"/, "", inner)
+        gsub(/"hyprbar\.toml"/, "", inner)
         return head inner tail
     }
 

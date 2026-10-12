@@ -667,7 +667,7 @@ namespace noctalia::theme {
                         },
                 },
                 {
-                    .name = "Noctalia",
+                    .name = "Hyprbar",
                     .dark =
                         FixedPaletteMode{
                             .palette =

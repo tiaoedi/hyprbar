@@ -19,11 +19,11 @@ resolve_config_home() {
 
 config_dir="$(resolve_config_home)/niri"
 config_file="$config_dir/config.kdl"
-output_file="$config_dir/noctalia.kdl"
-include_line='include "noctalia.kdl"'
+output_file="$config_dir/hyprbar.kdl"
+include_line='include "hyprbar.kdl"'
 
-has_noctalia_include() {
-    grep -Eq '^[[:space:]]*include([[:space:]].*)?"([^"]*/)?noctalia\.kdl"([[:space:]]|$)' "$config_file"
+has_hyprbar_include() {
+    grep -Eq '^[[:space:]]*include([[:space:]].*)?"([^"]*/)?hyprbar\.kdl"([[:space:]]|$)' "$config_file"
 }
 
 apply_include() {
@@ -34,7 +34,7 @@ apply_include() {
         return
     fi
 
-    if has_noctalia_include; then
+    if has_hyprbar_include; then
         return
     else
         local grep_status=$?

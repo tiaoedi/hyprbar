@@ -531,7 +531,7 @@ namespace {
   }
 
   std::filesystem::path remoteIconCachePath(std::string_view url) {
-    const std::filesystem::path cacheDir = std::filesystem::path("/tmp") / "noctalia-notification-icons";
+    const std::filesystem::path cacheDir = std::filesystem::path("/tmp") / "hyprbar-notification-icons";
     const std::size_t hash = std::hash<std::string_view>{}(url);
     return cacheDir / (std::to_string(hash) + ".img");
   }
@@ -2188,7 +2188,7 @@ void NotificationToast::ensureSurfaces() {
     inst->output = output.output;
 
     auto surfaceConfig = LayerSurfaceConfig{
-        .nameSpace = "noctalia-notification",
+        .nameSpace = "hyprbar-notification",
         .layer = layer == "overlay" ? LayerShellLayer::Overlay : LayerShellLayer::Top,
         .anchor = anchor,
         .width = surfaceWidth,

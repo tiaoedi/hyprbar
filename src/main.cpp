@@ -38,7 +38,7 @@ namespace {
 
   enum class SpawnResult { Parent, Error };
 
-  constexpr const char* kDaemonPipeEnv = "NOCTALIA_DAEMON_PIPE_FD";
+  constexpr const char* kDaemonPipeEnv = "HYPRBAR_DAEMON_PIPE_FD";
   int g_daemonPipe = -1;
 
   void closeFd(int& fd) {
@@ -132,11 +132,11 @@ namespace {
   int runTopLevelFlag(const char* flag) {
     if (std::strcmp(flag, "--version") == 0 || std::strcmp(flag, "-v") == 0) {
       const std::string version = noctalia::build_info::displayVersion();
-      std::println("noctalia {}", version);
+      std::println("hyprbar {}", version);
       return 0;
     }
     if (std::strcmp(flag, "--help") == 0 || std::strcmp(flag, "-h") == 0) {
-      std::print("{}", noctalia::cli::renderHelp(noctalia::cli::kRootCmd, "noctalia"));
+      std::print("{}", noctalia::cli::renderHelp(noctalia::cli::kRootCmd, "hyprbar"));
       return 0;
     }
     return -1;
@@ -225,7 +225,7 @@ namespace {
     // is settled before bars or surfaces are created. Held for the process lifetime.
     SingleInstanceLock instanceLock;
     if (!instanceLock.tryAcquire()) {
-      std::println(stderr, "error: noctalia is already running");
+      std::println(stderr, "error: hyprbar is already running");
       completeDaemonStartup(1);
       _exit(1);
     }
@@ -309,7 +309,7 @@ int main(int argc, char* argv[]) {
 
   if (argc >= 2) {
     std::println(stderr, "error: unknown command: {}", argv[1]);
-    std::println(stderr, "Run 'noctalia --help' for usage.");
+    std::println(stderr, "Run 'hyprbar --help' for usage.");
     return 1;
   }
 
@@ -337,7 +337,7 @@ int main(int argc, char* argv[]) {
         return 1;
       }
       if (daemonResult == 0) {
-        std::println("noctalia started [pid: {}]", pid);
+        std::println("hyprbar started [pid: {}]", pid);
       }
       return daemonResult;
     }

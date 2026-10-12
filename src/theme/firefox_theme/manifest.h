@@ -9,7 +9,7 @@ namespace noctalia::theme::firefox_theme::manifest {
 
   inline constexpr std::string_view kExtensionId = "pywalfox@frewacom.org";
   inline constexpr std::string_view kName = "pywalfox";
-  inline constexpr std::string_view kDescription = "Noctalia Firefox theme native messaging host";
+  inline constexpr std::string_view kDescription = "Hyprbar Firefox theme native messaging host";
 
   enum class Ownership : std::uint8_t {
     Missing,

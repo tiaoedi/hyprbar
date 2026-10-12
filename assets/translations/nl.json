@@ -691,9 +691,9 @@
       "dbus-disabled": "D-Bus-meldingen uitgeschakeld",
       "desktop-widgets-editor": "Widget-editor",
       "desktop-widgets-editor-enabled": "Widget-editor voor bureaublad staat aan. Schakel over naar een lege werkruimte om de editor-overlay te zien.",
-      "greeter-sync": "Noctalia Greeter",
+      "greeter-sync": "Greeter",
       "greeter-sync-success": "Uiterlijk gesynchroniseerd. Wijzigingen worden toegepast bij het volgende aanmeldingsscherm.",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "Deze sneltoets accepteert een enkele toets zonder modificatietoetsen.",
       "keybind-invalid-printable": "Drukbare toetsen (letters, cijfers, symbolen) vereisen een modificatietoets zoals Ctrl of Alt.",
       "keybind-invalid-super": "De Super-/Windows-toets kan niet worden gebruikt in shell-sneltoetsen.",
@@ -959,7 +959,7 @@
       },
       "reset-page": "Herstellen van sommige instellingen mislukt.",
       "support-report": "Opslaan van ondersteuningsrapport mislukt.",
-      "sync-greeter": "Kon uiterlijk niet synchroniseren met Noctalia Greeter.",
+      "sync-greeter": "Kon uiterlijk niet synchroniseren met Greeter.",
       "widget": {
         "rename": "Kon benoemde widget niet hernoemen."
       },
@@ -1265,8 +1265,8 @@
         },
         "kind-label": "Soort",
         "location-label": "Locatie",
-        "location-placeholder-git": "https://github.com/me/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/me/hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "Naam",
         "name-placeholder": "mijn-plugins",
         "remove": "Verwijder bron",
@@ -1307,7 +1307,7 @@
           "label": "Hoekronding"
         },
         "custom-palette": {
-          "description": "Kies een palet uit ~/.config/noctalia/palettes/",
+          "description": "Kies een palet uit ~/.config/hyprbar/palettes/",
           "label": "Aangepast palet",
           "search-placeholder": "Aangepaste paletten zoeken..."
         },
@@ -1674,7 +1674,7 @@
             "label": "Bij uitschakelen"
           },
           "started": {
-            "description": "Commando om uit te voeren nadat Noctalia start",
+            "description": "Commando om uit te voeren nadat Hyprbar start",
             "label": "Bij opstarten"
           },
           "theme-mode-changed": {
@@ -2156,7 +2156,7 @@
           "label": "Datumnotatie"
         },
         "launch-apps-as-systemd-services": {
-          "description": "Start applicaties in aparte systemd-diensten zodat ze Noctalia's cgroup niet delen",
+          "description": "Start applicaties in aparte systemd-diensten zodat ze Hyprbar's cgroup niet delen",
           "label": "Apps starten als systemd-diensten"
         },
         "niri-overview-type-to-launch": {
@@ -2164,7 +2164,7 @@
           "label": "Typen om te starten"
         },
         "offline-mode": {
-          "description": "Blokkeer alle uitgaande netwerkverzoeken",
+          "description": "Blokkeert nieuwe HTTP-verzoeken via de gedeelde client van Hyprbar; geen firewall.",
           "label": "Offline-modus"
         },
         "osd-background-opacity": {
@@ -2294,12 +2294,12 @@
         },
         "sync-greeter": {
           "button": "Nu synchroniseren",
-          "description": "Kopiëer de huidige achtergrond en kleuren naar Noctalia Greeter (vereist beheerdersrechten)",
-          "label": "Noctalia Greeter"
+          "description": "Kopiëer de huidige achtergrond en kleuren naar Greeter (vereist beheerdersrechten)",
+          "label": "Greeter"
         },
         "telemetry": {
-          "description": "Verzendt een kleine anonieme opstartping met versie, OS, compositor, monitorresoluties, RAM en UI-schaal",
-          "label": "Anonieme opstartping"
+          "description": "Verstuurt bij inschakeling opstarttelemetrie met een blijvende installatie-ID.",
+          "label": "Opstarttelemetrie"
         },
         "time-format": {
           "description": "Standaard tijdnotatie voor de shell-UI zonder eigen instelling",
@@ -2890,7 +2890,7 @@
     "window": {
       "export-config": "Configuratie exporteren…",
       "export-config-saved": "Configuratie-export opgeslagen.",
-      "native-title": "Noctalia Instellingen",
+      "native-title": "Hyprbar Instellingen",
       "no-results": "Geen instellingen gevonden",
       "no-results-hint": "Probeer een andere instellingsnaam of configuratiesleutel.",
       "reset-page": "Pagina herstellen",
@@ -2911,7 +2911,7 @@
     "no-wallpaper-selected": "Geen bureaubladachtergrond geselecteerd",
     "select-wallpaper": "Selecteer bureaubladachtergrond",
     "subtitle": "Een paar snelle keuzes om aan de slag te gaan.",
-    "title": "Welkom bij Noctalia",
+    "title": "Welkom bij Hyprbar",
     "wallpaper": "Bureaubladachtergrond",
     "wallpaper-scheme": "Achtergrondschema"
   },

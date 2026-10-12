@@ -48,7 +48,7 @@ namespace noctalia::theme::firefox_theme::manifest {
   install(const std::filesystem::path& manifestPath, const std::filesystem::path& hostExecutable, std::string* error) {
     if (hostExecutable.empty() || !std::filesystem::is_regular_file(hostExecutable)) {
       if (error != nullptr) {
-        *error = "noctalia executable not found";
+        *error = "hyprbar executable not found";
       }
       return false;
     }

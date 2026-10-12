@@ -101,7 +101,7 @@ namespace {
     }
 
     const std::string lower = StringUtils::toLower(baseKey);
-    if (lower.starts_with("dev.noctalia.")) {
+    if (lower.starts_with("dev.hyprbar.") || lower.starts_with("dev.noctalia.")) {
       return true;
     }
 

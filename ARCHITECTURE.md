@@ -1,7 +1,7 @@
 Architecture
 ===
 
-This file describes how Noctalia is put together and the invariants reviewers enforce. For code style, testing, commit
+This file describes how Hyprbar is put together and the invariants reviewers enforce. For code style, testing, commit
 conventions, and the project layout, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Event Loop
@@ -187,7 +187,9 @@ use `needsFrameTick()` and `onFrameTick()` only for continuous animation.
   explicitly.
 - **Clipboard**: large payloads are written across `POLLOUT` ticks; do not close the send fd on `EAGAIN`.
 - **Weather**: `auto_locate` is best effort and uses the cached location on failure. `[shell].offline_mode = true`
-  disables all HTTP traffic. Never log coordinates or location names.
+  blocks new requests routed through the shared `HttpClient`; it does not cancel active transfers or act as a
+  system-wide firewall, and it does not control browser, external-process, or arbitrary plugin traffic. Local caches
+  remain readable. Never log coordinates or location names.
 - **Brightness**: keep the service instance stable across reloads and hotplug, since consumers hold raw pointers. Check
   `BrightnessDisplay::controllable` before exposing writes. Read the `brightness` sysfs file, not `actual_brightness`.
 
@@ -222,7 +224,7 @@ use `needsFrameTick()` and `onFrameTick()` only for continuous animation.
   keys use `selectionFg` and `selectionBg`.
 - Built-in template hooks live beside their template (for example `assets/templates/fuzzel/apply.sh`). Community
   templates are fetched from `https://api.noctalia.dev/templates` and cached under
-  `$XDG_STATE_HOME/noctalia/community-templates`. Template application runs on a background worker.
+  `$XDG_STATE_HOME/hyprbar/community-templates`. Template application runs on a background worker.
 - Glyph names resolve through `src/render/text/glyph_registry.cpp`: curated aliases, then `U+`/`0x` codepoints, then
   Tabler names from `tabler.json`. C++ glyph literals belong in the curated registry.
 

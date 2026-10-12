@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Sync docs/user/**/*.mdx into ../noctalia-docs/src/content/docs/noctalia/.
+# Sync docs/user/**/*.mdx into ../hyprbar-docs/src/content/docs/hyprbar/.
 # The source files remain MDX so the docs site can keep using its components.
 # Documentation assets are copied from docs/assets/ into the docs site's
 # src/assets/. Existing generated pages are replaced atomically, and stale
@@ -8,9 +8,9 @@
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-site_root="${1:-"$repo_root/../noctalia-docs"}"
+site_root="${1:-"$repo_root/../hyprbar-docs"}"
 source_dir="$repo_root/docs/user"
-dest_dir="$site_root/src/content/docs/noctalia"
+dest_dir="$site_root/src/content/docs/hyprbar"
 asset_source="$repo_root/docs/assets"
 asset_dest="$site_root/src/assets"
 plugin_api_source="$repo_root/docs/plugin-api.json"

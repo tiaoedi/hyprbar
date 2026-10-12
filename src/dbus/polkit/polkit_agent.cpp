@@ -29,7 +29,7 @@
 namespace {
 
   constexpr Logger kLog("polkit");
-  constexpr auto kAgentObjectPath = "/org/noctalia/PolkitAuthenticationAgent";
+  constexpr auto kAgentObjectPath = "/org/hyprbar/PolkitAuthenticationAgent";
 
   // GObject dispatches these signal/vfunc callbacks through libffi (g_cclosure_marshal_generic),
   // so a C++ exception escaping one would unwind across the C ABI and call std::terminate. Run the

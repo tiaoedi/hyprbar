@@ -257,7 +257,7 @@ void SessionActionRunner::invoke(const SessionPanelActionConfig& cfg) const {
   }
   if (cfg.action == "lock_and_suspend") {
     if (!lockThenSuspendDetached()) {
-      notify::error("Noctalia", i18n::tr("session.errors.lock-title"), i18n::tr("session.errors.lock-body"));
+      notify::error("Hyprbar", i18n::tr("session.errors.lock-title"), i18n::tr("session.errors.lock-body"));
     }
     return;
   }
@@ -271,7 +271,7 @@ void SessionActionRunner::invoke(const SessionPanelActionConfig& cfg) const {
   }
   if (cfg.action == "lock") {
     if (!lock()) {
-      notify::error("Noctalia", i18n::tr("session.errors.lock-title"), i18n::tr("session.errors.lock-body"));
+      notify::error("Hyprbar", i18n::tr("session.errors.lock-title"), i18n::tr("session.errors.lock-body"));
     }
     return;
   }

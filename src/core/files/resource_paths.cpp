@@ -18,11 +18,11 @@ namespace paths {
     constexpr Logger kLog("paths");
 
     std::filesystem::path installedAssetsRoot() {
-      const std::filesystem::path datadir(NOCTALIA_INSTALL_DATADIR);
+      const std::filesystem::path datadir(HYPRBAR_INSTALL_DATADIR);
       if (datadir.is_absolute()) {
-        return datadir / "noctalia" / "assets";
+        return datadir / "hyprbar" / "assets";
       }
-      return std::filesystem::path(NOCTALIA_INSTALL_PREFIX) / datadir / "noctalia" / "assets";
+      return std::filesystem::path(HYPRBAR_INSTALL_PREFIX) / datadir / "hyprbar" / "assets";
     }
 
     bool isAssetRoot(const std::filesystem::path& root) {
@@ -32,7 +32,8 @@ namespace paths {
 
       std::error_code ec;
       return std::filesystem::exists(root / "emoji.json", ec)
-          && std::filesystem::exists(root / "fonts" / "noctalia-tabler.ttf", ec)
+          && std::filesystem::exists(root / "hyprbar.svg", ec)
+          && std::filesystem::exists(root / "fonts" / "hyprbar-tabler.ttf", ec)
           && std::filesystem::exists(root / "templates" / "builtin.toml", ec)
           && std::filesystem::exists(root / "translations" / "en.json", ec);
     }
@@ -60,13 +61,13 @@ namespace paths {
     std::vector<std::filesystem::path> assetCandidates() {
       std::vector<std::filesystem::path> candidates;
 
-      if (const char* env = std::getenv("NOCTALIA_ASSETS_DIR"); env != nullptr && env[0] != '\0') {
+      if (const char* env = std::getenv("HYPRBAR_ASSETS_DIR"); env != nullptr && env[0] != '\0') {
         const std::filesystem::path overridePath(env);
         if (isAssetRoot(overridePath)) {
           candidates.push_back(overridePath);
           return candidates;
         }
-        kLog.warn("NOCTALIA_ASSETS_DIR is not a valid asset bundle: {}", overridePath.string());
+        kLog.warn("HYPRBAR_ASSETS_DIR is not a valid asset bundle: {}", overridePath.string());
       }
 
       if (auto exe = executablePath()) {
@@ -74,11 +75,11 @@ namespace paths {
         appendUnique(candidates, exeDir / "assets");
         appendUnique(candidates, exeDir.parent_path() / "assets");
 
-        const std::filesystem::path datadir(NOCTALIA_INSTALL_DATADIR);
+        const std::filesystem::path datadir(HYPRBAR_INSTALL_DATADIR);
         if (!datadir.empty() && !datadir.is_absolute()) {
-          appendUnique(candidates, exeDir.parent_path() / datadir / "noctalia" / "assets");
+          appendUnique(candidates, exeDir.parent_path() / datadir / "hyprbar" / "assets");
         }
-        appendUnique(candidates, exeDir.parent_path() / "share" / "noctalia" / "assets");
+        appendUnique(candidates, exeDir.parent_path() / "share" / "hyprbar" / "assets");
       }
 
       appendUnique(candidates, installedAssetsRoot());

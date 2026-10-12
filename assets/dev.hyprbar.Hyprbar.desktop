@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Name=Hyprbar
+Comment=A customizable desktop shell for Wayland.
+Exec=hyprbar --daemon
+Icon=hyprbar
+Terminal=false
+Categories=Settings;DesktopSettings;
+StartupNotify=false
+Actions=Settings;
+Keywords=desktop;shell;wayland;bar;launcher;
+
+[Desktop Action Settings]
+Name=Open Settings
+Exec=sh -c "hyprbar msg settings-open || { hyprbar --daemon && hyprbar msg settings-open; }"

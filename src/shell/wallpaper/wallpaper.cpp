@@ -1230,7 +1230,7 @@ void Wallpaper::createInstance(const WaylandOutput& output) {
   instance->description = output.description;
 
   auto surfaceConfig = LayerSurfaceConfig{
-      .nameSpace = "noctalia-wallpaper",
+      .nameSpace = "hyprbar-wallpaper",
       .layer = LayerShellLayer::Background,
       .anchor = LayerShellAnchor::Top | LayerShellAnchor::Bottom | LayerShellAnchor::Left | LayerShellAnchor::Right,
       .width = 0,

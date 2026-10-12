@@ -1,5 +1,8 @@
 name: CI
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [main, master]
@@ -21,7 +24,7 @@ jobs:
         run: |
           pacman -Syu --noconfirm --needed git just clang22
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Check formatting
         env:
@@ -50,7 +53,7 @@ jobs:
             nlohmann-json stb \
             jemalloc just clang
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Build
         run: just build

@@ -37,12 +37,12 @@ int main() {
   const std::filesystem::path root =
       std::filesystem::temp_directory_path() / ("noctalia-group-style-persist-" + std::to_string(::getpid()));
   std::filesystem::remove_all(root);
-  writeFile(root / "config" / "noctalia" / "config.toml", R"(
+  writeFile(root / "config" / "hyprbar" / "config.toml", R"(
 [bar.default]
 start = [ "clock", "weather" ]
 )");
 
-  ::setenv("NOCTALIA_CONFIG_HOME", (root / "config").c_str(), 1);
+  ::setenv("HYPRBAR_CONFIG_HOME", (root / "config").c_str(), 1);
   ::setenv("XDG_STATE_HOME", (root / "state").c_str(), 1);
 
   // Every style field differs from its default so a dropped key cannot pass by accident.

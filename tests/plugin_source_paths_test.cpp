@@ -30,8 +30,8 @@ namespace {
 } // namespace
 
 int main() {
-  ::setenv("NOCTALIA_STATE_HOME", "/tmp/noctalia-path-test-state", 1);
-  ::setenv("NOCTALIA_DATA_HOME", "/tmp/noctalia-path-test-data", 1);
+  ::setenv("HYPRBAR_STATE_HOME", "/tmp/noctalia-path-test-state", 1);
+  ::setenv("HYPRBAR_DATA_HOME", "/tmp/noctalia-path-test-data", 1);
 
   const PluginSourceConfig gitSource{
       .kind = PluginSourceKind::Git,
@@ -44,10 +44,10 @@ int main() {
       .location = "~/dev/noctalia-plugins",
   };
 
-  const std::filesystem::path stateRoot = "/tmp/noctalia-path-test-state/noctalia";
+  const std::filesystem::path stateRoot = "/tmp/noctalia-path-test-state/hyprbar";
   bool ok = true;
   ok = expectPath(
-           scripting::plugin_paths::localSourceRoot(), "/tmp/noctalia-path-test-data/noctalia/plugins",
+           scripting::plugin_paths::localSourceRoot(), "/tmp/noctalia-path-test-data/hyprbar/plugins",
            "local source root"
        )
       && ok;

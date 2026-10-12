@@ -1,6 +1,6 @@
 ---
 title: Bar
-description: Add and customize Noctalia bars, choose their widgets, and adjust them per monitor.
+description: Add and customize Hyprbar bars, choose their widgets, and adjust them per monitor.
 sidebar:
   order: 2
 ---
@@ -85,7 +85,7 @@ configured corner radius, half the bar `thickness`, and the available `margin_en
 
 Multiple `[bar.*]` entries are supported - each is independently configured and rendered on all monitors.
 
-`[bar].order` controls the order Noctalia creates bar layer-shell surfaces. This matters only for bars with
+`[bar].order` controls the order Hyprbar creates bar layer-shell surfaces. This matters only for bars with
 `reserve_space = true`, and the compositor still owns the final exclusive-zone arrangement. Names omitted from `order`
 are appended after the listed names.
 
@@ -103,7 +103,7 @@ back = "media previous"
 forward = "media next"
 ```
 
-All nine gestures are available, and an action is an IPC command, `exec <command line>`, or `none` - see [Widget Actions](/noctalia/bar/actions/) for the full vocabulary. Panel actions anchor at the pointer, since there is no widget to anchor to.
+All nine gestures are available, and an action is an IPC command, `exec <command line>`, or `none` - see [Widget Actions](/hyprbar/bar/actions/) for the full vocabulary. Panel actions anchor at the pointer, since there is no widget to anchor to.
 
 Right-click opens Control Center unless you bind `right` to something else. While an attached panel is open, right-click anywhere on the bar still toggles Control Center unless the click lands in the dead zone and `right` is bound.
 
@@ -190,8 +190,8 @@ The IPC `bar-layer-set <top|overlay> [bar-name] [monitor-selector]` switches the
 
 ```kdl
 binds {
-    Mod+B { spawn-sh "noctalia msg bar-layer-set overlay"; }
-    Mod+Shift+B { spawn-sh "noctalia msg bar-layer-set top"; }
+    Mod+B { spawn-sh "hyprbar msg bar-layer-set overlay"; }
+    Mod+Shift+B { spawn-sh "hyprbar msg bar-layer-set top"; }
 }
 ```
 

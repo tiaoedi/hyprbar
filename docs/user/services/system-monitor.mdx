@@ -16,7 +16,7 @@ network_poll_seconds = 3.0          # network throughput
 disk_poll_seconds = 10.0            # disk usage and swap usage
 ```
 
-When disabled, Noctalia keeps system-monitor UI available but stops the background sampling thread. Bar `sysmon` widgets, desktop `sysmon` widgets, and the Control Center System tab show unavailable values until the setting is enabled again.
+When disabled, Hyprbar keeps system-monitor UI available but stops the background sampling thread. Bar `sysmon` widgets, desktop `sysmon` widgets, and the Control Center System tab show unavailable values until the setting is enabled again.
 
 Poll intervals are configured globally under `[system.monitor]`, not per widget. Each value is the number of seconds between samples for that metric group. A non-zero value is clamped to `1` to `120` seconds; setting a value to `0` disables that metric group entirely - it is never sampled and schedules no wakeups. GPU probes run only while UI displays a GPU stat, so the default interval does not wake an otherwise unused discrete GPU. Set `gpu_poll_seconds = 0` to disable probing entirely. You can also adjust intervals in whole-second steps (down to `0`) in **Settings → Services → Advanced** when the system monitor is enabled.
 
@@ -39,7 +39,7 @@ CPU temperature auto-detection prefers known CPU hwmon drivers such as `k10temp`
 cpu_temp_sensor_path = "/sys/class/hwmon/hwmon3/temp1_input"
 ```
 
-When `cpu_temp_sensor_path` is set, Noctalia uses only that file. If the path is missing, unreadable, not a `temp*_input` file, or cannot be parsed, CPU temperature is reported as unavailable until the configuration is fixed.
+When `cpu_temp_sensor_path` is set, Hyprbar uses only that file. If the path is missing, unreadable, not a `temp*_input` file, or cannot be parsed, CPU temperature is reported as unavailable until the configuration is fixed.
 
 To list available hwmon temperature inputs with their driver names, labels, and raw values:
 
@@ -84,10 +84,10 @@ The stats are read once and shared, but a few *presentation* options stay per wi
 
 ## GPU data sources
 
-Noctalia reads GPU statistics straight from the kernel and from the vendor's own management library where one exists. No elevated privileges are required, and Noctalia does not invoke command-line monitoring tools such as `nvidia-smi`, `intel_gpu_top`, or `radeontop`.
+Hyprbar reads GPU statistics straight from the kernel and from the vendor's own management library where one exists. No elevated privileges are required, and Hyprbar does not invoke command-line monitoring tools such as `nvidia-smi`, `intel_gpu_top`, or `radeontop`.
 
 ::::note[Integrated GPUs are supported]
-GPU monitoring is not limited to discrete GPUs. Noctalia can report temperature and usage for supported integrated AMD and Intel GPUs when their kernel drivers expose those metrics. The `gpu_vram` stat is different: an integrated GPU that shares system memory has no dedicated VRAM to report, so that one stat is unavailable even though its other GPU stats can work.
+GPU monitoring is not limited to discrete GPUs. Hyprbar can report temperature and usage for supported integrated AMD and Intel GPUs when their kernel drivers expose those metrics. The `gpu_vram` stat is different: an integrated GPU that shares system memory has no dedicated VRAM to report, so that one stat is unavailable even though its other GPU stats can work.
 ::::
 
 | GPU | Runtime requirement | Extra package needed? |
@@ -102,7 +102,7 @@ For NVIDIA, the driver and userspace library must be compatible; installing `nvi
 ldconfig -p | grep 'libnvidia-ml.so.1'
 ```
 
-The open-source Nouveau driver does not provide NVML, so NVIDIA usage and VRAM monitoring require the proprietary driver. The `nvidia-smi` executable may be installed by the same package, but Noctalia loads NVML directly and does not run it.
+The open-source Nouveau driver does not provide NVML, so NVIDIA usage and VRAM monitoring require the proprietary driver. The `nvidia-smi` executable may be installed by the same package, but Hyprbar loads NVML directly and does not run it.
 
 | GPU | Temperature | Usage | VRAM |
 |-----|-------------|-------|------|
@@ -112,9 +112,9 @@ The open-source Nouveau driver does not provide NVML, so NVIDIA usage and VRAM m
 
 On AMD, ROCm SMI is used instead of sysfs when the ROCm runtime is installed. On a hybrid laptop whose discrete NVIDIA GPU is asleep, NVML is skipped so the GPU is not woken, and the integrated GPU is reported instead.
 
-Intel is the odd one out: it publishes no device-wide busy counter, so usage is summed from the per-client statistics the kernel exposes for each process using the GPU. Three consequences follow. Work done by *other users'* processes is not counted, which is invisible on a normal single-user desktop. Usage needs two samples before it can report anything, so the first value appears one `gpu_poll_seconds` interval after startup. Noctalia currently counts Intel render and compute engines, but not media/video engines; hardware-accelerated video playback can therefore show `0%` while a per-engine monitor that includes video decoding reports activity. This difference does not mean the integrated GPU is unsupported.
+Intel is the odd one out: it publishes no device-wide busy counter, so usage is summed from the per-client statistics the kernel exposes for each process using the GPU. Three consequences follow. Work done by *other users'* processes is not counted, which is invisible on a normal single-user desktop. Usage needs two samples before it can report anything, so the first value appears one `gpu_poll_seconds` interval after startup. Hyprbar currently counts Intel render and compute engines, but not media/video engines; hardware-accelerated video playback can therefore show `0%` while a per-engine monitor that includes video decoding reports activity. This difference does not mean the integrated GPU is unsupported.
 
-Intel VRAM is reported only for discrete cards such as Intel Arc, and **requires Linux 6.18 or newer**: earlier kernels release the used-memory figure only to privileged processes, so Noctalia reports VRAM as unavailable rather than showing a permanent zero. Integrated Intel GPUs have no dedicated video memory and never report VRAM.
+Intel VRAM is reported only for discrete cards such as Intel Arc, and **requires Linux 6.18 or newer**: earlier kernels release the used-memory figure only to privileged processes, so Hyprbar reports VRAM as unavailable rather than showing a permanent zero. Integrated Intel GPUs have no dedicated video memory and never report VRAM.
 
 ## Value highlighting
 
@@ -152,7 +152,7 @@ net_tx_activity_threshold    = 1      # MB/s
 net_tx_critical_threshold    = 50     # MB/s
 ```
 
-The value's color is interpolated between the widget's regular foreground color (its `color` setting) and its `highlight_color` (set per widget - see the [`sysmon` widget](/noctalia/bar/widgets/sysmon/)). Below the activity threshold the value stays at its regular color; the moment it crosses the activity threshold it jumps to a small highlight tint, then ramps the rest of the way to the full `highlight_color`, reaching it at or above the critical threshold. Set the critical threshold to `0` to disable highlighting for that stat.
+The value's color is interpolated between the widget's regular foreground color (its `color` setting) and its `highlight_color` (set per widget - see the [`sysmon` widget](/hyprbar/bar/widgets/sysmon/)). Below the activity threshold the value stays at its regular color; the moment it crosses the activity threshold it jumps to a small highlight tint, then ramps the rest of the way to the full `highlight_color`, reaching it at or above the critical threshold. Set the critical threshold to `0` to disable highlighting for that stat.
 
 | Key | Default | Unit | Stat |
 |-----|---------|------|------|

@@ -210,7 +210,7 @@
     "filter-placeholder": "Filtrar área de transferência...",
     "preview": {
       "empty-text-payload": "(corpo do texto vazio)",
-      "image-title": "Entrada na Área de Transferência de Imagem ",
+      "image-title": "Entrada na Área de Transferência de Imagem",
       "loading": "Carregando pré-visualização...",
       "text-title": "Entrada na Área de Transferência de Texto",
       "truncated": "... truncado"
@@ -526,7 +526,7 @@
         }
       },
       "location-unavailable": "Localização indisponível",
-      "no-location-body": "Adicione seu endereço ou ative a autolocalização  nas Configurações de Localização.",
+      "no-location-body": "Adicione seu endereço ou ative a autolocalização nas Configurações de Localização.",
       "no-location-title": "Localização não definida",
       "refreshing": "Atualizando o clima...",
       "waiting": "Aguardando dados do clima"
@@ -862,14 +862,14 @@
       "calendar-reminder-open": "Abrir",
       "calendar-reminder-untitled": "Evento sem título",
       "calendar-reminder-with-location": "{when}\n{location}",
-      "config-migration-body": "Atualize {path} no arquivo fonte. Noctalia está aplicando está substituição só temporariamente. Execute nocatlia config validade para listar cada mudança necessária.",
+      "config-migration-body": "Atualize {path} no arquivo fonte. Hyprbar está aplicando está substituição só temporariamente. Execute nocatlia config validade para listar cada mudança necessária.",
       "config-migration-title": "Atualiação de configuração necessária",
       "dbus-disabled": "Notificações DBus desabilitadas",
       "desktop-widgets-editor": "Editor de Widget",
       "desktop-widgets-editor-enabled": "O editor de widgets da área de trabalho está ligado. Mude para um espaço de trabalho vazio para que as janelas abertas não cubram o editor.",
-      "greeter-sync": "Noctalia Greeter",
+      "greeter-sync": "Greeter",
       "greeter-sync-pending": "Sincronizando aparência para o greeter. Se uma caixa de diálogo de autorização aparecer, aprove-o; autorização sem senha segue políticas do sistema.",
-      "greeter-sync-pending-console": "Sincronizando aparência para o greeter. Se autorização é necessária, aprove a caixa de diálogo do polkit no Noctalia, em um TTY ou em um console.",
+      "greeter-sync-pending-console": "Sincronizando aparência para o greeter. Se autorização é necessária, aprove a caixa de diálogo do polkit no Hyprbar, em um TTY ou em um console.",
       "greeter-sync-pending-legacy": "Sincronizando através do utilitário legado. Aprovação do administrador é necessária.",
       "greeter-sync-pending-manual": "Os arquivos estão preparados para a sincronização legada autenticada. Execute o auxiliar de aplicação posicional em um terminal, mantendo o NOCTALIA_GREETER_STATE_DIR caso utilize um caminho personalizado, ou configure o shell.greeter_sync.privilege_command e sincronize novamente.",
       "greeter-sync-pending-manual-pkexec": "Sincronizando aparência para o greeter. Se autorização de administrador for necessária e não for apresentada uma caixa de diálogo, execute em um terminal: pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\".",
@@ -877,7 +877,7 @@
       "greeter-sync-timeout": "A sincronização do Greeter ainda está aguardando autorização. Verifique se há uma caixa de diálogo do polkit em um TTY ou console, habilite o agente polkit nas configurações de Segurança ou execute o pkexec manualmente.",
       "greeter-sync-timeout-manual": "A sincronização legada do Greeter ainda precisa da autorização. Execute o auxiliar de aplicação posicional em um terminal e preserve NOCTALIA_GREETER_STATE_DIR se você utiliza um caminho personalizado.",
       "greeter-sync-timeout-manual-pkexec": "Sincronização com o greeter continua necessitando autorização. Execute em um terminal: pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\"",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "Este atalho aceita uma única tecla sem modificadores.",
       "keybind-invalid-printable": "Teclas imprimíveis (letras, números, símbolos) requerem uma tecla modificadora como Ctrl ou Alt.",
       "keybind-invalid-super": "A tecla Super/Windows não pode ser usada em atalhos de teclado do shell.",
@@ -949,7 +949,7 @@
     },
     "enable-failed": {
       "body-error": "{plugin}: {error}",
-      "body-incompatible": "O plugin {plugin} requer a versão {version} da API de plugins; este Noctalia suporta as APIs {oldest}–{current}",
+      "body-incompatible": "O plugin {plugin} requer a versão {version} da API de plugins; este Hyprbar suporta as APIs {oldest}–{current}",
       "body-timeout": "A instalação do {plugin} demorou muito.",
       "title": "Plugin não habilitado"
     }
@@ -1116,7 +1116,7 @@
           "accordion": "Acordeão",
           "accordion-description": "Mostra somente o primeiro widget; pairando sobre a capsula revela o resto",
           "accordion-direction": "Direção de revelação",
-          "accordion-direction-description": "Lado do ",
+          "accordion-direction-description": "Lado do",
           "action": "Grupo",
           "border": "Borda",
           "border-description": "Cor do contorno da cápsula; deixe em Padrão para nenhum contorno.",
@@ -1245,7 +1245,7 @@
       },
       "reset-page": "Falha ao redefinir algumas configurações.",
       "support-report": "Falha em salvar o relatório de suporte.",
-      "sync-greeter": "Não foi possível sincronizar a aparência com o Noctalia Greeter.",
+      "sync-greeter": "Não foi possível sincronizar a aparência com o Greeter.",
       "sync-greeter-timeout": "A sincronização do Greeter ainda está aguardando a autorização. Verifique se há uma caixa de diálogo do polkit em um TTY ou console, habilite o agente polkit nas configurações de Segurança ou execute o pkexec manualmente.",
       "sync-greeter-timeout-manual": "A sincronização legada do Greeter ainda precisa da autorização do administrador. Execute o auxiliar de aplicação posicional em um terminal e preserve NOCTALIA_GREETER_STATE_DIR se você utiliza um caminho personalizado.",
       "sync-greeter-timeout-manual-pkexec": "Sincronização com o greeter continua necessitando autorização. Execute em um terminal: pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\"",
@@ -1565,7 +1565,7 @@
           "up-right": "Acima à Direita"
         },
         "window-switcher-style": {
-          "carousel": "Carrossel ",
+          "carousel": "Carrossel",
           "compact": "Compacto"
         }
       },
@@ -1645,7 +1645,7 @@
         "deprecated": "Obsoleto",
         "empty": "Nenhum plugin habilitado.",
         "held-back": "versão mais antiga",
-        "held-back-hint": "v{version} requer a API de plugins {required}; este Noctalia suporta até {current}. Atualize o Noctalia para obtê-la.",
+        "held-back-hint": "v{version} requer a API de plugins {required}; este Hyprbar suporta até {current}. Atualize o Hyprbar para obtê-la.",
         "incompatible-plugin-api": "APi de plugin incoompatível",
         "remove": "Remover plugin",
         "requires": "Requer: {dependencies}",
@@ -1678,8 +1678,8 @@
         },
         "kind-label": "Tipo",
         "location-label": "Localização",
-        "location-placeholder-git": "https://github.com/me/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/me/hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "ID da Fonte",
         "name-placeholder": "meus-plugins",
         "precedence-hint": "As fontes de nível inferior têm prioridade sobre as de nível superior quando oferecem o mesmo plug-in.",
@@ -1689,19 +1689,19 @@
         "update": "Atualizar fonte"
       },
       "store": {
-        "add": "Adicionar ao Noctalia",
+        "add": "Adicionar ao Hyprbar",
         "back-to-catalog": "Voltar ao catálogo de plugins",
         "categories": "Categoria",
         "category-all": "Todos",
         "empty": "Não foram encontrados plugins",
         "held-back": "Versão mais antiga",
-        "held-back-hint": "Instala a v{version} para a API de plugins {resolved}. A versão mais recente v{latest} requer a API de plugins {latestRequired}; este Noctalia suporta até {current}.",
+        "held-back-hint": "Instala a v{version} para a API de plugins {resolved}. A versão mais recente v{latest} requer a API de plugins {latestRequired}; este Hyprbar suporta até {current}.",
         "incompatible": "Incompatível",
-        "incompatible-hint": "Requer a API de plugins {required}; este Noctalia suporta {oldest}–{current}.",
+        "incompatible-hint": "Requer a API de plugins {required}; este Hyprbar suporta {oldest}–{current}.",
         "installed": "Instalado",
         "loading": "Carregando catálogo...",
         "no-readme": "Nenhuma descrição disponível.",
-        "open-page": "Abrir página de plugin em noctalia.dev",
+        "open-page": "Abrir página de plugin em the plugin catalog",
         "open-source": "Abrir repositório fonte de plugin",
         "results-count": "{count} plugins",
         "search-placeholder": "Busque plugins...",
@@ -1761,7 +1761,7 @@
           "label": "Arredondamento dos Cantos"
         },
         "custom-palette": {
-          "description": "Escolha uma paleta em ~/.config/noctalia/palettes/",
+          "description": "Escolha uma paleta em ~/.config/hyprbar/palettes/",
           "label": "Paleta Personalizada",
           "search-placeholder": "Busque paletas personalizadas..."
         },
@@ -1805,7 +1805,7 @@
           "label": "Preto Puro"
         },
         "shell-theme-mode": {
-          "description": "Fixar modo Claro ou Escuro do Noctalia; Seguir mantém em sincronia com o Modo do Tema",
+          "description": "Fixar modo Claro ou Escuro do Hyprbar; Seguir mantém em sincronia com o Modo do Tema",
           "label": "Modo do Tema do Shell"
         },
         "theme-mode": {
@@ -1952,7 +1952,7 @@
           "label": "Destaque ao Passar o Mouse"
         },
         "layer": {
-          "description": "Use Overlay para mostrar a barra  acima de apps em tela cheia; painéis acoplados acompanham a barra",
+          "description": "Use Overlay para mostrar a barra acima de apps em tela cheia; painéis acoplados acompanham a barra",
           "label": "Camada Wayland"
         },
         "opposite-edge-margin": {
@@ -2123,7 +2123,7 @@
         },
         "inactive-icon-opacity": {
           "description": "Opacidade de ícones não focados no Dock",
-          "label": "Opacidade de Ícones Inativos "
+          "label": "Opacidade de Ícones Inativos"
         },
         "inactive-icon-scale": {
           "description": "Escala dos ícones não focados do Dock",
@@ -2131,7 +2131,7 @@
         },
         "item-spacing": {
           "description": "Espaço entre itens do Dock",
-          "label": "Espaçamento de Itens "
+          "label": "Espaçamento de Itens"
         },
         "launcher-custom-image": {
           "description": "Use uma imagem no botão do launcher na Dock ao invés de um ícone",
@@ -2243,7 +2243,7 @@
             "label": "Ao Bloquear a Sessão"
           },
           "session-unlocked": {
-            "description": "Comando para executar depois que a sessão for desbloqueada ",
+            "description": "Comando para executar depois que a sessão for desbloqueada",
             "label": "Ao Desbloquear a Sessão"
           },
           "shutting-down": {
@@ -2251,7 +2251,7 @@
             "label": "Ao Desligar"
           },
           "started": {
-            "description": "Comando para executar após o Noctalia iniciar",
+            "description": "Comando para executar após o Hyprbar iniciar",
             "label": "Ao Iniciar"
           },
           "theme-mode-changed": {
@@ -2853,7 +2853,7 @@
           "requires-gamma-control": "O compositor não oferece suporte ao controle de gama"
         },
         "night-temperature": {
-          "description": "Temperatura de cor à noite  (Kelvin)",
+          "description": "Temperatura de cor à noite (Kelvin)",
           "label": "Temperatura Noturna"
         },
         "notification-sound": {
@@ -2897,7 +2897,7 @@
             "label": "Intervalo de Polling do Disco"
           },
           "gpu-poll": {
-            "description": "Segundos entre as coletas de temperatura da GPU, uso  e amostras da VRAM; Amostra da GPU são coletadas somente quando algo mostra estatísticas da GPU, ou seja, uma máquina em modo de espera nunca é acordada (0 desabilita completamente)",
+            "description": "Segundos entre as coletas de temperatura da GPU, uso e amostras da VRAM; Amostra da GPU são coletadas somente quando algo mostra estatísticas da GPU, ou seja, uma máquina em modo de espera nunca é acordada (0 desabilita completamente)",
             "label": "Intervalo de Polling da GPU"
           },
           "label": "Monitor do Sistema",
@@ -3048,7 +3048,7 @@
           "description-cancelled": "A caixa de diálogo do Secret Service foi cancelada; histórico da área de transferência permanecerá disponível apenas nesta sessão",
           "description-error": "Não foi possível abrir ou salvar o histórico criptografado da área de transferência",
           "description-locked": "Armazenamento da chave da área de transferência está bloqueado ou o acesso foi negado; corrija o acesso e tente novamente",
-          "description-migration": "Histórico da área de transferência em texto simples está aguardando criptografia; Os arquivos existentes serão preservados até que a migração seja  bem sucedida",
+          "description-migration": "Histórico da área de transferência em texto simples está aguardando criptografia; Os arquivos existentes serão preservados até que a migração seja bem sucedida",
           "description-missing-key": "A chave de armazenamento criptografado configurada está ausente; os arquivos existentes do histórico da área de transferência foram preservados.",
           "description-opening": "O histórico criptografado da área de transferência está sendo aberto.",
           "description-recovery": "Histórico da área de transferência não pôde ser autenticado ou está danificado; tente novamente depois de restaurar a chave correta, ou redefina o armazenamento privado",
@@ -3060,7 +3060,7 @@
           "label": "Formato da Data"
         },
         "external-ip": {
-          "description": "Determinar o IP público da WAN da conexão (por meio de api.noctalia.dev) e exibi-lo na guia “Rede” da Central de Controle",
+          "description": "Determinar o IP público da WAN da conexão (por meio de the online service) e exibi-lo na guia “Rede” da Central de Controle",
           "label": "Mostrar IP da WAN"
         },
         "greeter-sync-auto": {
@@ -3076,9 +3076,9 @@
           "label": "Rótulos de Layouts de Teclado"
         },
         "launch-apps-as-systemd-services": {
-          "description": "Executa aplicativos em serviços systemd separados para que não compartilhem o cgroup do Noctalia",
+          "description": "Executa aplicativos em serviços systemd separados para que não compartilhem o cgroup do Hyprbar",
           "label": "Iniciar Apps como Serviços do Systemd",
-          "requires-systemd-session": "Requer que o Noctalia seja executado como um serviço de usuário do systemd (uwsm ou uma unidade de usuário do systemd)"
+          "requires-systemd-session": "Requer que o Hyprbar seja executado como um serviço de usuário do systemd (uwsm ou uma unidade de usuário do systemd)"
         },
         "launch-apps-custom-command": {
           "description": "Envolve apps iniciados pelo launcher, dock e taskbar; substitui $CMD pelo comando original",
@@ -3090,7 +3090,7 @@
           "label": "Digitar para Abrir Launcher"
         },
         "offline-mode": {
-          "description": "Bloquear todas as solicitações de saída de rede",
+          "description": "Bloqueia novas solicitações HTTP pelo cliente compartilhado do Hyprbar; não é um firewall.",
           "label": "Modo Off-line"
         },
         "osd-background-opacity": {
@@ -3316,12 +3316,12 @@
         },
         "sync-greeter": {
           "button": "Sincronizar Agora",
-          "description": "Copiar a aparência atual e arranjo de monitores para o Noctalia Greeter. Aprovação de administrador é necessária a não ser que políticas de sistema autorizem sincronização sem senha para seu usuário.",
-          "label": "Noctalia Greeter"
+          "description": "Copiar a aparência atual e arranjo de monitores para o Greeter. Aprovação de administrador é necessária a não ser que políticas de sistema autorizem sincronização sem senha para seu usuário.",
+          "label": "Greeter"
         },
         "telemetry": {
-          "description": "Envia um pequeno ping anônimo de inicialização com a versão, o sistema operacional, o compositor, as resoluções do monitor, a RAM e a escala da interface do usuário",
-          "label": "Ping de Inicialização Anônimo"
+          "description": "Quando ativada, envia telemetria de inicialização com um identificador persistente da instalação.",
+          "label": "Telemetria de Inicialização"
         },
         "time-format": {
           "description": "Formato de hora padrão para a interface do usuário do shell sem configuração própria",
@@ -3612,7 +3612,7 @@
           },
           "clipboard-text": {
             "description": "Imprimir o texto mais recente da Área de Transferência (vazio quando a seleção não contém texto)",
-            "label": "Imprimir texto da Área de Transferência "
+            "label": "Imprimir texto da Área de Transferência"
           },
           "color-scheme-get": {
             "description": "Imprimir esquema de cores ativo: <fonte> <nome> (fonte é interna, papel de parede, comunidade ou personalizada)",
@@ -3640,15 +3640,15 @@
           },
           "desktop-widgets-show": {
             "description": "Mostrar widgets de área de trabalho (só em tempo de execução; não altera a configuração salva)",
-            "label": "Mostrar widgets de área de trabalho "
+            "label": "Mostrar widgets de área de trabalho"
           },
           "desktop-widgets-toggle": {
             "description": "Alternar visiblidade de widgets de área de trabalho só em tempo de execução; não altera a configuração salva)",
             "label": "Alternar visiblidade de widgets de área de trabalho"
           },
           "desktop-widgets-toggle-edit": {
-            "description": "Alternar modo de edição de widgets de área de trabalho ",
-            "label": "Alternar editor de widgets de área de trabalho "
+            "description": "Alternar modo de edição de widgets de área de trabalho",
+            "label": "Alternar editor de widgets de área de trabalho"
           },
           "dock-hide": {
             "description": "Ocultar o Dock (sobrescrita presiste)",
@@ -3679,7 +3679,7 @@
             "label": "Definir perfil do EasyEffects"
           },
           "greeter-sync": {
-            "description": "Sincronizar papel de parede, cores e layout de monitor como Noctalia Greeter",
+            "description": "Sincronizar papel de parede, cores e layout de monitor como Greeter",
             "label": "Sincronizar aparência do greeter"
           },
           "keyboard-backlight-down": {
@@ -3795,7 +3795,7 @@
             "label": "Invocar a ação mais recente de notificação"
           },
           "notification-show": {
-            "description": "Mostrar uma notificação interna de Noctalia",
+            "description": "Mostrar uma notificação interna de Hyprbar",
             "label": "Mostrar uma notificação"
           },
           "osd-disable": {
@@ -4520,7 +4520,7 @@
         },
         "show-active-indicator": {
           "description": "Exibir um pequeno ponto abaixo do ícone da janela ativa na barra de tarefas",
-          "label": "Indicador de Janela Ativa "
+          "label": "Indicador de Janela Ativa"
         },
         "show-all-outputs": {
           "description": "Incluir janelas de todos os monitores neste widget",
@@ -4656,7 +4656,7 @@
           "label": "Visualização"
         },
         "vpn-status": {
-          "description": "Como mostrar o status da VPN:  Substituir troca o ícone de rede por um escudo VPN, Ambos mostra-os lado a lado, Oculto desabilita o indicador da VPN",
+          "description": "Como mostrar o status da VPN: Substituir troca o ícone de rede por um escudo VPN, Ambos mostra-os lado a lado, Oculto desabilita o indicador da VPN",
           "label": "Estado da VPN"
         },
         "warning-color": {
@@ -4725,8 +4725,8 @@
       "export-config": "Exportar Config...",
       "export-config-saved": "Exportação de configuração salva.",
       "filter-overridden": "Sobrescrito",
-      "legacy-config-warning": "Configurações Legadas: {issue}. Edite esta entrada na fonte; Noctalia está aplicando está substituição só temporariamente. Execute nocatlia config validade para listar cada mudança necessária.",
-      "native-title": "Configurações do Noctalia",
+      "legacy-config-warning": "Configurações Legadas: {issue}. Edite esta entrada na fonte; Hyprbar está aplicando está substituição só temporariamente. Execute nocatlia config validade para listar cada mudança necessária.",
+      "native-title": "Configurações do Hyprbar",
       "no-results": "Nenhuma configuração encontrada",
       "no-results-hint": "Tente um nome diferente de configuração ou uma tecla de config.",
       "offline-mode-notice": {
@@ -4762,7 +4762,7 @@
     "no-wallpaper-selected": "Nenhum papel de parede selecionado",
     "select-wallpaper": "Selecione papel de parede",
     "subtitle": "Algumas escolhas rápidas para os primeiros passos",
-    "title": "Seja Bem-Vindo ao Noctalia",
+    "title": "Seja Bem-Vindo ao Hyprbar",
     "wallpaper": "Papel de parede",
     "wallpaper-scheme": "Esquema do Papel de Parede"
   },

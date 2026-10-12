@@ -75,6 +75,18 @@ int main() {
   bool ok = true;
 
   {
+    scripting::ScriptRuntime runtime("test/hyprbar-api:service", {}, api, {});
+    runtime.start(
+        "=hyprbar-api",
+        "hyprbar.state.set('hyprbar_alias', true)\n"
+        "noctalia.state.set('legacy_alias', true)\n",
+        {}
+    );
+    ok = expect(waitForState("test/hyprbar-api", "hyprbar_alias"), "Hyprbar plugin API global is unavailable") && ok;
+    ok = expect(waitForState("test/hyprbar-api", "legacy_alias"), "legacy Noctalia plugin API alias is unavailable") && ok;
+  }
+
+  {
     scripting::ScriptRuntime runtime("test/enable:service", {}, api, {});
     runtime.start(
         "=enable",
@@ -241,9 +253,9 @@ int main() {
   std::filesystem::create_directories(root / "config");
   std::filesystem::create_directories(root / "state");
   std::filesystem::create_directories(root / "data");
-  ::setenv("NOCTALIA_CONFIG_HOME", (root / "config").c_str(), 1);
-  ::setenv("NOCTALIA_STATE_HOME", (root / "state").c_str(), 1);
-  ::setenv("NOCTALIA_DATA_HOME", (root / "data").c_str(), 1);
+  ::setenv("HYPRBAR_CONFIG_HOME", (root / "config").c_str(), 1);
+  ::setenv("HYPRBAR_STATE_HOME", (root / "state").c_str(), 1);
+  ::setenv("HYPRBAR_DATA_HOME", (root / "data").c_str(), 1);
   const auto modulePluginDir = root / "module-plugin";
   ok = expect(
            writeText(modulePluginDir / "main.luau", "return true\n")
@@ -1093,9 +1105,9 @@ int main() {
         && ok;
   }
 
-  ::unsetenv("NOCTALIA_CONFIG_HOME");
-  ::unsetenv("NOCTALIA_STATE_HOME");
-  ::unsetenv("NOCTALIA_DATA_HOME");
+  ::unsetenv("HYPRBAR_CONFIG_HOME");
+  ::unsetenv("HYPRBAR_STATE_HOME");
+  ::unsetenv("HYPRBAR_DATA_HOME");
   std::filesystem::remove_all(root);
   return ok ? 0 : 1;
 }

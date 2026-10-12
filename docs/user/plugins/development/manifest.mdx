@@ -30,9 +30,9 @@ exactly `MAJOR.MINOR.PATCH`, with non-negative decimal components and no leading
 and build suffixes are not accepted.
 
 `plugin_api` is a positive integer and gates enable, the catalog badge, and update safety. API levels are cumulative:
-leave the value unchanged until the plugin adopts a capability introduced by a newer level. Noctalia currently
+leave the value unchanged until the plugin adopts a capability introduced by a newer level. Hyprbar currently
 supports plugin APIs <PluginApiRange />; see
-[Plugin API Versions](/noctalia/plugins/development/plugin-api/) for the capability introduced by each level.
+[Plugin API Versions](/hyprbar/plugins/development/plugin-api/) for the capability introduced by each level.
 
 `license` defaults to `MIT` when omitted. `deprecated = true` marks the plugin as deprecated in plugin listings; it is a
 soft status marker, not a compatibility gate.
@@ -78,7 +78,7 @@ entry = "ticker.luau"
 A `[[widget]]` entry can declare what its bar widget does on click and scroll, in a `[widget.actions]`
 table <PluginApiBadge feature="widget-gesture-actions" />. These are defaults: they show up in the
 settings editor as the widget's own, and the user overrides any of them per instance with
-`[widget.<name>.actions]`. See [Widget Actions](/noctalia/bar/actions/) for the gesture keys and the action
+`[widget.<name>.actions]`. See [Widget Actions](/hyprbar/bar/actions/) for the gesture keys and the action
 grammar.
 
 ```toml
@@ -101,7 +101,7 @@ not.
 
 ## Settings schema
 
-A setting becomes a typed control in the settings GUI and is read back via `noctalia.getConfig(key)`. Only declared keys
+A setting becomes a typed control in the settings GUI and is read back via `hyprbar.getConfig(key)`. Only declared keys
 resolve - reading an undeclared key logs a loud warning and returns `nil` (no silent fallbacks).
 
 Settings come in two scopes:
@@ -112,7 +112,7 @@ Settings come in two scopes:
 - **Widget entry settings** - a `[[<entry>.setting]]` block under a `[[widget]]`. These are edited with the bar widget's
   own settings. Use this for widget presentation tweaks; they are not a second enabled plugin instance.
 - **Panel entry settings** - a `[[panel.setting]]` block under a `[[panel]]`. These also appear in **Settings → Plugins**
-  (the gear on the plugin row) and are read with `noctalia.getConfig(key)` in the panel script.
+  (the gear on the plugin row) and are read with `hyprbar.getConfig(key)` in the panel script.
 
 When both declare the same key, the widget entry value wins for that widget. Both scopes use the same field schema:
 
@@ -138,7 +138,7 @@ entry = "widget.luau"
 ```
 
 The manifest only declares an entry's settings schema. Named widget instances, their configured values, and bar
-placement belong in the user's Noctalia configuration. See [Plugin widgets](/noctalia/bar/widgets/#plugin-widgets) for
+placement belong in the user's Hyprbar configuration. See [Plugin widgets](/hyprbar/bar/widgets/#plugin-widgets) for
 that configuration.
 
 | Field | Notes |
@@ -158,7 +158,7 @@ that configuration.
 `extensions` to filter a `file` picker; users can still enter a path directly.
 
 `string_map` requires <PluginApiBadge feature="string-map-setting" />. It stores string keys associated with string values and is returned from
-`noctalia.getConfig()` as an associative Luau table. Its default is a TOML table:
+`hyprbar.getConfig()` as an associative Luau table. Its default is a TOML table:
 
 ```toml
 plugin_api = 6

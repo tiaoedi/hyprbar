@@ -60,6 +60,27 @@ namespace noctalia::cli {
       false,
   };
 
+  inline constexpr std::array kConfigImportNoctaliaFlags{
+      Flag{"--config-dir", {}, "<dir>", "Noctalia configuration source directory", {}, {}, false, false},
+      Flag{"--state-dir", {}, "<dir>", "Noctalia state source directory", {}, {}, false, false},
+      Flag{"--data-dir", {}, "<dir>", "Noctalia data source directory", {}, {}, false, false},
+      Flag{"--apply", {}, {}, "Write the import into isolated Hyprbar directories", {}, {}, false, false},
+      Flag{"--include-local-plugins", {}, {}, "Copy local plugin code from the Noctalia data directory", {}, {}, false, false},
+      Flag{"--include-plugin-data", {}, {}, "Copy persistent plugin data from the Noctalia state directory", {}, {}, false, false},
+  };
+  inline constexpr Command kConfigImportNoctaliaCmd{
+      "import-noctalia",
+      "Import Noctalia configuration",
+      "Previews the files to import by default. Pass --apply to write them. Existing target files are never overwritten.\n"
+      "Only config TOML files and state/settings.toml are imported by default; app state, notification/clipboard history, and keyring credentials are not copied.\n"
+      "Local plugin code and persistent plugin data may be sensitive and are excluded unless their respective --include flags are passed. Imported plugin settings may activate remote plugins on startup; review the files before launching Hyprbar.",
+      {},
+      kConfigImportNoctaliaFlags,
+      {},
+      {},
+      false,
+  };
+
   inline constexpr std::array kConfigReplayFlags{
       Flag{"--target", {}, "<dir>", "Directory where replay files are written", {}, {}, false, true},
       Flag{"--flattened", {}, {}, "Write only merged_config.content as config.toml", {}, {}, false, false},
@@ -71,8 +92,8 @@ namespace noctalia::cli {
   inline constexpr Command kConfigReplayReportCmd{
       "replay-report",
       "Reconstruct config and state from a support report",
-      "Reconstruct config-home/noctalia and state-home/noctalia from a support report.\n\n"
-      "With --flattened, reconstruct a single config-home/noctalia/config.toml from the report's merged config.",
+      "Reconstruct config-home/hyprbar and state-home/hyprbar from a support report.\n\n"
+      "With --flattened, reconstruct a single config-home/hyprbar/config.toml from the report's merged config.",
       {},
       kConfigReplayFlags,
       kConfigReplayPositionals,
@@ -82,12 +103,13 @@ namespace noctalia::cli {
 
   inline constexpr std::array kConfigSubcommands{
       kConfigExportCmd,
+      kConfigImportNoctaliaCmd,
       kConfigReplayReportCmd,
       kConfigSettingsCountCmd,
       kConfigValidateCmd,
   };
   inline constexpr Command kConfigCmd{
-      "config", "Validate config and support/replay helpers", {}, {}, {}, {}, kConfigSubcommands, false,
+      "config", "Validate, export, and import configuration", {}, {}, {}, {}, kConfigSubcommands, false,
   };
 
 } // namespace noctalia::cli

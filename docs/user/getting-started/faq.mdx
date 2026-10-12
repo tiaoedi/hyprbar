@@ -1,25 +1,25 @@
 ---
 title: FAQ
-description: Frequently asked questions for Noctalia.
+description: Frequently asked questions for Hyprbar.
 sidebar:
   order: 99
 ---
 
 import FaqItem from '../../../../components/FaqItem.astro';
 
-Find answers to common setup and troubleshooting questions for Noctalia.
+Find answers to common setup and troubleshooting questions for Hyprbar.
 
 ## Setup
 
 <FaqItem question="What distributions are supported?">
 
-Noctalia is packaged for Arch Linux, NixOS, Fedora, openSUSE. You can also install it manually on other Linux distributions if the required build and runtime dependencies are available.
+This fork currently maintains a local Fedora 44+ RPM spec; it has no public package repository. Source builds are documented, but other distribution packages have not been validated for Hyprbar.
 
-See the [Installation guide](/noctalia/getting-started/installation/) for distro-specific commands and manual install steps.
+See the [Installation guide](/hyprbar/getting-started/installation/) for local Fedora RPM and source-build guidance.
 
 </FaqItem>
 
-<FaqItem question="Does Noctalia support touchscreen scrolling?">
+<FaqItem question="Does Hyprbar support touchscreen scrolling?">
 
 Yes. Tap controls normally. In a scrollable view, drag vertically over rows, buttons, or other controls to scroll; a fast release continues with a fling. On a vertical page, a horizontal drag remains with an axis-specific control such as a slider.
 
@@ -27,36 +27,36 @@ Touch dragging requires the compositor to send `wl_touch.motion` events. If taps
 
 </FaqItem>
 
-<FaqItem question="Will Noctalia v4 automatically upgrade to v5, and can I keep both installed?">
+<FaqItem question="Will Hyprbar v4 automatically upgrade to v5, and can I keep both installed?">
 
-No. Noctalia v5 is a fresh install, not an automatic upgrade from the Quickshell-based v4 line. It ships as a separate package, your package manager will not replace v4 with v5, and v4 settings are not migrated into v5.
+No. Hyprbar v5 is a fresh install, not an automatic upgrade from the Quickshell-based v4 line. It ships as a separate package, your package manager will not replace v4 with v5, and v4 settings are not migrated into v5.
 
 On most distributions, you can keep v4 installed while you try v5. The packages do not conflict, so you can install both and run whichever version you want. Their configuration files do not conflict either: v4 config is JSON-only, v5 config is TOML, and their config file names are different. v5 may write separate state files, but its configuration is TOML.
 
-The main thing you need to adjust is your **compositor** keybinds. Keybinds live in your compositor config, not in Noctalia's package, so update the bindings that launch the Noctalia launcher, panels, settings UI, or other commands when switching between v4 and v5.
+The main thing you need to adjust is your **compositor** keybinds. Keybinds live in your compositor config, not in Hyprbar's package, so update the bindings that launch the Hyprbar launcher, panels, settings UI, or other commands when switching between v4 and v5.
 
-See the [Installation guide](/noctalia/getting-started/installation/) and [Running Noctalia](/noctalia/getting-started/running-the-shell/) for setup steps.
-
-</FaqItem>
-
-<FaqItem question="Should I use v4 or noctalia-qs instructions with v5?">
-
-No. Noctalia v5 is a native C++ and OpenGL ES shell launched with `noctalia`. The v4 line is Quickshell-based and uses `qs` / `noctalia-qs`, so v4 commands and configuration examples should not be copied into a v5 setup.
-
-If you are using the Quickshell-based version, use the [v4 documentation](/noctalia-shell-legacy/) instead.
+See the [Installation guide](/hyprbar/getting-started/installation/) and [Running Hyprbar](/hyprbar/getting-started/running-the-shell/) for setup steps.
 
 </FaqItem>
 
-<FaqItem question="How do I start Noctalia automatically?">
+<FaqItem question="Should I use v4 or hyprbar-qs instructions with v5?">
 
-Noctalia does not manage session autostart from its Settings app. Use your compositor's autostart mechanism instead.
+No. Hyprbar v5 is a native C++ and OpenGL ES shell launched with `hyprbar`. The v4 line is Quickshell-based and uses `qs` / `hyprbar-qs`, so v4 commands and configuration examples should not be copied into a v5 setup.
+
+If you are using the Quickshell-based version, use the [v4 documentation](/hyprbar-shell-legacy/) instead.
+
+</FaqItem>
+
+<FaqItem question="How do I start Hyprbar automatically?">
+
+Hyprbar does not manage session autostart from its Settings app. Use your compositor's autostart mechanism instead.
 
 Examples for each supported compositor:
 
 :::note[Niri]
 Add to `~/.config/niri/config.kdl`:
 ```ini
-spawn-at-startup "noctalia"
+spawn-at-startup "hyprbar"
 ```
 :::
 
@@ -64,7 +64,7 @@ spawn-at-startup "noctalia"
 Add to your `hyprland.start` event hook in `~/.config/hypr/hyprland.lua`:
 ```lua
 hl.on("hyprland.start", function()
-  hl.exec_cmd("noctalia")
+  hl.exec_cmd("hyprbar")
 end)
 ```
 :::
@@ -72,29 +72,29 @@ end)
 :::note[Sway / Scroll]
 Add to `~/.config/sway/config` (or equivalent):
 ```bash
-exec noctalia
+exec hyprbar
 ```
 :::
 
 :::note[Labwc]
 Add to `~/.config/labwc/autostart`:
 ```
-noctalia
+hyprbar
 ```
 :::
 
 :::note[Mango]
 Add to `~/.config/mango/config.conf`:
 ```bash
-exec-once=noctalia
+exec-once=hyprbar
 ```
 :::
 
 :::note[KDE Plasma]
-Add `noctalia` under System Settings → Autostart, or see [KDE Plasma](/noctalia/compositor-settings/kde/) for Plasma-specific limits (clipboard, blur, screenshots, and more).
+Add `hyprbar` under System Settings → Autostart, or see [KDE Plasma](/hyprbar/compositor-settings/kde/) for Plasma-specific limits (clipboard, blur, screenshots, and more).
 :::
 
-If your compositor expects startup commands to return after the shell has initialized, use `noctalia --daemon`. See the [Running Noctalia](/noctalia/getting-started/running-the-shell/) page for details.
+If your compositor expects startup commands to return after the shell has initialized, use `hyprbar --daemon`. See the [Running Hyprbar](/hyprbar/getting-started/running-the-shell/) page for details.
 
 </FaqItem>
 
@@ -103,22 +103,22 @@ If your compositor expects startup commands to return after the shell has initia
 <FaqItem question="Where should I put my config, and why is my setting ignored?">
 
 If you only use Settings, you normally do not need to edit config files. Settings writes your changes to
-`~/.local/state/noctalia/settings.toml`.
+`~/.local/state/hyprbar/settings.toml`.
 
-If you write config by hand, put it in `~/.config/noctalia/`. Noctalia reads every `*.toml` file in that directory,
+If you write config by hand, put it in `~/.config/hyprbar/`. Hyprbar reads every `*.toml` file in that directory,
 sorted alphabetically, and merges them.
 
 Settings changes load after hand-written config, so they win when both layers define the same setting. If a value in your
-file looks ignored, check Settings first, or inspect `~/.local/state/noctalia/settings.toml`.
+file looks ignored, check Settings first, or inspect `~/.local/state/hyprbar/settings.toml`.
 
-See [How configuration works](/noctalia/configuration/) for the full load order and export options.
+See [How configuration works](/hyprbar/configuration/) for the full load order and export options.
 
 </FaqItem>
 
 
-<FaqItem question="How does Noctalia resolve application icons?">
+<FaqItem question="How does Hyprbar resolve application icons?">
 
-Noctalia resolves application icons through GTK's icon-theme support. The dock, taskbar, launcher, and other shell surfaces use the active GTK icon theme; configuring an icon theme only in a Qt control center does not change Noctalia's application icons.
+Hyprbar resolves application icons through GTK's icon-theme support. The dock, taskbar, launcher, and other shell surfaces use the active GTK icon theme; configuring an icon theme only in a Qt control center does not change Hyprbar's application icons.
 
 Configure and apply the icon theme through your system's GTK settings, for example with `nwg-look`.
 
@@ -148,17 +148,17 @@ type = "sysmon"
 # settings for the second sysmon
 ```
 
-See [Widget definitions](/noctalia/bar/widgets/#widget-definitions) for more examples.
+See [Widget definitions](/hyprbar/bar/widgets/#widget-definitions) for more examples.
 
 </FaqItem>
 
 <FaqItem question="How do I choose Monday or Sunday as the first day of the week?">
 
-This is not a Noctalia setting. There is no Settings toggle or TOML key for it in v5.
+This is not a Hyprbar setting. There is no Settings toggle or TOML key for it in v5.
 
-Noctalia follows your system locale, so set the first day of the week through your system's `LC_TIME` locale.
+Hyprbar follows your system locale, so set the first day of the week through your system's `LC_TIME` locale.
 
-This is different from v4, which had a Noctalia-specific override. In v5, calendar and localized date behavior come from
+This is different from v4, which had a Hyprbar-specific override. In v5, calendar and localized date behavior come from
 the active system locale.
 
 </FaqItem>
@@ -167,7 +167,7 @@ the active system locale.
 
 Start with compositor output scaling. That is the correct way to handle HiDPI monitors and affects all Wayland clients consistently.
 
-For Noctalia-specific sizing in Settings:
+For Hyprbar-specific sizing in Settings:
 
 - Use **Appearance → Interface → UI scale** for non-bar shell UI such as panels, launcher, clipboard, and settings.
 - Use **Bar → Layout → Content scale** for bar widget content.
@@ -175,15 +175,15 @@ For Noctalia-specific sizing in Settings:
 
 In text config, the main keys are `shell.ui_scale`, `[bar.<name>].scale`, and `[widget.<name>].scale`.
 
-See [Shell settings](/noctalia/configuration/shell/#shell-settings) and [Bars](/noctalia/bar/).
+See [Shell settings](/hyprbar/configuration/shell/#shell-settings) and [Bars](/hyprbar/bar/).
 
 </FaqItem>
 
 <FaqItem question="How do I turn off blur behind a transparent bar?">
 
-On Niri, making a bar transparent only changes Noctalia surface opacity. When Niri `ext-background-effects` support is active, Noctalia still publishes blur regions for its layer surfaces, so the compositor can keep blurring behind the bar.
+On Niri, making a bar transparent only changes Hyprbar surface opacity. When Niri `ext-background-effects` support is active, Hyprbar still publishes blur regions for its layer surfaces, so the compositor can keep blurring behind the bar.
 
-The default xray blur samples the wallpaper, which can also appear as faint wallpaper-colored pixels around rounded corners. Use `xray false` to blur the actual content behind Noctalia, or `blur false` to disable the effect. See [Niri compositor settings: Blur](/noctalia/compositor-settings/niri/?section=blur) for the full rules and explanation.
+The default xray blur samples the wallpaper, which can also appear as faint wallpaper-colored pixels around rounded corners. Use `xray false` to blur the actual content behind Hyprbar, or `blur false` to disable the effect. See [Niri compositor settings: Blur](/hyprbar/compositor-settings/niri/?section=blur) for the full rules and explanation.
 
 </FaqItem>
 
@@ -203,13 +203,13 @@ panel_overlap  = 0      # 1 is default; 0 removes the overlap, negative pushes t
 contact_shadow = true   # dark gradient at the seam for a lifted look
 ```
 
-See [Bars](/noctalia/bar/) for the full per-bar and per-monitor field list.
+See [Bars](/hyprbar/bar/) for the full per-bar and per-monitor field list.
 
 </FaqItem>
 
-<FaqItem question="How can I get Noctalia to display in my language?">
+<FaqItem question="How can I get Hyprbar to display in my language?">
 
-Noctalia follows your system locale by default.
+Hyprbar follows your system locale by default.
 
 In Settings, use **Appearance → Interface → Language**.
 
@@ -222,15 +222,15 @@ lang = "fr"
 
 If a translation is not available for that language, untranslated strings fall back to English.
 Language values may use BCP-47 tags such as `pt-BR` and `zh-Hans`, or POSIX locale names such as `pt_BR.UTF-8`.
-For Chinese locales without an explicit script, Noctalia derives the script from the region: for example `zh_CN`
+For Chinese locales without an explicit script, Hyprbar derives the script from the region: for example `zh_CN`
 matches `zh-Hans`.
 
 </FaqItem>
 
-<FaqItem question="How do I use Noctalia colors with an external wallpaper app?">
+<FaqItem question="How do I use Hyprbar colors with an external wallpaper app?">
 
 If you manage wallpapers with another tool such as waypaper, swww, or hyprpaper, let that app draw the wallpaper and let
-Noctalia use the image only for color extraction.
+Hyprbar use the image only for color extraction.
 
 In Settings:
 
@@ -240,7 +240,7 @@ In Settings:
 In text config:
 
 ```toml
-# Disable Noctalia wallpaper display
+# Disable Hyprbar wallpaper display
 [wallpaper]
 enabled = false
 
@@ -250,13 +250,13 @@ source           = "wallpaper"
 wallpaper_scheme = "m3-content"
 ```
 
-After your wallpaper app sets a new image, tell Noctalia which file to use for color extraction:
+After your wallpaper app sets a new image, tell Hyprbar which file to use for color extraction:
 
 ```sh
-noctalia msg wallpaper-set ~/Pictures/Wallpapers/new-wallpaper.png
+hyprbar msg wallpaper-set ~/Pictures/Wallpapers/new-wallpaper.png
 ```
 
-Noctalia extracts colors from that image, generates a palette with the configured scheme, and cross-fades the shell to the new colors even though it is not displaying the wallpaper itself. The path is persisted across restarts.
+Hyprbar extracts colors from that image, generates a palette with the configured scheme, and cross-fades the shell to the new colors even though it is not displaying the wallpaper itself. The path is persisted across restarts.
 
 </FaqItem>
 
@@ -266,15 +266,15 @@ Noctalia extracts colors from that image, generates a palette with the configure
 
 Check these points first:
 
-1. Make sure Noctalia is running.
-2. Use v5 IPC commands in the form `noctalia msg ...`.
+1. Make sure Hyprbar is running.
+2. Use v5 IPC commands in the form `hyprbar msg ...`.
 3. Verify that your compositor bind syntax is correct.
 4. Test the command in a terminal before putting it in a compositor config.
 
-Noctalia Settings does not create compositor keybinds. Keybinds belong in your compositor's configuration; Noctalia only
+Hyprbar Settings does not create compositor keybinds. Keybinds belong in your compositor's configuration; Hyprbar only
 receives the IPC command.
 
-See the [IPC overview](/noctalia/ipc/) and [Shell commands](/noctalia/ipc/shell/).
+See the [IPC overview](/hyprbar/ipc/) and [Shell commands](/hyprbar/ipc/shell/).
 
 </FaqItem>
 
@@ -291,20 +291,20 @@ services.upower.enable = true;
 The battery widget defaults to the system battery. If you want to show a peripheral or second battery, middle-click the
 battery widget and choose its **Device** setting. In text config, set the widget's `device` key.
 
-See the [`battery` widget docs](/noctalia/bar/widgets/battery/).
+See the [`battery` widget docs](/hyprbar/bar/widgets/battery/).
 
 </FaqItem>
 
 <FaqItem question="Why won't an app appear in the launcher or dock?">
 
-Noctalia discovers desktop applications from `.desktop` files in standard application directories. If an app is missing, verify that it installs a desktop entry under a path such as:
+Hyprbar discovers desktop applications from `.desktop` files in standard application directories. If an app is missing, verify that it installs a desktop entry under a path such as:
 
 - `/usr/share/applications/`
 - `~/.local/share/applications/`
 - `$HOME/.nix-profile/share/applications/`
 - `/etc/profiles/per-user/$USER/share/applications/`
 
-For dock pins, match the desktop entry ID, `StartupWMClass`, display name, or full desktop entry path. See the [Dock](/noctalia/dock/) page for matching rules.
+For dock pins, match the desktop entry ID, `StartupWMClass`, display name, or full desktop entry path. See the [Dock](/hyprbar/dock/) page for matching rules.
 
 </FaqItem>
 
@@ -322,21 +322,21 @@ In text config, Weather requires `[weather] enabled = true` plus a resolved `[lo
 
 Weather, Theme `auto`, and Night Light all share the same location source.
 
-See [Location](/noctalia/services/location/), [Theme](/noctalia/theming/#mode), and [Night Light](/noctalia/services/night-light/).
+See [Location](/hyprbar/services/location/), [Theme](/hyprbar/theming/#mode), and [Night Light](/hyprbar/services/night-light/).
 
 </FaqItem>
 
 <FaqItem question="Why can't I unlock my lock screen?">
 
-Noctalia authenticates through PAM using the `login` service. Make sure `/etc/pam.d/login` exists and is valid for your distribution.
+Hyprbar authenticates through PAM using the `login` service. Make sure `/etc/pam.d/login` exists and is valid for your distribution.
 
-If you changed your PAM stack for fingerprint, security key, or other authentication methods, make sure those changes are present in the `login` PAM service used by Noctalia.
+If you changed your PAM stack for fingerprint, security key, or other authentication methods, make sure those changes are present in the `login` PAM service used by Hyprbar.
 
 </FaqItem>
 
 <FaqItem question="Does the lock screen engage before suspend?">
 
-By default yes, when the lock screen is enabled. Noctalia holds a logind sleep delay inhibitor and locks the session on `PrepareForSleep` before allowing suspend or hibernate to proceed (including lid-close sleep). You do not need a separate idle daemon for lock-before-sleep.
+By default yes, when the lock screen is enabled. Hyprbar holds a logind sleep delay inhibitor and locks the session on `PrepareForSleep` before allowing suspend or hibernate to proceed (including lid-close sleep). You do not need a separate idle daemon for lock-before-sleep.
 
 To suspend without locking (for example lid close or `systemctl suspend`), set `[lockscreen].lock_before_suspend = false` in Settings → Security → Lock Screen, or in TOML. Explicit **Lock and Suspend** session/idle actions still lock first.
 

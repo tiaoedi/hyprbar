@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="3840" y2="2160" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset=".52" stop-color="#18233b"/>
+      <stop offset="1" stop-color="#211b3b"/>
+    </linearGradient>
+    <radialGradient id="glow-a" cx="0" cy="0" r="1" gradientTransform="matrix(1740 940 -700 1296 960 280)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38bdf8" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-b" cx="0" cy="0" r="1" gradientTransform="matrix(1440 780 -620 1145 3260 1950)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#a78bfa" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="120" y1="1800" x2="3700" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7dd3fc" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#7dd3fc" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#c4b5fd" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#base)"/>
+  <rect width="3840" height="2160" fill="url(#glow-a)"/>
+  <rect width="3840" height="2160" fill="url(#glow-b)"/>
+  <g fill="none" stroke="url(#line)" stroke-width="3">
+    <path d="M-180 1790C620 1500 890 1160 1450 1120s830 310 1390 150 810-500 1170-790"/>
+    <path d="M-140 1900c790-300 1060-610 1610-650s820 290 1370 130 790-480 1150-760" opacity=".72"/>
+    <path d="M-100 2010c780-290 1080-540 1610-590s810 260 1350 110 780-450 1140-730" opacity=".48"/>
+  </g>
+  <g fill="none" stroke="#c4b5fd" stroke-opacity=".13" stroke-width="2">
+    <circle cx="2980" cy="720" r="390"/>
+    <circle cx="2980" cy="720" r="510"/>
+    <circle cx="2980" cy="720" r="630"/>
+    <path d="M2980 30v1380M2290 720h1380"/>
+  </g>
+  <path d="M0 0h3840v2160H0z" fill="none" stroke="#fff" stroke-opacity=".025" stroke-width="4"/>
+</svg>

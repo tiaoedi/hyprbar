@@ -1,13 +1,22 @@
 # Credits
 
-Noctalia is made possible by the incredible work of many open-source projects and contributors.
+Hyprbar is an independent fork based on the Noctalia v5.2.1 source project, commit
+[`6ef43e2bf2f3d5b4205ec72a72e34a2ab76ce3b4`](https://github.com/noctalia-dev/noctalia/commit/6ef43e2bf2f3d5b4205ec72a72e34a2ab76ce3b4).
+Upstream source and contributor credits are preserved below; see `LICENSE` for the upstream license.
 
-## Design & Branding
+## Hyprbar design & branding
 
-- **MrDowntempo** — Creator of the Noctalia Owl and moon logo
-- **[SaberJ2X](https://www.reddit.com/user/SaberJ64/)** — Creator of Talia, the Noctalia mascot
-- **[Tabler Icons](https://tabler.io/icons)** — Icon set used throughout the shell
-- **[Riyan Resdian on Noun Project](https://thenounproject.com/creator/yaicon/)** — Plug icon
+- **Hyprbar icon and wallpaper** — Original vector artwork created for this fork.
+- **[Tabler Icons](https://tabler.io/icons)** — Icon set used throughout the shell (MIT; bundled-font license text is in `assets/fonts/tabler-icons-license.txt`)
+- **Documentation screenshots** — Images retained from the Noctalia v5 documentation. Screenshots marked `*-v5.png` show upstream Noctalia, not a current Hyprbar build.
+
+## Preserved upstream design & branding credits
+
+These are provenance acknowledgments: the original Noctalia logo and Talia artwork are not bundled as standalone assets, though retained upstream documentation screenshots may show the original interface. These credits do not claim endorsement or additional permission.
+
+- **MrDowntempo** — Creator of the original Noctalia Owl and moon logo
+- **[SaberJ2X](https://www.reddit.com/user/SaberJ64/)** — Creator of Talia, the original upstream mascot
+- **[Riyan Resdian on Noun Project](https://thenounproject.com/creator/yaicon/)** — A plug-icon acknowledgment retained from the upstream credits; this fork does not include a separate Noun Project plug asset.
 
 ## System Libraries
 
@@ -54,18 +63,28 @@ Bundled in `third_party/` and built from source:
 
 ## System Integration
 
-External tools Noctalia integrates with at runtime when present:
+External tools Hyprbar can integrate with at runtime when present:
 
 - **[ddcutil](https://www.ddcutil.com/)** — External display brightness control
+
+## Upstream-hosted services
+
+The fork retains optional requests to `api.noctalia.dev` for community palettes and templates, location lookup,
+public-IP lookup, opt-in telemetry, and Google Calendar OAuth. These endpoints are inherited from the Noctalia codebase;
+this repository does not establish who currently operates them or how request data is handled. The published
+[Noctalia privacy policy](https://noctalia.dev/privacy) is an upstream reference, not a Hyprbar privacy policy, and this
+repository does not verify whether it covers the endpoint behavior described here.
 
 ## Special Thanks
 
 - The **Wayland** community for building the future of Linux desktop graphics
 - The **Niri**, **Hyprland**, **Sway**, **Labwc**, and **MangoWC** teams for their excellent Wayland compositors
-- All the contributors and users who have helped make Noctalia better
+- All the contributors and users who have helped make Hyprbar better
 
 ## License
 
-Noctalia is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+Hyprbar is based on the upstream MIT-licensed source. Bundled third-party components retain their individual licenses;
+their license texts are included in `third_party/` and alongside the bundled Tabler font. See [LICENSE](LICENSE) and the
+third-party notices.
 
 Each dependency listed above is governed by its own respective license. Please refer to their individual projects for licensing information.

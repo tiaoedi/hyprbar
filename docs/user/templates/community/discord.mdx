@@ -1,48 +1,24 @@
 ---
 title: Discord
-description: Theming Discord clients with Noctalia
+description: Theming Discord clients with Hyprbar
 sidebar:
   order: 6
 ---
 
-Noctalia supports multiple Discord client alternatives that can be themed.
+This release does not ship a Discord-specific template or verify Discord-client compatibility. The screenshot and client list inherited from upstream documentation have been removed because they showed upstream Noctalia theme names and a third-party account.
 
-## Supported Clients
-
-- **Vesktop** - Modern Discord client
-- **WebCord** - Privacy-focused Discord client
-- **ArmCord** - Lightweight Discord client
-- **Equibop** - Discord client
-- **Lightcord** - Discord client
-- **Dorion** - Discord client
-- **Vencord** - Discord client
+You may find third-party Discord themes in the community-template catalog. They are not maintained or tested by Hyprbar; inspect their source and verify compatibility with your client before enabling them. The catalog endpoint is inherited from upstream. `[shell].offline_mode = true` blocks new catalog/template HTTP requests made through Hyprbar's shared client; content already cached locally may remain readable. This setting does not control browser, other-process, or arbitrary plugin network activity.
 
 ## Setup
 
-1. **Install your preferred Discord client:**
-   ```bash
-   # Example for Vesktop (Arch Linux)
-   paru -S vesktop
-   ```
-
-2. **Enable Discord theming in Noctalia:**
-  - Open **Settings → Color Scheme → Templates → Programs**
-  - Toggle on **Discord**
-
-3. **Enable theme in Discord:**
-  - Open your Discord client
-  - Go to **Settings → Themes**
-  - Toggle one of the two available Noctalia themes
-
-![Discord](../../../assets/app-theming/discord.png)
+1. Enable community templates only if you trust the upstream catalog and the selected template.
+2. Follow the documentation for your Discord client and the particular theme you choose.
 
 ## Troubleshooting
 
-- **Theme not appearing:** Make sure you've enabled the theme in Discord settings
-- **Colors not updating:** Restart your Discord client after changing color schemes
-- **Client not supported:** Check that your Discord client is one of the supported alternatives
-- **Theme looks broken:** Ensure you're using a supported Discord client and have the latest version
+- **Theme not appearing:** Confirm that the third-party theme supports your client and is installed using that client's current instructions.
+- **Colors not updating:** Check the theme's own requirements; this fork does not guarantee Discord integration.
 
 ## Additional Notes
 
-The theme will automatically update when you change color schemes in Noctalia.
+Do not assume that a community theme automatically follows Hyprbar colors unless its source explicitly implements that integration.

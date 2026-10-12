@@ -13,8 +13,10 @@ struct wl_output;
 class ControlCenterWidget : public Widget {
 public:
   struct Options {
+    [[nodiscard]] static std::string defaultCustomImage();
+
     std::string glyph = "noctalia";
-    std::string customImage;
+    std::string customImage = defaultCustomImage();
     bool customImageColorize = false;
   };
 

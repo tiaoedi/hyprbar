@@ -1,23 +1,23 @@
 ---
 title: Mango
-description: Configure Mango effects and keybinds for Noctalia.
+description: Configure Mango effects and keybinds for Hyprbar.
 sidebar:
   order: 7
 ---
 
-Configure Mango for Noctalia surfaces and use Mango binds to launch Noctalia IPC commands directly from the compositor.
+Configure Mango for Hyprbar surfaces and use Mango binds to launch Hyprbar IPC commands directly from the compositor.
 
-## Autostart Noctalia
+## Autostart Hyprbar
 
 Add to your `~/.config/mango/config.conf`:
 
 ```bash
-exec-once=noctalia
+exec-once=hyprbar
 ```
 
 ## Blur and shadows
 
-Mango's SceneFX layer blur does not filter by surface opacity. If layer blur is enabled, transparent Noctalia surfaces can still receive compositor blur. For the cleanest result, disable Mango's blur and layer shadows, and turn on Noctalia's own drop shadows.
+Mango's SceneFX layer blur does not filter by surface opacity. If layer blur is enabled, transparent Hyprbar surfaces can still receive compositor blur. For the cleanest result, disable Mango's blur and layer shadows, and turn on Hyprbar's own drop shadows.
 
 Add this to `~/.config/mango/config.conf`:
 
@@ -45,7 +45,7 @@ shadowscolor=0x000000ff
 
 Mango uses `blur_layer` for layer-surface blur and `layer_shadows` for layer-surface shadows. Use those exact names; both also require their global toggles, `blur=1` and `shadows=1`.
 
-Then disable Noctalia's rendered drop shadows in your Noctalia TOML config:
+Then disable Hyprbar's rendered drop shadows in your Hyprbar TOML config:
 
 ```toml
 [bar.default]
@@ -67,14 +67,14 @@ Add these binds to your `~/.config/mango/config.conf`:
 
 ```bash
 # Core binds
-bind=SUPER,space,spawn,noctalia msg panel-toggle launcher
-bind=SUPER,s,spawn,noctalia msg panel-toggle control-center
-bind=SUPER,comma,spawn,noctalia msg settings-toggle
+bind=SUPER,space,spawn,hyprbar msg panel-toggle launcher
+bind=SUPER,s,spawn,hyprbar msg panel-toggle control-center
+bind=SUPER,comma,spawn,hyprbar msg settings-toggle
 
 # Media keys
-bind=NONE,XF86AudioRaiseVolume,spawn,noctalia msg volume-up
-bind=NONE,XF86AudioLowerVolume,spawn,noctalia msg volume-down
-bind=NONE,XF86AudioMute,spawn,noctalia msg volume-mute
-bind=NONE,XF86MonBrightnessUp,spawn,noctalia msg brightness-up
-bind=NONE,XF86MonBrightnessDown,spawn,noctalia msg brightness-down
+bind=NONE,XF86AudioRaiseVolume,spawn,hyprbar msg volume-up
+bind=NONE,XF86AudioLowerVolume,spawn,hyprbar msg volume-down
+bind=NONE,XF86AudioMute,spawn,hyprbar msg volume-mute
+bind=NONE,XF86MonBrightnessUp,spawn,hyprbar msg brightness-up
+bind=NONE,XF86MonBrightnessDown,spawn,hyprbar msg brightness-down
 ```

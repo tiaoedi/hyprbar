@@ -29,7 +29,8 @@ namespace noctalia::theme {
 
     constexpr Logger kLog("community_templates");
     constexpr std::string_view kCatalogUrl = "https://api.noctalia.dev/templates";
-    constexpr std::string_view kCacheMetadataFilename = ".noctalia-cache.json";
+    constexpr std::string_view kCacheMetadataFilename = ".hyprbar-cache.json";
+    constexpr std::string_view kLegacyCacheMetadataFilename = ".noctalia-cache.json";
 
     struct CommunityTemplateFile {
       std::string name;
@@ -346,9 +347,8 @@ namespace noctalia::theme {
       std::filesystem::remove(sidecarPath(path), ec);
     }
 
-    CacheMetadata readCacheMetadata(const std::filesystem::path& dir) {
+    CacheMetadata readCacheMetadataFile(const std::filesystem::path& path) {
       CacheMetadata metadata;
-      const std::filesystem::path path = cacheMetadataPath(dir);
       std::ifstream in(path);
       if (!in)
         return metadata;
@@ -375,6 +375,15 @@ namespace noctalia::theme {
         }
       } catch (const std::exception& e) {
         kLog.warn("failed to parse community template cache metadata {}: {}", path.string(), e.what());
+      }
+      return metadata;
+    }
+
+    CacheMetadata readCacheMetadata(const std::filesystem::path& dir) {
+      CacheMetadata metadata = readCacheMetadataFile(cacheMetadataPath(dir));
+      const CacheMetadata legacy = readCacheMetadataFile(dir / std::string(kLegacyCacheMetadataFilename));
+      for (const auto& [name, md5] : legacy.fileMd5s) {
+        metadata.fileMd5s.try_emplace(name, md5);
       }
       return metadata;
     }
@@ -904,7 +913,7 @@ namespace noctalia::theme {
     const std::string state = FileUtils::stateDir();
     if (!state.empty())
       return std::filesystem::path(state) / "community-templates";
-    return std::filesystem::path("/tmp") / "noctalia" / "community-templates";
+    return std::filesystem::path("/tmp") / "hyprbar" / "community-templates";
   }
 
   std::filesystem::path communityTemplateDir(std::string_view id) {

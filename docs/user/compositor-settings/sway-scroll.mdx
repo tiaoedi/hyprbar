@@ -1,18 +1,18 @@
 ---
 title: Sway / Scroll
-description: Configure Sway-style keybinds for Noctalia.
+description: Configure Sway-style keybinds for Hyprbar.
 sidebar:
   order: 6
 ---
 
 Use this page for compositors that use Sway-style bind syntax.
 
-## Autostart Noctalia
+## Autostart Hyprbar
 
 Add to your `~/.config/sway/config` (or equivalent):
 
 ```bash
-exec noctalia
+exec hyprbar
 ```
 
 ## IPC Keybinds
@@ -20,7 +20,7 @@ exec noctalia
 Add these binds to your `~/.config/sway/config` or the equivalent compositor configuration file:
 
 ```bash
-set $ipc noctalia msg
+set $ipc hyprbar msg
 
 # Core binds
 bindsym $mod+space exec $ipc panel-toggle launcher

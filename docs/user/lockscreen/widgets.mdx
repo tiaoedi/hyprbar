@@ -7,10 +7,10 @@ sidebar:
 
 # Lockscreen widgets
 
-Lockscreen widgets use the same widget types and per-type settings as [desktop widgets](/noctalia/desktop/widgets/). Layout is stored in a dedicated `[lockscreen_widgets]` section (not shared with `[desktop_widgets]` or `[lockscreen]` backdrop keys).
+Lockscreen widgets use the same widget types and per-type settings as [desktop widgets](/hyprbar/desktop/widgets/). Layout is stored in a dedicated `[lockscreen_widgets]` section (not shared with `[desktop_widgets]` or `[lockscreen]` backdrop keys).
 
-- Declarative config: `[lockscreen_widgets]` in `~/.config/noctalia/*.toml`
-- GUI/editor overrides: `settings.toml` under your Noctalia state directory (same as desktop widgets)
+- Declarative config: `[lockscreen_widgets]` in `~/.config/hyprbar/*.toml`
+- GUI/editor overrides: `settings.toml` under your Hyprbar state directory (same as desktop widgets)
 
 ```toml
 [lockscreen_widgets]
@@ -31,7 +31,7 @@ format = "{:%H:%M}"
 
 When enabled, widgets render on each lock surface, over the same blurred and tinted wallpaper as the rest of the lock screen. To show a clock on the lock screen, add a **clock** widget.
 
-Text widgets (clock, weather, media player, label, sysmon) support a per-widget `font_family` setting just like desktop widgets - empty inherits the shell font. See [Desktop widgets - Common settings](/noctalia/desktop/widgets/#common-settings).
+Text widgets (clock, weather, media player, label, sysmon) support a per-widget `font_family` setting just like desktop widgets - empty inherits the shell font. See [Desktop widgets - Common settings](/hyprbar/desktop/widgets/#common-settings).
 
 ---
 
@@ -42,13 +42,13 @@ Edit mode is only available while the session is **unlocked**. The editor shows 
 ### Related IPC
 
 For lockscreen widget edit-mode commands, see
-[Surfaces → Lockscreen widgets](/noctalia/ipc/surfaces/#lockscreen-widgets).
+[Surfaces → Lockscreen widgets](/hyprbar/ipc/surfaces/#lockscreen-widgets).
 
 You can also use **Settings → Security → Lock screen → Toggle Editor**.
 
 ### Controls
 
-Same interaction model as desktop widget edit mode (move, rotate, resize, grid snap, center guides, toolbar), except the **login box** widget can only be moved (not resized or rotated). You can toggle the visibility of login boxes for individual monitors using the eye icon in the toolbar, provided that at least one login box remains visible across all monitors. Select it and open the settings inspector to adjust panel and input styling; **Reset to Defaults** at the bottom restores all login box settings. See [Desktop widgets - Edit mode](/noctalia/desktop/widgets/#edit-mode).
+Same interaction model as desktop widget edit mode (move, rotate, resize, grid snap, center guides, toolbar), except the **login box** widget can only be moved (not resized or rotated). You can toggle the visibility of login boxes for individual monitors using the eye icon in the toolbar, provided that at least one login box remains visible across all monitors. Select it and open the settings inspector to adjust panel and input styling; **Reset to Defaults** at the bottom restores all login box settings. See [Desktop widgets - Edit mode](/hyprbar/desktop/widgets/#edit-mode).
 
 ---
 

@@ -49,15 +49,15 @@ namespace {
 
   bool readsLogLevelEnvironment() {
     setLogLevel(LogLevel::Info);
-    bool ok = expect(setenv("NOCTALIA_LOG_LEVEL", "warn", 1) == 0, "failed to set NOCTALIA_LOG_LEVEL");
+    bool ok = expect(setenv("HYPRBAR_LOG_LEVEL", "warn", 1) == 0, "failed to set HYPRBAR_LOG_LEVEL");
     initLogLevelFromEnvironment();
     ok = expect(currentLogLevel() == LogLevel::Warn, "environment log level was not applied") && ok;
 
     setLogLevel(LogLevel::Error);
-    ok = expect(setenv("NOCTALIA_LOG_LEVEL", "WRN", 1) == 0, "failed to set invalid NOCTALIA_LOG_LEVEL") && ok;
+    ok = expect(setenv("HYPRBAR_LOG_LEVEL", "WRN", 1) == 0, "failed to set invalid HYPRBAR_LOG_LEVEL") && ok;
     initLogLevelFromEnvironment();
     ok = expect(currentLogLevel() == LogLevel::Error, "invalid environment log level changed current level") && ok;
-    unsetenv("NOCTALIA_LOG_LEVEL");
+    unsetenv("HYPRBAR_LOG_LEVEL");
     return ok;
   }
 
@@ -70,7 +70,7 @@ namespace {
     initLogFile();
     logWarn("{}", std::string(10'000, 'x'));
 
-    const auto logPath = cacheRoot / "noctalia" / "noctalia.log";
+    const auto logPath = cacheRoot / "hyprbar" / "hyprbar.log";
     std::error_code ec;
     const auto size = std::filesystem::file_size(logPath, ec);
     bool ok = expect(!ec, "failed to stat capped log file");
@@ -89,10 +89,10 @@ namespace {
       return false;
     }
 
-    const auto logDir = cacheRoot / "noctalia";
+    const auto logDir = cacheRoot / "hyprbar";
     std::filesystem::create_directories(logDir);
 
-    const auto logPath = logDir / "noctalia.log";
+    const auto logPath = logDir / "hyprbar.log";
     const std::size_t initialSize = kMaxLogBytes - 8;
     {
       std::ofstream out(logPath, std::ios::binary);
@@ -109,7 +109,7 @@ namespace {
     initLogFile();
     logWarn("rotate-now");
 
-    const auto backupPath = logDir / "noctalia.log.1";
+    const auto backupPath = logDir / "hyprbar.log.1";
     std::error_code ec;
     const auto backupSize = std::filesystem::file_size(backupPath, ec);
     bool ok = expect(!ec, "missing rotated backup");

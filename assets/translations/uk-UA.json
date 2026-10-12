@@ -840,10 +840,10 @@
       "dbus-disabled": "Сповіщення DBus вимкнено",
       "desktop-widgets-editor": "Редактор віджетів",
       "desktop-widgets-editor-enabled": "Редактор віджетів робочого столу увімкнено. Перейди на порожній робочий простір, щоб побачити оверлей редактора.",
-      "greeter-sync": "Вітальний екран Noctalia",
+      "greeter-sync": "Вітальний екран",
       "greeter-sync-pending": "Адміністратор має схвалити запис налаштувань для вітального екрану",
       "greeter-sync-success": "Оформлення синхронізовано. Зміни будуть застосовані при наступному екрані входу.",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "Це поєднання клавіш приймає одну клавішу без модифікаторів.",
       "keybind-invalid-printable": "Клавіші з друкованими символами (літери, цифри тощо) працюватимуть лише з модифікатором, як-от Ctrl або Alt.",
       "keybind-invalid-super": "Клавіша Super/Windows не може бути використана у прив'язках клавіш оболонки.",
@@ -909,7 +909,7 @@
     },
     "enable-failed": {
       "body-error": "{plugin}: {error}",
-      "body-incompatible": "{plugin} очікує API {version}; ця версія Noctalia підтримує API {oldest}–{current}.",
+      "body-incompatible": "{plugin} очікує API {version}; ця версія Hyprbar підтримує API {oldest}–{current}.",
       "body-timeout": "Установлення додатку «{plugin}» тривало надто довго.",
       "title": "Додаток не увімкнено."
     }
@@ -1187,7 +1187,7 @@
       },
       "reset-page": "Не вдалося скинути деякі налаштування.",
       "support-report": "Не вдалося зберегти звіт підтримки.",
-      "sync-greeter": "Не вдалося синхронізувати вигляд з Noctalia Greeter.",
+      "sync-greeter": "Не вдалося синхронізувати вигляд з Greeter.",
       "sync-greeter-timeout": "Синхронізація з екраном входу ще чекає на авторизацію. Перевір усі TTY або термінали на запит від Polkit, увімкни агент Polkit в налаштуваннях безпеки, або виконай pkexec вручну.",
       "widget": {
         "rename": "Не вдалося перейменувати іменований віджет."
@@ -1535,7 +1535,7 @@
         "delete-confirm-title": "Видалити «{name}»?",
         "empty": "Немає ввімкнених додатків.",
         "held-back": "",
-        "held-back-hint": "v{version} вимагає API {required}; ця версія оболонки Noctalia підтримує версії до API {current}. Онови оболонку Noctalia щоб мати змогу встановити цей додаток.",
+        "held-back-hint": "v{version} вимагає API {required}; ця версія оболонки Hyprbar підтримує версії до API {current}. Онови оболонку Hyprbar щоб мати змогу встановити цей додаток.",
         "incompatible-plugin-api": "Несумісний API",
         "remove": "Вилучити додаток",
         "requires": "Вимагає: {dependencies}",
@@ -1558,7 +1558,7 @@
         "errors": {
           "duplicate-name": "Джерело з таким ідентифікатором уже існує.",
           "invalid-name": "Ідентифікатор джерела мусить містити літери, цифри, а також символи «., _, і -», і має починатися з літери чи цифри.",
-          "location-required": "Адресу джерела  обов'язково треба вказати."
+          "location-required": "Адресу джерела обов'язково треба вказати."
         },
         "kind": {
           "git": "Git",
@@ -1566,8 +1566,8 @@
         },
         "kind-label": "Тип",
         "location-label": "Адреса",
-        "location-placeholder-git": "https://github.com/me/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/me/hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "Ідентифікатор джерела",
         "name-placeholder": "my-plugins",
         "precedence-hint": "Джерела нижче мають вищий приорітет понад джерелами нижче, якщо вони мають той самий додаток.",
@@ -1577,19 +1577,19 @@
         "update": "Оновити джерело"
       },
       "store": {
-        "add": "Додати до Noctalia",
+        "add": "Додати до Hyprbar",
         "back-to-catalog": "Назад до каталогу додатків",
         "categories": "Категорії",
         "category-all": "Усі",
         "empty": "Додатки не знайдені.",
         "held-back": "Старіша версія",
-        "held-back-hint": "Встановлює v{version} для API {resolved}. Найновіша v{latest} потребує API {latestRequired}; ця версія оболонки Noctalia підтримує тільки до API {current}.",
+        "held-back-hint": "Встановлює v{version} для API {resolved}. Найновіша v{latest} потребує API {latestRequired}; ця версія оболонки Hyprbar підтримує тільки до API {current}.",
         "incompatible": "Несумісно",
-        "incompatible-hint": "Потребує API {required}; ця версія оболонки Noctalia підтримує {oldest}–{current}.",
+        "incompatible-hint": "Потребує API {required}; ця версія оболонки Hyprbar підтримує {oldest}–{current}.",
         "installed": "Встановлено",
         "loading": "Триває завантаження каталогу…",
         "no-readme": "Немає доступного опису.",
-        "open-page": "Відкрити сторінку додатка на noctalia.dev",
+        "open-page": "Відкрити сторінку додатка на the plugin catalog",
         "open-source": "Відкрити репозиторій із початковим кодом додатка",
         "results-count": "Доступно додатків: {count}",
         "search-placeholder": "Введи назву додатка…",
@@ -1643,7 +1643,7 @@
           "label": "Закруглення кутів"
         },
         "custom-palette": {
-          "description": "Обери палітру з ~/.config/noctalia/palettes/",
+          "description": "Обери палітру з ~/.config/hyprbar/palettes/",
           "label": "Користувацька палітра",
           "search-placeholder": "Пошук власних палітр..."
         },
@@ -1789,7 +1789,7 @@
           "label": "Сім'я шрифтів"
         },
         "font-scale": {
-          "description": "Масштабування тексту по всім віджетам цього Bar; множиться на font_scale окремих віджетів  ",
+          "description": "Масштабування тексту по всім віджетам цього Bar; множиться на font_scale окремих віджетів",
           "label": "Масштаб шрифту"
         },
         "font-weight": {
@@ -1862,7 +1862,7 @@
           "label": "Затримка виконання"
         },
         "hot-corners-enabled": {
-          "description": "Виконувати дії при торканні курсором до країв екрану ",
+          "description": "Виконувати дії при торканні курсором до країв екрану",
           "label": "Гарячі кути"
         },
         "hot-corners-top-left": {
@@ -1982,7 +1982,7 @@
           "label": "Кнопка Запускача"
         },
         "layer": {
-          "description": "Обери Overlay щоб також показувати док понад повноекранними вікнами ",
+          "description": "Обери Overlay щоб також показувати док понад повноекранними вікнами",
           "label": "Шар Wayland"
         },
         "magnification": {
@@ -2082,7 +2082,7 @@
             "label": "При вимкненні"
           },
           "started": {
-            "description": "Команда для запуску після старту Noctalia",
+            "description": "Команда для запуску після старту Hyprbar",
             "label": "При запуску"
           },
           "theme-mode-changed": {
@@ -2408,7 +2408,7 @@
           "placeholder": "Місто, Країна"
         },
         "location-auto-locate": {
-          "description": "Визначати ваше місцеперебування автоматично за IP-адресою через сайт noctalia.dev",
+          "description": "Визначати ваше місцеперебування автоматично за IP-адресою",
           "label": "Автовизначення (IP)"
         },
         "longitude": {
@@ -2596,7 +2596,7 @@
           "label": "Розмір історії"
         },
         "clipboard-image-action": {
-          "description": "Команда, яка виконуватиметься після вибору зображення з буфера обміну; Використовуй {path}, щоб вставити шлях, {stdin} щоб позначити місце  stdin, або прибери {path} щоб пропустити обраний вміст автоматично",
+          "description": "Команда, яка виконуватиметься після вибору зображення з буфера обміну; Використовуй {path}, щоб вставити шлях, {stdin} щоб позначити місце stdin, або прибери {path} щоб пропустити обраний вміст автоматично",
           "label": "Команда дії зображення",
           "placeholder": "gimp {path} або satty -f -"
         },
@@ -2612,7 +2612,7 @@
           "label": "Автоматично синхронізувати"
         },
         "launch-apps-as-systemd-services": {
-          "description": "Запускає програми в окремих службах systemd, щоб вони не ділили cgroup Noctalia",
+          "description": "Запускає програми в окремих службах systemd, щоб вони не ділили cgroup Hyprbar",
           "label": "Запускати програми як служби systemd"
         },
         "niri-overview-type-to-launch": {
@@ -2620,7 +2620,7 @@
           "label": "Набери, щоб запустити"
         },
         "offline-mode": {
-          "description": "Блокувати всі вихідні мережеві запити",
+          "description": "Блокує нові HTTP-запити через спільний клієнт Hyprbar; це не брандмауер.",
           "label": "Офлайн-режим"
         },
         "osd-background-opacity": {
@@ -2783,12 +2783,12 @@
         },
         "sync-greeter": {
           "button": "Синхронізувати зараз",
-          "description": "Застосувати поточне тло й колірну палітру до вітального екрану Noctalia (потрібні права адміністратора)",
-          "label": "Noctalia Привітання"
+          "description": "Застосувати поточне тло й колірну палітру до вітального екрану (потрібні права адміністратора)",
+          "label": "Привітання"
         },
         "telemetry": {
-          "description": "Надсилає невеликий анонімний стартовий пінг з версією, OS, композитором, роздільною здатністю монітора, RAM та UI scale",
-          "label": "Анонімний пінг при запуску"
+          "description": "Після ввімкнення надсилає телеметрію запуску з постійним ідентифікатором інсталяції.",
+          "label": "Телеметрія під час запуску"
         },
         "time-format": {
           "description": "Формат часу за замовчуванням для інтерфейсу оболонки без власного налаштування",
@@ -2965,8 +2965,8 @@
             "label": "Увімкнути нічний режим"
           },
           "nightlight-force-toggle": {
-            "description": "Перемкнути нічний режим примусово ",
-            "label": "Перемкнути нічний режим примусово "
+            "description": "Перемкнути нічний режим примусово",
+            "label": "Перемкнути нічний режим примусово"
           },
           "nightlight-toggle": {
             "description": "Перемкнути розклад нічного режиму"
@@ -3446,7 +3446,7 @@
       "export-config": "Експортувати конфігурацію…",
       "export-config-saved": "Конфігурацію експортовано.",
       "filter-overridden": "Змінені",
-      "native-title": "Параметри Noctalia",
+      "native-title": "Параметри Hyprbar",
       "no-results": "Параметр не знайдено",
       "no-results-hint": "Спробуйте іншу назву налаштування або config key.",
       "offline-mode-notice": {
@@ -3472,7 +3472,7 @@
     "no-wallpaper-selected": "Тло екрана не вибрано.",
     "select-wallpaper": "Обери тло екрана.",
     "subtitle": "Кілька швидких варіантів для початку.",
-    "title": "Ласкаво просимо до Noctalia",
+    "title": "Ласкаво просимо до Hyprbar",
     "wallpaper": "Шпалери",
     "wallpaper-scheme": "Схема генерування палітри"
   },
