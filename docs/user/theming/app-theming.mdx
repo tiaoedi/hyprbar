@@ -40,14 +40,14 @@ hyprbar theme --list-templates
 
 ## Community Templates
 
-The community-template catalog uses `api.noctalia.dev` through an endpoint inherited from upstream code. This repository does not establish the endpoint's current operator or data handling. The published [Noctalia privacy policy](https://noctalia.dev/privacy) is an upstream reference, not a Hyprbar policy, and this repository does not verify that it covers these requests. Review a template before enabling it; community templates can include commands/hooks. `[shell].offline_mode = true` blocks new requests routed through Hyprbar's shared client, while cached content may remain available.
+The community-template catalog uses an external service retained by Hyprbar. This repository does not establish the service's current operator or data handling, and its data-retention practices have not been verified. Review a template before enabling it; community templates can include commands/hooks. `[shell].offline_mode = true` blocks new shared-client requests but does not cancel in-flight transfers or control unrelated network activity.
 
-Community templates are fetched from `https://api.noctalia.dev/templates` and cached locally:
+Community templates are fetched from the external service documented in the repository-root `NETWORK-PRIVACY.md` and cached locally:
 
 ```toml
 [theme.templates]
 enable_community_templates = true
-community_ids              = []        # opt-in; fetched from api.noctalia.dev/templates
+community_ids              = []        # opt-in; fetched from the configured external service
 ```
 
 `community_ids` selects which community templates run. In **Settings → Templates**, enable community templates and use **Browse Templates** to search and filter the catalog (by category or enabled-only). Metadata and files are stored in `~/.local/state/hyprbar/community-templates/` (honoring `HYPRBAR_STATE_HOME`, then `XDG_STATE_HOME`).

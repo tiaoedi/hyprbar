@@ -28,4 +28,4 @@ RPM_BUILD_NCPUS=4 rpmbuild -ba packaging/rpm/hyprbar.spec
 
 O spec usa as macros Meson do Fedora, executa os testes com diretórios HOME/XDG isolados, inclui assets e licenças de dependências vendorizadas e gera completions Bash/Zsh/Fish do executável recém-compilado. Requisitos de bibliotecas compartilhadas são gerados pelo RPM a partir dos binários.
 
-Fedora 44 x86_64 é o único alvo de pacote planejado para esta primeira versão. Os nomes de dependências usados para outras distribuições em `BUILDING.md` são notas herdadas do upstream, não uma declaração de compatibilidade testada.
+Fedora 44 x86_64 é o único alvo de pacote planejado para esta primeira versão. As dependências listadas para outras distribuições em `BUILDING.md` não foram validadas para o Hyprbar.

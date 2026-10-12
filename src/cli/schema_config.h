@@ -61,16 +61,16 @@ namespace noctalia::cli {
   };
 
   inline constexpr std::array kConfigImportNoctaliaFlags{
-      Flag{"--config-dir", {}, "<dir>", "Noctalia configuration source directory", {}, {}, false, false},
-      Flag{"--state-dir", {}, "<dir>", "Noctalia state source directory", {}, {}, false, false},
-      Flag{"--data-dir", {}, "<dir>", "Noctalia data source directory", {}, {}, false, false},
+      Flag{"--config-dir", {}, "<dir>", "Legacy configuration source directory", {}, {}, false, false},
+      Flag{"--state-dir", {}, "<dir>", "Legacy state source directory", {}, {}, false, false},
+      Flag{"--data-dir", {}, "<dir>", "Legacy data source directory", {}, {}, false, false},
       Flag{"--apply", {}, {}, "Write the import into isolated Hyprbar directories", {}, {}, false, false},
-      Flag{"--include-local-plugins", {}, {}, "Copy local plugin code from the Noctalia data directory", {}, {}, false, false},
-      Flag{"--include-plugin-data", {}, {}, "Copy persistent plugin data from the Noctalia state directory", {}, {}, false, false},
+      Flag{"--include-local-plugins", {}, {}, "Copy local plugin code from the legacy data directory", {}, {}, false, false},
+      Flag{"--include-plugin-data", {}, {}, "Copy persistent plugin data from the legacy state directory", {}, {}, false, false},
   };
   inline constexpr Command kConfigImportNoctaliaCmd{
       "import-noctalia",
-      "Import Noctalia configuration",
+      "Import existing configuration",
       "Previews the files to import by default. Pass --apply to write them. Existing target files are never overwritten.\n"
       "Only config TOML files and state/settings.toml are imported by default; app state, notification/clipboard history, and keyring credentials are not copied.\n"
       "Local plugin code and persistent plugin data may be sensitive and are excluded unless their respective --include flags are passed. Imported plugin settings may activate remote plugins on startup; review the files before launching Hyprbar.",

@@ -1,14 +1,14 @@
 Contributing
 ===
 
-This file collects contributor-facing details for Hyprbar, forked from Noctalia v5.2.1: design goals, stack notes, code style, contribution rules,
+This file collects contributor-facing details for Hyprbar: design goals, stack notes, code style, contribution rules,
 testing, commit conventions, source layout, and debugging helpers.
 
 For dependencies and normal build commands, start with [BUILDING.md](BUILDING.md). For the architecture and the
 invariants reviewers enforce (UI phases, layer boundaries, rendering, surfaces, config, plugins), read
 [ARCHITECTURE.md](ARCHITECTURE.md).
 
-Hyprbar inherits much of its architecture from upstream; the rules below describe this fork's current practices.
+Hyprbar's architecture is source-derived; the rules below describe this fork's current practices.
 
 ## Design Principles
 
@@ -138,8 +138,7 @@ edit generated copies; the next sync overwrites them.
 ### Vendored code
 
 Do not patch vendored code under `third_party/` for Hyprbar behavior; local edits are lost when the dependency is
-refreshed. Put fork-specific behavior in Hyprbar-owned sources under `src/`, or fix the issue in the upstream source
-project and update the vendored snapshot deliberately.
+refreshed. Put fork-specific behavior in Hyprbar-owned sources under `src/`, or prepare and review a deliberate update to the vendored snapshot.
 
 ## Testing
 
@@ -188,8 +187,7 @@ This fork does not run an automatic pull-request description enforcement bot; re
 
 ## Translations
 
-The locale catalogs in `assets/translations/` were inherited from the upstream project. Hyprbar has no separate
-translation service; `assets/translations/en.json` is the source catalog for fork-specific strings.
+The locale catalogs in `assets/translations/` are maintained in this repository. Hyprbar has no separate translation service; `assets/translations/en.json` is the source catalog for project-specific strings.
 
 When a code, UI, settings, or documentation change needs a new user-facing string, add or update the English string in
 `assets/translations/en.json`. Do not machine-translate or copy English into other locales. Locale changes must be

@@ -13,11 +13,10 @@ Plugins extend Hyprbar with **bar widgets**, **desktop widgets**, **shell panels
 running in isolated VMs. A plugin is a directory containing a static
 `plugin.toml` manifest and one or more `.luau` entry scripts.
 
-Plugins come from **sources**. This fork inherits two default git sources from its upstream project; these repositories
-are maintained externally and are not Hyprbar-owned catalogs:
+Plugins come from **sources**. This build currently references two externally maintained git sources; they are not Hyprbar-owned catalogs:
 
-- **official** - `https://github.com/noctalia-dev/official-plugins` (upstream-maintained)
-- **community** - `https://github.com/noctalia-dev/community-plugins` (community-maintained upstream)
+- **official** - `https://github.com/noctalia-dev/official-plugins` (externally maintained)
+- **community** - `https://github.com/noctalia-dev/community-plugins` (community-maintained)
 
 You can also add your own git repos or local directories.
 
@@ -46,7 +45,7 @@ If a plugin is enabled in `config.toml` and you disable it in Settings, Hyprbar 
 
 ```sh
 hyprbar msg plugins list                              # every plugin across all sources, with enabled state
-hyprbar msg plugins enable noctalia/screen_recorder  # fetch (if needed) + enable upstream plugin id
+hyprbar msg plugins enable noctalia/screen_recorder  # legacy plugin ID; fetch (if needed) + enable
 hyprbar msg plugins disable noctalia/screen_recorder # disable; code + settings are retained
 hyprbar msg plugins update official                   # update a source, then hot-reload its plugins
 ```
@@ -60,9 +59,7 @@ hyprbar msg plugins source add my-dev path ~/dev/my-plugins
 hyprbar msg plugins source remove my-repo
 ```
 
-The inherited `official` and `community` sources can be updated and enabled or disabled in Settings, but are protected
-from removal in Settings and IPC. Custom git/path sources are removable. **Auto-update plugins** is a dropdown that
-controls the global `[plugins].auto_update` mode: **All sources** (default), **upstream official source only**, or **None**.
+The configured `official` and `community` sources can be updated and enabled or disabled in Settings, but cannot be removed there or through IPC. Custom git/path sources are removable. **Auto-update plugins** is a dropdown for the global `[plugins].auto_update` mode: **All sources** (default), **official source only**, or **None**.
 
 Enabling a plugin makes its entries available. Its **bar widget** then shows up in the Add-widget picker - add a widget
 instance just like any built-in widget (or configure one by hand with `type = "<author>/<plugin>:<entry>"`). A
@@ -79,7 +76,7 @@ also writes runtime toggles to its state file, and both are merged.
 ```toml
 [plugins]
 # Fully-qualified ids ("<author>/<plugin>") that are active.
-enabled = ["noctalia/screen_recorder"] # upstream plugin id; plugin ids are compatibility identifiers
+enabled = ["noctalia/screen_recorder"] # legacy plugin ID retained for compatibility
 auto_update = "all" # "all" | "official" | "none"; background git updates on startup and every 6 hours
 
 # A git source: cached and updated by Hyprbar.
@@ -124,7 +121,7 @@ runtime files for that source, then re-fetches from the new location when needed
 
 `hyprbar msg plugins update <source>` updates the source and hot-reloads its enabled plugins. The global
 `[plugins].auto_update` mode decides what the background tick (startup + every 6 hours) updates: `"all"` (default)
-pulls every enabled git source, `"official"` pulls only the inherited upstream `official` source, and `"none"` disables
+pulls every enabled git source, `"official"` pulls only the configured `official` source, and `"none"` disables
 background updates.
 Updates are safe per enabled plugin: if one enabled plugin's new
 version targets an unsupported plugin API level, Hyprbar keeps that plugin's previous exported copy, still updates

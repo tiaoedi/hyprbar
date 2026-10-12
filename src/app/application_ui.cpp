@@ -790,7 +790,7 @@ void Application::initNotificationAndOsd() {
       },
       [this](bool userCancelled, bool willLockSession) {
         ++m_idleGraceOverlayGeneration;
-        // Keep the overlay only when handing off to Noctalia's lock screen (avoids a flash).
+        // Keep the overlay only when handing off to Hyprbar's lock screen (avoids a flash).
         // External lockers never take ownership; deferred hide also races with suspend.
         const bool handoffToLockScreen = !userCancelled && willLockSession && m_configService.isLockScreenEnabled();
         if (!handoffToLockScreen) {

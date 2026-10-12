@@ -1,7 +1,7 @@
 # Building Hyprbar from source
 
 This guide covers source dependencies, distro-specific package installation, build modes, and install layouts. Hyprbar is
-an independent fork based on Noctalia v5.2.1. Source compilation and the test suite have been run on Fedora 44 x86_64;
+maintained as an independent Wayland shell. Source compilation and the test suite have been run on Fedora 44 x86_64;
 package/build notes for other distributions are inherited from upstream and are not compatibility claims. No prebuilt RPM
 is currently published. The spec and local RPM build procedure are documented in [`packaging/rpm/README.md`](packaging/rpm/README.md).
 

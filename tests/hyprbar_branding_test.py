@@ -22,13 +22,7 @@ ALLOWED_TECHNICAL_TOKENS = re.compile(
     r"|noctalia:[a-z0-9_-]+"
     r"|noctalia\.(?:dev|cachix\.org)(?:/[a-z0-9_./?=&%-]*)?"
     r"|noctalia\.(?:css|toml|log)"
-    r"|Noctalia v5\.2\.1"
-    r"|upstream Noctalia"
-    r"|Noctalia upstream"
-    r"|Noctalia privacy policy"
     r"|import-noctalia"
-    r"|Noctalia Greeter"
-    r"|Noctalia Pywalfox native messaging host"
     r"|NoctaliaTheme"
     r"|noctalia-shell"
     r"|dev\.noctalia\.[A-Za-z0-9_.]+"
@@ -47,10 +41,11 @@ SOURCE_COMPATIBILITY_TOKENS = {
     "src/system/screen_time_service.cpp": BRAND,
     "src/theme/firefox_theme/firefox_theme.cpp": BRAND,
 }
-# Exact persistent identifiers remain readable across Noctalia-to-Hyprbar upgrades.
+# Exact legacy literals remain recognized where removing them could break upgrades or external integrations.
 PERSISTENT_COMPATIBILITY_LITERALS = {
     "src/security/secret_store.cpp": {"noctalia"},
     "src/theme/community_templates.cpp": {".noctalia-cache.json"},
+    "src/theme/firefox_theme/manifest.cpp": {"Noctalia Pywalfox native messaging host"},
 }
 # The GTK helper recognizes the previous import only to rewrite it to Hyprbar's CSS file.
 TEMPLATE_COMPATIBILITY_REPLACEMENTS = {
@@ -61,6 +56,54 @@ CPP_STRING = re.compile(
     re.DOTALL,
 )
 CPP_COMMENT = re.compile(r"/\*.*?\*/|//[^\n]*", re.DOTALL)
+
+
+FORK_ORIGIN_DESCRIPTIONS = {
+    "README.md": "Fork independente baseado no código-fonte do **Noctalia v5.2.1**:",
+    "CREDITS.md": "Hyprbar is an independent fork based on the Noctalia v5.2.1 source project",
+}
+
+
+def documentation_prose(text: str) -> str:
+    visible: list[str] = []
+    in_fence = False
+    fence_marker = ""
+    for line in text.splitlines():
+        stripped = line.lstrip()
+        marker = "```" if stripped.startswith("```") else "~~~" if stripped.startswith("~~~") else ""
+        if marker:
+            if not in_fence:
+                in_fence = True
+                fence_marker = marker
+            elif marker == fence_marker:
+                in_fence = False
+                fence_marker = ""
+            continue
+        if in_fence:
+            continue
+        parts = line.split("`")
+        line = "".join(parts[::2])
+        while "](" in line:
+            start = line.find("](")
+            end = line.find(")", start + 2)
+            if end < 0:
+                break
+            line = line[: start + 1] + line[end + 1 :]
+        for scheme in ("https://", "http://"):
+            while scheme in line:
+                start = line.find(scheme)
+                end = start
+                while end < len(line) and not line[end].isspace() and line[end] not in ")>]:":
+                    end += 1
+                line = line[:start] + line[end:]
+        while "<" in line and ">" in line:
+            start = line.find("<")
+            end = line.find(">", start + 1)
+            if end < 0:
+                break
+            line = line[:start] + line[end + 1 :]
+        visible.append(line)
+    return "\n".join(visible)
 
 
 def strings(value: Any, path: str = "") -> list[tuple[str, str]]:
@@ -225,18 +268,12 @@ def main(root: Path) -> int:
         path = assets / relative
         if path.is_file() and unwanted_artwork.search(path.read_text(encoding="utf-8")):
             errors.append(f"{relative}: excluded mascot artwork/provenance remains")
-    public_docs = [
-        root / name
-        for name in (
-            "README.md",
-            "INSTALACAO-PT-BR.md",
-            "BUILDING.md",
-            "PACKAGING.md",
-            "CREDITS.md",
-            "packaging/rpm/README.md",
-        )
-    ]
-    public_docs.extend(sorted((root / "docs" / "user").rglob("*.mdx")))
+    public_docs = list(root.glob("*.md")) + list(root.glob("*.mdx"))
+    for documentation_root in (root / "docs",):
+        public_docs.extend(documentation_root.rglob("*.md"))
+        public_docs.extend(documentation_root.rglob("*.mdx"))
+    public_docs.extend((root / "packaging/rpm/README.md", root / "example.toml"))
+    public_docs = sorted(set(public_docs))
     for source in public_docs:
         if not source.is_file():
             continue
@@ -247,6 +284,15 @@ def main(root: Path) -> int:
             continue
         if unwanted_artwork.search(text):
             errors.append(f"{source.relative_to(root)}: excluded mascot artwork/provenance remains in public docs")
+        allowed_origin = FORK_ORIGIN_DESCRIPTIONS.get(source.relative_to(root).as_posix())
+        if allowed_origin is not None:
+            if text.count(allowed_origin) != 1:
+                errors.append(f"{source.relative_to(root)}: expected exactly one fork-origin description")
+            text = text.replace(allowed_origin, " ", 1)
+        prose = documentation_prose(text)
+        residual = ALLOWED_TECHNICAL_TOKENS.sub("", prose)
+        if BRAND.search(residual):
+            errors.append(f"{source.relative_to(root)}: old product branding remains outside the fork-origin description")
 
     font_path = assets / "fonts" / "hyprbar-tabler.ttf"
     if font_path.is_file():
@@ -265,9 +311,9 @@ def main(root: Path) -> int:
         except OSError as error:
             errors.append(f"{source.relative_to(root)}: could not read documentation: {error}")
             continue
-        residual = ALLOWED_TECHNICAL_TOKENS.sub("", text)
+        residual = ALLOWED_TECHNICAL_TOKENS.sub("", documentation_prose(text))
         if BRAND.search(residual):
-            errors.append(f"{source.relative_to(root)}: old product branding remains outside documented compatibility/upstream references")
+            errors.append(f"{source.relative_to(root)}: old product branding remains outside technical identifiers and code examples")
 
     source_root = root / "src"
     for source in sorted(source_root.rglob("*")):

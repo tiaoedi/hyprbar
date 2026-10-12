@@ -507,7 +507,7 @@ namespace noctalia::config {
             return std::unexpected(resolvedTarget.error());
           }
           if (pathsOverlap(*resolvedSource, *resolvedTarget)) {
-            return std::unexpected("Noctalia source and Hyprbar target directories must not overlap");
+            return std::unexpected("Source and target directories must not overlap");
           }
         }
       }
@@ -622,7 +622,7 @@ namespace noctalia::config {
           return std::unexpected(resolvedSource.error());
         }
         if (pathsOverlap(*resolvedTarget, *resolvedSource)) {
-          return std::unexpected("import target overlaps a Noctalia source directory: " + path.string());
+          return std::unexpected("import target overlaps a legacy source directory: " + path.string());
         }
       }
       return {};
@@ -767,7 +767,7 @@ namespace noctalia::config {
         const auto sourcePlugins = *sourceData / "plugins";
         const auto targetPlugins = *targetData / "plugins";
         if (isWithin(targetPlugins, sourcePlugins) || isWithin(sourcePlugins, targetPlugins)) {
-          std::println(stderr, "error: Noctalia and Hyprbar plugin directories must be separate");
+          std::println(stderr, "error: source and target plugin directories must be separate");
           return 1;
         }
         if (std::filesystem::exists(sourcePlugins, ec) && !ec) {
@@ -787,7 +787,7 @@ namespace noctalia::config {
         const auto sourcePluginData = *sourceState / "plugins/data";
         const auto targetPluginData = *targetState / "plugins/data";
         if (isWithin(targetPluginData, sourcePluginData) || isWithin(sourcePluginData, targetPluginData)) {
-          std::println(stderr, "error: Noctalia and Hyprbar plugin data directories must be separate");
+          std::println(stderr, "error: source and target plugin data directories must be separate");
           return 1;
         }
         if (std::filesystem::exists(sourcePluginData, ec) && !ec) {
@@ -862,7 +862,7 @@ namespace noctalia::config {
         return 1;
       }
 
-      std::println("Imported {} file(s) into Hyprbar's isolated directories. Noctalia files were left unchanged.", files.size());
+      std::println("Imported {} file(s) into Hyprbar's isolated directories. Source files were left unchanged.", files.size());
       std::println("Keyring credentials, app state, plugin caches, notification history, and clipboard history were not copied.");
       if (parsed->has("--include-local-plugins")) {
         std::println("Local plugin code was copied; review it before starting Hyprbar.");

@@ -43,7 +43,7 @@ namespace noctalia::theme {
     struct ResolvedTheme {
       GeneratedPalette generated;
       Palette palette;
-      // Resolved [theme].mode (apps) and the mode Noctalia itself runs in.
+      // Resolved [theme].mode (apps) and the mode Hyprbar itself runs in.
       std::string mode;
       std::string shellMode;
     };

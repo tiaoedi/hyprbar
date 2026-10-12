@@ -146,9 +146,9 @@ recursive                  = true    # include subdirectories when picking rando
 [theme]
 mode   = "dark"                     # dark | light | auto
 source = "builtin"                  # builtin | wallpaper | community
-builtin = "Noctalia"                # Ayu | Catppuccin | Dracula | Eldritch | Gruvbox |
-                                    # Kanagawa | Noctalia | Nord | Rosé Pine | Tokyo-Night
-# community_palette = "Noctalia"    # fetched from the upstream API, cached locally
+builtin = "Hyprbar"                  # Hyprbar | Ayu | Catppuccin | Dracula | Eldritch | Gruvbox |
+                                    # Kanagawa | Nord | Rosé Pine | Tokyo-Night
+# community_palette = "palette-id-from-catalog" # fetched from the external catalog, cached locally
 # wallpaper_scheme  = "m3-content"  # m3-tonal-spot | m3-content | m3-fruit-salad |
                                     # m3-rainbow | m3-monochrome | vibrant | faithful |
                                     # dysfunctional | muted
@@ -159,7 +159,7 @@ pure_black_dark = false             # anchor dark surfaces to true black (OLED);
 enable_builtin_templates            = true
 builtin_ids                = []     # opt-in; list ids with: hyprbar theme --list-templates
 enable_community_templates = true
-community_ids              = []     # fetched from api.noctalia.dev/templates, cached locally
+community_ids              = []     # fetched from the configured external service, cached locally
 
 # User-defined templates are declared directly in config.
 # [theme.templates.user.my_app]
@@ -513,10 +513,10 @@ enabled = false
 
 [hooks]
 
-# started           = "notify-send 'Noctalia' 'Shell started'"
+# started           = "notify-send 'Hyprbar' 'Shell started'"
 # wallpaper_changed = []
 # colors_changed    = []
-# theme_mode_changed = "notify-send 'Noctalia' \"Theme mode: $NOCTALIA_THEME_MODE\""
+# theme_mode_changed = "notify-send 'Hyprbar' \"Theme mode: $NOCTALIA_THEME_MODE\""
 # session_locked    = []
 # session_unlocked  = []
 # logging_out       = []

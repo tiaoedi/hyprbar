@@ -3,7 +3,7 @@ set -euo pipefail
 
 hyprbar_bin=${1:?usage: config_import_noctalia_cli_test.sh /path/to/hyprbar}
 help_output=$("$hyprbar_bin" config import-noctalia --help 2>&1)
-[[ "$help_output" == *"Noctalia configuration source directory"* ]]
+[[ "$help_output" == *"Legacy configuration source directory"* ]]
 [[ "$help_output" == *"--apply"* ]]
 [[ "$help_output" == *"--config-dir"* ]]
 [[ "$help_output" == *"--include-plugin-data"* ]]

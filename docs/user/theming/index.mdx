@@ -69,7 +69,7 @@ For theme mode and palette commands, see
 |-------|-------------|
 | `builtin` | Use one of the palettes compiled into the binary. |
 | `wallpaper` | Generate a palette from the current default wallpaper each time it changes. |
-| `community` | Fetch a palette by name from `https://api.noctalia.dev/palette/<name>`. |
+| `community` | Fetch a palette by its ID from the external community catalog; exact service endpoints are listed in the repository-root `NETWORK-PRIVACY.md`. |
 | `custom` | Load a palette JSON file from the Hyprbar config directory's `palettes/` folder. |
 
 ---
@@ -84,13 +84,13 @@ Available palettes: `Ayu`, `Catppuccin`, `Dracula`, `Eldritch`, `Gruvbox`, `Kana
 
 ## `community_palette`
 
-Community palette catalogs and downloads use `api.noctalia.dev` through endpoints inherited from upstream code. This repository does not establish who currently operates the endpoints or how requests are handled. The published [Noctalia privacy policy](https://noctalia.dev/privacy) is an upstream reference, not a Hyprbar policy, and this repository does not verify that it covers these requests. New shared-client requests are blocked when `[shell].offline_mode = true`; cached catalogs and palettes may remain available.
+Community palette catalogs and downloads use external endpoints through integrations retained in Hyprbar. This repository does not establish who currently operates the endpoints or how requests are handled. Their data-retention practices have not been verified. New shared-client requests are blocked when `[shell].offline_mode = true`; cached catalogs and palettes may remain available.
 
-Names a palette served by `https://api.noctalia.dev/palette/<name>`. The shell downloads the palette on first use and stores it in `~/.local/state/hyprbar/community-palettes/` (honoring `HYPRBAR_STATE_HOME`, then `XDG_STATE_HOME`).
+Names a palette in the configured community service. Hyprbar downloads it on first use and stores it in `~/.local/state/hyprbar/community-palettes/` (honoring `HYPRBAR_STATE_HOME`, then `XDG_STATE_HOME`). See the repository-root `NETWORK-PRIVACY.md` for exact service endpoints.
 
-The Settings GUI lists palette names from the cached `https://api.noctalia.dev/palettes` catalog when that catalog is available.
+The Settings GUI lists community palette names from the cached external catalog when available.
 
-The catalog is refreshed on every launch and config reload. Each catalog entry carries an `md5` of its palette JSON; when the cached palette's checksum no longer matches the catalog, the shell re-downloads it and cross-fades to the updated colors. This means edits you publish to the online catalog reach clients automatically - no manual cache clearing. A cached palette whose catalog entry omits an `md5` is treated as up to date and kept. If the catalog cannot be fetched, the cached palette is used as-is, so community palettes still work offline.
+The external catalog is refreshed on every launch and config reload. Each catalog entry carries an `md5` of its palette JSON; when the cached palette's checksum no longer matches the catalog, the shell re-downloads it and cross-fades to the updated colors. This means edits you publish to the online catalog reach clients automatically - no manual cache clearing. A cached palette whose catalog entry omits an `md5` is treated as up to date and kept. If the catalog cannot be fetched, the cached palette is used as-is, so community palettes still work offline.
 
 While the initial download is in flight - or if it fails - the shell falls back to `Hyprbar` built-in and cross-fades once the download arrives.
 

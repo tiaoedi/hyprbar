@@ -1,6 +1,6 @@
 # Packaging Hyprbar
 
-Hyprbar is an independent fork based on Noctalia v5.2.1. Upstream source and contributor credits are retained in [`CREDITS.md`](CREDITS.md). Do not treat upstream package repositories as Hyprbar releases.
+Hyprbar is independently maintained. Source provenance and inherited attribution are documented in [`CREDITS.md`](CREDITS.md). Do not treat external package repositories as Hyprbar releases.
 
 ## Current package status
 
@@ -38,6 +38,6 @@ The RPM spec generates Bash, Zsh, and Fish completions from the freshly built ex
 
 Hyprbar is a Wayland shell, not a compositor, login manager, or greeter. It may claim freedesktop notification and StatusNotifier services; avoid running competing hosts for those services in the same session.
 
-Some identifiers intentionally retain upstream spelling because they are public integration contracts or persistent formats: plugin API namespace `noctalia.*`, glyph prefix `noctalia-glyph:`, encrypted-store format `NOCTALIAENC1`, and the optional Noctalia Greeter helper interface. Preserve these until a versioned migration is designed. Other internal implementation names are not product branding; review behavior, persistence, external consumers, and migration safety before changing them.
+Some identifiers intentionally retain historical spelling because they are public integration contracts or persistent formats: plugin API namespace `noctalia.*`, glyph prefix `noctalia-glyph:`, encrypted-store format `NOCTALIAENC1`, and the optional greeter helper interface (`noctalia-greeter`). Preserve these until a versioned migration is designed. Other internal implementation names are not product branding; review behavior, persistence, external consumers, and migration safety before changing them.
 
-Hyprbar configuration, state, data, cache, runtime socket, and desktop identity use Hyprbar-specific names. `hyprbar config import-noctalia` is an explicit migration path: preview is the default, `--apply` is required to copy, private state is excluded by default, and destination files are not overwritten.
+Hyprbar configuration, state, data, cache, runtime socket, and desktop identity use Hyprbar-specific names. The legacy configuration importer is an explicit migration path: preview is the default, `--apply` is required to copy, private state is excluded by default, and destination files are not overwritten.

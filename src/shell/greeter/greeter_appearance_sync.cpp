@@ -1137,7 +1137,7 @@ namespace greeter {
             return "error: usage: greeter-sync\n";
           }
           if (!appearanceSyncAvailable(config.config().shell.greeterSync)) {
-            return "error: noctalia greeter is not installed\n";
+            return "error: compatible greeter is not installed\n";
           }
           const bool logind = logindOnSystemBus != nullptr && logindOnSystemBus();
           const GreeterSyncLaunch launch =

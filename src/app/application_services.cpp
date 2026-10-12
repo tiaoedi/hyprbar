@@ -641,7 +641,7 @@ void Application::initStyleThemeAndWayland() {
 
   // Apply theme before any UI constructs palette-dependent scene nodes.
   auto syncScriptApiWallpaperDirectory = [this]() {
-    // Wallpapers are a shell surface, so they follow Noctalia's own mode.
+    // Wallpapers are a shell surface, so they follow Hyprbar's own mode.
     const ThemeMode mode = m_themeService.isLightMode() ? ThemeMode::Light : ThemeMode::Dark;
     m_scriptApi.setWallpaperDirectory(
         wallpaper::resolveGlobalWallpaperDirectory(m_configService.config().wallpaper, mode)

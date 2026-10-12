@@ -1,6 +1,6 @@
 # Instalação do Hyprbar no Fedora 44
 
-Hyprbar é um fork independente baseado no código-fonte do Noctalia v5.2.1. Não é mantido nem endossado pelos mantenedores originais. A compilação e a suíte de testes foram verificadas em Fedora 44 x86_64; não há RPM pré-compilado publicado ainda.
+Hyprbar é um shell de desktop Wayland mantido de forma independente. A compilação e a suíte de testes foram verificadas em Fedora 44 x86_64; não há RPM pré-compilado publicado ainda.
 
 ## Compilar e instalar
 
