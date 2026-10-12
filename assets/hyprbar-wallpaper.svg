@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160">
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#090a29"/>
+      <stop offset="1" stop-color="#11133d"/>
+    </linearGradient>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#night)"/>
+  <path d="M0 1460C740 1260 1010 890 1710 850s1340 340 2130 20v1290H0Z" fill="#0e0e43" opacity=".82"/>
+  <path d="M0 390C520 360 700 210 1060 0M3840 1730c-470 55-810 235-1120 430" fill="none" stroke="#fff59b" stroke-width="5" opacity=".42"/>
+  <path d="M0 1670c470-120 850-310 1120-640M3840 470c-690 140-1060 360-1410 680" fill="none" stroke="#a9aefe" stroke-width="3" opacity=".19"/>
+  <!-- Freedo is included unchanged from freedo.svg; attribution/license: licenses/FREEDO-NOTICE.md -->
+  <image href="freedo.svg" x="1490" y="660" width="860" height="840" preserveAspectRatio="xMidYMid meet"/>
+</svg>

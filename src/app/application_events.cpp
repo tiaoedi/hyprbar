@@ -23,7 +23,7 @@ namespace {
   std::string_view powerProfileOriginName(PowerProfilesChangeOrigin origin) {
     switch (origin) {
     case PowerProfilesChangeOrigin::Noctalia:
-      return "noctalia";
+      return "hyprbar";
     case PowerProfilesChangeOrigin::External:
       return "external";
     }

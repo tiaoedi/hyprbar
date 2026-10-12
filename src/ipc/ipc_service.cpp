@@ -292,7 +292,7 @@ std::string IpcService::buildHelp() const {
     maxSignature = std::max(maxSignature, signatures.back().size());
   }
 
-  std::string out = "Usage: noctalia msg <command> [args]\n\nCommands:\n";
+  std::string out = "Usage: hyprbar msg <command> [args]\n\nCommands:\n";
   for (std::size_t i = 0; i < infos.size(); ++i) {
     out += "  ";
     out += signatures[i];
@@ -308,7 +308,7 @@ std::string IpcService::buildHelp() const {
 std::string IpcService::executeParsed(const std::string& command, const std::string& args) const {
   const auto it = std::ranges::find_if(m_handlers, [&command](const auto& e) { return e.first == command; });
   if (it == m_handlers.end()) {
-    return "error: unknown command (try: noctalia msg --help)\n";
+    return "error: unknown command (try: hyprbar msg --help)\n";
   }
   return it->second.fn(args);
 }
@@ -322,5 +322,5 @@ std::string IpcService::resolveSocketPath() {
   if (display == nullptr || display[0] == '\0') {
     display = "wayland-0";
   }
-  return std::string(runtime) + "/noctalia-" + display + ".sock";
+  return std::string(runtime) + "/hyprbar-" + display + ".sock";
 }

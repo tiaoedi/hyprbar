@@ -801,7 +801,7 @@ namespace {
     if (auto* host = hostForState(L)) {
       host->scriptNotifyInfo(title, body);
     } else {
-      notify::info("Noctalia", title, body);
+      notify::info("Hyprbar", title, body);
     }
     return 0;
   }
@@ -812,7 +812,7 @@ namespace {
     if (auto* host = hostForState(L)) {
       host->scriptNotifyError(title, body);
     } else {
-      notify::error("Noctalia", title, body);
+      notify::error("Hyprbar", title, body);
     }
     return 0;
   }
@@ -1834,6 +1834,9 @@ namespace {
     lua_createtable(L, 0, 0);
     luaL_register(L, nullptr, kNoctaliaStringLib);
     lua_setfield(L, -2, "string");
+    // Expose the Hyprbar name while preserving the original plugin API table.
+    lua_getglobal(L, "noctalia");
+    lua_setglobal(L, "hyprbar");
     lua_pop(L, 1);
   }
 } // namespace
@@ -2735,7 +2738,7 @@ void LuauHost::scriptNotifyInfo(std::string title, std::string body) {
     );
     return;
   }
-  notify::info("Noctalia", title, body);
+  notify::info("Hyprbar", title, body);
 }
 
 void LuauHost::scriptNotifyError(std::string title, std::string body) {
@@ -2745,7 +2748,7 @@ void LuauHost::scriptNotifyError(std::string title, std::string body) {
     );
     return;
   }
-  notify::error("Noctalia", title, body);
+  notify::error("Hyprbar", title, body);
 }
 
 bool LuauHost::scriptLoadSound(std::string name, std::string path, int callbackRef) {

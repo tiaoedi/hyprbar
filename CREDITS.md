@@ -1,13 +1,17 @@
 # Credits
 
-Noctalia is made possible by the incredible work of many open-source projects and contributors.
+Hyprbar is a fork of the Noctalia v5.2.1 project. Upstream source and contributor credits are preserved below; see `LICENSE` for the upstream license.
 
-## Design & Branding
+## Hyprbar design & branding
 
-- **MrDowntempo** — Creator of the Noctalia Owl and moon logo
-- **[SaberJ2X](https://www.reddit.com/user/SaberJ64/)** — Creator of Talia, the Noctalia mascot
+- **GNU Linux-libre Freedo** — Official logo cleaned up by Rubén Rodríguez Pérez; the current SVG adds nostrils, open eyes, and a new brush by Islene Calciolari Garcia and Alexandre Oliva. Copyright © 2009 Rubén Rodríguez Pérez and © 2009 FSFLA; licensed under GFDL 1.3-or-later. See [`assets/licenses/FREEDO-NOTICE.md`](assets/licenses/FREEDO-NOTICE.md) and [`assets/licenses/GFDL-1.3.txt`](assets/licenses/GFDL-1.3.txt).
 - **[Tabler Icons](https://tabler.io/icons)** — Icon set used throughout the shell
 - **[Riyan Resdian on Noun Project](https://thenounproject.com/creator/yaicon/)** — Plug icon
+
+## Preserved upstream design & branding credits
+
+- **MrDowntempo** — Creator of the original Noctalia Owl and moon logo
+- **[SaberJ2X](https://www.reddit.com/user/SaberJ64/)** — Creator of Talia, the original upstream mascot
 
 ## System Libraries
 
@@ -54,7 +58,7 @@ Bundled in `third_party/` and built from source:
 
 ## System Integration
 
-External tools Noctalia integrates with at runtime when present:
+External tools Hyprbar can integrate with at runtime when present:
 
 - **[ddcutil](https://www.ddcutil.com/)** — External display brightness control
 
@@ -62,10 +66,10 @@ External tools Noctalia integrates with at runtime when present:
 
 - The **Wayland** community for building the future of Linux desktop graphics
 - The **Niri**, **Hyprland**, **Sway**, **Labwc**, and **MangoWC** teams for their excellent Wayland compositors
-- All the contributors and users who have helped make Noctalia better
+- All the contributors and users who have helped make Hyprbar better
 
 ## License
 
-Noctalia is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+Hyprbar source code is licensed under the MIT License. The Freedo artwork has its separate GFDL terms above; see [LICENSE](LICENSE) for the upstream code license.
 
 Each dependency listed above is governed by its own respective license. Please refer to their individual projects for licensing information.

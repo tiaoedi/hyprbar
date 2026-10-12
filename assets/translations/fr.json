@@ -80,7 +80,7 @@
       "network": {
         "active": "Actif",
         "band": "Bande",
-        "cellular": "Cellulaire  ",
+        "cellular": "Cellulaire",
         "connected": "Connecté",
         "connecting": "Connexion",
         "download": "Téléchargement",
@@ -145,7 +145,7 @@
         "off": "Météo désactivée",
         "tooltip": {
           "condition": "Condition",
-          "feels-like": "Ressenti ",
+          "feels-like": "Ressenti",
           "high": "Élevé",
           "humidity": "Humidité",
           "low": "Faible",
@@ -785,14 +785,14 @@
       "dbus-disabled": "Notifications DBus désactivées",
       "desktop-widgets-editor": "Éditeur de widgets",
       "desktop-widgets-editor-enabled": "L’éditeur de widgets de bureau est activé. Basculez sur un espace de travail vide pour ne pas superposer des fenêtres sur l'éditeur.",
-      "greeter-sync": "Noctalia Greeter",
+      "greeter-sync": "Greeter",
       "greeter-sync-pending": "En attente de l'approbation de l'administrateur pour écrire dans le greeter.",
-      "greeter-sync-pending-console": "En attente de l'autorisation de l'administrateur. Accepte la demande polkit dans Noctalia, sur un TTY ou une console, ou exécute pkexec manuellement.",
+      "greeter-sync-pending-console": "En attente de l'autorisation de l'administrateur. Accepte la demande polkit dans Hyprbar, sur un TTY ou une console, ou exécute pkexec manuellement.",
       "greeter-sync-pending-manual": "Les fichiers sont prêts. Exécute cette commande dans un terminal : pkexec noctalia-greeter-apply-appearance \"$XDG_RUNTIME_DIR/noctalia-greeter-sync\". Tu peux aussi définir shell.greeter_sync.privilege_command (par exemple ghostty -e pkexec), puis relancer la synchronisation.",
       "greeter-sync-success": "Apparence synchronisée. Les modifications s’appliqueront au prochain écran de connexion.",
       "greeter-sync-timeout": "La synchronisation du greeter est toujours en attente de l'autorisation de l'administrateur. Vérifie si une demande polkit est affichée sur un TTY ou une console, active le polkit agent dans les paramètres de sécurité, ou exécute pkexec manuellement.",
       "greeter-sync-timeout-manual": "La synchronisation du greeter nécessite toujours l'autorisation de l'administrateur. Exécute cette commande dans un terminal : pkexec noctalia-greeter-apply-appearance \"$XDG_RUNTIME_DIR/noctalia-greeter-sync\"",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "Ce raccourci accepte une seule touche sans modificateur.",
       "keybind-invalid-printable": "Les touches imprimables (lettres, chiffres, symboles) nécessitent un modificateur tel que Ctrl ou Alt.",
       "keybind-invalid-super": "La touche Super/Windows ne peut pas être utilisée dans les raccourcis du shell.",
@@ -864,7 +864,7 @@
     },
     "enable-failed": {
       "body-error": "{plugin}: {error}",
-      "body-incompatible": "{plugin} nécessite Noctalia {version} ou une version plus récente.",
+      "body-incompatible": "{plugin} nécessite Hyprbar {version} ou une version plus récente.",
       "body-timeout": "L'installation de {plugin} a pris trop de temps.",
       "title": "Plugin désactivé"
     }
@@ -1107,7 +1107,7 @@
             },
             "widget": "Widget",
             "workspaces": {
-              "colors": "Cloueurs ",
+              "colors": "Cloueurs",
               "list": "Workspaces"
             }
           }
@@ -1126,7 +1126,7 @@
         "rename": "Impossible de renommer la barre."
       },
       "batch-write": "Certains paramètres pourraient ne pas être sauvegardés",
-      "custom-schedule-times": "Les horaires personnalisés doivent inclure à la fois une heure de lever et de coucher du soleil au format HH:MM. ",
+      "custom-schedule-times": "Les horaires personnalisés doivent inclure à la fois une heure de lever et de coucher du soleil au format HH:MM.",
       "export-config": "Échec de l’export de la configuration.",
       "export-wallpaper-palette": "Impossible d’enregistrer la palette du fond d’écran comme palette personnalisée.",
       "monitor-override": {
@@ -1136,7 +1136,7 @@
       },
       "reset-page": "Échec de la réinitialisation de certains paramètres.",
       "support-report": "Échec de l’enregistrement du rapport de support.",
-      "sync-greeter": "Impossible de synchroniser l’apparence avec Noctalia Greeter.",
+      "sync-greeter": "Impossible de synchroniser l’apparence avec Greeter.",
       "sync-greeter-timeout": "La synchronisation du greeter est toujours en attente de l'autorisation de l'administrateur. Vérifie si une demande polkit est affichée sur un TTY ou une console, active le polkit agent dans les paramètres de sécurité, ou exécute pkexec manuellement.",
       "sync-greeter-timeout-manual": "La synchronisation du greeter nécessite toujours l'autorisation de l'administrateur. Exécute cette commande dans un terminal : pkexec noctalia-greeter-apply-appearance \"$XDG_RUNTIME_DIR/noctalia-greeter-sync\"",
       "widget": {
@@ -1167,7 +1167,7 @@
           "suspend": "Mettre en veille"
         },
         "kind-section-label": "Action",
-        "locked-timeout-label": "Délai d'inactivité tant que verrouillé (secondes, 0 = off) ",
+        "locked-timeout-label": "Délai d'inactivité tant que verrouillé (secondes, 0 = off)",
         "name-label": "Nom",
         "name-placeholder": "Comportement en inactivité",
         "resume-command-label": "Commande de reprise",
@@ -1360,7 +1360,7 @@
       },
       "hot-corners": {
         "command": "Exécuter la commande",
-        "control-center": "Centre de contrôle ",
+        "control-center": "Centre de contrôle",
         "launcher": "Lanceur",
         "none": "Aucune",
         "window-switcher": "Changeur de fenêtres"
@@ -1489,8 +1489,8 @@
         "delete-confirm-title": "Supprimer \"{name}\"?",
         "deprecated": "Déprécié",
         "empty": "Aucun plugin activé.",
-        "held-back": "ancienne version  ",
-        "held-back-hint": "v{version} nécessite l'API de plugins {required} ; cette version de Noctalia ne prend en charge que jusqu'à {current}. Mettez Noctalia à jour pour l'obtenir.",
+        "held-back": "ancienne version",
+        "held-back-hint": "v{version} nécessite l'API de plugins {required} ; cette version de Hyprbar ne prend en charge que jusqu'à {current}. Mettez Hyprbar à jour pour l'obtenir.",
         "incompatible-plugin-api": "API du plugin incompatible",
         "remove": "Enlever le plugin",
         "requires": "A besoins de : {dependencies}",
@@ -1521,8 +1521,8 @@
         },
         "kind-label": "Type",
         "location-label": "Localisation",
-        "location-placeholder-git": "https://github.com/me/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/me/hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "Identifiant de la source",
         "name-placeholder": "my-plugins",
         "precedence-hint": "Les sources de priorité inférieure remplacent les sources de priorité supérieure lorsqu'elles proposent le même plugin.",
@@ -1532,14 +1532,14 @@
         "update": "Mettre à jour la source"
       },
       "store": {
-        "add": "Ajoute à Noctalia",
+        "add": "Ajoute à Hyprbar",
         "categories": "Catégories",
         "category-all": "Tout",
         "empty": "Aucun plugin trouvé",
         "incompatible": "Incompatible",
         "loading": "Chargement du catalogue...",
         "no-readme": "Pas de description disponible...",
-        "open-page": "Ouvrir la page du plugin sur noctalia.dev",
+        "open-page": "Ouvrir la page du plugin sur the plugin catalog",
         "open-source": "Ouvrir le dépôt source du plugin",
         "results-count": "{count} plugins",
         "search-placeholder": "Recherche plugins...",
@@ -1595,7 +1595,7 @@
           "label": "Arrondi des coins"
         },
         "custom-palette": {
-          "description": "Choisir une palette depuis ~/.config/noctalia/palettes/",
+          "description": "Choisir une palette depuis ~/.config/hyprbar/palettes/",
           "label": "Palette personnalisée",
           "search-placeholder": "Chercher des palettes personnalisées..."
         },
@@ -1815,7 +1815,7 @@
           "label": "Délai d'activation"
         },
         "hot-corners-enabled": {
-          "description": "Déclenche une action en placent le pointeur de la sourie dans les coins de l'écran ",
+          "description": "Déclenche une action en placent le pointeur de la sourie dans les coins de l'écran",
           "label": "Hot Corners"
         },
         "hot-corners-top-left": {
@@ -1828,7 +1828,7 @@
         },
         "hot-corners-top-right": {
           "description": "Action lorsque le pointeur atteint le coin supérieur droit",
-          "label": "Coin supérieure droit "
+          "label": "Coin supérieure droit"
         },
         "hot-corners-top-right-command": {
           "description": "Commande Shell à exécuter en appuyant sur le coin supérieur droit",
@@ -2031,7 +2031,7 @@
             "label": "Lors de l’arrêt du système"
           },
           "started": {
-            "description": "Commande à exécuter après le démarrage de Noctalia",
+            "description": "Commande à exécuter après le démarrage de Hyprbar",
             "label": "Après le démarrage"
           },
           "theme-mode-changed": {
@@ -2039,7 +2039,7 @@
             "label": "Lors du changement de mode du thème"
           },
           "wallpaper-changed": {
-            "description": "Commande à exécuter lorsque le fond d’écran change;  fourni NOCTALIA_WALLPAPER_PATH et NOCTALIA_WALLPAPER_CONNECTOR",
+            "description": "Commande à exécuter lorsque le fond d’écran change; fourni NOCTALIA_WALLPAPER_PATH et NOCTALIA_WALLPAPER_CONNECTOR",
             "label": "Lors du changement de fond d’écran"
           },
           "wifi-disabled": {
@@ -2136,7 +2136,7 @@
           "label": "Intensité de la teinte"
         },
         "wallpaper": {
-          "description": "Utilise une image personnalisée comme arrière-plan de l’écran de verrouillage. Laissez vide pour utiliser le fond d’écran du  bureau.",
+          "description": "Utilise une image personnalisée comme arrière-plan de l’écran de verrouillage. Laissez vide pour utiliser le fond d’écran du bureau.",
           "label": "Fond d’écran",
           "placeholder": "Utiliser le fond d’écran du bureau"
         },
@@ -2232,7 +2232,7 @@
           "label": "Barre latérale lors de l’ouverture d’un onglet"
         },
         "control-center-tabs": {
-          "description": "Choisissez quels onglets apparaissent dans le centre de contrôle ; les onglets décochés sont cachés ",
+          "description": "Choisissez quels onglets apparaissent dans le centre de contrôle ; les onglets décochés sont cachés",
           "label": "Onglets du centre de contrôle"
         },
         "control-center-width": {
@@ -2447,7 +2447,7 @@
           "placeholder": "Ville, Pays"
         },
         "location-auto-locate": {
-          "description": "Détecte vote position automatiquement à partir de votre adresse IP via noctalia.dev",
+          "description": "Détecte vote position automatiquement à partir de votre adresse IP via the plugin catalog",
           "label": "Localisation automatique (IP)"
         },
         "longitude": {
@@ -2493,7 +2493,7 @@
           "label": "Coucher du soleil"
         },
         "sync-monitor-brightness": {
-          "description": "Synchronise la luminosité de tout les écrans ",
+          "description": "Synchronise la luminosité de tout les écrans",
           "label": "Synchronise la luminosité"
         },
         "system-monitor": {
@@ -2662,12 +2662,12 @@
           "label": "Commande avec privilèges pour la synchronisation du greeter"
         },
         "launch-apps-as-systemd-services": {
-          "description": "Lance les applications dans des services systemd distincts afin qu’elles ne partagent pas le même cgroup que Noctalia",
+          "description": "Lance les applications dans des services systemd distincts afin qu’elles ne partagent pas le même cgroup que Hyprbar",
           "label": "Lancer les applications comme services systemd"
         },
         "launch-apps-custom-command": {
           "description": "Commande personnalisée utilisée par le lanceur d'applications. Elle remplace $CMD par la commande d'origine.",
-          "label": "Commande personnalisée du lanceur d'applications ",
+          "label": "Commande personnalisée du lanceur d'applications",
           "placeholder": "$CMD"
         },
         "niri-overview-type-to-launch": {
@@ -2851,8 +2851,8 @@
         },
         "sync-greeter": {
           "button": "Synchroniser maintenant",
-          "description": "Copie l'apparence actuelle et la disposition des écrans dans Noctalia Greeter. L'approbation administrateur est requit, sauf si la politique système autorise la synchronisation sans mot de passe pour votre utilisateur.",
-          "label": "Noctalia Greeter"
+          "description": "Copie l'apparence actuelle et la disposition des écrans dans Greeter. L'approbation administrateur est requit, sauf si la politique système autorise la synchronisation sans mot de passe pour votre utilisateur.",
+          "label": "Greeter"
         },
         "telemetry": {
           "description": "Envoie un court signal anonyme au démarrage contenant la version, le système d’exploitation, le compositeur, les résolutions d’écran, la quantité de mémoire vive et l’échelle de l’interface",
@@ -3012,7 +3012,7 @@
             "label": "Activer l'OSD"
           },
           "volume-osd": {
-            "description": "Afficher le volume OSD sans changer le volume (par défaut le volume actuel) ",
+            "description": "Afficher le volume OSD sans changer le volume (par défaut le volume actuel)",
             "label": "Afficher le volume OSD"
           }
         },
@@ -3150,7 +3150,7 @@
         },
         "custom-image": {
           "description": "Chemin vers une image personnalisée. Laissez vide pour utiliser l'icon glyph",
-          "dialog-title": "Sélectionnez l'image personnalisée ",
+          "dialog-title": "Sélectionnez l'image personnalisée",
           "label": "Image personnalisée"
         },
         "custom-image-colorize": {
@@ -3222,7 +3222,7 @@
           "label": "Interactif"
         },
         "network-speed-compact": {
-          "description": "Utiliser le suffixe de l’unité, soit 1.2M au lieu de 1.2 MB/s "
+          "description": "Utiliser le suffixe de l’unité, soit 1.2M au lieu de 1.2 MB/s"
         },
         "pinned": {
           "label": "Items épinglés",
@@ -3301,11 +3301,11 @@
     },
     "window": {
       "export-config": "Exporter la configuration...",
-      "native-title": "Paramètres Noctalia",
+      "native-title": "Paramètres Hyprbar",
       "no-results": "Pas de paramètre trouvé",
       "offline-mode-notice": {
-        "template-store": "Les téléchargements des modèles de la communauté ne vont pas fonctionner. ",
-        "templates": "Les téléchargements des modèles de la communauté et des mises à jour ne vont pas fonctionner. ",
+        "template-store": "Les téléchargements des modèles de la communauté ne vont pas fonctionner.",
+        "templates": "Les téléchargements des modèles de la communauté et des mises à jour ne vont pas fonctionner.",
         "title": "Mode hors connexion"
       },
       "reset-page": "Réinitialiser la page",
@@ -3323,7 +3323,7 @@
     "no-wallpaper-selected": "Pas de fond d'écran sélectionné",
     "select-wallpaper": "Choisir un fond d'écran",
     "subtitle": "Quelques options avant de commencer.",
-    "title": "Bienvenue sur Noctalia",
+    "title": "Bienvenue sur Hyprbar",
     "wallpaper": "Fond d'écran",
     "wallpaper-scheme": "Schéma de fond d’écran"
   },
@@ -3371,7 +3371,7 @@
     "units": {
       "day": "{count} jour",
       "day-plural": "{count} jours",
-      "hour": "{count} heure ",
+      "hour": "{count} heure",
       "hour-plural": "{count} heures",
       "minute": "{count} minute",
       "minute-plural": "{count} minutes",

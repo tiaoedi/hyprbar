@@ -5,11 +5,11 @@ sidebar:
   order: 5
 ---
 
-The Noctalia launcher is a centralized search interface that provides quick access to your applications, system actions, and utility providers.
+The Hyprbar launcher is a centralized search interface that provides quick access to your applications, system actions, and utility providers.
 
 ## How search works
 
-As you type, Noctalia queries all active **Launcher Providers**. Providers can either be "global" (always searching) or "prefixed" (triggered by a specific keyword).
+As you type, Hyprbar queries all active **Launcher Providers**. Providers can either be "global" (always searching) or "prefixed" (triggered by a specific keyword).
 
 - **Global providers** (like Applications and Calculator) results are merged and sorted by a relevance score.
 - **Prefixed providers** (like Emoji and Wallpaper) take over the search results when their prefix is detected at the start of your query.
@@ -52,7 +52,7 @@ When `shell.launcher.app_grid` is enabled and every visible result is an applica
 - **Desktop actions**: Set `shell.launcher.show_app_actions = true` to search and launch `.desktop` actions directly alongside applications. This is disabled by default; actions remain available from an application's right-click menu.
 - **Scoring**: Uses fuzzy matching with weights. Activation count boosts the score.
 - **Pinned apps**: Drag a pinned app onto another pinned app to reorder them. Pin markers appear in both the list and app-grid views.
-- **Terminal apps**: Entries with `Terminal=true` run inside a terminal. Prefer `export TERMINAL=wezterm` (or another emulator on `PATH`); do not put `-e` in `$TERMINAL`. See [Shell: launching apps](/noctalia/configuration/shell/#shell-settings) for discovery order and how this differs from `launch_apps_custom_command`.
+- **Terminal apps**: Entries with `Terminal=true` run inside a terminal. Prefer `export TERMINAL=wezterm` (or another emulator on `PATH`); do not put `-e` in `$TERMINAL`. See [Shell: launching apps](/hyprbar/configuration/shell/#shell-settings) for discovery order and how this differs from `launch_apps_custom_command`.
 
 ### Calculator
 
@@ -81,10 +81,10 @@ Example: `/emo heart`
 
 ### Panels
 
-Open or close any panel Noctalia knows about, without memorizing its `noctalia msg panel-toggle` id.
+Open or close any panel Hyprbar knows about, without memorizing its `hyprbar msg panel-toggle` id.
 
 - **Prefix**: `/pan `
-- **Source**: Every panel currently registered with Noctalia (built-in or from an enabled plugin), plus one row per visible Control Center tab (Audio, Network, Bluetooth, and so on).
+- **Source**: Every panel currently registered with Hyprbar (built-in or from an enabled plugin), plus one row per visible Control Center tab (Audio, Network, Bluetooth, and so on).
 - **Functionality**: Fuzzy-matches against the panel's name. Activating a plain panel result toggles it; activating a tab result opens Control Center directly to that tab.
 - **Scoring**: Activation count boosts the score.
 - **Ignored panels**: `shell.launcher.panels.ignored` excludes specific panel ids from the list (defaulting to `polkit`, `setup-wizard`, `test`, and `launcher`) for panels that aren't meant to be opened on demand, or (for `launcher`) redundant to toggle from within the launcher itself. Editable under **Settings → Panels → Launcher → Providers**.
@@ -118,10 +118,10 @@ Find and focus any currently open window.
 
 ## Dmenu mode
 
-`noctalia dmenu` is a stdin/stdout picker for scripts that already produce newline-separated choices:
+`hyprbar dmenu` is a stdin/stdout picker for scripts that already produce newline-separated choices:
 
 ```sh
-printf 'alpha\nbeta\ngamma\n' | noctalia dmenu -p "Pick"
+printf 'alpha\nbeta\ngamma\n' | hyprbar dmenu -p "Pick"
 ```
 
 It opens the launcher scoped to those candidates, prints the selected line to stdout, and exits `0`. Closing the launcher
@@ -129,8 +129,8 @@ or pressing Escape prints nothing and exits `1`. `-p` / `--prompt` sets the laun
 A tab inside a candidate splits the display into title and description, but the full original line is still returned. If
 the current filter has no candidate match, pressing Enter returns the typed text.
 
-The command talks to the running Noctalia instance on the same `XDG_RUNTIME_DIR` and `WAYLAND_DISPLAY`; start Noctalia
-first, then call `noctalia dmenu` from scripts or compositor commands.
+The command talks to the running Hyprbar instance on the same `XDG_RUNTIME_DIR` and `WAYLAND_DISPLAY`; start Hyprbar
+first, then call `hyprbar dmenu` from scripts or compositor commands.
 
 ### Persistent dmenu entries
 
@@ -147,7 +147,7 @@ label = "Commands"
 prefix = "cmd"
 glyph = "terminal"
 global = false
-exec = "case \"{selection}\" in Open*) xdg-open ~/.config/noctalia ;; Show*) notify-send \"$(date)\" ;; esac"
+exec = "case \"{selection}\" in Open*) xdg-open ~/.config/hyprbar ;; Show*) notify-send \"$(date)\" ;; esac"
 ```
 
 Open the launcher, type `/cmd`, then select one of the listed results. `command` is run to produce newline-separated
@@ -175,10 +175,10 @@ Fields:
 | `global`   | Whether results participate in normal non-prefixed launcher search                                                                                                                   |
 | `freeform` | Whether non-empty typed text can become an activatable result                                                                                                                        |
 
-Noctalia runs `exec` as a detached command; it does not automatically open a terminal. For interactive commands such as
+Hyprbar runs `exec` as a detached command; it does not automatically open a terminal. For interactive commands such as
 `dnf upgrade`, launch your terminal emulator explicitly (`foot -e ...`, `kitty -e ...`, `alacritty -e ...`, etc.).
 That is different from Application results with `Terminal=true`, which use `$TERMINAL` / terminal discovery
-(see [Shell settings](/noctalia/configuration/shell/#shell-settings)).
+(see [Shell settings](/hyprbar/configuration/shell/#shell-settings)).
 
 Set `freeform = true` when the typed text itself should be activatable. The typed text after the prefix is available as
 `{query}`:
@@ -220,10 +220,10 @@ supports readline-style shortcuts. Otherwise `Ctrl+A` selects all and `Ctrl+U` c
 
 The launcher itself is mostly automatic, but its behavior is influenced by other sections of your config:
 
-- **[Keybinds](/noctalia/configuration/shell/#keybinds)**: Customize navigation (`up`, `down`) and activation (`validate`, `cancel`).
-- **[Shell](/noctalia/configuration/shell/#shell-settings)**: `ui_scale` and `font_family` affect the launcher's appearance. `shell.launcher.categories` controls the category filters. `show_icons`, `show_app_origin_indicator`, `compact`, `app_grid`, `show_app_actions`, `sort_by_usage`, `pinned`, `fetch_exchange_rates`, and `auto_paste` adjust result layout, origin overlays, action search, ordering, pinning, currency rate refresh, and paste-after-copy (Settings → Launcher). `[shell.launcher.dmenu.entry.<id>]` adds custom dmenu-style providers backed by a shell command.
-- **[Wallpaper](/noctalia/desktop/wallpaper/)**: Defines the search paths for the Wallpaper provider.
-- **[Session actions](/noctalia/configuration/shell/#session-panel)**: Defines the actions shown by the Session provider.
+- **[Keybinds](/hyprbar/configuration/shell/#keybinds)**: Customize navigation (`up`, `down`) and activation (`validate`, `cancel`).
+- **[Shell](/hyprbar/configuration/shell/#shell-settings)**: `ui_scale` and `font_family` affect the launcher's appearance. `shell.launcher.categories` controls the category filters. `show_icons`, `show_app_origin_indicator`, `compact`, `app_grid`, `show_app_actions`, `sort_by_usage`, `pinned`, `fetch_exchange_rates`, and `auto_paste` adjust result layout, origin overlays, action search, ordering, pinning, currency rate refresh, and paste-after-copy (Settings → Launcher). `[shell.launcher.dmenu.entry.<id>]` adds custom dmenu-style providers backed by a shell command.
+- **[Wallpaper](/hyprbar/desktop/wallpaper/)**: Defines the search paths for the Wallpaper provider.
+- **[Session actions](/hyprbar/configuration/shell/#session-panel)**: Defines the actions shown by the Session provider.
 
 ### Provider prefixes
 
@@ -240,7 +240,7 @@ Each provider type gets its trigger word from a different place:
 - **Dmenu providers**: the `prefix`/`global` keys on the entry's `[shell.launcher.dmenu.entry.<id>]` table.
 - **Plugin providers**: the `[[launcher_provider]]` manifest `prefix`, optionally overridden per-user via `[shell.launcher.providers."<pluginId>:<entry>"]`.
 
-See [Shell: Launcher settings](/noctalia/configuration/shell/#shell-settings) for the full key reference, defaults, and examples.
+See [Shell: Launcher settings](/hyprbar/configuration/shell/#shell-settings) for the full key reference, defaults, and examples.
 
 ### From the Settings UI
 

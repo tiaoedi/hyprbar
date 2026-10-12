@@ -746,19 +746,19 @@
       "calendar-google-connect-start-failed": "No s'ha pogut iniciar l'autorització de Google. Comprova la connexió de xarxa i torna-ho a provar.",
       "calendar-google-connect-start-http": "No s'ha pogut iniciar l'autorització de Google. El broker OAuth ha retornat HTTP {status}.",
       "calendar-google-connect-timeout": "L'autorització de Google ha superat el temps d'espera. Torna a iniciar la connexió quan estiguis preparat per iniciar sessió.",
-      "config-migration-body": "Actualitza {path} al fitxer font. Noctalia només aplica aquest canvi temporalment. Executa noctalia config validate per veure tots els canvis necessaris.",
+      "config-migration-body": "Actualitza {path} al fitxer font. Hyprbar només aplica aquest canvi temporalment. Executa hyprbar config validate per veure tots els canvis necessaris.",
       "config-migration-title": "Cal actualitzar la configuració",
       "dbus-disabled": "Notificacions DBus desactivades",
       "desktop-widgets-editor": "Editor de widgets",
       "desktop-widgets-editor-enabled": "L'editor de ginys d'escriptori està activat. Canvia a un espai de treball buit perquè les finestres obertes no cobreixin l'editor.",
-      "greeter-sync": "Noctalia Greeter",
+      "greeter-sync": "Greeter",
       "greeter-sync-pending": "Sincronitzant l'aparença amb el greeter. Si apareix una sol·licitud de l'administrador, aprova-la; l'autorització sense contrasenya segueix la política del sistema.",
-      "greeter-sync-pending-console": "Sincronitzant l'aparença amb el greeter. Si es requereix autorització, aprova la sol·licitud de polkit a Noctalia, en una TTY o en una consola.",
+      "greeter-sync-pending-console": "Sincronitzant l'aparença amb el greeter. Si es requereix autorització, aprova la sol·licitud de polkit a Hyprbar, en una TTY o en una consola.",
       "greeter-sync-pending-manual": "Els fitxers estan preparats per a la sincronització heretada autenticada. Executa l'assistent d'aplicació posicional en una terminal, conservant NOCTALIA_GREETER_STATE_DIR si fas servir una ruta personalitzada, o configura shell.greeter_sync.privilege_command i torna a sincronitzar.",
       "greeter-sync-success": "Aparença sincronitzada. Els canvis s'apliquen a la següent pantalla d'inici de sessió.",
       "greeter-sync-timeout": "La sincronització amb el greeter continua a l'espera d'autorització. Busca una sol·licitud de polkit en una TTY o consola, activa l'agent de polkit als ajustos de Seguretat, o executa pkexec manualment.",
       "greeter-sync-timeout-manual": "La sincronització heretada autenticada encara necessita l'aprovació de l'administrador. Executa l'assistent d'aplicació posicional en una terminal i conserva NOCTALIA_GREETER_STATE_DIR si fas servir una ruta personalitzada.",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "Aquesta drecera accepta una sola tecla sense modificadors.",
       "keybind-invalid-printable": "Les tecles imprimibles (lletres, números, símbols) requereixen un modificador com Ctrl o Alt.",
       "keybind-invalid-super": "La tecla Super/Windows no es pot utilitzar a les dreceres del shell.",
@@ -830,7 +830,7 @@
     },
     "enable-failed": {
       "body-error": "{plugin}: {error}",
-      "body-incompatible": "{plugin} utilitza l'API de connectors {version}; aquesta versió de Noctalia admet l'API {oldest}–{current}.",
+      "body-incompatible": "{plugin} utilitza l'API de connectors {version}; aquesta versió de Hyprbar admet l'API {oldest}–{current}.",
       "body-timeout": "{plugin} ha trigat massa a instal·lar-se.",
       "title": "Connector no activat"
     }
@@ -1119,7 +1119,7 @@
       },
       "reset-page": "No s'han pogut restablir alguns paràmetres.",
       "support-report": "No s'ha pogut desar l'informe d'assistència.",
-      "sync-greeter": "No s'ha pogut sincronitzar l'aparença amb el Noctalia Greeter.",
+      "sync-greeter": "No s'ha pogut sincronitzar l'aparença amb el Greeter.",
       "sync-greeter-timeout": "La sincronització amb el greeter continua a l'espera d'autorització. Busca una sol·licitud de polkit en una TTY o consola, activa l'agent de polkit als ajustos de Seguretat, o executa pkexec manualment.",
       "sync-greeter-timeout-manual": "La sincronització heretada autenticada encara necessita l'aprovació de l'administrador. Executa l'assistent d'aplicació posicional en una terminal i conserva NOCTALIA_GREETER_STATE_DIR si fas servir una ruta personalitzada.",
       "widget": {
@@ -1481,7 +1481,7 @@
         "deprecated": "obsolet",
         "empty": "Cap connector activat.",
         "held-back": "versió anterior",
-        "held-back-hint": "v{version} necessita l'API de connectors {required}; aquesta versió de Noctalia admet fins a {current}. Actualitza Noctalia per obtenir-la.",
+        "held-back-hint": "v{version} necessita l'API de connectors {required}; aquesta versió de Hyprbar admet fins a {current}. Actualitza Hyprbar per obtenir-la.",
         "incompatible-plugin-api": "API de connectors incompatible",
         "remove": "Elimina el connector",
         "requires": "Requereix: {dependencies}",
@@ -1512,8 +1512,8 @@
         },
         "kind-label": "Tipus",
         "location-label": "Ubicació",
-        "location-placeholder-git": "https://github.com/jo/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/jo/Hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "ID de la font",
         "name-placeholder": "els-meus-plugins",
         "precedence-hint": "Les fonts inferiors substitueixen les superiors quan ofereixen el mateix connector.",
@@ -1523,18 +1523,18 @@
         "update": "Actualitza la font"
       },
       "store": {
-        "add": "Afegeix a Noctalia",
+        "add": "Afegeix a Hyprbar",
         "back-to-catalog": "Torna al catàleg de connectors",
         "categories": "Categories",
         "category-all": "Totes",
         "empty": "No s'ha trobat cap connector",
         "held-back": "Versió anterior",
-        "held-back-hint": "Instal·la la v{version} per a l'API de connectors {resolved}. La més recent, v{latest}, necessita l'API de connectors {latestRequired}; aquesta versió de Noctalia admet fins a {current}.",
+        "held-back-hint": "Instal·la la v{version} per a l'API de connectors {resolved}. La més recent, v{latest}, necessita l'API de connectors {latestRequired}; aquesta versió de Hyprbar admet fins a {current}.",
         "incompatible": "Incompatible",
-        "incompatible-hint": "Necessita l'API de connectors {required}; aquesta versió de Noctalia admet {oldest}–{current}.",
+        "incompatible-hint": "Necessita l'API de connectors {required}; aquesta versió de Hyprbar admet {oldest}–{current}.",
         "loading": "Carregant el catàleg…",
         "no-readme": "No hi ha cap descripció disponible.",
-        "open-page": "Obre la pàgina del connector a noctalia.dev",
+        "open-page": "Obre la pàgina del connector a the plugin catalog",
         "open-source": "Obre el repositori del codi font del connector",
         "results-count": "{count} connectors",
         "search-placeholder": "Cerca connectors…",
@@ -1594,7 +1594,7 @@
           "label": "Arrodoniment de cantonades"
         },
         "custom-palette": {
-          "description": "Tria una paleta de ~/.config/noctalia/palettes/",
+          "description": "Tria una paleta de ~/.config/hyprbar/palettes/",
           "label": "Paleta personalitzada",
           "search-placeholder": "Cerca paletes personalitzades…"
         },
@@ -2068,7 +2068,7 @@
             "label": "En apagar"
           },
           "started": {
-            "description": "Ordre a executar després que el Noctalia s'iniciï",
+            "description": "Ordre a executar després que el Hyprbar s'iniciï",
             "label": "En iniciar"
           },
           "theme-mode-changed": {
@@ -2589,7 +2589,7 @@
           "placeholder": "Ciutat, País"
         },
         "location-auto-locate": {
-          "description": "Detecta la teva ubicació automàticament a partir de la teva adreça IP mitjançant noctalia.dev",
+          "description": "Detecta la teva ubicació automàticament a partir de la teva adreça IP mitjançant the plugin catalog",
           "label": "Auto-localització (IP)"
         },
         "longitude": {
@@ -2812,7 +2812,7 @@
           "label": "Format de data"
         },
         "external-ip": {
-          "description": "Resol la IP WAN pública de la connexió (mitjançant api.noctalia.dev) i mostra-la a la pestanya de xarxa del Centre de control",
+          "description": "Resol la IP WAN pública de la connexió (mitjançant the online service) i mostra-la a la pestanya de xarxa del Centre de control",
           "label": "Mostra la IP WAN"
         },
         "greeter-sync-auto": {
@@ -2828,9 +2828,9 @@
           "label": "Etiquetes de disposició del teclat"
         },
         "launch-apps-as-systemd-services": {
-          "description": "Llança aplicacions en serveis systemd separats perquè no comparteixin el cgroup del Noctalia",
+          "description": "Llança aplicacions en serveis systemd separats perquè no comparteixin el cgroup del Hyprbar",
           "label": "Llança aplicacions com a serveis systemd",
-          "requires-systemd-session": "Requereix que Noctalia s'executi com un servei d'usuari de systemd (uwsm o una unitat d'usuari de systemd)"
+          "requires-systemd-session": "Requereix que Hyprbar s'executi com un servei d'usuari de systemd (uwsm o una unitat d'usuari de systemd)"
         },
         "launch-apps-custom-command": {
           "description": "Envolta les aplicacions iniciades des del llançador, el dock i la barra de tasques; substitueix $CMD per l'ordre original",
@@ -3026,8 +3026,8 @@
         },
         "sync-greeter": {
           "button": "Sincronitza ara",
-          "description": "Copia l'aparença actual i la disposició de monitors al Greeter de Noctalia. Es demana l'aprovació de l'administrador llevat que la política del sistema autoritzi la sincronització sense contrasenya per al teu usuari.",
-          "label": "Noctalia Greeter"
+          "description": "Copia l'aparença actual i la disposició de monitors al Greeter de . Es demana l'aprovació de l'administrador llevat que la política del sistema autoritzi la sincronització sense contrasenya per al teu usuari.",
+          "label": "Greeter"
         },
         "telemetry": {
           "description": "Envia un petit ping anònim d'inici amb versió, SO, compositor, resolucions de monitor, RAM i escala de la interfície",
@@ -3910,8 +3910,8 @@
       "export-config": "Exporta la configuració…",
       "export-config-saved": "Exportació de la configuració desada.",
       "filter-overridden": "Sobreescrit",
-      "legacy-config-warning": "Configuració obsoleta: {issue}. Edita aquesta entrada font; Noctalia només aplica aquest canvi temporalment. Executa noctalia config validate per veure tots els canvis necessaris.",
-      "native-title": "Configuració del Noctalia",
+      "legacy-config-warning": "Configuració obsoleta: {issue}. Edita aquesta entrada font; Hyprbar només aplica aquest canvi temporalment. Executa hyprbar config validate per veure tots els canvis necessaris.",
+      "native-title": "Configuració del Hyprbar",
       "no-results": "No s'han trobat paràmetres",
       "no-results-hint": "Prova amb un nom de paràmetre o una clau de configuració diferent.",
       "offline-mode-notice": {
@@ -3946,7 +3946,7 @@
     "no-wallpaper-selected": "No s'ha seleccionat cap fons de pantalla",
     "select-wallpaper": "Selecciona un fons de pantalla",
     "subtitle": "Unes quantes opcions ràpides per començar.",
-    "title": "Benvingut al Noctalia",
+    "title": "Benvingut al Hyprbar",
     "wallpaper": "Fons de pantalla",
     "wallpaper-scheme": "Esquema del fons de pantalla"
   },

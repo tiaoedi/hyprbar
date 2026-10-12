@@ -162,7 +162,7 @@ namespace noctalia::theme {
     if (!state.empty()) {
       return std::filesystem::path(state) / "community-palettes";
     }
-    return std::filesystem::path("/tmp") / "noctalia" / "community-palettes";
+    return std::filesystem::path("/tmp") / "hyprbar" / "community-palettes";
   }
 
   std::filesystem::path communityPaletteCachePath(std::string_view name) {

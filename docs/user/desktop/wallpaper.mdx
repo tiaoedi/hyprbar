@@ -56,7 +56,7 @@ directory_dark  = "/home/user/Wallpapers/Vertical/Dark"
 - **repeat** - tiled at native size across the output.
 - **span** - a single image stretched across the whole multi-monitor desktop, so each output shows the slice that matches its position in the compositor layout. The monitors are treated as one continuous canvas, honoring each output's logical position and the offset between them, so a wide wallpaper flows across screens instead of repeating the same framing on each. Single-monitor setups behave like `crop`, and the slices refresh automatically when a monitor is moved, added, or removed.
 
-`wallpaper.default.path` sets the initial/default wallpaper for every output. It can be declared in `~/.config/noctalia/*.toml`; choosing a wallpaper through the UI or IPC writes the same key to `settings.toml`, which loads last and overrides the declarative value.
+`wallpaper.default.path` sets the initial/default wallpaper for every output. It can be declared in `~/.config/hyprbar/*.toml`; choosing a wallpaper through the UI or IPC writes the same key to `settings.toml`, which loads last and overrides the declarative value.
 
 An empty global `wallpaper.directory` resolves to the standard XDG Pictures directory, using `XDG_PICTURES_DIR` or the `user-dirs.dirs` configuration file, and falls back to `~/Pictures`. This keeps the picker, launcher provider, and automatic rotation aligned without requiring a separate wallpaper folder.
 
@@ -77,13 +77,13 @@ Monitor overrides may also set `fill_color`.
 
 By default, the first wallpaper on each output appears immediately with no transition. Set `transition_on_startup = true` to fade (or wipe, etc.) in from a black screen at shell startup, matching v4 behavior. Later wallpaper changes always use the configured transition pool.
 
-When automation is enabled, Noctalia picks one image from the resolved browse folder at shell startup, then keeps picking on the configured interval and applies it to all connected outputs in sync.
+When automation is enabled, Hyprbar picks one image from the resolved browse folder at shell startup, then keeps picking on the configured interval and applies it to all connected outputs in sync.
 `order = "random"` chooses a random image each cycle.
 `order = "alphabetical"` sorts paths case-insensitively and advances to the next image each cycle (wrapping at the end).
 
 ## Favorites
 
-There is no separate Settings page for favorites. The wallpaper panel manages image favorites through tile stars, and advanced users can also declare favorites with `[[wallpaper.favorite]]` in Noctalia config.
+There is no separate Settings page for favorites. The wallpaper panel manages image favorites through tile stars, and advanced users can also declare favorites with `[[wallpaper.favorite]]` in Hyprbar config.
 
 Starred wallpapers appear at the **top of the browse grid** at the wallpaper root (before folders and images from that folder). Inside a subfolder, only favorites whose files live in that folder (or under it when **Flatten** is on) are pinned at the top. Solid `color:#RRGGBB` favorites can be declared in config and only appear at the root. The panel can display and remove those declarative color favorites, but it does not create them from the color picker because colors are applied through a dialog, not selected from the grid. Star an image tile to bookmark it; star again to remove it. The monitor selector (**ALL** vs one output) works the same for favorites and browse entries.
 
@@ -100,7 +100,7 @@ wallpaper_scheme = "m3-content"  # when palette_source = wallpaper
 path = "color:#1a1a2e"
 theme_mode = "dark"
 palette_source = "builtin"
-builtin_palette = "Noctalia"
+builtin_palette = "Hyprbar"
 ```
 
 The **Theme** and **Colors** row is always available under the toolbar. When no favorited image is selected, those controls persist a live global theme override, the same as changing theme mode or palette source in Settings. When the selected image is already a favorite, adjusting the controls also saves the favorite preset and re-applies that wallpaper with the updated settings.
@@ -117,7 +117,7 @@ To make the surface visible during niri overview, add a layer-rule to your niri 
 
 ```kdl
 layer-rule {
-    match namespace="^noctalia-backdrop"
+    match namespace="^hyprbar-backdrop"
     place-within-backdrop true
 }
 ```
@@ -129,6 +129,6 @@ blur_intensity = 0.5    # 0.0 = no blur, 1.0 = maximum blur
 tint_intensity = 0.3    # 0.0 = no tint, 1.0 = fully opaque tint
 ```
 
-When `enabled` on a supported compositor, backdrop layer surfaces and wallpaper textures stay loaded in GPU memory for the lifetime of the shell. Noctalia renders the blurred/tinted backdrop at startup and reuses the cached result until the wallpaper, scale, or backdrop styling changes.
+When `enabled` on a supported compositor, backdrop layer surfaces and wallpaper textures stay loaded in GPU memory for the lifetime of the shell. Hyprbar renders the blurred/tinted backdrop at startup and reuses the cached result until the wallpaper, scale, or backdrop styling changes.
 
 The tint color is `palette.surface` and is not currently configurable.

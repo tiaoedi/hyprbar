@@ -681,14 +681,14 @@
       "dbus-disabled": "DBus oznámení jsou vypnuta",
       "desktop-widgets-editor": "Editor widgetů",
       "desktop-widgets-editor-enabled": "Editor desktopových widgetů je zapnutý. Přepněte na prázdnou plochu pro zobrazení překryvu editoru.",
-      "greeter-sync": "Noctalia Greeter",
+      "greeter-sync": "Greeter",
       "greeter-sync-pending": "Čeká se na schválení administrátorem pro zápis do greetera.",
-      "greeter-sync-pending-console": "Čeká se na schválení administrátorem. Potvrď polkit výzvu v Noctalia, na TTY nebo konzoli, nebo spusť pkexec ručně.",
+      "greeter-sync-pending-console": "Čeká se na schválení administrátorem. Potvrď polkit výzvu v Hyprbar, na TTY nebo konzoli, nebo spusť pkexec ručně.",
       "greeter-sync-pending-manual": "Claude responded: Soubory jsou připraveny.Soubory jsou připraveny. Spusť v terminálu: pkexec noctalia-greeter-apply-appearance \"$XDG_RUNTIME_DIR/noctalia-greeter-sync\". Nebo nastav shell.greeter_sync.privilege_command (např. ghostty -e pkexec) a synchronizuj znovu.",
       "greeter-sync-success": "Vzhled synchronizován. Změny se projeví při příští přihlašovací obrazovce.",
       "greeter-sync-timeout": "Claude responded: Synchronizace greetera stále čeká na schválení administrátorem.Synchronizace greetera stále čeká na schválení administrátorem. Zkontroluj TTY nebo konzoli pro polkit výzvu, povol polkit agenta v nastavení Zabezpečení, nebo spusť pkexec ručně.",
       "greeter-sync-timeout-manual": "Synchronizace greetera stále vyžaduje schválení administrátorem. Spusť v terminálu: pkexec noctalia-greeter-apply-appearance \"$XDG_RUNTIME_DIR/noctalia-greeter-sync\"",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "Tato zkratka přijímá pouze jednu klávesu bez modifikátorů.",
       "keybind-invalid-printable": "Tisknutelné klávesy (písmena, čísla, symboly) vyžadují modifikátor jako Ctrl nebo Alt.",
       "keybind-invalid-super": "Klávesu Super/Windows nelze použít v klávesových zkratkách shellu.",
@@ -987,7 +987,7 @@
       },
       "reset-page": "Nepodařilo se resetovat některá nastavení.",
       "support-report": "Nepodařilo se uložit podpůrnou zprávu.",
-      "sync-greeter": "Nepodařilo se synchronizovat vzhled s Noctalia Greeter.",
+      "sync-greeter": "Nepodařilo se synchronizovat vzhled s Greeter.",
       "sync-greeter-timeout": "Synchronizace uvítací obrazovky stále čeká na schválení správcem. Zkontrolujte TTY nebo konzoli, zda se nezobrazila výzva polkit, povolte agenta polkit v nastavení Zabezpečení, nebo spusťte pkexec ručně.",
       "sync-greeter-timeout-manual": "Synchronizace uvítací obrazovky stále vyžaduje schválení správcem. Spusťte v terminálu: pkexec noctalia-greeter-apply-appearance \"$XDG_RUNTIME_DIR/noctalia-greeter-sync\"",
       "widget": {
@@ -1336,8 +1336,8 @@
         },
         "kind-label": "Typ",
         "location-label": "Umístění",
-        "location-placeholder-git": "https://github.com/me/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/me/hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "ID zdroje",
         "name-placeholder": "moje-pluginy",
         "precedence-hint": "Zdroje níže přepisují zdroje výše, pokud nabízejí stejný plugin.",
@@ -1390,7 +1390,7 @@
           "label": "Zaoblení rohů"
         },
         "custom-palette": {
-          "description": "Vybrat paletu z ~/.config/noctalia/palettes/",
+          "description": "Vybrat paletu z ~/.config/hyprbar/palettes/",
           "label": "Vlastní paleta",
           "search-placeholder": "Hledat vlastní palety..."
         },
@@ -2163,7 +2163,7 @@
           "placeholder": "Město, Země"
         },
         "location-auto-locate": {
-          "description": "Automaticky zjistit vaši polohu z IP adresy přes noctalia.dev",
+          "description": "Automaticky zjistit vaši polohu z IP adresy přes the plugin catalog",
           "label": "Automatická lokalizace (IP)"
         },
         "longitude": {
@@ -2542,8 +2542,8 @@
         },
         "sync-greeter": {
           "button": "Synchronizovat nyní",
-          "description": "Zkopírovat aktuální tapetu a barvy do Noctalia Greeter (vyžaduje schválení správcem)",
-          "label": "Noctalia Greeter"
+          "description": "Zkopírovat aktuální tapetu a barvy do Greeter (vyžaduje schválení správcem)",
+          "label": "Greeter"
         },
         "telemetry": {
           "description": "Odešle malý anonymní ping při spuštění s verzí, OS, kompozitorem, rozlišeními monitorů, RAM a měřítkem rozhraní",
@@ -3211,7 +3211,7 @@
     "window": {
       "export-config": "Exportovat konfiguraci…",
       "export-config-saved": "Export konfigurace uložen.",
-      "native-title": "Nastavení Noctalia",
+      "native-title": "Nastavení Hyprbar",
       "no-results": "Nebyla nalezena žádná nastavení",
       "no-results-hint": "Zkuste jiný název nastavení nebo klíč konfigurace.",
       "reset-page": "Obnovit stránku",

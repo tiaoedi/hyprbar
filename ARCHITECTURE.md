@@ -1,7 +1,7 @@
 Architecture
 ===
 
-This file describes how Noctalia is put together and the invariants reviewers enforce. For code style, testing, commit
+This file describes how Hyprbar is put together and the invariants reviewers enforce. For code style, testing, commit
 conventions, and the project layout, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Event Loop
@@ -222,7 +222,7 @@ use `needsFrameTick()` and `onFrameTick()` only for continuous animation.
   keys use `selectionFg` and `selectionBg`.
 - Built-in template hooks live beside their template (for example `assets/templates/fuzzel/apply.sh`). Community
   templates are fetched from `https://api.noctalia.dev/templates` and cached under
-  `$XDG_STATE_HOME/noctalia/community-templates`. Template application runs on a background worker.
+  `$XDG_STATE_HOME/hyprbar/community-templates`. Template application runs on a background worker.
 - Glyph names resolve through `src/render/text/glyph_registry.cpp`: curated aliases, then `U+`/`0x` codepoints, then
   Tabler names from `tabler.json`. C++ glyph literals belong in the curated registry.
 

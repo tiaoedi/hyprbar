@@ -8,7 +8,7 @@ sidebar:
 
 ## Local development
 
-Drop your plugin under `$XDG_DATA_HOME/noctalia/plugins/<plugin>/` (or add a `path` source pointing at your dev
+Drop your plugin under `$XDG_DATA_HOME/hyprbar/plugins/<plugin>/` (or add a `path` source pointing at your dev
 directory), then enable it once. Edits to `.luau` files hot-reload automatically; manifest changes are picked up on the
 next config reload. Drive an entry's `onIpc` handler from the shell to test:
 
@@ -22,13 +22,13 @@ rename ids. (Working on a single plugin? The data-dir drop-in above is simplest 
 
 ```sh
 # A bar widget - target a specific output (focused / connector / a-bar-name) or all:
-noctalia msg plugin me/hello:hello focused greet "hi there"
+hyprbar msg plugin me/hello:hello focused greet "hi there"
 
 # A service - it is a singleton with no output, so address it with the `all` target:
-noctalia msg plugin me/hello:ticker all refresh
+hyprbar msg plugin me/hello:ticker all refresh
 
 # A panel - toggle by full entry id:
-noctalia msg panel-toggle me/hello:panel
+hyprbar msg panel-toggle me/hello:panel
 ```
 
 The target picks which live instances receive the event: `focused` (the focused output), a connector or
@@ -57,9 +57,9 @@ dependencies = ["slurp"]
 
 Catalog rows require `id`, `name`, and a positive integer `plugin_api`; rows without them are ignored.
 
-### Keeping older Noctalia versions supported
+### Keeping older Hyprbar versions supported
 
-When you raise a plugin's `plugin_api`, every Noctalia below that level loses the plugin - unless the catalog names an
+When you raise a plugin's `plugin_api`, every Hyprbar below that level loses the plugin - unless the catalog names an
 older revision they can still run. Add a `[[plugin.release]]` row for each API level your history supports, newest
 first:
 
@@ -76,7 +76,7 @@ version    = "1.4.0"
 rev        = "5082ed5f85e795513b8485e4cedc66d5a2c816ff"
 ```
 
-A host picks the newest release its API range allows and exports that exact commit, so a user on an older Noctalia gets
+A host picks the newest release its API range allows and exports that exact commit, so a user on an older Hyprbar gets
 `v1.4.0` instead of nothing, and moves up to `v2.0.0` on their next update after upgrading. The store labels the row so
 the older version is never installed silently.
 
@@ -86,11 +86,11 @@ each revision that lowers the API level - the `update-catalog.py` script in the 
 for you, and it needs full history (`fetch-depth: 0` in CI). Release rows apply to `git` sources only; a `path` source
 has no revisions to export.
 
-Users add your repo with `noctalia msg plugins source add <name> git <url>`, then enable plugins from it.
+Users add your repo with `hyprbar msg plugins source add <name> git <url>`, then enable plugins from it.
 
 ## Sharing your plugin
 
-To get your plugin into the plugin store every Noctalia user already has, open a PR against
+To get your plugin into the plugin store every Hyprbar user already has, open a PR against
 [community-plugins](https://github.com/noctalia-dev/community-plugins) - its README has the submission rules. Your
 plugin ships a `plugin.toml`, its entry scripts, a `README.md`, a `thumbnail.webp`, and `translations/en.json`; CI
 validates all of it and regenerates the catalog on merge. Directory names are first-come in that repo, so a plugin

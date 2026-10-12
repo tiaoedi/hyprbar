@@ -56,7 +56,7 @@
       "size-large": "Grande",
       "size-medium": "Medio",
       "size-small": "Pequeño",
-      "tool-arrow": "Flecha (a)  · mantén Shift para ajustar el ángulo",
+      "tool-arrow": "Flecha (a) · mantén Shift para ajustar el ángulo",
       "tool-blur": "Desenfocar una región (u)",
       "tool-brush": "Pincel (b)",
       "tool-circle": "Elipse (o) · mantén Shift para círculo",
@@ -321,7 +321,7 @@
       "anonymous-identity": "Identidad anónima (opcional)",
       "available": "Disponible",
       "ca-certificate": "Ruta del certificado de CA (opcional)",
-      "cellular": "Celular ",
+      "cellular": "Celular",
       "cellular-connected": "Conectado",
       "cellular-connecting": "Conectando…",
       "cellular-connection": "Conexión móvil",
@@ -862,14 +862,14 @@
       "calendar-reminder-open": "Abrir",
       "calendar-reminder-untitled": "Evento sin título",
       "calendar-reminder-with-location": "{when}\n{location}",
-      "config-migration-body": "Actualiza {path} en el archivo de origen. Noctalia está aplicando este reemplazo solo temporalmente. Ejecuta noctalia config validate para listar todos los cambios necesarios.",
+      "config-migration-body": "Actualiza {path} en el archivo de origen. Hyprbar está aplicando este reemplazo solo temporalmente. Ejecuta hyprbar config validate para listar todos los cambios necesarios.",
       "config-migration-title": "Se necesita actualizar configuración",
       "dbus-disabled": "Notificaciones DBus deshabilitada",
       "desktop-widgets-editor": "Editor de Widget",
       "desktop-widgets-editor-enabled": "El editor de widgets de escritorio está activado. Cambie a un espacio de trabajo vacío para que las ventanas abiertas no tapen el editor.",
-      "greeter-sync": "Noctalia Greeter",
+      "greeter-sync": "Greeter",
       "greeter-sync-pending": "Sincronizando la apariencia con el greeter. Si aparece una solicitud del administrador, acéptala; la autorización sin contraseña sigue la política del sistema.",
-      "greeter-sync-pending-console": "Sincronizando la apariencia con el greeter. Si se requiere autorización, aprueba la solicitud de polkit en Noctalia, en una TTY o en una consola.",
+      "greeter-sync-pending-console": "Sincronizando la apariencia con el greeter. Si se requiere autorización, aprueba la solicitud de polkit en Hyprbar, en una TTY o en una consola.",
       "greeter-sync-pending-legacy": "Sincronizando a través del asistente autenticado auxiliar antiguo. Se requiere la aprobación del administrador.",
       "greeter-sync-pending-manual": "Los archivos están preparados para la sincronización heredada autenticada. Ejecuta el asistente de aplicación posicional en una terminal, conservando NOCTALIA_GREETER_STATE_DIR si usas una ruta personalizada, o configura shell.greeter_sync.privilege_command y sincroniza de nuevo.",
       "greeter-sync-pending-manual-pkexec": "Sincronizando la apariencia con el greeter. Si se requiere autorización de administrador y no aparece ninguna solicitud, ejecute lo siguiente en una terminal: pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\".",
@@ -877,7 +877,7 @@
       "greeter-sync-timeout": "La sincronización con el greeter sigue a la espera de autorización. Busca una solicitud de polkit en una TTY o consola, activa el agente de polkit en los ajustes de Seguridad, o ejecuta pkexec manualmente.",
       "greeter-sync-timeout-manual": "La sincronización heredada autenticada todavía necesita la aprobación del administrador. Ejecuta el asistente de aplicación posicional en una terminal y conserva NOCTALIA_GREETER_STATE_DIR si usas una ruta personalizada.",
       "greeter-sync-timeout-manual-pkexec": "La sincronización del greeter aún requiere autorización. Ejecute lo siguiente en una terminal: pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\"",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "Este atajo acepta una sola tecla sin modificadores.",
       "keybind-invalid-printable": "Las teclas imprimibles (letras, números, símbolos) requieren un modificador como Ctrl o Alt.",
       "keybind-invalid-super": "La tecla Super/Windows no se puede usar en los atajos de teclado del shell.",
@@ -949,7 +949,7 @@
     },
     "enable-failed": {
       "body-error": "{plugin}: {error}",
-      "body-incompatible": "{plugin} apunta a la API de complementos {version}; este Noctalia admite la API {oldest}–{current}.",
+      "body-incompatible": "{plugin} apunta a la API de complementos {version}; este Hyprbar admite la API {oldest}–{current}.",
       "body-timeout": "{plugin} tardó demasiado en instalarse.",
       "title": "Complemento no habilitado"
     }
@@ -1243,7 +1243,7 @@
       },
       "reset-page": "No se pudieron restablecer algunas configuraciones.",
       "support-report": "No se pudo guardar el informe de soporte.",
-      "sync-greeter": "No se pudo sincronizar la apariencia con Noctalia Greeter.",
+      "sync-greeter": "No se pudo sincronizar la apariencia con Greeter.",
       "sync-greeter-timeout": "La sincronización con el greeter sigue a la espera de autorización. Busca una solicitud de polkit en una TTY o consola, activa el agente de polkit en los ajustes de Seguridad, o ejecuta pkexec manualmente.",
       "sync-greeter-timeout-manual": "La sincronización heredada autenticada todavía necesita la aprobación del administrador. Ejecuta el asistente de aplicación posicional en una terminal y conserva NOCTALIA_GREETER_STATE_DIR si usas una ruta personalizada.",
       "sync-greeter-timeout-manual-pkexec": "La sincronización del greeter aún requiere autorización. Ejecuta lo siguiente en una terminal: pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\"",
@@ -1564,7 +1564,7 @@
         },
         "window-switcher-style": {
           "carousel": "Carousel",
-          "compact": "Compacto "
+          "compact": "Compacto"
         }
       },
       "theme": {
@@ -1643,7 +1643,7 @@
         "deprecated": "obsoleto",
         "empty": "No hay complementos activados.",
         "held-back": "versión antigua",
-        "held-back-hint": "v{version} requiere la API de complementos {required}; esta versión de Noctalia admite hasta la {current}. Actualiza Noctalia para obtenerla.",
+        "held-back-hint": "v{version} requiere la API de complementos {required}; esta versión de Hyprbar admite hasta la {current}. Actualiza Hyprbar para obtenerla.",
         "incompatible-plugin-api": "API de complemento incompatible",
         "remove": "Eliminar complemento",
         "requires": "Requiere: {dependencies}",
@@ -1676,8 +1676,8 @@
         },
         "kind-label": "Tipo",
         "location-label": "Ubicación",
-        "location-placeholder-git": "https://github.com/me/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/me/hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "ID de fuente",
         "name-placeholder": "my-plugins",
         "precedence-hint": "Las fuentes inferiores anulan a las superiores cuando ofrecen el mismo complemento.",
@@ -1687,19 +1687,19 @@
         "update": "Actualizar fuente"
       },
       "store": {
-        "add": "Añadir a Noctalia",
+        "add": "Añadir a Hyprbar",
         "back-to-catalog": "Volver al catálogo de plugins",
         "categories": "Categorías",
         "category-all": "Todo",
         "empty": "No se encontraron complementos",
         "held-back": "Versión antigua",
-        "held-back-hint": "Instala la versión v{version} para la API de complemento {resolved}. La versión más reciente, v{latest}, requiere la API de plugin {latestRequired}; esta versión de Noctalia admite hasta la {current}.",
+        "held-back-hint": "Instala la versión v{version} para la API de complemento {resolved}. La versión más reciente, v{latest}, requiere la API de plugin {latestRequired}; esta versión de Hyprbar admite hasta la {current}.",
         "incompatible": "Incompatible",
-        "incompatible-hint": "Requiere la API de complementos {required}; esta versión de Noctalia es compatible con {oldest}–{current}.",
+        "incompatible-hint": "Requiere la API de complementos {required}; esta versión de Hyprbar es compatible con {oldest}–{current}.",
         "installed": "Instalado",
         "loading": "Cargando catálogo…",
         "no-readme": "No hay descripción disponible.",
-        "open-page": "Abrir la página de complementos en noctalia.dev",
+        "open-page": "Abrir la página de complementos en the plugin catalog",
         "open-source": "Abrir repositorio del complemento",
         "results-count": "{count} plugins",
         "search-placeholder": "Buscar complementos…",
@@ -1759,7 +1759,7 @@
           "label": "Radio de las esquinas"
         },
         "custom-palette": {
-          "description": "Elige una paleta de ~/.config/noctalia/palettes/",
+          "description": "Elige una paleta de ~/.config/hyprbar/palettes/",
           "label": "Paleta personalizada",
           "search-placeholder": "Buscar paletas personalizadas..."
         },
@@ -1803,7 +1803,7 @@
           "label": "Negro puro"
         },
         "shell-theme-mode": {
-          "description": "Fija el modo claro u oscuro de Noctalia; la opción «Seguir» lo mantiene sincronizado con el modo del tema",
+          "description": "Fija el modo claro u oscuro de Hyprbar; la opción «Seguir» lo mantiene sincronizado con el modo del tema",
           "label": "Modo de tema del shell"
         },
         "theme-mode": {
@@ -1938,7 +1938,7 @@
           "label": "Grosor de fuente"
         },
         "hover-highlight": {
-          "description": "Suave decoloración del widget bajo el puntero del ratón con su  propio color de fondo",
+          "description": "Suave decoloración del widget bajo el puntero del ratón con su propio color de fondo",
           "label": "Destacar al pasar el cursor"
         },
         "layer": {
@@ -2241,7 +2241,7 @@
             "label": "Al apagar"
           },
           "started": {
-            "description": "Comando a ejecutar después de que Noctalia se inicie",
+            "description": "Comando a ejecutar después de que Hyprbar se inicie",
             "label": "Al iniciar"
           },
           "theme-mode-changed": {
@@ -2806,7 +2806,7 @@
           "placeholder": "Ciudad, País"
         },
         "location-auto-locate": {
-          "description": "Detectar tu ubicación automáticamente a partir de tu dirección IP mediante noctalia.dev",
+          "description": "Detectar tu ubicación automáticamente a partir de tu dirección IP mediante the plugin catalog",
           "label": "Localizar automáticamente (IP)"
         },
         "longitude": {
@@ -3034,7 +3034,7 @@
           "label": "Formato de fecha"
         },
         "external-ip": {
-          "description": "Resuelve IP publica WAN (via api.noctalia.dev) y se muestra en el panel de Red del Panel de Control",
+          "description": "Resuelve IP publica WAN (via the online service) y se muestra en el panel de Red del Panel de Control",
           "label": "Mostrar IP WAN"
         },
         "greeter-sync-auto": {
@@ -3050,9 +3050,9 @@
           "label": "Etiquetas de distribución del teclado"
         },
         "launch-apps-as-systemd-services": {
-          "description": "Inicia las aplicaciones en servicios systemd independientes para que no compartan el cgroup de Noctalia",
+          "description": "Inicia las aplicaciones en servicios systemd independientes para que no compartan el cgroup de Hyprbar",
           "label": "Iniciar aplicaciones como servicios systemd",
-          "requires-systemd-session": "Requiere que Noctalia se ejecute como un servicio de usuario de systemd (uwsm o una unidad de usuario de systemd)"
+          "requires-systemd-session": "Requiere que Hyprbar se ejecute como un servicio de usuario de systemd (uwsm o una unidad de usuario de systemd)"
         },
         "launch-apps-custom-command": {
           "description": "Envuelve las aplicaciones iniciadas desde el lanzador, el dock y la barra de tareas; sustituye $CMD por el comando original",
@@ -3271,8 +3271,8 @@
         },
         "sync-greeter": {
           "button": "Sincronizar ahora",
-          "description": "Copiar la apariencia actual y la disposición de monitores al Greeter de Noctalia. Se solicita la aprobación del administrador a menos que la política del sistema autorice la sincronización sin contraseña para tu usuario.",
-          "label": "Noctalia Greeter"
+          "description": "Copiar la apariencia actual y la disposición de monitores al Greeter de . Se solicita la aprobación del administrador a menos que la política del sistema autorice la sincronización sin contraseña para tu usuario.",
+          "label": "Greeter"
         },
         "telemetry": {
           "description": "Envía un pequeño ping anónimo de inicio con la versión, el SO, el compositor, las resoluciones de monitor, la RAM y la escala de la interfaz",
@@ -3634,7 +3634,7 @@
             "label": "Establecer perfil de EasyEffects"
           },
           "greeter-sync": {
-            "description": "Sincronizar el fondo de pantalla, los colores y la disposición de los monitores con Noctalia Greeter",
+            "description": "Sincronizar el fondo de pantalla, los colores y la disposición de los monitores con Greeter",
             "label": "Sincronizar la apariencia del greeter"
           },
           "keyboard-backlight-down": {
@@ -3750,7 +3750,7 @@
             "label": "Invocar la última acción de notificación"
           },
           "notification-show": {
-            "description": "Mostrar una notificación interna de Noctalia",
+            "description": "Mostrar una notificación interna de Hyprbar",
             "label": "Mostrar una notificación"
           },
           "osd-disable": {
@@ -3831,7 +3831,7 @@
           },
           "status": {
             "description": "Imprimir el estado actual como JSON",
-            "label": "Imprimir el estado "
+            "label": "Imprimir el estado"
           },
           "taskbar-cycle": {
             "description": "Pase a la tarea o grupo de espacios de trabajo adyacente en la barra de tareas que lo invocó",
@@ -3871,7 +3871,7 @@
           },
           "volume-up": {
             "description": "Aumentar el volumen del altavoz",
-            "label": "Aumentar el volumen "
+            "label": "Aumentar el volumen"
           },
           "wallpaper-get": {
             "description": "Imprimir la ruta del fondo de pantalla predeterminado o la ruta efectiva para una salida",
@@ -4172,7 +4172,7 @@
         },
         "effects-profile-glyphs": {
           "description": "Asignar nombres de perfil de EasyEffects a glifos de iconos",
-          "label": "Glifos del perfil de efectos "
+          "label": "Glifos del perfil de efectos"
         },
         "empty-color": {
           "description": "Rol de color usado para espacios de trabajo vacíos; también se admiten colores hexadecimales fijos",
@@ -4673,8 +4673,8 @@
       "export-config": "Exportar configuración...",
       "export-config-saved": "Exportación de configuración guardada.",
       "filter-overridden": "Sobreescrito",
-      "legacy-config-warning": "Configuración heredada: {issue}. Edite esta entrada de origen; Noctalia aplicará el reemplazo solo temporalmente. Ejecute noctalia config validate para ver todos los cambios necesarios.",
-      "native-title": "Ajustes de Noctalia",
+      "legacy-config-warning": "Configuración heredada: {issue}. Edite esta entrada de origen; Hyprbar aplicará el reemplazo solo temporalmente. Ejecute hyprbar config validate para ver todos los cambios necesarios.",
+      "native-title": "Ajustes de Hyprbar",
       "no-results": "Ajustes no encontrados",
       "no-results-hint": "Prueba con otro nombre o clave de configuración.",
       "offline-mode-notice": {
@@ -4710,7 +4710,7 @@
     "no-wallpaper-selected": "Ningún fondo de pantalla seleccionado",
     "select-wallpaper": "Seleccionar fondo de pantalla",
     "subtitle": "Algunas opciones rápidas para empezar.",
-    "title": "Bienvenido a Noctalia",
+    "title": "Bienvenido a Hyprbar",
     "wallpaper": "Fondo de pantalla",
     "wallpaper-scheme": "Esquema de fondo de pantalla"
   },
@@ -4830,7 +4830,7 @@
       "choose-color": "Elegir el color del fondo de pantalla",
       "close": "Cerrar panel de fondo de pantalla",
       "color-title": "Color del fondo de pantalla",
-      "favorite-add": "Añadir  a Favoritos",
+      "favorite-add": "Añadir a Favoritos",
       "favorite-current": "Agregar el fondo de pantalla actual a favoritos",
       "favorite-remove": "Eliminar de Favoritos",
       "filter-placeholder": "Filtrar...",

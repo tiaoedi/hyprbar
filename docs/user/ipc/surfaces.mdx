@@ -7,7 +7,7 @@ sidebar:
 
 import IpcCommand from '../../../../components/IpcCommand.astro';
 
-These commands open, close, or adjust Noctalia UI surfaces.
+These commands open, close, or adjust Hyprbar UI surfaces.
 
 ## Bar
 
@@ -28,12 +28,12 @@ Use <IpcCommand command="bar-hide" /> when you want the bar to stay hidden until
 |--------|---------|-------------|
 | Open panel | <IpcCommand command="panel-open <id> [context]" /> | Open a panel by id without toggling it closed when it is already open. Optional `context` works like <IpcCommand command="panel-toggle <id> [context]" />. |
 | Close panel | <IpcCommand command="panel-close [id]" /> | Close the active panel, or close the named panel if it is active. |
-| Toggle launcher | <IpcCommand command="panel-toggle launcher [query]" /> | Open or close the app launcher. Optional `query` pre-fills the search input (e.g. `noctalia msg panel-toggle launcher "/wall"`). |
+| Toggle launcher | <IpcCommand command="panel-toggle launcher [query]" /> | Open or close the app launcher. Optional `query` pre-fills the search input (e.g. `hyprbar msg panel-toggle launcher "/wall"`). |
 | Toggle session menu | <IpcCommand command="panel-toggle session" /> | Open or close the logout, reboot, and shutdown menu. |
 | Toggle clipboard | <IpcCommand command="panel-toggle clipboard" /> | Open or close clipboard history. |
 | Toggle wallpaper panel | <IpcCommand command="panel-toggle wallpaper" /> | Open or close wallpaper picker. |
-| Toggle control center | <IpcCommand command="panel-toggle control-center [tab]" /> | Open or close Control Center. Optional `tab` opens the tab inside control center by default (e.g. `noctalia msg panel-toggle control-center media`). |
-| Toggle plugin panel | <IpcCommand command="panel-toggle <author/plugin:entry> [context]" /> | Open or close a plugin `[[panel]]` entry (e.g. `noctalia msg panel-toggle noctalia/wallhaven:browser`). Optional `context` is passed to `onOpen`. |
+| Toggle control center | <IpcCommand command="panel-toggle control-center [tab]" /> | Open or close Control Center. Optional `tab` opens the tab inside control center by default (e.g. `hyprbar msg panel-toggle control-center media`). |
+| Toggle plugin panel | <IpcCommand command="panel-toggle <author/plugin:entry> [context]" /> | Open or close a plugin `[[panel]]` entry (e.g. `hyprbar msg panel-toggle hyprbar/wallhaven:browser`). Optional `context` is passed to `onOpen`. |
 
 ## Dock
 

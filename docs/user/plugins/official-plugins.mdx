@@ -1,8 +1,8 @@
 ---
-title: Official plugins
-description: The plugins shipped by the official source, and the IPC commands each one accepts.
+title: Upstream official plugins
+description: Plugins supplied by the inherited upstream source and the IPC commands they accept.
 sidebar:
-  label: Official plugins
+  label: Upstream plugins
   order: 3
 ---
 
@@ -10,12 +10,12 @@ import IpcCommand from '../../../../components/IpcCommand.astro';
 import PluginMeta from '../../../../components/PluginMeta.astro';
 import PluginApiBadge from '../../../../components/PluginApiBadge.astro';
 
-These ship from the default **official** source
-([`github.com/noctalia-dev/official-plugins`](https://github.com/noctalia-dev/official-plugins)). Each is installed and
-enabled like any other plugin - see [Using Plugins](/noctalia/plugins/). Once enabled, an entry can be driven over IPC:
+These are supplied by the upstream project's default **official** source
+([`github.com/noctalia-dev/official-plugins`](https://github.com/noctalia-dev/official-plugins)); they are not maintained by Hyprbar. Each is installed and
+enabled like any other plugin - see [Using Plugins](/hyprbar/plugins/). Once enabled, an entry can be driven over IPC:
 
 ```sh
-noctalia msg plugin <author/plugin:entry> <target> <event> [payload]
+hyprbar msg plugin <author/plugin:entry> <target> <event> [payload]
 ```
 
 `<target>` selects which live instances receive the event:
@@ -94,7 +94,7 @@ word isn't a language, the whole query is translated to the **default target lan
 A countdown timer **desktop widget** with start/pause and reset buttons and a progress bar. Add it from the
 desktop-widgets editor (it appears in the type picker once the plugin is enabled). Also the reference implementation
 for the declarative `ui.*` desktop-widget API - see
-[Declarative UI](/noctalia/plugins/development/declarative-ui/#desktopwidget--declarative-desktop-widget-ui).
+[Declarative UI](/hyprbar/plugins/development/declarative-ui/#desktopwidget--declarative-desktop-widget-ui).
 
 Settings: countdown duration, accent color, and progress-bar visibility.
 
@@ -154,21 +154,21 @@ cache, and per-output state; threshold, feather, and automatic generation are pl
 
 | Command | Effect |
 |---------|--------|
-| <IpcCommand command="panel-toggle noctalia/wallpaper_depth:manager" /> | open or close the manager panel |
-| <IpcCommand command="plugin noctalia/wallpaper_depth:service all setup" /> | install and verify the runtime and model |
-| <IpcCommand command="plugin noctalia/wallpaper_depth:service all generate" /> | regenerate every connected output mask |
-| <IpcCommand command="plugin noctalia/wallpaper_depth:service all clear-cache" /> | clear cached depth maps and masks |
+| <IpcCommand command="panel-toggle hyprbar/wallpaper_depth:manager" /> | open or close the manager panel |
+| <IpcCommand command="plugin hyprbar/wallpaper_depth:service all setup" /> | install and verify the runtime and model |
+| <IpcCommand command="plugin hyprbar/wallpaper_depth:service all generate" /> | regenerate every connected output mask |
+| <IpcCommand command="plugin hyprbar/wallpaper_depth:service all clear-cache" /> | clear cached depth maps and masks |
 
 ---
 
 ## Video Wallpaper {#mpvpaper}
 
-<PluginMeta icon="movie" id="noctalia/mpvpaper" />
+<PluginMeta icon="movie" id="hyprbar/mpvpaper" />
 
 Animated and video wallpapers via [mpvpaper](https://github.com/GhostNaN/mpvpaper). A headless **service**
 supervises one `mpvpaper` instance per output; a **panel** (`picker`) browses your video directory as a thumbnail
 grid and applies a video per output (or to all); a bar **widget** (`mpvpaper`) toggles the panel. When a video is
-assigned to an output, Noctalia drops its own wallpaper surface there so the video shows through - the bar and dock
+assigned to an output, Hyprbar drops its own wallpaper surface there so the video shows through - the bar and dock
 still draw above it. Assignments persist across restarts.
 
 Requires the external `mpvpaper` command (which pulls in `mpv`; `mpv` also renders the picker thumbnails). Works on
@@ -176,13 +176,13 @@ Requires the external `mpvpaper` command (which pulls in `mpv`; `mpv` also rende
 
 | Command | Effect |
 |---------|--------|
-| <IpcCommand command="panel-toggle noctalia/mpvpaper:picker" /> | open or close the video picker |
+| <IpcCommand command="panel-toggle hyprbar/mpvpaper:picker" /> | open or close the video picker |
 
 ---
 
 ## World Clock {#world_clock}
 
-<PluginMeta icon="world" id="noctalia/world_clock" />
+<PluginMeta icon="world" id="hyprbar/world_clock" />
 
 Track multiple IANA timezones in an attached **panel**. A headless **service** owns the zone list and publishes live
 times; a bar **widget** (`bar`) shows a world glyph and opens the panel on click. Zones persist under the plugin data
@@ -197,8 +197,8 @@ Requires plugin API 19 (`formatTime` timezone support, `timeFormat()` / `isValid
 
 | Command | Effect |
 |---------|--------|
-| <IpcCommand command="panel-toggle noctalia/world_clock:panel" /> | open or close the world-clock panel |
-| <IpcCommand command='plugin noctalia/world_clock:service all add "America/Los_Angeles"' /> | add a timezone |
-| <IpcCommand command='plugin noctalia/world_clock:service all remove "UTC"' /> | remove a timezone |
-| <IpcCommand command="plugin noctalia/world_clock:service all list" /> | notify with the configured zones |
-| <IpcCommand command="plugin noctalia/world_clock:service all clear" /> | remove every timezone |
+| <IpcCommand command="panel-toggle hyprbar/world_clock:panel" /> | open or close the world-clock panel |
+| <IpcCommand command='plugin hyprbar/world_clock:service all add "America/Los_Angeles"' /> | add a timezone |
+| <IpcCommand command='plugin hyprbar/world_clock:service all remove "UTC"' /> | remove a timezone |
+| <IpcCommand command="plugin hyprbar/world_clock:service all list" /> | notify with the configured zones |
+| <IpcCommand command="plugin hyprbar/world_clock:service all clear" /> | remove every timezone |

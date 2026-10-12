@@ -17,10 +17,10 @@ namespace {
 
   constexpr Logger kLog("kwin_active_window");
 
-  const sdbus::ServiceName kBusName{"dev.noctalia.KWinActiveWindow"};
-  const sdbus::ObjectPath kObjectPath{"/dev/noctalia/KWinActiveWindow"};
-  constexpr auto kInterface = "dev.noctalia.KWinActiveWindow";
-  constexpr auto kScriptLabel = "noctalia-active-window";
+  const sdbus::ServiceName kBusName{"dev.hyprbar.KWinActiveWindow"};
+  const sdbus::ObjectPath kObjectPath{"/dev/hyprbar/KWinActiveWindow"};
+  constexpr auto kInterface = "dev.hyprbar.KWinActiveWindow";
+  constexpr auto kScriptLabel = "hyprbar-active-window";
 
   const sdbus::ServiceName kKwinBusName{"org.kde.KWin"};
   const sdbus::ObjectPath kKwinPath{"/KWin"};
@@ -32,9 +32,9 @@ namespace {
   constexpr char kFieldSeparator = '\x1e';
 
   constexpr std::string_view kScriptSource = R"js(
-const BUS = "dev.noctalia.KWinActiveWindow";
-const PATH = "/dev/noctalia/KWinActiveWindow";
-const IFACE = "dev.noctalia.KWinActiveWindow";
+const BUS = "dev.hyprbar.KWinActiveWindow";
+const PATH = "/dev/hyprbar/KWinActiveWindow";
+const IFACE = "dev.hyprbar.KWinActiveWindow";
 const RECORD_SEP = "\x1F";
 const FIELD_SEP = "\x1e";
 
@@ -58,17 +58,17 @@ function notify(window) {
     const resourceClass = window.resourceClass || "";
     callDBus(BUS, PATH, IFACE, "notifyActiveWindow", caption, resourceClass, windowUuid(window));
   } catch (error) {
-    print("noctalia-active-window notify failed: " + error);
+    print("hyprbar-active-window notify failed: " + error);
   }
 }
 
 function isNoctaliaShellSurface(window) {
   const resourceClass = (window.resourceClass || "").toLowerCase();
-  if (resourceClass === "noctalia") {
+  if (resourceClass === "noctalia" || resourceClass === "hyprbar") {
     return true;
   }
   const caption = (window.caption || "").toLowerCase();
-  return caption === "noctalia" && resourceClass === "";
+  return (caption === "noctalia" || caption === "hyprbar") && resourceClass === "";
 }
 
 function shouldTrack(window) {
@@ -259,10 +259,10 @@ syncWindows();
 
   [[nodiscard]] bool isNoctaliaShellSurface(const std::string& appId, const std::string& title) {
     const std::string appLower = StringUtils::toLower(appId);
-    if (appLower == "noctalia") {
+    if (appLower == "noctalia" || appLower == "hyprbar") {
       return true;
     }
-    if (appLower.empty() && StringUtils::toLower(title) == "noctalia") {
+    if (appLower.empty() && (StringUtils::toLower(title) == "noctalia" || StringUtils::toLower(title) == "hyprbar")) {
       return true;
     }
     return false;
@@ -504,7 +504,7 @@ for (const window of workspace.windowList()) {{
         jsStringLiteral(uuid), jsStringLiteral(appId), jsStringLiteral(title), warpPointer ? "true" : "false"
     );
 
-    const std::string label = std::format("noctalia-activate-{}", ++m_transientScriptSerial);
+    const std::string label = std::format("hyprbar-activate-{}", ++m_transientScriptSerial);
     if (!runTransientScript(script, label)) {
       kLog.warn(R"(failed to activate kde window class="{}" title="{}")", appId, title);
     }
@@ -541,7 +541,7 @@ for (const window of workspace.windowList()) {{
         jsStringLiteral(uuid), jsStringLiteral(appId), jsStringLiteral(title)
     );
 
-    const std::string label = std::format("noctalia-close-{}", ++m_transientScriptSerial);
+    const std::string label = std::format("hyprbar-close-{}", ++m_transientScriptSerial);
     if (!runTransientScript(script, label)) {
       kLog.warn(R"(failed to close kde window class="{}" title="{}")", appId, title);
     }

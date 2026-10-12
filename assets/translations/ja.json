@@ -862,14 +862,14 @@
       "calendar-reminder-open": "開く",
       "calendar-reminder-untitled": "無題の予定",
       "calendar-reminder-with-location": "{when}\n{location}",
-      "config-migration-body": "ソースファイル内の{path}を更新してください。Noctaliaはこの置換を一時的にのみ適用しています。必要な変更をすべて確認するには、noctalia config validateを実行してください。",
+      "config-migration-body": "ソースファイル内の{path}を更新してください。Hyprbarはこの置換を一時的にのみ適用しています。必要な変更をすべて確認するには、Hyprbar config validateを実行してください。",
       "config-migration-title": "設定の更新が必要です",
       "dbus-disabled": "DBus通知は無効です",
       "desktop-widgets-editor": "ウィジェット編集",
       "desktop-widgets-editor-enabled": "デスクトップウィジェットの編集が有効です。開いているウィンドウで編集画面が隠れないよう、空のワークスペースに切り替えてください。",
-      "greeter-sync": "Noctalia Greeter",
+      "greeter-sync": "Greeter",
       "greeter-sync-pending": "外観設定をグリーターに同期しています。管理者の認証画面が表示された場合は承認してください。パスワード不要の認証はシステムポリシーに従います。",
-      "greeter-sync-pending-console": "外観設定をグリーターに同期しています。認証が必要な場合は、Noctalia、TTY、またはコンソールに表示されるpolkitの認証要求を承認してください。",
+      "greeter-sync-pending-console": "外観設定をグリーターに同期しています。認証が必要な場合は、Hyprbar、TTY、またはコンソールに表示されるpolkitの認証要求を承認してください。",
       "greeter-sync-pending-legacy": "認証済みの従来方式ヘルパーを使用して同期しています。管理者の承認が必要です。",
       "greeter-sync-pending-manual": "認証済みの従来方式の同期用ファイルを準備しました。ターミナルで位置引数形式の適用ヘルパーを実行してください。独自の保存先を使用している場合はNOCTALIA_GREETER_STATE_DIRを引き継ぐか、shell.greeter_sync.privilege_commandを設定してから、もう一度同期してください。",
       "greeter-sync-pending-manual-pkexec": "外観設定をグリーターに同期しています。管理者の認証が必要なのに認証要求が表示されない場合は、ターミナルで次のコマンドを実行してください：pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\"",
@@ -877,7 +877,7 @@
       "greeter-sync-timeout": "グリーターの同期は、まだ認証待ちです。TTYまたはコンソールでpolkitの認証要求を確認するか、セキュリティ設定でpolkitエージェントを有効にするか、pkexecを手動で実行してください。",
       "greeter-sync-timeout-manual": "認証済みの従来方式の同期には、引き続き管理者の承認が必要です。ターミナルで位置引数形式の適用ヘルパーを実行し、独自の保存先を使用している場合はNOCTALIA_GREETER_STATE_DIRを引き継いでください",
       "greeter-sync-timeout-manual-pkexec": "グリーターの同期には、まだ認証が必要です。ターミナルで次のコマンドを実行してください：pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\"",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "このショートカットには、修飾キーを使わない単一のキーを指定できます。",
       "keybind-invalid-printable": "文字入力キー（英字、数字、記号）を使用するには、CtrlやAltなどの修飾キーが必要です。",
       "keybind-invalid-super": "シェルのキーバインドではSuper/Windowsキーを使用できません。",
@@ -949,7 +949,7 @@
     },
     "enable-failed": {
       "body-error": "{plugin}：{error}",
-      "body-incompatible": "{plugin}はプラグインAPI{version}を対象としています。このNoctaliaが対応しているAPIは{oldest}～{current}です。",
+      "body-incompatible": "{plugin}はプラグインAPI{version}を対象としています。このHyprbarが対応しているAPIは{oldest}～{current}です。",
       "body-timeout": "{plugin}のインストールに時間がかかりすぎました。",
       "title": "プラグインが有効になっていません"
     }
@@ -1070,8 +1070,8 @@
         "create": "新規作成",
         "custom": "独自設定",
         "delete": "削除",
-        "delete-confirm-desc": "GUIで作成した画面用の上書き設定はsettings.tomlから削除されます。\n",
-        "delete-confirm-title": "「{name}」を削除しますか？\n",
+        "delete-confirm-desc": "GUIで作成した画面用の上書き設定はsettings.tomlから削除されます。",
+        "delete-confirm-title": "「{name}」を削除しますか？",
         "exists": "この画面には既に上書き設定があります。",
         "label": "画面：{name}",
         "management": "画面の上書き設定",
@@ -1139,7 +1139,7 @@
       },
       "reset-page": "一部の設定をリセットできませんでした。",
       "support-report": "サポートレポートを保存できませんでした。",
-      "sync-greeter": "外観設定をNoctalia Greeterに同期できませんでした。",
+      "sync-greeter": "外観設定を Greeterに同期できませんでした。",
       "sync-greeter-timeout": "グリーターの同期は、まだ認証待ちです。TTYまたはコンソールでpolkitの認証要求を確認するか、セキュリティ設定でpolkitエージェントを有効にするか、pkexecを手動で実行してください。",
       "sync-greeter-timeout-manual": "認証済みの従来方式の同期には、引き続き管理者の承認が必要です。ターミナルで位置引数形式の適用ヘルパーを実行し、独自の保存先を使用している場合はNOCTALIA_GREETER_STATE_DIRを引き継いでください",
       "sync-greeter-timeout-manual-pkexec": "グリーターの同期には、まだ認証が必要です。ターミナルで次のコマンドを実行してください：pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\"",
@@ -1410,7 +1410,7 @@
         "deprecated": "非推奨",
         "empty": "有効なプラグインはありません。",
         "held-back": "旧バージョン",
-        "held-back-hint": "v{version}にはプラグインAPI{required}が必要ですが、このNoctaliaが対応しているのは{current}までです。利用するにはNoctaliaを更新してください。",
+        "held-back-hint": "v{version}にはプラグインAPI{required}が必要ですが、このHyprbarが対応しているのは{current}までです。利用するにはHyprbarを更新してください。",
         "incompatible-plugin-api": "互換性のないプラグインAPI",
         "remove": "プラグインを削除",
         "requires": "必要な依存関係：{dependencies}",
@@ -1443,8 +1443,8 @@
         },
         "kind-label": "種類",
         "location-label": "位置情報",
-        "location-placeholder-git": "https://github.com/me/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/me/hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "配布元ID",
         "name-placeholder": "my-plugins",
         "precedence-hint": "同じプラグインがある場合、下にある配布元が上の配布元より優先されます。",
@@ -1454,19 +1454,19 @@
         "update": "配布元を更新"
       },
       "store": {
-        "add": "Noctaliaに追加",
+        "add": "Hyprbarに追加",
         "back-to-catalog": "プラグインカタログに戻る",
         "categories": "カテゴリ",
         "category-all": "すべて",
         "empty": "プラグインが見つかりません",
         "held-back": "旧バージョン",
-        "held-back-hint": "プラグインAPI{resolved}向けのv{version}をインストールします。最新版v{latest}にはプラグインAPI{latestRequired}が必要ですが、このNoctaliaは{current}まで対応しています。",
+        "held-back-hint": "プラグインAPI{resolved}向けのv{version}をインストールします。最新版v{latest}にはプラグインAPI{latestRequired}が必要ですが、このHyprbarは{current}まで対応しています。",
         "incompatible": "互換性なし",
-        "incompatible-hint": "プラグインAPI{required}が必要ですが、このNoctaliaが対応しているのは{oldest}～{current}です。",
+        "incompatible-hint": "プラグインAPI{required}が必要ですが、このHyprbarが対応しているのは{oldest}～{current}です。",
         "installed": "インストール済み",
         "loading": "カタログを読み込み中…",
         "no-readme": "説明がありません。",
-        "open-page": "noctalia.devでプラグインページを開く",
+        "open-page": "the plugin catalogでプラグインページを開く",
         "open-source": "プラグインのソースリポジトリを開く",
         "results-count": "{count}個のプラグイン",
         "search-placeholder": "プラグインを検索…",
@@ -1511,7 +1511,7 @@
           "label": "角の丸み"
         },
         "custom-palette": {
-          "description": "~/.config/noctalia/palettes/から配色を選択"
+          "description": "~/.config/hyprbar/palettes/から配色を選択"
         },
         "export-wallpaper-palette": {
           "button": "独自の配色として保存",
@@ -1537,7 +1537,7 @@
           "description": "暗いサーフェスを完全な黒に固定し、OLEDパネルでのバンディングを防止（ダークモードのみ）"
         },
         "shell-theme-mode": {
-          "description": "Noctalia独自のライトまたはダークモードに固定します。「追従」ではテーマモードと同期します",
+          "description": "Hyprbar独自のライトまたはダークモードに固定します。「追従」ではテーマモードと同期します",
           "label": "シェルのテーマモード"
         },
         "theme-mode": {
@@ -1954,7 +1954,7 @@
             "label": "シャットダウン時"
           },
           "started": {
-            "description": "Noctalia起動後に実行するコマンド"
+            "description": "Hyprbar起動後に実行するコマンド"
           },
           "theme-mode-changed": {
             "description": "確定したテーマモードがライトとダークの間で切り替わったときに実行するコマンドです",
@@ -2463,7 +2463,7 @@
           "placeholder": "都市名、国名"
         },
         "location-auto-locate": {
-          "description": "noctalia.devを利用してIPアドレスから現在地を自動検出",
+          "description": "the plugin catalogを利用してIPアドレスから現在地を自動検出",
           "label": "現在地を自動検出（IP）"
         },
         "longitude": {
@@ -2633,7 +2633,7 @@
           "description": "個別設定のないシェルUIで使用する既定の日付形式"
         },
         "external-ip": {
-          "description": "接続のパブリックWAN IPアドレスを（api.noctalia.dev経由で）取得し、コントロールセンターのネットワークタブに表示します"
+          "description": "接続のパブリックWAN IPアドレスを（the online service経由で）取得し、コントロールセンターのネットワークタブに表示します"
         },
         "greeter-sync-auto": {
           "description": "壁紙、配色、テーマモード、またはシェルフォントの変更時に、グリーターを自動同期します。認証は引き続きシステムの方針に従います。この設定でパスワードなしの同期が有効になることはありません。"
@@ -2642,9 +2642,9 @@
           "description": "グリーターの「今すぐ同期」で使用する権限昇格コマンドを上書きします。レガシーモード（旧ヘルパーまたはカスタムのグリーター状態ディレクトリ）では、別の管理者権限昇格ツールも使用できます。制限付き同期では--syncが追加され、指定したプレフィックスが最終的にpkexecを起動する必要があります（例：ghostty -e pkexec）"
         },
         "launch-apps-as-systemd-services": {
-          "description": "アプリを個別のsystemdサービスとして起動し、Noctaliaのcgroupを共有しないようにします。",
+          "description": "アプリを個別のsystemdサービスとして起動し、Hyprbarのcgroupを共有しないようにします。",
           "label": "アプリをsystemdサービスとして起動",
-          "requires-systemd-session": "Noctaliaをsystemdユーザーサービスとして実行する必要があります（uwsmまたはsystemdユーザーユニット）"
+          "requires-systemd-session": "Hyprbarをsystemdユーザーサービスとして実行する必要があります（uwsmまたはsystemdユーザーユニット）"
         },
         "launch-apps-custom-command": {
           "description": "ランチャー、ドック、タスクバーから起動するアプリをこのコマンド経由で起動し、$CMDを元のコマンドに置き換えます",
@@ -2823,7 +2823,7 @@
           "label": "位置情報を表示"
         },
         "sync-greeter": {
-          "description": "現在の外観設定と画面配置をNoctalia Greeterにコピーします。システムポリシーでユーザーのパスワードなし同期が許可されていない場合は、管理者の承認を求めます。"
+          "description": "現在の外観設定と画面配置を Greeterにコピーします。システムポリシーでユーザーのパスワードなし同期が許可されていない場合は、管理者の承認を求めます。"
         },
         "telemetry": {
           "description": "バージョン、OS、コンポジター、画面解像度、RAM、UI倍率を含む匿名の起動時通信を送信します。"
@@ -3097,7 +3097,7 @@
             "label": "デスクトップウィジェットを表示"
           },
           "desktop-widgets-toggle": {
-            "description": "デスクトップウィジェットの表示・非表示を切替（実行中のみ。保存設定は変更しません）\n",
+            "description": "デスクトップウィジェットの表示・非表示を切替（実行中のみ。保存設定は変更しません）",
             "label": "デスクトップウィジェットの表示・非表示を切替"
           },
           "desktop-widgets-toggle-edit": {
@@ -3129,7 +3129,7 @@
             "label": "画面の電源を入れる"
           },
           "greeter-sync": {
-            "description": "壁紙、配色、画面配置をNoctalia Greeterに同期"
+            "description": "壁紙、配色、画面配置を Greeterに同期"
           },
           "keyboard-backlight-down": {
             "description": "すべてのキーボードバックライトを1段階暗くする",
@@ -3199,10 +3199,10 @@
             "label": "OSDを切替"
           },
           "panel-open": {
-            "description": "IDを指定してパネルを開きます。必要に応じてコンテキストも指定できます（例：launcher /emo、control-center audio）。\n"
+            "description": "IDを指定してパネルを開きます。必要に応じてコンテキストも指定できます（例：launcher /emo、control-center audio）。"
           },
           "panel-toggle": {
-            "description": "IDを指定してパネルの表示・非表示を切り替えます。必要に応じてコンテキストも指定できます（例：launcher /emo、control-center audio）。\n"
+            "description": "IDを指定してパネルの表示・非表示を切り替えます。必要に応じてコンテキストも指定できます（例：launcher /emo、control-center audio）。"
           },
           "plugins": {
             "description": "プラグインと配布元を管理（一覧表示、有効化、無効化、更新、配布元の一覧・追加・削除）",
@@ -3586,7 +3586,7 @@
     "no-wallpaper-selected": "壁紙が選択されていません",
     "select-wallpaper": "壁紙を選択",
     "subtitle": "いくつかの簡単な設定を選んで始めましょう。",
-    "title": "Noctaliaへようこそ",
+    "title": "Hyprbarへようこそ",
     "wallpaper": "壁紙",
     "wallpaper-scheme": "壁紙配色"
   },

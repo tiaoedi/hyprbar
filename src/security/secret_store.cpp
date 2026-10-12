@@ -524,7 +524,7 @@ namespace security {
 
   SecretStoreAttributes secretStoreAttributes(const SecretId& id) {
     return {
-        .application = "noctalia",
+        .application = "hyprbar",
         .scope = id.scope,
         .owner = id.owner,
         .name = id.name,

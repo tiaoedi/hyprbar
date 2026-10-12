@@ -29,7 +29,7 @@ namespace noctalia::theme {
 
     constexpr Logger kLog("community_templates");
     constexpr std::string_view kCatalogUrl = "https://api.noctalia.dev/templates";
-    constexpr std::string_view kCacheMetadataFilename = ".noctalia-cache.json";
+    constexpr std::string_view kCacheMetadataFilename = ".hyprbar-cache.json";
 
     struct CommunityTemplateFile {
       std::string name;
@@ -904,7 +904,7 @@ namespace noctalia::theme {
     const std::string state = FileUtils::stateDir();
     if (!state.empty())
       return std::filesystem::path(state) / "community-templates";
-    return std::filesystem::path("/tmp") / "noctalia" / "community-templates";
+    return std::filesystem::path("/tmp") / "hyprbar" / "community-templates";
   }
 
   std::filesystem::path communityTemplateDir(std::string_view id) {

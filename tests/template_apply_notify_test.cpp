@@ -53,9 +53,9 @@ int main() {
   std::filesystem::create_directories(root / "config");
   std::filesystem::create_directories(root / "state");
   std::filesystem::create_directories(root / "data");
-  ::setenv("NOCTALIA_CONFIG_HOME", (root / "config").c_str(), 1);
-  ::setenv("NOCTALIA_STATE_HOME", (root / "state").c_str(), 1);
-  ::setenv("NOCTALIA_DATA_HOME", (root / "data").c_str(), 1);
+  ::setenv("HYPRBAR_CONFIG_HOME", (root / "config").c_str(), 1);
+  ::setenv("HYPRBAR_STATE_HOME", (root / "state").c_str(), 1);
+  ::setenv("HYPRBAR_DATA_HOME", (root / "data").c_str(), 1);
 
   int applications = 0;
   int paletteChanges = 0;
@@ -115,9 +115,9 @@ int main() {
     TEST_CHECK(paletteChanges == 1);
   }
 
-  ::unsetenv("NOCTALIA_CONFIG_HOME");
-  ::unsetenv("NOCTALIA_STATE_HOME");
-  ::unsetenv("NOCTALIA_DATA_HOME");
+  ::unsetenv("HYPRBAR_CONFIG_HOME");
+  ::unsetenv("HYPRBAR_STATE_HOME");
+  ::unsetenv("HYPRBAR_DATA_HOME");
   std::filesystem::remove_all(root);
   return 0;
 }

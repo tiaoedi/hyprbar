@@ -1,6 +1,6 @@
 ---
 title: Hyprland
-description: Configure Hyprland for the best experience with Noctalia.
+description: Configure Hyprland for the best experience with Hyprbar.
 sidebar:
   order: 5
 ---
@@ -10,13 +10,13 @@ import blur1 from '../../assets/hyprland-blur/hyprland-blur-1-v5.png';
 
 Add the following settings to your Hyprland Lua configuration file (usually found at `~/.config/hypr/hyprland.lua`).
 
-## Autostart Noctalia
+## Autostart Hyprbar
 
 Add this to your `hyprland.start` event hook:
 
 ```lua
 hl.on("hyprland.start", function()
-  hl.exec_cmd("noctalia")
+  hl.exec_cmd("hyprbar")
 end)
 ```
 
@@ -54,7 +54,7 @@ hl.config({
 
 ## Persistent Workspaces
 
-For the best workspace indicator behavior, make your regular Hyprland workspaces persistent. This keeps empty workspaces visible in Noctalia instead of only showing workspaces that currently contain windows.
+For the best workspace indicator behavior, make your regular Hyprland workspaces persistent. This keeps empty workspaces visible in Hyprbar instead of only showing workspaces that currently contain windows.
 
 Update the monitor name and workspace list to match your setup. You can find more syntax and examples in the official [Workspace Rules](https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/) documentation.
 
@@ -72,7 +72,7 @@ Add these binds to your `hyprland.lua`:
 
 ```lua
 local mainMod = "SUPER"
-local ipc = "noctalia msg "
+local ipc = "hyprbar msg "
 
 -- Core binds
 hl.bind(mainMod .. "+Space", hl.dsp.exec_cmd(ipc .. "panel-toggle launcher"))
@@ -87,7 +87,7 @@ hl.bind("XF86AudioMute", hl.dsp.exec_cmd(ipc .. "volume-mute"))
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. "brightness-up"))
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"))
 
--- Noctalia Settings
+-- Hyprbar Settings
 hl.window_rule({
     match = { class = "dev.noctalia.Noctalia" },
     float = true,
@@ -97,16 +97,16 @@ hl.window_rule({
 
 ## Blur
 
-Enable blur for Noctalia's bar, panels, dock, and notifications.
-We also disable Hyprland's built-in layer animations for Noctalia so they do not interfere with Noctalia's own animations.
+Enable blur for Hyprbar's bar, panels, dock, and notifications.
+We also disable Hyprland's built-in layer animations for Hyprbar so they do not interfere with Hyprbar's own animations.
 
-<ImageLightbox src={blur1} alt="Blurred Noctalia surfaces" />
+<ImageLightbox src={blur1} alt="Blurred Hyprbar surfaces" />
 
 ```lua
 hl.layer_rule({
-  name = "noctalia",
+  name = "hyprbar",
   match = {
-    namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$",
+    namespace = "^hyprbar-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$",
   },
   no_anim = true,
   ignore_alpha = 0.5,

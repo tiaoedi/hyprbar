@@ -70,7 +70,7 @@ An action is one of three things:
 
 | Form | Meaning |
 |---|---|
-| `<command> [arguments]` | Run an IPC command, exactly as `noctalia msg` would |
+| `<command> [arguments]` | Run an IPC command, exactly as `hyprbar msg` would |
 | `exec <command line>` | Run a shell command |
 | `none` | Unbind the gesture |
 
@@ -81,8 +81,8 @@ right = "exec gsimplecal"                       # shell command
 middle = "none"                                 # nothing happens
 ```
 
-The command vocabulary is the same one `noctalia msg` uses, so anything you can bind to a keyboard
-shortcut you can bind to a widget. Run `noctalia msg --help` for the full list. The settings editor
+The command vocabulary is the same one `hyprbar msg` uses, so anything you can bind to a keyboard
+shortcut you can bind to a widget. Run `hyprbar msg --help` for the full list. The settings editor
 offers the same commands in a searchable picker, with the argument hint shown in the field beside it.
 
 Reach for `exec` only when nothing in that list covers what you want. A built-in command is faster,

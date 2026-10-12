@@ -200,7 +200,7 @@ Application::~Application() {
 void Application::run(std::function<void()> startupReadyCallback) {
   initLogFile();
   initLogLevelFromEnvironment();
-  kLog.info("noctalia {}", noctalia::build_info::displayVersion());
+  kLog.info("hyprbar {}", noctalia::build_info::displayVersion());
   // Claim the tray watcher name first. The tray UI itself is wired up later.
   // Item callbacks run from deferred work on the main loop, after the shell
   // is initialized.

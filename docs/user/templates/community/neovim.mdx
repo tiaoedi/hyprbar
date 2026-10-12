@@ -1,16 +1,16 @@
 ---
 title: Neovim
-description: Theming Neovim with Noctalia
+description: Theming Neovim with Hyprbar
 sidebar:
   order: 8
 ---
 
-Neovim can be themed using the Noctalia via the `base16` colorscheme.
+Neovim can be themed using the Hyprbar via the `base16` colorscheme.
 
 ## Setup
 
 1. **Add a user template for neovim**
-  - Add this to any TOML file under `~/.config/noctalia/` (for example `~/.config/noctalia/nvim.toml`). A user template becomes active as soon as its entry exists; there is no separate toggle to enable it. Set `enabled = false` on the entry to keep it defined but inactive.
+  - Add this to any TOML file under `~/.config/hyprbar/` (for example `~/.config/hyprbar/nvim.toml`). A user template becomes active as soon as its entry exists; there is no separate toggle to enable it. Set `enabled = false` on the entry to keep it defined but inactive.
 
     ```toml
     [theme.templates.user.nvim_base16]
@@ -78,5 +78,5 @@ Neovim can be themed using the Noctalia via the `base16` colorscheme.
    ```lua
     require('matugen').setup()
    ```
-When you restart neovim, it should use your noctalia theme.
+When you restart neovim, it should use your hyprbar theme.
 

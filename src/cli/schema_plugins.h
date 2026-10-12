@@ -36,7 +36,7 @@ namespace noctalia::cli {
       "plugins",
       "Offline plugin author tools",
       "Offline tools for plugin authors (no running shell required).\n"
-      "To manage installed plugins on the running instance, use 'noctalia msg plugins'.",
+      "To manage installed plugins on the running instance, use 'hyprbar msg plugins'.",
       {},
       {},
       {},

@@ -14,14 +14,14 @@ The foot terminal does not support live config reload, you need terminal sequenc
 ``` sh
 #!/usr/bin/env bash
 
-CONFIG_PATH=~/.config/noctalia
+CONFIG_PATH=~/.config/hyprbar
 TEMPLATE_PATH=$CONFIG_PATH/templates/terminal-sequences
 
 mkdir -p $CONFIG_PATH/templates
 
 cat >> $CONFIG_PATH/config.toml <<'EOF'
 [theme.templates.user.terminal-sequences]
-input_path = '~/.config/noctalia/templates/terminal-sequences'
+input_path = '~/.config/hyprbar/templates/terminal-sequences'
 output_path = '~/.cache/terminal-sequences'
 post_hook = 'tee /dev/pts/[0-9]* < ~/.cache/terminal-sequences'
 EOF
@@ -56,10 +56,10 @@ EOF
 
 #### or step by step :
 
-1. Add this to your `~/.config/noctalia/config.toml` (create it if you don't have one) :
+1. Add this to your `~/.config/hyprbar/config.toml` (create it if you don't have one) :
     ``` toml
     [theme.templates.user.terminal-sequences]
-    input_path = '~/.config/noctalia/templates/terminal-sequences'
+    input_path = '~/.config/hyprbar/templates/terminal-sequences'
     output_path = '~/.cache/terminal-sequences'
     post_hook = 'tee /dev/pts/[0-9]* < ~/.cache/terminal-sequences'
     ```
@@ -68,9 +68,9 @@ EOF
     ``` sh
     #!/usr/bin/env bash
 
-    TEMPLATE_PATH=~/.config/noctalia/templates/terminal-sequences
+    TEMPLATE_PATH=~/.config/hyprbar/templates/terminal-sequences
 
-    mkdir -p ~/.config/noctalia/templates
+    mkdir -p ~/.config/hyprbar/templates
 
     {
         printf '\033]10;{{colors.terminal_foreground.default.hex}}\007'

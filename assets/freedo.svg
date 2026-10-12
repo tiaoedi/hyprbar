@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<!-- SPDX-License-Identifier: GFDL-1.3-or-later -->
+
+<!--
+Freedo - The mascot of Linux-libre
+
+The Freedo character originally started off as a draft from Burnaron
+[0], who later shared a vectorized version [1].
+
+A cleaned up version was developed by Rubén Rodríguez Pérez [2].
+It can also be found at [3] licensed under the GNU Free Documentation
+License (GFDL) version 1.2 or any later version. Rubén confirmed this 
+at [4] and [5].
+
+Burnaron's version came to be called Freetz [6], with the cleaned up
+version being called Freedo [7].
+
+Islene Calciolari Garcia and Alexandre Oliva made further changes to 
+Freedo by adding nostrils, opening the eyes, and changing the brush 
+color [8].
+
+Their modified version of Freedo can be found at [9] combined
+with the GNU head and licensed under the GFDL 1.2 or any later 
+version, as required by [10].
+
+Since Burnaron's draft didn't include any license terms I contacted 
+Burnaron via email and received permission to use the GFDL version 
+1.3 or any later version. This makes for consistent licensing from 
+Burnaron's draft through Rubén's cleaned up version to the modified 
+version made by Islene Calciolari Garcia and Alexandre Oliva.
+
+Therefore:
+
+Permission is granted to copy, distribute and/or modify Freedo under
+the terms of the GNU Free Documentation License, Version 1.3 or any
+later version published by the Free Software Foundation; with no
+Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+
+Freedo is, however, also a trademark for GNU Linux-libre [11].
+
+[0] http://www.fsfla.org/pipermail/linux-libre/2009-March/000453.html
+[1] http://www.fsfla.org/pipermail/linux-libre/2009-March/000464.html
+[2] http://www.fsfla.org/pipermail/linux-libre/2009-April/000541.html
+[3] https://commons.wikimedia.org/wiki/File:Freedo.svg
+[4] http://www.fsfla.org/pipermail/linux-libre/2009-December/000923.html
+[5] http://www.fsfla.org/pipermail/linux-libre/2010-April/001133.html
+[6] http://www.fsfla.org/pipermail/linux-libre/2009-April/000533.html
+[7] http://www.fsfla.org/pipermail/linux-libre/2009-May/000621.html
+[8] http://www.fsfla.org/pipermail/linux-libre/2009-May/000644.html
+[9] https://commons.wikimedia.org/wiki/File:Freedo_con_GNU.svg
+[10] https://www.gnu.org/graphics/heckert_gnu.en.html
+[11] http://www.fsfla.org/ikiwiki/selibre/linux-libre/
+-->
+
+<!--
+                GNU Free Documentation License
+                 Version 1.3, 3 November 2008
+
+
+ Copyright (C) 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
+     <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+0. PREAMBLE
+
+The purpose of this License is to make a manual, textbook, or other
+functional and useful document "free" in the sense of freedom: to
+assure everyone the effective freedom to copy and redistribute it,
+with or without modifying it, either commercially or noncommercially.
+Secondarily, this License preserves for the author and publisher a way
+to get credit for their work, while not being considered responsible
+for modifications made by others.
+
+This License is a kind of "copyleft", which means that derivative
+works of the document must themselves be free in the same sense.  It
+complements the GNU General Public License, which is a copyleft
+license designed for free software.
+
+We have designed this License in order to use it for manuals for free
+software, because free software needs free documentation: a free
+program should come with manuals providing the same freedoms that the
+software does.  But this License is not limited to software manuals;
+it can be used for any textual work, regardless of subject matter or
+whether it is published as a printed book.  We recommend this License
+principally for works whose purpose is instruction or reference.
+
+
+1. APPLICABILITY AND DEFINITIONS
+
+This License applies to any manual or other work, in any medium, that
+contains a notice placed by the copyright holder saying it can be
+distributed under the terms of this License.  Such a notice grants a
+world-wide, royalty-free license, unlimited in duration, to use that
+work under the conditions stated herein.  The "Document", below,
+refers to any such manual or work.  Any member of the public is a
+licensee, and is addressed as "you".  You accept the license if you
+copy, modify or distribute the work in a way requiring permission
+under copyright law.
+
+A "Modified Version" of the Document means any work containing the
+Document or a portion of it, either copied verbatim, or with
+modifications and/or translated into another language.
+
+A "Secondary Section" is a named appendix or a front-matter section of
+the Document that deals exclusively with the relationship of the
+publishers or authors of the Document to the Document's overall
+subject (or to related matters) and contains nothing that could fall
+directly within that overall subject.  (Thus, if the Document is in
+part a textbook of mathematics, a Secondary Section may not explain
+any mathematics.)  The relationship could be a matter of historical
+connection with the subject or with related matters, or of legal,
+commercial, philosophical, ethical or political position regarding
+them.
+
+The "Invariant Sections" are certain Secondary Sections whose titles
+are designated, as being those of Invariant Sections, in the notice
+that says that the Document is released under this License.  If a
+section does not fit the above definition of Secondary then it is not
+allowed to be designated as Invariant.  The Document may contain zero
+Invariant Sections.  If the Document does not identify any Invariant
+Sections then there are none.
+
+The "Cover Texts" are certain short passages of text that are listed,
+as Front-Cover Texts or Back-Cover Texts, in the notice that says that
+the Document is released under this License.  A Front-Cover Text may
+be at most 5 words, and a Back-Cover Text may be at most 25 words.
+
+A "Transparent" copy of the Document means a machine-readable copy,
+represented in a format whose specification is available to the
+general public, that is suitable for revising the document
+straightforwardly with generic text editors or (for images composed of
+pixels) generic paint programs or (for drawings) some widely available
+drawing editor, and that is suitable for input to text formatters or
+for automatic translation to a variety of formats suitable for input
+to text formatters.  A copy made in an otherwise Transparent file
+format whose markup, or absence of markup, has been arranged to thwart
+or discourage subsequent modification by readers is not Transparent.
+An image format is not Transparent if used for any substantial amount
+of text.  A copy that is not "Transparent" is called "Opaque".
+
+Examples of suitable formats for Transparent copies include plain
+ASCII without markup, Texinfo input format, LaTeX input format, SGML
+or XML using a publicly available DTD, and standard-conforming simple
+HTML, PostScript or PDF designed for human modification.  Examples of
+transparent image formats include PNG, XCF and JPG.  Opaque formats
+include proprietary formats that can be read and edited only by
+proprietary word processors, SGML or XML for which the DTD and/or
+processing tools are not generally available, and the
+machine-generated HTML, PostScript or PDF produced by some word
+processors for output purposes only.
+
+The "Title Page" means, for a printed book, the title page itself,
+plus such following pages as are needed to hold, legibly, the material
+this License requires to appear in the title page.  For works in
+formats which do not have any title page as such, "Title Page" means
+the text near the most prominent appearance of the work's title,
+preceding the beginning of the body of the text.
+
+The "publisher" means any person or entity that distributes copies of
+the Document to the public.
+
+A section "Entitled XYZ" means a named subunit of the Document whose
+title either is precisely XYZ or contains XYZ in parentheses following
+text that translates XYZ in another language.  (Here XYZ stands for a
+specific section name mentioned below, such as "Acknowledgements",
+"Dedications", "Endorsements", or "History".)  To "Preserve the Title"
+of such a section when you modify the Document means that it remains a
+section "Entitled XYZ" according to this definition.
+
+The Document may include Warranty Disclaimers next to the notice which
+states that this License applies to the Document.  These Warranty
+Disclaimers are considered to be included by reference in this
+License, but only as regards disclaiming warranties: any other
+implication that these Warranty Disclaimers may have is void and has
+no effect on the meaning of this License.
+
+2. VERBATIM COPYING
+
+You may copy and distribute the Document in any medium, either
+commercially or noncommercially, provided that this License, the
+copyright notices, and the license notice saying this License applies
+to the Document are reproduced in all copies, and that you add no
+other conditions whatsoever to those of this License.  You may not use
+technical measures to obstruct or control the reading or further
+copying of the copies you make or distribute.  However, you may accept
+compensation in exchange for copies.  If you distribute a large enough
+number of copies you must also follow the conditions in section 3.
+
+You may also lend copies, under the same conditions stated above, and
+you may publicly display copies.
+
+
+3. COPYING IN QUANTITY
+
+If you publish printed copies (or copies in media that commonly have
+printed covers) of the Document, numbering more than 100, and the
+Document's license notice requires Cover Texts, you must enclose the
+copies in covers that carry, clearly and legibly, all these Cover
+Texts: Front-Cover Texts on the front cover, and Back-Cover Texts on
+the back cover.  Both covers must also clearly and legibly identify
+you as the publisher of these copies.  The front cover must present
+the full title with all words of the title equally prominent and
+visible.  You may add other material on the covers in addition.
+Copying with changes limited to the covers, as long as they preserve
+the title of the Document and satisfy these conditions, can be treated
+as verbatim copying in other respects.
+
+If the required texts for either cover are too voluminous to fit
+legibly, you should put the first ones listed (as many as fit
+reasonably) on the actual cover, and continue the rest onto adjacent
+pages.
+
+If you publish or distribute Opaque copies of the Document numbering
+more than 100, you must either include a machine-readable Transparent
+copy along with each Opaque copy, or state in or with each Opaque copy
+a computer-network location from which the general network-using
+public has access to download using public-standard network protocols
+a complete Transparent copy of the Document, free of added material.
+If you use the latter option, you must take reasonably prudent steps,
+when you begin distribution of Opaque copies in quantity, to ensure
+that this Transparent copy will remain thus accessible at the stated
+location until at least one year after the last time you distribute an
+Opaque copy (directly or through your agents or retailers) of that
+edition to the public.
+
+It is requested, but not required, that you contact the authors of the
+Document well before redistributing any large number of copies, to
+give them a chance to provide you with an updated version of the
+Document.
+
+
+4. MODIFICATIONS
+
+You may copy and distribute a Modified Version of the Document under
+the conditions of sections 2 and 3 above, provided that you release
+the Modified Version under precisely this License, with the Modified
+Version filling the role of the Document, thus licensing distribution
+and modification of the Modified Version to whoever possesses a copy
+of it.  In addition, you must do these things in the Modified Version:
+
+A. Use in the Title Page (and on the covers, if any) a title distinct
+   from that of the Document, and from those of previous versions
+   (which should, if there were any, be listed in the History section
+   of the Document).  You may use the same title as a previous version
+   if the original publisher of that version gives permission.
+B. List on the Title Page, as authors, one or more persons or entities
+   responsible for authorship of the modifications in the Modified
+   Version, together with at least five of the principal authors of the
+   Document (all of its principal authors, if it has fewer than five),
+   unless they release you from this requirement.
+C. State on the Title page the name of the publisher of the
+   Modified Version, as the publisher.
+D. Preserve all the copyright notices of the Document.
+E. Add an appropriate copyright notice for your modifications
+   adjacent to the other copyright notices.
+F. Include, immediately after the copyright notices, a license notice
+   giving the public permission to use the Modified Version under the
+   terms of this License, in the form shown in the Addendum below.
+G. Preserve in that license notice the full lists of Invariant Sections
+   and required Cover Texts given in the Document's license notice.
+H. Include an unaltered copy of this License.
+I. Preserve the section Entitled "History", Preserve its Title, and add
+   to it an item stating at least the title, year, new authors, and
+   publisher of the Modified Version as given on the Title Page.  If
+   there is no section Entitled "History" in the Document, create one
+   stating the title, year, authors, and publisher of the Document as
+   given on its Title Page, then add an item describing the Modified
+   Version as stated in the previous sentence.
+J. Preserve the network location, if any, given in the Document for
+   public access to a Transparent copy of the Document, and likewise
+   the network locations given in the Document for previous versions
+   it was based on.  These may be placed in the "History" section.
+   You may omit a network location for a work that was published at
+   least four years before the Document itself, or if the original
+   publisher of the version it refers to gives permission.
+K. For any section Entitled "Acknowledgements" or "Dedications",
+   Preserve the Title of the section, and preserve in the section all
+   the substance and tone of each of the contributor acknowledgements
+   and/or dedications given therein.
+L. Preserve all the Invariant Sections of the Document,
+   unaltered in their text and in their titles.  Section numbers
+   or the equivalent are not considered part of the section titles.
+M. Delete any section Entitled "Endorsements".  Such a section
+   may not be included in the Modified Version.
+N. Do not retitle any existing section to be Entitled "Endorsements"
+   or to conflict in title with any Invariant Section.
+O. Preserve any Warranty Disclaimers.
+
+If the Modified Version includes new front-matter sections or
+appendices that qualify as Secondary Sections and contain no material
+copied from the Document, you may at your option designate some or all
+of these sections as invariant.  To do this, add their titles to the
+list of Invariant Sections in the Modified Version's license notice.
+These titles must be distinct from any other section titles.
+
+You may add a section Entitled "Endorsements", provided it contains
+nothing but endorsements of your Modified Version by various
+parties - for example, statements of peer review or that the text has
+been approved by an organization as the authoritative definition of a
+standard.
+
+You may add a passage of up to five words as a Front-Cover Text, and a
+passage of up to 25 words as a Back-Cover Text, to the end of the list
+of Cover Texts in the Modified Version.  Only one passage of
+Front-Cover Text and one of Back-Cover Text may be added by (or
+through arrangements made by) any one entity.  If the Document already
+includes a cover text for the same cover, previously added by you or
+by arrangement made by the same entity you are acting on behalf of,
+you may not add another; but you may replace the old one, on explicit
+permission from the previous publisher that added the old one.
+
+The author(s) and publisher(s) of the Document do not by this License
+give permission to use their names for publicity for or to assert or
+imply endorsement of any Modified Version.
+
+
+5. COMBINING DOCUMENTS
+
+You may combine the Document with other documents released under this
+License, under the terms defined in section 4 above for modified
+versions, provided that you include in the combination all of the
+Invariant Sections of all of the original documents, unmodified, and
+list them all as Invariant Sections of your combined work in its
+license notice, and that you preserve all their Warranty Disclaimers.
+
+The combined work need only contain one copy of this License, and
+multiple identical Invariant Sections may be replaced with a single
+copy.  If there are multiple Invariant Sections with the same name but
+different contents, make the title of each such section unique by
+adding at the end of it, in parentheses, the name of the original
+author or publisher of that section if known, or else a unique number.
+Make the same adjustment to the section titles in the list of
+Invariant Sections in the license notice of the combined work.
+
+In the combination, you must combine any sections Entitled "History"
+in the various original documents, forming one section Entitled
+"History"; likewise combine any sections Entitled "Acknowledgements",
+and any sections Entitled "Dedications".  You must delete all sections
+Entitled "Endorsements".
+
+
+6. COLLECTIONS OF DOCUMENTS
+
+You may make a collection consisting of the Document and other
+documents released under this License, and replace the individual
+copies of this License in the various documents with a single copy
+that is included in the collection, provided that you follow the rules
+of this License for verbatim copying of each of the documents in all
+other respects.
+
+You may extract a single document from such a collection, and
+distribute it individually under this License, provided you insert a
+copy of this License into the extracted document, and follow this
+License in all other respects regarding verbatim copying of that
+document.
+
+
+7. AGGREGATION WITH INDEPENDENT WORKS
+
+A compilation of the Document or its derivatives with other separate
+and independent documents or works, in or on a volume of a storage or
+distribution medium, is called an "aggregate" if the copyright
+resulting from the compilation is not used to limit the legal rights
+of the compilation's users beyond what the individual works permit.
+When the Document is included in an aggregate, this License does not
+apply to the other works in the aggregate which are not themselves
+derivative works of the Document.
+
+If the Cover Text requirement of section 3 is applicable to these
+copies of the Document, then if the Document is less than one half of
+the entire aggregate, the Document's Cover Texts may be placed on
+covers that bracket the Document within the aggregate, or the
+electronic equivalent of covers if the Document is in electronic form.
+Otherwise they must appear on printed covers that bracket the whole
+aggregate.
+
+
+8. TRANSLATION
+
+Translation is considered a kind of modification, so you may
+distribute translations of the Document under the terms of section 4.
+Replacing Invariant Sections with translations requires special
+permission from their copyright holders, but you may include
+translations of some or all Invariant Sections in addition to the
+original versions of these Invariant Sections.  You may include a
+translation of this License, and all the license notices in the
+Document, and any Warranty Disclaimers, provided that you also include
+the original English version of this License and the original versions
+of those notices and disclaimers.  In case of a disagreement between
+the translation and the original version of this License or a notice
+or disclaimer, the original version will prevail.
+
+If a section in the Document is Entitled "Acknowledgements",
+"Dedications", or "History", the requirement (section 4) to Preserve
+its Title (section 1) will typically require changing the actual
+title.
+
+
+9. TERMINATION
+
+You may not copy, modify, sublicense, or distribute the Document
+except as expressly provided under this License.  Any attempt
+otherwise to copy, modify, sublicense, or distribute it is void, and
+will automatically terminate your rights under this License.
+
+However, if you cease all violation of this License, then your license
+from a particular copyright holder is reinstated (a) provisionally,
+unless and until the copyright holder explicitly and finally
+terminates your license, and (b) permanently, if the copyright holder
+fails to notify you of the violation by some reasonable means prior to
+60 days after the cessation.
+
+Moreover, your license from a particular copyright holder is
+reinstated permanently if the copyright holder notifies you of the
+violation by some reasonable means, this is the first time you have
+received notice of violation of this License (for any work) from that
+copyright holder, and you cure the violation prior to 30 days after
+your receipt of the notice.
+
+Termination of your rights under this section does not terminate the
+licenses of parties who have received copies or rights from you under
+this License.  If your rights have been terminated and not permanently
+reinstated, receipt of a copy of some or all of the same material does
+not give you any rights to use it.
+
+
+10. FUTURE REVISIONS OF THIS LICENSE
+
+The Free Software Foundation may publish new, revised versions of the
+GNU Free Documentation License from time to time.  Such new versions
+will be similar in spirit to the present version, but may differ in
+detail to address new problems or concerns.  See
+https://www.gnu.org/licenses/.
+
+Each version of the License is given a distinguishing version number.
+If the Document specifies that a particular numbered version of this
+License "or any later version" applies to it, you have the option of
+following the terms and conditions either of that specified version or
+of any later version that has been published (not as a draft) by the
+Free Software Foundation.  If the Document does not specify a version
+number of this License, you may choose any version ever published (not
+as a draft) by the Free Software Foundation.  If the Document
+specifies that a proxy can decide which future versions of this
+License can be used, that proxy's public statement of acceptance of a
+version permanently authorizes you to choose that version for the
+Document.
+
+11. RELICENSING
+
+"Massive Multiauthor Collaboration Site" (or "MMC Site") means any
+World Wide Web server that publishes copyrightable works and also
+provides prominent facilities for anybody to edit those works.  A
+public wiki that anybody can edit is an example of such a server.  A
+"Massive Multiauthor Collaboration" (or "MMC") contained in the site
+means any set of copyrightable works thus published on the MMC site.
+
+"CC-BY-SA" means the Creative Commons Attribution-Share Alike 3.0 
+license published by Creative Commons Corporation, a not-for-profit 
+corporation with a principal place of business in San Francisco, 
+California, as well as future copyleft versions of that license 
+published by that same organization.
+
+"Incorporate" means to publish or republish a Document, in whole or in 
+part, as part of another Document.
+
+An MMC is "eligible for relicensing" if it is licensed under this 
+License, and if all works that were first published under this License 
+somewhere other than this MMC, and subsequently incorporated in whole or 
+in part into the MMC, (1) had no cover texts or invariant sections, and 
+(2) were thus incorporated prior to November 1, 2008.
+
+The operator of an MMC Site may republish an MMC contained in the site
+under CC-BY-SA on the same site at any time before August 1, 2009,
+provided the MMC is eligible for relicensing.
+
+
+ADDENDUM: How to use this License for your documents
+
+To use this License in a document you have written, include a copy of
+the License in the document and put the following copyright and
+license notices just after the title page:
+
+    Copyright (c)  YEAR  YOUR NAME.
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the GNU Free Documentation License, Version 1.3
+    or any later version published by the Free Software Foundation;
+    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+    A copy of the license is included in the section entitled "GNU
+    Free Documentation License".
+
+If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts,
+replace the "with...Texts." line with this:
+
+    with the Invariant Sections being LIST THEIR TITLES, with the
+    Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+
+If you have Invariant Sections without Cover Texts, or some other
+combination of the three, merge those two alternatives to suit the
+situation.
+
+If your document contains nontrivial examples of program code, we
+recommend releasing these examples in parallel under your choice of
+free software license, such as the GNU General Public License,
+to permit their use in free software.
+-->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="282.22223mm"
+   height="275.69907mm"
+   viewBox="0 0 1000 976.88645"
+   id="svg3479"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="Freedo.svg">
+  <defs
+     id="defs3481" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.5"
+     inkscape:cx="459.18897"
+     inkscape:cy="599.17797"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1918"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3484">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(144,-21.132753)">
+    <g
+       id="g2443"
+       transform="matrix(4.7892177,0,0,4.7892177,-338.62675,-971.69206)">
+      <path
+         style="fill:#a7d4ff;fill-rule:evenodd;stroke:#000000;stroke-width:4.20881128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path3186"
+         d="m 134.91,269.82 0.0428,-16.504 c -2.9888,4.6076 -19.001,14.703 -22.388,18.124 -6.7217,6.5127 -23.553,9.0517 -32.088,13.932 2.9897,8.2146 12.349,1.2133 10.612,13.633 4.2091,-0.50679 12.393,-0.32297 18.18,-8.335 l 25.641,-20.85 -1e-5,0 z"
+         sodipodi:nodetypes="ccccccc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:#f8b44d;fill-rule:evenodd;stroke:#000000;stroke-width:4.20881128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path3188"
+         d="m 101.48,325.85 c -2.2463,5.1493 -7.4151,5.1241 -12.634,5.0099 l -18.441,-62.714 c 4.8342,-13.486 1.382,-32.8 -11.833,-36.263 4.9313,-10.489 12.149,-6.8382 18.528,-8.3756 11.91,2.4518 25.588,37.177 9.4668,47.139 l 14.511,48.747 0.40108,6.4577 z"
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:#fab74f;fill-rule:evenodd;stroke:#000000;stroke-width:4.20881128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path2402"
+         d="m 169.81,376.03 c -0.26914,14.696 13.293,31.133 22.574,33.146 2.4231,-3.9913 3.7757,-7.683 3.7834,-11.599 5.6169,3.0506 8.5406,3.39 13.897,3.7477 1.3879,-4.5732 1.3773,-7.5533 -2.127,-12.043 4.9932,0.61542 9.8552,-0.74204 13.685,-2.573 -2.6963,-7.3527 -25.62,-16.006 -34.7,-17.587 -12.518,7.9681 -29.521,-9.6978 -17.114,6.9083 z"
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:#f8b44d;fill-rule:evenodd;stroke:#000000;stroke-width:4.20881128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path2400"
+         d="m 119.68,369.75 c -12.969,-1.0317 -27.442,6.6466 -34.618,12.82 2.7198,1.2984 8.1267,4.6425 13.497,4.0368 -2.8039,4.1134 -2.8721,7.7479 -2.3482,11.141 3.4582,0.78116 9.5233,0.11458 14.092,-1.1059 -2.0744,4.1931 -2.6197,7.7633 -1.3624,11.603 6.1988,0.11953 26.066,-11.998 33.915,-29.658 -16.951,-4.6502 -14.136,3.2308 -23.174,-8.8362 z"
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:#a7d4ff;fill-rule:evenodd;stroke:#000000;stroke-width:4.20881128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path2396"
+         d="m 119.37,251.31 c 0,0 2.4684,-21.142 11.419,-30.227 22.343,-22.678 51.218,-10.055 63.319,17.857 11.229,25.901 32.743,101.79 15.103,126.87 -18.714,28.702 -60.529,29.028 -88.048,20.125 -8.3591,-1.9855 -19.157,-15.262 -21.177,-23.12 -4.8004,-18.633 -8.9899,-44.429 9.3593,-83.124 l 5.2766,-13.208 4.7475,-15.17 z"
+         sodipodi:nodetypes="csscccccc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:4.20881128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path2398"
+         d="m 115.27,381.98 c -15.081,-38.924 -11.772,-95.987 33.911,-94.677 45.262,1.2981 49.602,74.982 22.741,101.52 -18.444,5.4872 -48.52,1.034 -56.652,-6.8388 z"
+         sodipodi:nodetypes="czcc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:#000000;stroke-width:4.20881128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path2406"
+         d="m 191.89,254.9 c 1.2586,8.0166 1.8185,15.631 6.2364,25.465 -3.0084,8.1494 -1.1509,11.97 1.0254,15.507 4.549,6.6819 5.9287,13.466 5.8946,20.296 -0.22546,7.03 -2.6822,11.839 3.3289,20.146 4.3291,5.0914 9.3646,9.6665 12.534,16.822 4.3309,-5.9009 5.3949,-12.656 5.6511,-19.622 -5.4168,-5.3232 -10.184,-11.48 -9.2076,-20.791 -1.0884,9.2549 3.7183,15.791 7.0816,18.552 6.4254,3.6484 5.9342,3.3389 13.828,4.9941 -1.8983,-9.0027 1.1042,-10.362 0.34922,-16.011 -0.9641,-7.2137 -3.9356,-15.898 -6.7089,-23.117 l -4.7368,-7.9647 c -6.3802,-11.469 -11.098,-68.692 -29.512,-55.822 -5.1616,6.9929 -5.6431,14.259 -5.7635,21.546 z"
+         sodipodi:nodetypes="ccccccccccscccc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:#a7d4ff;fill-rule:evenodd;stroke:#000000;stroke-width:4.20881128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path2404"
+         d="m 208.35,259.72 c 7.3156,15.23 17.508,30.629 28.204,46.056 0,0 6.3882,-6.4748 8.1661,-9.8861 1.3577,-2.6051 2.6164,-9.4363 2.6164,-9.4363 -4.0305,-9.3826 -17.155,-28.316 -27.446,-37.002 -13.209,-9.2458 -14.121,-1.8523 -11.541,10.268 z"
+         sodipodi:nodetypes="ccsscc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:#f8b44d;fill-rule:evenodd;stroke:#000000;stroke-width:4.03034544;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path2408"
+         d="m 140.22,245.12 c -5.8009,3.1496 -13.21,12.735 -8.7445,29.915 11.331,7.7897 47.31,-11.816 32.245,-28.195 -7.0279,-4.9595 -16.277,-4.4137 -23.501,-1.7201 z"
+         sodipodi:nodetypes="cccc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:#a7d4ff;fill-rule:evenodd;stroke:#000000;stroke-width:4.20881128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path3190"
+         d="m 65.4,301.54 c 3.8471,8.7989 16.509,4.9758 19.309,4.2176 6.1604,-1.9937 3.6619,-10.702 -1.7376,-11.798 -3.9095,-0.70621 -3.9402,0.21868 -7.8373,1.6205 l 2.944,-1.5712 c -1.1802,-3.9333 -1.7681,-5.1703 -2.7039,-8.5751 -6.0723,-0.41348 -13.316,9.8307 -9.9741,16.106 z"
+         sodipodi:nodetypes="ccccccc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:4.20881128;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path3198"
+         d="m 64.011,225.3 c 17.131,-2.7337 23.43,26.974 20.344,36.478"
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <g
+         style="stroke:#000000;stroke-linecap:butt"
+         id="g2406"
+         transform="matrix(0.333215,0.00876396,-0.00876396,0.333215,33.341,124.645)">
+        <path
+           style="fill:#ececec;fill-rule:evenodd;stroke-width:12.62656021;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+           id="path3200"
+           d="m 102.79,314.27 -51.443,10.11 c -32.626,9.4905 -1.2487,130.23 33.433,124.55 l 58.266,-24.95 C 157.455,359.722 123.737,316.56 102.79,314.27 Z"
+           sodipodi:nodetypes="ccccc"
+           inkscape:connector-curvature="0"
+           stroke-miterlimit="4" />
+        <path
+           style="fill:none;stroke-width:3.08632779px;stroke-linejoin:miter"
+           id="path3202"
+           d="m 53.694,327.34 c 28.462,-6.729 56.553,102.79 28.981,122.75 l 11.445,-4.6686"
+           sodipodi:nodetypes="ccc"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke-width:3.15664005px;stroke-linejoin:miter"
+           id="path3206"
+           d="M 71.623,335.88 123.79,325.53"
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke-width:3.15664005px;stroke-linejoin:miter"
+           id="path3208"
+           d="m 79.8,349.28 50.66,-10.39"
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke-width:3.15664005px;stroke-linejoin:miter"
+           id="path3210"
+           d="M 85.264,364.51 135.22,354.09"
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke-width:3.15664005px;stroke-linejoin:miter"
+           id="path3212"
+           d="M 91.139,380.43 140.33,369.61"
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke-width:3.15664005px;stroke-linejoin:miter"
+           id="path3214"
+           d="m 92.825,396.52 51.465,-12.9"
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke-width:3.15664005px;stroke-linejoin:miter"
+           id="path3216"
+           d="M 94.128,411.7 145.12,397.2"
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;stroke-width:3.15664005px;stroke-linejoin:miter"
+           id="path3220"
+           d="M 92.948,426.56 144.34,409.27"
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0" />
+      </g>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3.99995995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path3189"
+         d="m 206.52,275.25 c 0.81509,5.5607 2.0978,7.6094 3.5758,10.237 1.478,2.6276 3.3089,5.3917 3.5688,5.464"
+         sodipodi:nodetypes="czc"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:3.99995995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path3191"
+         d="m 213.94,297.92 c 0.16589,0.3548 0.86534,2.3872 0.79332,5.1255"
+         inkscape:connector-curvature="0"
+         stroke-miterlimit="4" />
+      <g
+         id="g4966">
+        <g
+           style="fill-rule:evenodd;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+           id="g4962"
+           stroke-miterlimit="4">
+          <path
+             style="fill:#000001;stroke:#000000;stroke-width:4.20881128"
+             id="use4887"
+             d="m 144.69,226.7 c -1.6495,3.023 -2.068,4.4752 -1.8827,8.7539 0.1559,1.8986 1.8614,1.9128 3.1274,0.33066 0.31159,-4.2223 0.37031,-4.1815 1.8183,-8.2706 -0.47204,-1.8668 -2.1535,-1.6286 -3.063,-0.81395 z"
+             sodipodi:nodetypes="ccccc"
+             inkscape:connector-curvature="0" />
+          <path
+             style="fill:#d2d2d2;stroke:#ffffff;stroke-width:0.93653578"
+             id="use4889"
+             d="m 144.69,230.48 c -0.31005,0.79632 -0.38871,1.1789 -0.35387,2.306 0.0293,0.50014 0.34986,0.50388 0.58783,0.0871 0.0586,-1.1122 0.0696,-1.1015 0.34176,-2.1787 -0.0887,-0.49177 -0.40476,-0.42901 -0.57572,-0.21442 l 0,10e-6 z"
+             sodipodi:nodetypes="ccccc"
+             inkscape:connector-curvature="0" />
+        </g>
+        <g
+           id="g4958">
+          <use
+             id="use4891"
+             xlink:href="#use4887"
+             transform="translate(15.6289,-0.0207831)"
+             height="280"
+             width="260"
+             y="0"
+             x="0" />
+          <use
+             id="use4893"
+             xlink:href="#use4889"
+             transform="translate(15.7325,0.239813)"
+             height="280"
+             width="260"
+             y="0"
+             x="0" />
+        </g>
+      </g>
+      <path
+         style="stroke-width:1px"
+         id="path4909"
+         d="m 122.38,92.892 -10.737,4.5865"
+         inkscape:connector-curvature="0"
+         transform="translate(15.0398,169.279)" />
+      <g
+         id="g4954"
+         transform="translate(-1.23526,0)">
+        <path
+           style="fill:#000001;fill-rule:evenodd;stroke:#000000;stroke-width:0.7661792;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+           id="use4887-0"
+           d="m 149.69,247.75 c -0.24276,0.68069 -0.30436,1.0077 -0.27708,1.9712 0.0229,0.42751 0.27394,0.43071 0.46027,0.0745 0.0459,-0.95075 0.0545,-0.94156 0.26759,-1.8623 -0.0695,-0.42035 -0.31693,-0.36671 -0.45078,-0.18328 l 0,-4e-5 z"
+           sodipodi:nodetypes="ccccc"
+           inkscape:connector-curvature="0"
+           stroke-miterlimit="4" />
+        <use
+           id="use4952"
+           xlink:href="#use4887-0"
+           inkscape:transform-center-x="0.21411142"
+           inkscape:transform-center-y="-2.9576367"
+           transform="translate(3.75258,-0.0521192)"
+           height="280"
+           width="260"
+           y="0"
+           x="0" />
+      </g>
+    </g>
+  </g>
+</svg>

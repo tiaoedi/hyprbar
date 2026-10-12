@@ -43,7 +43,7 @@ namespace scripting {
 
 namespace noctalia::plugins {
 
-  // Entry point for `noctalia plugins <command> [paths]`. Returns a process exit
+  // Entry point for `hyprbar plugins <command> [paths]`. Returns a process exit
   // code. Offline author tool; does not start Application or talk to a running shell.
   int runCli(int argc, char* argv[]);
 

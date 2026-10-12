@@ -1,5 +1,6 @@
 #include "shell/bar/widgets/control_center_widget.h"
 
+#include "core/files/resource_paths.h"
 #include "render/scene/input_area.h"
 #include "render/scene/node.h"
 #include "ui/builders.h"
@@ -7,6 +8,8 @@
 #include "ui/style.h"
 
 #include <memory>
+
+std::string ControlCenterWidget::Options::defaultCustomImage() { return paths::assetPath("freedo.svg").string(); }
 
 ControlCenterWidget::ControlCenterWidget(wl_output* /*output*/, Options options)
     : m_barGlyphId(std::move(options.glyph)),

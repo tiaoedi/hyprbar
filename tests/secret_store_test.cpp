@@ -210,8 +210,8 @@ namespace {
     const security::SecretId id{.scope = "calendar", .owner = "personal", .name = "refresh-token"};
     const auto attributes = security::secretStoreAttributes(id);
     bool ok = true;
-    ok = expect(security::SecretStoreSchemaName == "dev.noctalia.Secret", "schema name changed") && ok;
-    ok = expect(attributes.application == "noctalia", "application attribute changed") && ok;
+    ok = expect(security::SecretStoreSchemaName == "dev.hyprbar.Secret", "Hyprbar schema name changed") && ok;
+    ok = expect(attributes.application == "hyprbar", "application attribute changed") && ok;
     ok = expect(attributes.scope == "calendar", "scope attribute changed") && ok;
     ok = expect(attributes.owner == "personal", "owner attribute changed") && ok;
     ok = expect(attributes.name == "refresh-token", "name attribute changed") && ok;

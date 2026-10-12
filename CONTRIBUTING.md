@@ -1,21 +1,20 @@
 Contributing
 ===
 
-This file collects contributor-facing details for Noctalia: design goals, stack notes, code style, contribution rules,
+This file collects contributor-facing details for Hyprbar, forked from Noctalia v5.2.1: design goals, stack notes, code style, contribution rules,
 testing, commit conventions, source layout, and debugging helpers.
 
 For dependencies and normal build commands, start with [BUILDING.md](BUILDING.md). For the architecture and the
 invariants reviewers enforce (UI phases, layer boundaries, rendering, surfaces, config, plugins), read
 [ARCHITECTURE.md](ARCHITECTURE.md).
 
-Before contributing, read our [ethos](https://noctalia.dev/ethos) to understand the values and philosophy guiding the
-project.
+Hyprbar inherits much of its architecture from upstream; the rules below describe this fork's current practices.
 
 ## Design Principles
 
 - Direct Wayland + OpenGL ES only -- no toolkit overhead
 - Minimal scene graph, domain-specific to shell UI
-- Packaging should work across all major Linux distros: Arch, NixOS, Fedora, Gentoo, Debian, Void, OpenSuse
+- Fedora 44+ is the only distro packaging target currently maintained for this fork; other targets are unverified
 
 ## Stack
 
@@ -137,9 +136,9 @@ overwrites them.
 
 ### Vendored code
 
-Do not patch vendored code under `third_party/` for Noctalia behavior; local edits are lost when the dependency is
-refreshed. Put compatibility code in Noctalia-owned sources under `src/`, or fix the issue upstream and update the
-vendored snapshot from upstream.
+Do not patch vendored code under `third_party/` for Hyprbar behavior; local edits are lost when the dependency is
+refreshed. Put fork-specific behavior in Hyprbar-owned sources under `src/`, or fix the issue in the upstream source
+project and update the vendored snapshot deliberately.
 
 ## Testing
 
@@ -196,14 +195,12 @@ again. The check never closes a pull request.
 
 ## Translations
 
-Noctalia translations are managed through [Noctalia Translate](https://i18n.noctalia.dev/projects/noctalia). The JSON
-files in `assets/translations/` are exported from that workflow, with `assets/translations/en.json` acting as the
-source catalog for new strings.
+The locale catalogs in `assets/translations/` were inherited from the upstream project. Hyprbar has no separate
+translation service; `assets/translations/en.json` is the source catalog for fork-specific strings.
 
 When a code, UI, settings, or documentation change needs a new user-facing string, add or update the English string in
-`assets/translations/en.json` only. Do not machine translate strings, copy English into other locales, or include broad
-updates to non-English translation files in a normal feature or bug-fix PR. The translation team handles those locale
-updates through the translation app.
+`assets/translations/en.json`. Do not machine-translate or copy English into other locales. Locale changes must be
+reviewed against the fork's English source before inclusion.
 
 Only edit non-English translation files when the PR is explicitly about translation tooling, an import/export sync, or a
 maintainer has asked for that specific locale change.
@@ -298,7 +295,7 @@ src/
   wayland/          Wayland connection, seats, surfaces, clipboard, toplevels, text input
     hyprland/       Hyprland-specific Wayland protocol helpers
 assets/
-  fonts/            Bundled Noctalia Tabler and UI fonts
+  fonts/            Bundled Hyprbar Tabler and UI fonts
   sounds/           Notification and UI sounds
   templates/        Built-in theme templates
   translations/     Exported translation catalogs
@@ -316,20 +313,20 @@ third_party/
 
 ## Debugging
 
-All debug commands use the `dev.noctalia.Debug` D-Bus service, available at runtime.
+All debug commands use the `dev.hyprbar.Debug` D-Bus service, available at runtime.
 
 ```sh
 # Enable verbose debug logs
-gdbus call --session --dest dev.noctalia.Debug --object-path /dev/noctalia/Debug --method dev.noctalia.Debug.SetVerboseLogs true
+gdbus call --session --dest dev.hyprbar.Debug --object-path /dev/hyprbar/Debug --method dev.hyprbar.Debug.SetVerboseLogs true
 
 # Disable verbose debug logs
-gdbus call --session --dest dev.noctalia.Debug --object-path /dev/noctalia/Debug --method dev.noctalia.Debug.SetVerboseLogs false
+gdbus call --session --dest dev.hyprbar.Debug --object-path /dev/hyprbar/Debug --method dev.hyprbar.Debug.SetVerboseLogs false
 
 # Check current verbose log state
-gdbus call --session --dest dev.noctalia.Debug --object-path /dev/noctalia/Debug --method dev.noctalia.Debug.GetVerboseLogs
+gdbus call --session --dest dev.hyprbar.Debug --object-path /dev/hyprbar/Debug --method dev.hyprbar.Debug.GetVerboseLogs
 
 # Emit an internal notification (app_name, summary, body, timeout_ms, urgency 0-2)
-gdbus call --session --dest dev.noctalia.Debug --object-path /dev/noctalia/Debug --method dev.noctalia.Debug.EmitInternalNotification "Noctalia" "Test" "Hello from debug" 5000 1
+gdbus call --session --dest dev.hyprbar.Debug --object-path /dev/hyprbar/Debug --method dev.hyprbar.Debug.EmitInternalNotification "Hyprbar" "Test" "Hello from debug" 5000 1
 ```
 
 ### Crash output
@@ -340,17 +337,16 @@ When reporting a crash, include the complete terminal output from the process if
 ### ASan crash reports
 
 AddressSanitizer (ASan) can find memory errors that a normal build reports only as a crash. It requires a temporary
-source build; it does not replace the Noctalia package you already use.
+source build; it does not replace any installed shell package.
 
-Install the source-build dependencies for your distribution using the commands in
-[BUILDING.md](BUILDING.md#dependencies), then clone the repository:
+Install the source-build dependencies using [BUILDING.md](BUILDING.md#dependencies), then run these commands from
+the root of the existing Hyprbar source checkout (do not clone the upstream repository for this test):
 
 ```sh
-git clone https://github.com/noctalia-dev/noctalia.git
-cd noctalia
+git rev-parse --show-toplevel
 ```
 
-Stop the Noctalia instance started by your compositor, then configure and build ASan:
+Stop any Hyprbar instance started by your compositor, then configure and build ASan:
 
 ```sh
 just configure asan && just build asan
@@ -359,9 +355,10 @@ just configure asan && just build asan
 Start the ASan binary in the foreground and save its output:
 
 ```sh
-ASAN_OPTIONS=log_path=/tmp/noctalia-asan ./build-asan/noctalia 2>&1 | tee noctalia-asan-terminal.log
+cache_home=${XDG_CACHE_HOME:-"$HOME/.cache"}
+mkdir -p "$cache_home/hyprbar"
+ASAN_OPTIONS="log_path=$cache_home/hyprbar/asan" ./build-asan/hyprbar 2>&1 | tee "$cache_home/hyprbar/asan-terminal.log"
 ```
 
-Reproduce the crash once. If Noctalia does not exit, press `Ctrl+C`. Attach both `noctalia-asan-terminal.log` and every
-`/tmp/noctalia-asan.*` file to the GitHub issue. The files in `/tmp` preserve the ASan report if the crash takes down
-the terminal. If the build or startup fails, attach that complete output instead.
+Reproduce the crash once. If Hyprbar does not exit, press `Ctrl+C`. Attach the terminal log and the ASan report files
+from `$XDG_CACHE_HOME/hyprbar/` to the bug report. If the build or startup fails, attach that complete output instead.

@@ -1,6 +1,6 @@
 ---
 title: Plugin Development
-description: Build a Noctalia plugin with a plugin.toml manifest and isolated Luau entry scripts.
+description: Build a Hyprbar plugin with a plugin.toml manifest and isolated Luau entry scripts.
 sidebar:
   label: Overview
   order: 1
@@ -26,12 +26,12 @@ service, and a shortcut sharing state, and `screen_recorder` is a full real-worl
 
 | Page | Use it for |
 |------|------------|
-| [Manifest & Settings](/noctalia/plugins/development/manifest/) | `plugin.toml`, entry declarations, and typed settings schemas |
-| [Entry Scripts](/noctalia/plugins/development/entries/) | Luau lifecycle functions and APIs for widgets, shortcuts, and launcher providers |
-| [Declarative UI](/noctalia/plugins/development/declarative-ui/) | `desktopWidget.*`, `panel.*`, and the shared `ui.*` control vocabulary |
-| [Runtime API](/noctalia/plugins/development/runtime-api/) | `noctalia.*` host capabilities and shared plugin state |
-| [Plugin API Versions](/noctalia/plugins/development/plugin-api/) | Compatibility levels and the capabilities introduced by each version |
-| [Workflow & Publishing](/noctalia/plugins/development/workflow/) | Local development, IPC testing, source repos, and catalog metadata |
+| [Manifest & Settings](/hyprbar/plugins/development/manifest/) | `plugin.toml`, entry declarations, and typed settings schemas |
+| [Entry Scripts](/hyprbar/plugins/development/entries/) | Luau lifecycle functions and APIs for widgets, shortcuts, and launcher providers |
+| [Declarative UI](/hyprbar/plugins/development/declarative-ui/) | `desktopWidget.*`, `panel.*`, and the shared `ui.*` control vocabulary |
+| [Runtime API](/hyprbar/plugins/development/runtime-api/) | `hyprbar.*` host capabilities and shared plugin state |
+| [Plugin API Versions](/hyprbar/plugins/development/plugin-api/) | Compatibility levels and the capabilities introduced by each version |
+| [Workflow & Publishing](/hyprbar/plugins/development/workflow/) | Local development, IPC testing, source repos, and catalog metadata |
 
 ## Minimal widget
 
@@ -49,12 +49,12 @@ entry = "widget.luau"
 
 ```lua
 function update()
-  noctalia.setUpdateInterval(1000)
+  hyprbar.setUpdateInterval(1000)
   barWidget.setGlyph("puzzle")
   barWidget.setText("Hello")
 end
 
 function onClick()
-  noctalia.notify("Hello", "you clicked me")
+  hyprbar.notify("Hello", "you clicked me")
 end
 ```

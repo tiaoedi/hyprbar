@@ -432,7 +432,7 @@ void SetupWizardPanel::create() {
 
 void SetupWizardPanel::doLayout(Renderer& renderer, float width, float height) {
   if (m_logo != nullptr && !m_logo->hasImage()) {
-    m_logo->setSourceFile(renderer, paths::assetPath("noctalia.svg").string(), 48 * static_cast<int>(contentScale()));
+    m_logo->setSourceFile(renderer, paths::assetPath("freedo.svg").string(), 48 * static_cast<int>(contentScale()));
   }
   if (m_root != nullptr) {
     m_root->setPosition(0.0F, 0.0F);

@@ -288,7 +288,7 @@ struct ToplevelThumbnailCapturePending {
     const int stride = bufferWidth * 4;
     mappedSize = static_cast<std::size_t>(stride) * height;
 #ifdef __linux__
-    fd = memfd_create("noctalia-toplevel-thumbnail", MFD_CLOEXEC | MFD_ALLOW_SEALING);
+    fd = memfd_create("hyprbar-toplevel-thumbnail", MFD_CLOEXEC | MFD_ALLOW_SEALING);
 #endif
     if (fd < 0 || ftruncate(fd, static_cast<off_t>(mappedSize)) < 0) {
       owner->fail("failed to allocate toplevel capture shared-memory file");
