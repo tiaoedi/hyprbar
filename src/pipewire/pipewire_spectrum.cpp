@@ -170,8 +170,8 @@ bool PipeWireSpectrum::Stream::start() {
   const char* const passiveMode = m_spectrum.m_service.serverSupportsPassiveFollow() ? "in-follow" : "true";
 
   auto* props = pw_properties_new(
-      PW_KEY_MEDIA_TYPE, "Audio", PW_KEY_MEDIA_CATEGORY, "Capture", PW_KEY_MEDIA_NAME, "Noctalia Spectrum",
-      PW_KEY_APP_NAME, "Noctalia Spectrum", PW_KEY_STREAM_MONITOR, "true", PW_KEY_STREAM_CAPTURE_SINK, "true",
+      PW_KEY_MEDIA_TYPE, "Audio", PW_KEY_MEDIA_CATEGORY, "Capture", PW_KEY_MEDIA_NAME, "Hyprbar Spectrum",
+      PW_KEY_APP_NAME, "Hyprbar Spectrum", PW_KEY_STREAM_MONITOR, "true", PW_KEY_STREAM_CAPTURE_SINK, "true",
       // No media.role: WirePlumber restore-stream keys on media.role first, sharing volume across Music-role captures.
       PW_KEY_TARGET_OBJECT, m_targetObject.c_str(), PW_KEY_NODE_PASSIVE, passiveMode, nullptr
   );
@@ -180,7 +180,7 @@ bool PipeWireSpectrum::Stream::start() {
     return false;
   }
 
-  m_stream = pw_stream_new(core, "noctalia-spectrum", props);
+  m_stream = pw_stream_new(core, "hyprbar-spectrum", props);
   if (m_stream == nullptr) {
     pw_properties_free(props);
     kLog.warn("failed to create spectrum stream");

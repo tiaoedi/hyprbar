@@ -1517,7 +1517,7 @@ void WindowSwitcher::ensureSurface() {
   inst->uiLayoutScale = shellUiScale(m_config);
 
   auto config = LayerSurfaceConfig{
-      .nameSpace = "noctalia-window-switcher",
+      .nameSpace = "hyprbar-window-switcher",
       .layer = LayerShellLayer::Overlay,
       .anchor = LayerShellAnchor::Top | LayerShellAnchor::Bottom | LayerShellAnchor::Left | LayerShellAnchor::Right,
       .width = 0,

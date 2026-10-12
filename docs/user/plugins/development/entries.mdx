@@ -8,7 +8,7 @@ sidebar:
 
 import PluginApiBadge from '../../../../../components/PluginApiBadge.astro';
 
-A script defines **global functions** that Noctalia calls, and drives the UI through the API namespaces. Which globals
+A script defines **global functions** that Hyprbar calls, and drives the UI through the API namespaces. Which globals
 apply depends on the entry kind:
 
 | Function | Widget | Shortcut | Launcher | Desktop | Panel | Service | When |
@@ -21,13 +21,13 @@ apply depends on the entry kind:
 | `onActivate(id)` | | | ✓ | | | | a launcher result was selected |
 | `onEnable()` | | | | | | ✓ | the plugin was explicitly enabled successfully (see below) |
 | `onOpen(context)` / `onClose()` | | | | | ✓ | | the panel is opened / closed |
-| `onKey(chord, pressed)` | | | | | ✓ | | a `capture_keys` chord while the panel is focused ([details](/noctalia/plugins/development/declarative-ui/#handling-keys-directly)) |
+| `onKey(chord, pressed)` | | | | | ✓ | | a `capture_keys` chord while the panel is focused ([details](/hyprbar/plugins/development/declarative-ui/#handling-keys-directly)) |
 | `onFrameTick(deltaMs)` | | | | ✓ | ✓ | | every frame, after `desktopWidget.setNeedsFrameTick(true)` / `panel.setNeedsFrameTick(true)` |
-| `onIpc(event, payload)` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | `noctalia msg plugin …` |
+| `onIpc(event, payload)` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | `hyprbar msg plugin …` |
 | `onConfigChanged()` | | | | | | ✓ | a plugin setting changed (see below) |
 | `onExit(signal, reason)` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | the entry runtime is about to be destroyed (see below) |
 
-The top level of the script runs once at load - set up state and register `noctalia.state.watch` handlers there.
+The top level of the script runs once at load - set up state and register `hyprbar.state.watch` handlers there.
 
 ### Modules
 
@@ -62,7 +62,7 @@ There are no package search paths, implicit extensions, `init.luau` alternatives
 can leave the plugin directory, just like the rest of the trusted-plugin filesystem API.
 
 A module must return exactly one non-`nil` value. It runs in the entry's VM, but gets its own global environment:
-`noctalia.*`, `ui.*`, and the other sandboxed globals are visible, while globals assigned by the module stay private to
+`hyprbar.*`, `ui.*`, and the other sandboxed globals are visible, while globals assigned by the module stay private to
 that module. Inside a module, `_G` is the module environment, not the entry's `_G`.
 
 Each entry keeps its own module cache. Requiring the same canonical path returns the cached value without re-running the
@@ -80,8 +80,8 @@ On a bar widget, what a click or scroll does is user configuration. A binding in
 `onRightClick` from firing for that instance. Gestures nobody has bound still reach your callbacks.
 
 You can declare your own defaults in the manifest - see
-[widget gesture defaults](/noctalia/plugins/development/manifest/#widget-gesture-defaults) - and
-[Widget Actions](/noctalia/bar/actions/) for the full gesture and action vocabulary.
+[widget gesture defaults](/hyprbar/plugins/development/manifest/#widget-gesture-defaults) - and
+[Widget Actions](/hyprbar/bar/actions/) for the full gesture and action vocabulary.
 
 `onMiddleClick` is the exception worth planning for: every widget gets a built-in `middle` binding
 that opens its settings, so the callback does not fire unless a `middle = "none"` binding frees the
@@ -133,7 +133,7 @@ silences the callback outright.
 ### Cleaning up when an entry exits
 
 Define `onExit(signal, reason)` to release resources owned by an entry before its Luau runtime is destroyed. It runs when
-Noctalia exits normally, when a plugin or entry is disabled or removed, and before a runtime is restarted or reloaded.
+Hyprbar exits normally, when a plugin or entry is disabled or removed, and before a runtime is restarted or reloaded.
 The first argument remains the process signal: `2` for graceful `SIGINT`, `15` for `SIGTERM`, and `0` for every other
 teardown. The optional second argument requires <PluginApiBadge feature="service-lifecycle" /> and describes why the
 runtime is exiting:
@@ -143,23 +143,23 @@ runtime is exiting:
 | `"disable"` | The enabled plugin is being explicitly disabled. |
 | `"uninstall"` | The enabled plugin is being explicitly uninstalled. |
 | `"reload"` | The entry is being reloaded, restarted, or otherwise replaced without a process shutdown. |
-| `"shutdown"` | Noctalia is shutting down after `SIGINT` or `SIGTERM`. |
+| `"shutdown"` | Hyprbar is shutting down after `SIGINT` or `SIGTERM`. |
 
 Existing handlers that accept only `signal` remain compatible; Luau ignores the additional argument:
 
 ```lua
 function onExit(_signal, reason)
   if reason == "disable" then
-    noctalia.runAsync("systemctl --user stop my-plugin.service")
+    hyprbar.runAsync("systemctl --user stop my-plugin.service")
   elseif reason == "uninstall" then
-    noctalia.runAsync("systemctl --user disable --now my-plugin.service")
+    hyprbar.runAsync("systemctl --user disable --now my-plugin.service")
   end
 end
 ```
 
 Keep cleanup short: `onExit` has the normal callback time budget. It cannot run after `SIGKILL`, a process crash, or
-another abrupt termination that prevents Noctalia from shutting down gracefully. If cleanup must continue after the
-entry VM is destroyed, call `noctalia.runAsync(command)` without a result callback; the detached command outlives the
+another abrupt termination that prevents Hyprbar from shutting down gracefully. If cleanup must continue after the
+entry VM is destroyed, call `hyprbar.runAsync(command)` without a result callback; the detached command outlives the
 runtime. An uninstall command must use an installed helper or otherwise avoid plugin-directory files, which may be
 removed as soon as the hook returns. A detached command cannot report its eventual result back to the destroyed
 runtime, so make cleanup idempotent and expose a way for the user to retry it.
@@ -172,20 +172,20 @@ succeeds and after the service runtime has loaded; it also runs when the user re
 
 ```lua
 function onEnable()
-  noctalia.runAsync("systemctl --user start my-plugin.service")
+  hyprbar.runAsync("systemctl --user start my-plugin.service")
 end
 
 function onExit(_signal, reason)
   if reason == "disable" then
-    noctalia.runAsync("systemctl --user stop my-plugin.service")
+    hyprbar.runAsync("systemctl --user stop my-plugin.service")
   elseif reason == "uninstall" then
-    noctalia.runAsync("systemctl --user disable --now my-plugin.service")
+    hyprbar.runAsync("systemctl --user disable --now my-plugin.service")
   end
 end
 ```
 
 `onEnable()` describes an explicit plugin-manager action, not every service start. It does not run during ordinary
-Noctalia startup, a source update, a script reload, or a settings-driven service restart. Use top-level initialization
+Hyprbar startup, a source update, a script reload, or a settings-driven service restart. Use top-level initialization
 for normal service startup.
 
 Lifecycle hooks can only run while an entry runtime exists. Removing a plugin that was already disabled cannot invoke
@@ -196,28 +196,28 @@ therefore be idempotent and available through the plugin's normal controls.
 
 When a user edits a plugin setting, the change reaches each entry differently:
 
-- **Widgets, desktop widgets, panels** are rebuilt, so their next `noctalia.getConfig(...)` reads the new value
+- **Widgets, desktop widgets, panels** are rebuilt, so their next `hyprbar.getConfig(...)` reads the new value
   automatically.
 - **Services** are long-lived. If a service defines **`onConfigChanged()`**, the host updates its settings in place and
-  calls that function , `noctalia.getConfig(...)` returns the new values, and the service keeps all its in-memory state
+  calls that function , `hyprbar.getConfig(...)` returns the new values, and the service keeps all its in-memory state
   (timers, caches, connections). If a service does **not** define `onConfigChanged()`, the host instead **restarts the
   service runtime** (the top-level chunk re-runs with the new settings).
 
-Either way, `noctalia.state` is **process-lifetime** and survives a service restart, so any cache you store there must be
+Either way, `hyprbar.state` is **process-lifetime** and survives a service restart, so any cache you store there must be
 keyed by the config it depends on , otherwise a service will keep serving data fetched for the old settings. For example,
 store the location alongside cached results and re-fetch when it differs:
 
 ```lua
 function onConfigChanged()
-  local loc = noctalia.getConfig("city") .. "|" .. noctalia.getConfig("country")
-  if loc ~= noctalia.state.get("location") then
-    noctalia.state.set("location", loc)
+  local loc = hyprbar.getConfig("city") .. "|" .. hyprbar.getConfig("country")
+  if loc ~= hyprbar.state.get("location") then
+    hyprbar.state.set("location", loc)
     refetch()   -- location changed; invalidate and reload
   end
 end
 ```
 
-Desktop widgets and panels use declarative `ui.*` trees. See [Declarative UI](/noctalia/plugins/development/declarative-ui/)
+Desktop widgets and panels use declarative `ui.*` trees. See [Declarative UI](/hyprbar/plugins/development/declarative-ui/)
 for their rendering APIs and controls.
 
 ## `barWidget.*` - widget presentation
@@ -225,7 +225,7 @@ for their rendering APIs and controls.
 A bar widget can patch the built-in glyph/text row with the imperative methods below, or describe composite content as a
 `ui.*` tree with `barWidget.render(tree)`. Calls update persistent presentation state until replaced by another call.
 After `render()` activates a tree, `setText`, `setGlyph`, `setImage`, `setFont`, `setColor`, and `setGlyphColor`
-have no visible effect. See [Declarative UI](/noctalia/plugins/development/declarative-ui/#barwidgetrender--declarative-bar-widget-ui)
+have no visible effect. See [Declarative UI](/hyprbar/plugins/development/declarative-ui/#barwidgetrender--declarative-bar-widget-ui)
 for the declarative API and its bar-specific constraints.
 
 ### Reference
@@ -237,17 +237,17 @@ for the declarative API and its bar-specific constraints.
 | `barWidget.setImage(path [, watch [, width [, height]]])` | nothing | Shows an image and hides the glyph. Relative paths resolve from the plugin directory; `~` expands to the home directory. `watch` reloads the image when the source changes. Supplying only `width` uses a square image; omit dimensions to use the image's natural size. |
 | `barWidget.setTooltip(content)` | nothing | Sets a plain-text tooltip, one key/value row, or an array of rows. Pass `nil` or empty content to clear it. |
 | `barWidget.clearTooltip()` | nothing | Clears the current tooltip. Equivalent to `setTooltip(nil)`. |
-| `barWidget.setFont(family [, baseline])` | nothing | Sets the text font family and optional baseline mode. Load custom fonts first with [`noctalia.loadFont(path)`](/noctalia/plugins/development/runtime-api/#filesystem). |
+| `barWidget.setFont(family [, baseline])` | nothing | Sets the text font family and optional baseline mode. Load custom fonts first with [`hyprbar.loadFont(path)`](/hyprbar/plugins/development/runtime-api/#filesystem). |
 | `barWidget.setColor(color [, mode])` | nothing | Sets the text color to a palette role or `#RRGGBB` value. See [Colors](#colors). |
 | `barWidget.setGlyphColor(color [, mode])` | nothing | Sets the glyph color to a palette role or `#RRGGBB` value. See [Colors](#colors). |
 | `barWidget.setVisible(visible)` | nothing | Shows or hides the entire widget capsule. |
 | `barWidget.isVertical()` | bool | Returns `true` when this widget's hosting bar is vertical, otherwise `false`. Use it to choose a column for a side bar and a row for a horizontal bar. |
 | `barWidget.outputName()` | string or `nil` | Returns the connector name of the monitor this widget instance's bar is on, or `nil` when unknown. |
-| `barWidget.render(tree)` | nothing | Replaces the built-in glyph/text row with a declarative `ui.*` tree. See [Declarative UI](/noctalia/plugins/development/declarative-ui/#barwidgetrender--declarative-bar-widget-ui). |
+| `barWidget.render(tree)` | nothing | Replaces the built-in glyph/text row with a declarative `ui.*` tree. See [Declarative UI](/hyprbar/plugins/development/declarative-ui/#barwidgetrender--declarative-bar-widget-ui). |
 
 `outputName()` is local to each widget placement, so a widget on two bars can scope content per monitor. In contrast,
-`noctalia.focusedOutputName()` returns the same globally focused output everywhere. Cross-reference
-[`noctalia.outputs()`](/noctalia/plugins/development/runtime-api/#outputs-wallpaper-and-panels) by name when you need
+`hyprbar.focusedOutputName()` returns the same globally focused output everywhere. Cross-reference
+[`hyprbar.outputs()`](/hyprbar/plugins/development/runtime-api/#outputs-wallpaper-and-panels) by name when you need
 geometry.
 
 ### Tooltips
@@ -265,7 +265,7 @@ barWidget.setTooltip({
 
 ### Colors
 
-Pass a [palette color role](/noctalia/theming/palette/) or a fixed `#RRGGBB` value to `setColor` and
+Pass a [palette color role](/hyprbar/theming/palette/) or a fixed `#RRGGBB` value to `setColor` and
 `setGlyphColor`. With the default mode, `"on_surface"` keeps the widget's configured `color` or `icon_color`;
 pass `"script"` as the second argument to use `"on_surface"` literally.
 
@@ -277,7 +277,7 @@ barWidget.setColor("on_surface", "script")
 
 ### Custom fonts
 
-Register a font file with [`noctalia.loadFont(path)`](/noctalia/plugins/development/runtime-api/#filesystem), then pass the
+Register a font file with [`hyprbar.loadFont(path)`](/hyprbar/plugins/development/runtime-api/#filesystem), then pass the
 returned family name to `setFont`. The font becomes usable anywhere text is drawn: `setFont` and a `ui.*` label's
 `fontFamily` prop. It stays available across every surface once loaded.
 
@@ -291,7 +291,7 @@ returned family name to `setFont`. The font becomes usable anywhere text is draw
 | `"pictographic"` | Art/icon fonts anchored at the ink top (keeps pose art steady, e.g. bongocat). |
 
 ```lua
-local font = noctalia.loadFont("fonts/bongocat.otf")
+local font = hyprbar.loadFont("fonts/bongocat.otf")
 if font then
   barWidget.setFont(font, "pictographic")
 end
@@ -302,7 +302,7 @@ end
 `setLabel(text)` · `setIcon(on [, off])` · `setActive(bool)` · `setEnabled(bool)`
 
 ```lua
-local on = noctalia.state.get("toggled") == true
+local on = hyprbar.state.get("toggled") == true
 
 local function render()
   shortcut.setLabel(on and "On" or "Off")
@@ -313,7 +313,7 @@ render()
 
 function onClick()
   on = not on
-  noctalia.state.set("toggled", on)
+  hyprbar.state.set("toggled", on)
   render()
 end
 ```
@@ -346,7 +346,7 @@ before running `onQuery` - set it for network-backed providers so you aren't cal
   the same provider, e.g. `"/tr french "`. (An `onActivate` that does *not* call `setQuery` closes the launcher as
   usual.)
 
-Use `noctalia.fuzzyScore(pattern, text)` to rank local lists with Noctalia's native fuzzy matcher. It returns a numeric
+Use `hyprbar.fuzzyScore(pattern, text)` to rank local lists with Hyprbar's native fuzzy matcher. It returns a numeric
 score, or `nil` when `pattern` does not match `text`.
 
 Queries run off the UI thread, so a result can arrive after `onQuery` returns - publish a placeholder synchronously,
@@ -367,12 +367,12 @@ function onQuery(text)
     return
   end
   launcher.setResults(text, { { id = "loading", title = "Translating…", glyph = "loader" } })
-  noctalia.http({ url = endpoint(text) }, function(res)
+  hyprbar.http({ url = endpoint(text) }, function(res)
     launcher.setResults(text, { { id = res.body, title = res.body, glyph = "language" } })
   end)
 end
 
 function onActivate(id)
-  noctalia.copyToClipboard(id, "text/plain")
+  hyprbar.copyToClipboard(id, "text/plain")
 end
 ```

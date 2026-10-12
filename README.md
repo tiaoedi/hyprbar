@@ -1,150 +1,47 @@
-# Noctalia
+# Hyprbar
 
-Noctalia is a native Wayland desktop shell for people who want a polished, configurable Linux desktop without stitching
-together a separate bar, launcher, notification daemon, lock screen, wallpaper tool, and settings UI.
+![Ícone do Hyprbar](assets/hyprbar.svg)
 
-It provides the shell layer around your compositor: bars, widgets, dock, launcher, control center, notifications,
-wallpaper, lock screen, session actions, clipboard history, OSDs, tray integration, and desktop widgets. The project is
-built directly on Wayland and OpenGL ES with no Qt or GTK dependency, so the UI, rendering, configuration, and IPC model
-are designed as one cohesive shell instead of a collection of unrelated panels and scripts.
+Fork independente de **Noctalia v5.2.1**: um shell de desktop nativo para Wayland, com barra, widgets, dock, launcher, notificações, controles de sessão e seletor de papéis de parede. Esta é a distribuição mantida por `tiaoedi`; não é o projeto oficial Noctalia e não é endossada pelos mantenedores originais.
 
-<p><br/></p>
+- Desenvolvedor: `sebastao .o santana` (GitHub: [@tiaoedi](https://github.com/tiaoedi))
+- YouTube: [Linux Livre](https://www.youtube.com/@linuxlivre9008)
 
-<p align="center">
-  <img src="https://assets.noctalia.dev/noctalia-logo.svg?v=2" alt="Noctalia Logo" style="width: 192px" />
-</p>
+## Baixar e instalar
 
-<p align="center">
-  <a href="https://docs.noctalia.dev/noctalia/getting-started/installation/">
-    <img
-      src="https://img.shields.io/badge/Install_Noctalia-FFF59B?style=for-the-badge&labelColor=FFF59B"
-      alt="Install Noctalia"
-      style="height: 50px"
-    />
-  </a>
-</p>
+O GitHub oferece arquivos ZIP/TAR do código-fonte; consulte [Releases](https://github.com/tiaoedi/hyprbar/releases) para pacotes binários quando houver uma versão publicada. Não há RPM nem checksum de release publicados ainda. Para compilar no Fedora, siga [`INSTALACAO-PT-BR.md`](INSTALACAO-PT-BR.md) e [`BUILDING.md`](BUILDING.md).
 
-<p><br/></p>
+Para iniciar automaticamente no Hyprland, adicione `exec-once = hyprbar --daemon` à configuração do compositor. No Niri, consulte [`docs/user/compositor-settings/niri.mdx`](docs/user/compositor-settings/niri.mdx). A documentação complementar está em [`docs/user/getting-started/installation.mdx`](docs/user/getting-started/installation.mdx).
 
-<p align="center">
-  <a href="https://github.com/noctalia-dev/noctalia/commits">
-    <img src="https://img.shields.io/github/last-commit/noctalia-dev/noctalia?style=for-the-badge&labelColor=FFF59B&color=FFF59B&logo=git&logoColor=070722&label=commit" alt="Last commit" />
-  </a>
-  <a href="https://github.com/noctalia-dev/noctalia/stargazers">
-    <img src="https://img.shields.io/github/stars/noctalia-dev/noctalia?style=for-the-badge&labelColor=FFF59B&color=FFF59B&logo=github&logoColor=070722" alt="GitHub stars" />
-  </a>
-  <a href="https://docs.noctalia.dev">
-    <img src="https://img.shields.io/badge/docs-FFF59B?style=for-the-badge&logo=gitbook&logoColor=070722&labelColor=FFF59B" alt="Documentation" />
-  </a>
-  <a href="https://discord.noctalia.dev">
-    <img src="https://img.shields.io/badge/discord-FFF59B?style=for-the-badge&labelColor=FFF59B&logo=discord&logoColor=070722" alt="Discord" />
-  </a>
-</p>
+## Compatibilidade verificada
 
-## Why Noctalia?
+| Ambiente | Verificação deste fork |
+|---|---|
+| Fedora 44 x86_64 | Compilação do código-fonte e suíte de testes verificados; RPM ainda não publicado |
+| Hyprland 0.56.2 | Execução e painéis principais verificados |
+| Niri | Configuração de inicialização validada; execução não verificada |
+| Outros compositores/distribuições | O código contém integrações herdadas, mas não foram validadas para este fork |
 
-Most Wayland setups leave the desktop shell to a stack of small tools: one bar, another launcher, another notification
-daemon, a lock screen, a wallpaper daemon, scripts for session actions, and separate config formats for each piece. That
-can be flexible, but it also makes a complete desktop feel fragile and hard to keep visually consistent.
+É necessário iniciar em uma sessão Wayland com suporte EGL/GLES. Áudio depende de PipeWire/WirePlumber; recursos opcionais podem depender de serviços disponíveis na sessão. A compatibilidade efetiva varia conforme os protocolos e recursos oferecidos pelo compositor.
 
-Noctalia solves that by providing one configurable shell layer that owns the common desktop surfaces and services while
-still fitting into compositor-driven Wayland workflows. It is meant for users who want the control of a custom desktop
-environment with fewer moving parts and a consistent UI.
+## Serviços remotos herdados
 
-To understand the values and philosophy guiding the project, read our [ethos](https://noctalia.dev/ethos).
+Este fork ainda usa endpoints herdados de `api.noctalia.dev` para recursos opcionais como catálogos de paletas/templates, geolocalização/geocodificação, consulta de IP público e OAuth do Google Calendar. A telemetria é opt-in (`telemetry_enabled = false` por padrão). Este repositório não estabelece quem opera atualmente esses endpoints, nem a retenção ou o uso dos dados; a política publicada pelo Noctalia é apenas uma referência upstream, não uma política do Hyprbar, e não verificamos se ela cobre essas requisições. `offline_mode = true` bloqueia novos pedidos pelo cliente HTTP compartilhado do Hyprbar, mas não cancela transferências já em andamento e não é firewall: navegador, outros processos e caminhos arbitrários de plugins podem continuar usando a rede. Caches locais ainda podem ser lidos. Veja `NETWORK-PRIVACY.md` e a documentação de [localização](docs/user/services/location.mdx), [calendário](docs/user/services/calendar.mdx) e [configuração](docs/user/configuration/shell.mdx).
 
-## What It Includes
+## Compilar do código-fonte
 
-- Multi-monitor bars with configurable widgets, taskbar, workspaces, system tray, media, network, battery, brightness,
-  weather, clipboard, and custom script-backed widgets.
-- Dock, launcher, control center, notification toasts/history, wallpaper picker, OSD overlays, lock screen, session
-  panel, and desktop widgets.
-- TOML configuration with hot reload, GUI-managed overrides, theme/palette support, template application, and IPC for
-  runtime control.
-- Direct Wayland integration for layer-shell, session lock, idle behavior, clipboard, foreign toplevels, workspaces,
-  fractional scaling, and compositor-specific workspace backends where needed.
+Consulte [`BUILDING.md`](BUILDING.md) para dependências e instruções por distribuição. Exemplo:
 
-## Wayland Compositor Support
+```sh
+git clone --depth 1 https://github.com/tiaoedi/hyprbar.git
+cd hyprbar
+just configure release
+just build release
+sudo just install release
+```
 
-Noctalia supports Wayland compositors that provide the layer-shell protocols it needs for shell surfaces. Workspace
-integration works through compositor-native backends where needed, or through `ext-workspace-v1` on compositors that
-implement it.
+Se estiver migrando uma configuração antiga, use `hyprbar config import-noctalia --help` para revisar a importação antes de aplicá-la. Hyprbar mantém nomes internos `noctalia.*` em algumas interfaces por compatibilidade; isso não altera a identidade independente do fork.
 
-Current compositor integrations include Niri, Hyprland, Sway, Scroll, Mango, Labwc, dwl, and other compatible
-Wayland compositors. Other compositors may run Noctalia but can have reduced workspace, window, output, or
-session-action integration depending on the protocols and IPC they expose.
+## Créditos e licença
 
-## Scope
-
-Noctalia is a desktop shell, not a full desktop environment. It provides the visual and service layer around your
-Wayland compositor: bars, panels, launcher, notifications, dock, lock screen, idle behavior, OSDs, theming, wallpapers,
-desktop widgets, and multi-monitor shell surfaces.
-
-Window management, tiling, compositor configuration such as monitor arrangement and positions, file management,
-removable-drive mounting, printers management, and screen mirroring/casting belong to the compositor, dedicated desktop
-applications, or system services.
-
-Display/login greeter support lives in the separate [Noctalia Greeter](https://github.com/noctalia-dev/noctalia-greeter)
-project. Noctalia may integrate with those pieces when useful, but it does not replace them.
-
-Core Noctalia is non-invasive: it does not manage your compositor settings or take over your dotfiles. Compositor-specific
-controls can be provided as opt-in plugins rather than becoming core shell behavior.
-
-The plugin system is available for user-installed extensions. Features that are useful to some users but not essential
-to the core shell can live there: extra bar widgets, launcher providers, desktop widgets, panels, shortcuts, background
-services, compositor-specific extras and controls, hardware-specific controls, and third-party service integrations.
-
-## Build from source
-
-Source dependencies, distro-specific package commands, build modes, and install layouts live in
-[BUILDING.md](BUILDING.md).
-
-## Configuration
-
-A ready-to-use starting config with all defaults is at [example.toml](example.toml). The full configuration reference
-lives in the [documentation site](https://docs.noctalia.dev/noctalia/). The source MDX files are in
-[`docs/user/`](docs/user/); sync them to a local docs checkout with `tools/sync-docs.sh`.
-
-## Contributing
-
-Developer notes, code style, contribution rules, testing, project layout, and debugging commands live in
-[CONTRIBUTING.md](CONTRIBUTING.md). The architecture and its invariants are described in
-[ARCHITECTURE.md](ARCHITECTURE.md).
-
-Bug reports, fixes, documentation updates, themes, and configuration examples are welcome. For general help and design
-discussion, join the community on [Discord](https://discord.noctalia.dev).
-
-## Credits
-
-Thank you to the [contributors](https://github.com/noctalia-dev/noctalia/graphs/contributors) and community
-members who test Noctalia, report issues, share configurations, and help shape the project.
-
-## Donations
-
-Donations are appreciated but completely optional.
-
-<p>
-  <a href="https://www.buymeacoffee.com/noctalia">
-    <img src="https://img.shields.io/badge/Buy_Me_a_Coffee-FFF59B?style=for-the-badge&logo=buymeacoffee&logoColor=070722&labelColor=FFF59B" alt="Buy Me a Coffee">
-  </a>
-  <a href="https://ko-fi.com/noctaliadev">
-    <img src="https://img.shields.io/badge/Ko--fi-FFF59B?style=for-the-badge&logo=kofi&logoColor=070722&labelColor=FFF59B" alt="Ko-fi">
-  </a>
-</p>
-
-## License
-
-MIT License. See [LICENSE](LICENSE) for details.
-
-## Packaging
-
-Distro packaging notes (description, deps, install layout, Meson options) live in
-[PACKAGING.md](PACKAGING.md).
-
-## Star History
-
-<p align="center">
-  <a href="https://github.com/noctalia-dev/noctalia/stargazers">
-    <img src="https://api.noctalia.dev/stars" alt="Star History" />
-  </a>
-</p>
+O código-fonte deriva do [Noctalia v5.2.1](https://github.com/noctalia-dev/noctalia). Os créditos upstream foram preservados em [`CREDITS.md`](CREDITS.md). A licença principal é MIT; componentes incluídos em `third_party/` e a fonte Tabler mantêm suas próprias licenças. Consulte [`LICENSE`](LICENSE) e os avisos de cada componente antes de redistribuir.

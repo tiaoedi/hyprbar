@@ -5,27 +5,27 @@ sidebar:
   order: 3
 ---
 
-The Control Center is Noctalia's panel for session controls, system status, media, notifications, weather, and service-specific tools. Open it from the control-center bar widget, by right-clicking empty space on a bar, or with IPC:
+The Control Center is Hyprbar's panel for session controls, system status, media, notifications, weather, and service-specific tools. Open it from the control-center bar widget, by right-clicking empty space on a bar, or with IPC:
 
 ```sh
-noctalia msg panel-toggle control-center
+hyprbar msg panel-toggle control-center
 ```
 
 Pass a context to jump straight to a tab:
 
 ```sh
-noctalia msg panel-toggle control-center audio
-noctalia msg panel-open control-center system
+hyprbar msg panel-toggle control-center audio
+hyprbar msg panel-open control-center system
 ```
 
 ## Sidebar
 
-Set `sidebar` under `[control_center]` for tab navigation when Control Center opens on **Home** (control center widget, bar background click, or `noctalia msg panel-toggle control-center` with no tab name).
+Set `sidebar` under `[control_center]` for tab navigation when Control Center opens on **Home** (control center widget, bar background click, or `hyprbar msg panel-toggle control-center` with no tab name).
 Use `"full"` for icons and labels, `"compact"` for icon-only tabs, or `"none"` to hide the sidebar.
 
-Set `sidebar_section` for opens that jump straight to a tab (volume, network, and media bar widgets, or `noctalia msg panel-toggle control-center audio`).
+Set `sidebar_section` for opens that jump straight to a tab (volume, network, and media bar widgets, or `hyprbar msg panel-toggle control-center audio`).
 
-Keyboard navigation uses the global [`[keybinds]`](/noctalia/configuration/shell/#keybinds) actions: `tab_next` / `tab_previous` switch between the sidebar and the active tab body; arrow keys move within the focused pane.
+Keyboard navigation uses the global [`[keybinds]`](/hyprbar/configuration/shell/#keybinds) actions: `tab_next` / `tab_previous` switch between the sidebar and the active tab body; arrow keys move within the focused pane.
 
 ```toml
 [control_center]
@@ -48,8 +48,8 @@ sidebar = "compact"
 
 ### Sidebar Tabs
 
-Use these context IDs with `noctalia msg panel-toggle control-center <context>` or
-`noctalia msg panel-open control-center <context>` to open a specific tab.
+Use these context IDs with `hyprbar msg panel-toggle control-center <context>` or
+`hyprbar msg panel-open control-center <context>` to open a specific tab.
 
 | Context | Tab | What it shows |
 |---------|-----|---------------|
@@ -66,23 +66,23 @@ Use these context IDs with `noctalia msg panel-toggle control-center <context>` 
 | `screen-time` | Screen Time | Foreground app usage totals and charts for today, three days, or fourteen days |
 | `power` | Power | Battery charge and status, power profiles, battery health, and connected-device battery levels |
 
-`weather`, `system`, and `screen-time` open only when their corresponding services are enabled; `power` opens only when UPower or `power-profiles-daemon` is available. Otherwise Noctalia falls back to the first visible tab.
+`weather`, `system`, and `screen-time` open only when their corresponding services are enabled; `power` opens only when UPower or `power-profiles-daemon` is available. Otherwise Hyprbar falls back to the first visible tab.
 
-Any tab except Home can also be hidden manually with [`hidden_tabs`](#sidebar) (use the context ID, e.g. `"monitor"` for the brightness tab). Hidden tabs drop from both the sidebar and keyboard navigation, and from the launcher's [Panels provider](/noctalia/launcher/#panels).
+Any tab except Home can also be hidden manually with [`hidden_tabs`](#sidebar) (use the context ID, e.g. `"monitor"` for the brightness tab). Hidden tabs drop from both the sidebar and keyboard navigation, and from the launcher's [Panels provider](/hyprbar/launcher/#panels).
 
-Every available tab except Home that isn't hidden also gets its own row in the launcher's [Panels provider](/noctalia/launcher/#panels) (`/pan`), so you can jump straight to, say, Bluetooth without landing on Home first. Home remains available through the main Control Center row.
+Every available tab except Home that isn't hidden also gets its own row in the launcher's [Panels provider](/hyprbar/launcher/#panels) (`/pan`), so you can jump straight to, say, Bluetooth without landing on Home first. Home remains available through the main Control Center row.
 
 ## Home
 
 The Home tab is the default Control Center landing view. It combines frequently checked status with a compact shortcut grid.
 
-Click the avatar in the user card to pick a custom image. Noctalia saves the selected path as `[shell].avatar_path`.
+Click the avatar in the user card to pick a custom image. Hyprbar saves the selected path as `[shell].avatar_path`.
 
-When AccountsService is available, Noctalia also writes the selected avatar to `org.freedesktop.Accounts` as your user's `IconFile`. That is what Noctalia Greeter reads for the login user list. On distros where this is not enabled by default, install and enable **accountsservice** (usually the `accounts-daemon` service) if you want the same avatar in both the shell and the greeter.
+When AccountsService is available, Hyprbar also writes the selected avatar to `org.freedesktop.Accounts` as your user's `IconFile`. That is what Hyprbar Greeter reads for the login user list. On distros where this is not enabled by default, install and enable **accountsservice** (usually the `accounts-daemon` service) if you want the same avatar in both the shell and the greeter.
 
 Click the date/time card to open the Weather tab. When `[weather].enabled = false`, the card hides its weather summary line and opens the Calendar tab instead.
 
-The shortcut buttons are configured separately; see [Control Center shortcuts](/noctalia/control-center/shortcuts/).
+The shortcut buttons are configured separately; see [Control Center shortcuts](/hyprbar/control-center/shortcuts/).
 
 Set `show_session_button = false` under `[control_center]` to hide the session-actions button in the Home tab header. This does not affect Home shortcuts configured with `type = "session"` or session widgets on the bar.
 
@@ -96,13 +96,13 @@ The Audio tab groups PipeWire output, input, device, and stream controls. Use it
 
 ## Monitor
 
-The Monitor tab exposes brightness controls when Noctalia has a controllable backlight for the display. If no writable brightness device is available, the tab remains available but has no write controls to expose.
+The Monitor tab exposes brightness controls when Hyprbar has a controllable backlight for the display. If no writable brightness device is available, the tab remains available but has no write controls to expose.
 
 ## System
 
 The System tab summarizes the machine and live resource usage. It shows distribution/kernel details, board/CPU/GPU information, uptime, install age, load averages, memory and swap, and graphs driven by the shared system monitor service.
 
-System monitor sampling is configured globally under `[system.monitor]`; see [System monitor](/noctalia/services/system-monitor/).
+System monitor sampling is configured globally under `[system.monitor]`; see [System monitor](/hyprbar/services/system-monitor/).
 
 ## Network
 
@@ -126,21 +126,21 @@ When ModemManager reports a modem, the Network tab adds a **Cellular** card with
 
 The switch follows GNOME's mobile-data semantics: with a saved NetworkManager `gsm` profile it turns the data connection on and off and leaves the modem registered on the network; with no such profile it powers the modem radio itself. Turning it on can take several seconds while the modem enables, searches, and registers, and the switch holds the requested position until the change lands.
 
-Cellular needs ModemManager running (`org.freedesktop.ModemManager1`) and, for mobile data, a `gsm` connection profile created with `nmcli` or another NetworkManager front end. Noctalia does not create or edit cellular profiles.
+Cellular needs ModemManager running (`org.freedesktop.ModemManager1`) and, for mobile data, a `gsm` connection profile created with `nmcli` or another NetworkManager front end. Hyprbar does not create or edit cellular profiles.
 
 ## Bluetooth
 
-The Bluetooth tab shows adapter power state, paired devices, and connection controls. It is backed by Noctalia's Bluetooth service and agent.
+The Bluetooth tab shows adapter power state, paired devices, and connection controls. It is backed by Hyprbar's Bluetooth service and agent.
 
 ## Weather
 
 The Weather tab expands the Home weather summary into current conditions, forecast detail, and location/status information. It is hidden when `[weather].enabled = false`.
 
-Weather configuration is documented under [Weather](/noctalia/services/weather/).
+Weather configuration is documented under [Weather](/hyprbar/services/weather/).
 
 ## Calendar
 
-The Calendar tab shows the month view and events from configured calendar accounts. Calendar accounts and sync behavior are documented under [Calendar](/noctalia/services/calendar/).
+The Calendar tab shows the month view and events from configured calendar accounts. Calendar accounts and sync behavior are documented under [Calendar](/hyprbar/services/calendar/).
 
 Right-click a day to launch the application registered for the `text/calendar` MIME type. The Calendar panel closes
 after a successful launch.
@@ -158,16 +158,16 @@ show_week_numbers = false       # ISO 8601 week numbers in the month grid
 | `show_events_card` | bool | `true` | Show the event list beside the month grid. Also toggled from the calendar button in the tab header. |
 | `show_week_numbers` | bool | `false` | Show a column of ISO 8601 week numbers to the left of the month grid, separated from it by a divider. Each row is numbered by the week its Thursday falls in. |
 
-The shared `event_date_format` and `event_time_format` options are documented under [Calendar](/noctalia/services/calendar/).
+The shared `event_date_format` and `event_time_format` options are documented under [Calendar](/hyprbar/services/calendar/).
 Week numbers are a decoration of the month grid, so they work with `[calendar].enabled = false` and no accounts configured.
 
 ## Notifications
 
-The Notifications tab shows notification history and notification actions, including Do Not Disturb. Notification daemon and history behavior are documented under [Notifications](/noctalia/services/notifications/).
+The Notifications tab shows notification history and notification actions, including Do Not Disturb. Notification daemon and history behavior are documented under [Notifications](/hyprbar/services/notifications/).
 
 ## Screen Time
 
-The Screen Time tab shows how long each application was in the foreground today. Noctalia tracks focus using the active `zwlr_foreign_toplevel` window, pauses tracking while its session lock is active, and stores daily totals under `$XDG_STATE_HOME/noctalia/screen_time.json` (about 14 days retained).
+The Screen Time tab shows how long each application was in the foreground today. Hyprbar tracks focus using the active `zwlr_foreign_toplevel` window, pauses tracking while its session lock is active, and stores daily totals under `$XDG_STATE_HOME/hyprbar/screen_time.json` (about 14 days retained).
 
 - **Range** toggle: today (hourly chart), last 3 days, or last 14 days (daily bars)
 - **Total** time for the selected range, with a stacked bar chart (hourly or per-day)
@@ -176,7 +176,7 @@ The Screen Time tab shows how long each application was in the foreground today.
 
 Open it from the control center sidebar (`screen-time` context) or add a Home shortcut with `type = "screen_time"`.
 
-Reset stored history from **Settings → System → Screen Time → Reset Screen Time Data** (clears `screen_time.json` while Noctalia is running).
+Reset stored history from **Settings → System → Screen Time → Reset Screen Time Data** (clears `screen_time.json` while Hyprbar is running).
 
 ## Power
 
@@ -192,4 +192,4 @@ Sections appear only when their data is available: the battery and health sectio
 ## Related IPC
 
 For opening Control Center from scripts or keybinds, see
-[Surfaces -> Panels](/noctalia/ipc/surfaces/#panels).
+[Surfaces -> Panels](/hyprbar/ipc/surfaces/#panels).

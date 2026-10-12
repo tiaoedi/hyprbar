@@ -116,7 +116,7 @@ void TelemetryService::maybeSend(
 
   nlohmann::json payload = {
       {"instanceId", instanceId},
-      {"version", std::string("v") + NOCTALIA_VERSION},
+      {"version", std::string("v") + HYPRBAR_VERSION},
       {"compositor", compositorLabel()},
       {"os", distroLabel()},
       {"ramGb", memoryTotalGb()},
@@ -124,7 +124,7 @@ void TelemetryService::maybeSend(
       {"ui", {{"scaleRatio", config.config().accessibility.uiScale}}},
   };
 
-  kLog.info("sending anonymous ping");
+  kLog.info("sending startup telemetry");
   httpClient.post("https://api.noctalia.dev/ping", payload.dump(), "application/json", [](bool success) {
     if (success) {
       kLog.debug("ping sent");

@@ -16,7 +16,7 @@ These commands control shell state, logging, settings windows, the window switch
 | Print status | <IpcCommand command="status" /> | Print basic shell state as JSON. |
 | Show log level | <IpcCommand command="log-level-status" /> | Print the current console log level. |
 | Set log level | <IpcCommand command="log-level-set debug" /> | Set the console log level for the running session. Use `debug`, `info`, `warn`, or `error`. |
-| Reload config | <IpcCommand command="config-reload" /> | Reload the merged Noctalia config stack immediately. |
+| Reload config | <IpcCommand command="config-reload" /> | Reload the merged Hyprbar config stack immediately. |
 | Open settings | <IpcCommand command="settings-open [context]" /> | Open or focus the graphical settings window, optionally at a specific section (e.g. `bar`). |
 | Open plugin settings | <IpcCommand command="settings-open-plugin noctalia/notes" /> | Open the settings window at an installed plugin's settings. The plugin must be enabled and expose settings. |
 | Close settings | <IpcCommand command="settings-close" /> | Close the graphical settings window. |
@@ -26,7 +26,7 @@ Set `NOCTALIA_LOG_LEVEL` to `debug`, `info`, `warn`, or `error` before startup t
 
 ## Window Switcher
 
-Alt+Tab-style overlay with two presentations selected by `[shell.window_switcher].style`: the default `carousel` uses freestanding selected/near/far cards, while `compact` uses a boxed strip of equal-sized cards. Carousel cards keep stable proportions and fit snapshots inside a small themed frame, so differing window aspect ratios do not distort the layout. Captions sit below previews and the position counter sits above them. Application icons scale with the rendered preview and follow the carousel direction: bottom-left on left and selected cards, bottom-right on right cards. Close controls follow the same side at the top of left and right cards, while the selected card keeps its close control at the top-right. Moving through either style animates position, scale, opacity, and pointer-hover changes using the global animation settings. The selected card's shadow uses `[shell.shadow]`, and each close control appears only while the pointer is over its card. When the compositor supports the foreign-toplevel image-capture protocol, Noctalia takes a static snapshot of each window as the switcher opens; unsupported windows use their application icon instead. The window-switcher settings also control MRU ordering, whether captions, the counter, and application icons are shown, and which windows the list is drawn from: `show_all_outputs` picks the monitors, and `current_workspace_only` keeps the workspace shown on each of them (an open Hyprland special workspace takes over from the regular one it covers). Then wire your compositor shortcut to the IPC commands below.
+Alt+Tab-style overlay with two presentations selected by `[shell.window_switcher].style`: the default `carousel` uses freestanding selected/near/far cards, while `compact` uses a boxed strip of equal-sized cards. Carousel cards keep stable proportions and fit snapshots inside a small themed frame, so differing window aspect ratios do not distort the layout. Captions sit below previews and the position counter sits above them. Application icons scale with the rendered preview and follow the carousel direction: bottom-left on left and selected cards, bottom-right on right cards. Close controls follow the same side at the top of left and right cards, while the selected card keeps its close control at the top-right. Moving through either style animates position, scale, opacity, and pointer-hover changes using the global animation settings. The selected card's shadow uses `[shell.shadow]`, and each close control appears only while the pointer is over its card. When the compositor supports the foreign-toplevel image-capture protocol, Hyprbar takes a static snapshot of each window as the switcher opens; unsupported windows use their application icon instead. The window-switcher settings also control MRU ordering, whether captions, the counter, and application icons are shown, and which windows the list is drawn from: `show_all_outputs` picks the monitors, and `current_workspace_only` keeps the workspace shown on each of them (an open Hyprland special workspace takes over from the regular one it covers). Then wire your compositor shortcut to the IPC commands below.
 
 | Action | Command | Description |
 |--------|---------|-------------|
@@ -37,7 +37,7 @@ Alt+Tab-style overlay with two presentations selected by `[shell.window_switcher
 Example Hyprland bind (use `hold` so a quick tap switches to the previous window):
 
 ```ini
-hl.bind("ALT + TAB", hl.dsp.exec_cmd("noctalia msg window-switcher hold"))
+hl.bind("ALT + TAB", hl.dsp.exec_cmd("hyprbar msg window-switcher hold"))
 ```
 
 While the overlay is open it takes exclusive keyboard focus on its layer surface:
@@ -60,7 +60,7 @@ Snapshots are intentionally frozen for each switcher session rather than streame
 
 | Action | Command | Description |
 |--------|---------|-------------|
-| Lock session | <IpcCommand command="session lock" /> | Lock the current session. `loginctl lock-session` uses the same path when Noctalia is running. |
+| Lock session | <IpcCommand command="session lock" /> | Lock the current session. `loginctl lock-session` uses the same path when Hyprbar is running. |
 | Suspend system | <IpcCommand command="session suspend" /> | Suspend without locking first. |
 | Lock and suspend | <IpcCommand command="session lock-and-suspend" /> | Lock the session, then suspend once the lock is active. |
 | Log out | <IpcCommand command="session logout" /> | End the graphical session (compositor-native when available). |

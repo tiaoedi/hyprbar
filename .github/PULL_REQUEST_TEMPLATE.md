@@ -1,9 +1,6 @@
-<!-- A bot checks this description and converts the pull request back to a draft if
-     required structure is missing. It never closes the pull request.
-
-     Required: the Summary, Motivation, Type of Change, Testing, and Checklist
-     headings, and the Checklist wording below. Before marking a pull request ready for
-     review, check exactly one change type and every Checklist item.
+<!-- Use the Summary, Motivation, Type of Change, Testing, and Checklist headings
+     below. Before requesting review, check exactly one change type and every
+     Checklist item that applies.
 
      Everything else may be deleted, including these guidance comments and any of the
      Related Issue, Manual Coverage, Screenshots / Videos, and Additional Notes sections.

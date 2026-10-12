@@ -862,14 +862,14 @@
       "calendar-reminder-open": "Открыть",
       "calendar-reminder-untitled": "Событие без названия",
       "calendar-reminder-with-location": "{when}\n{location}",
-      "config-migration-body": "Обновите {path} в исходном файле. Noctalia применяет эту замену временно. Выполните «noctalia config validate», чтобы просмотреть список всех необходимых изменений.",
+      "config-migration-body": "Обновите {path} в исходном файле. Hyprbar применяет эту замену временно. Выполните «hyprbar config validate», чтобы просмотреть список всех необходимых изменений.",
       "config-migration-title": "Требуется обновление конфигурации",
       "dbus-disabled": "DBus-уведомления отключены",
       "desktop-widgets-editor": "Редактор виджетов",
       "desktop-widgets-editor-enabled": "Редактор виджетов рабочего стола включён. Переключитесь на пустое рабочее пространство, чтобы открытые окна не перекрывали редактор.",
-      "greeter-sync": "Noctalia Greeter",
+      "greeter-sync": "Greeter",
       "greeter-sync-pending": "Синхронизация внешнего вида с экраном входа. Если появится запрос администратора, подтвердите его; авторизация без пароля зависит от системной политики.",
-      "greeter-sync-pending-console": "Синхронизация внешнего вида с экраном входа. Если потребуется авторизация, подтвердите запрос polkit в Noctalia, в TTY или в консоли.",
+      "greeter-sync-pending-console": "Синхронизация внешнего вида с экраном входа. Если потребуется авторизация, подтвердите запрос polkit в Hyprbar, в TTY или в консоли.",
       "greeter-sync-pending-legacy": "Синхронизация через устаревший модуль с авторизацией. Требуется подтверждение администратора.",
       "greeter-sync-pending-manual": "Файлы подготовлены для устаревшей синхронизации с аутентификацией. Запустите консольную утилиту применения в терминале (сохранив переменную NOCTALIA_GREETER_STATE_DIR, если вы используете кастомный путь) или настройте параметр shell.greeter_sync.privilege_command и повторите синхронизацию.",
       "greeter-sync-pending-manual-pkexec": "Синхронизация внешнего вида с экраном входа. Если требуется авторизация администратора, а запрос не появляется, выполните в терминале: pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\".",
@@ -877,7 +877,7 @@
       "greeter-sync-timeout": "Синхронизация с экраном входа всё ещё ожидает авторизации. Проверьте TTY или консоль на наличие запроса polkit, включите агент polkit в разделе «Безопасность» или выполните pkexec вручную.",
       "greeter-sync-timeout-manual": "Для устаревшей синхронизации с аутентификацией по-прежнему требуется подтверждение администратора. Запустите позиционный вспомогательный инструмент применения (apply helper) в терминале, сохранив переменную NOCTALIA_GREETER_STATE_DIR, если вы используете нестандартный путь.",
       "greeter-sync-timeout-manual-pkexec": "Синхронизация с экраном входа всё ещё требует авторизации. Выполните в терминале: pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\"",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "Это сочетание клавиш принимает одну клавишу без модификаторов.",
       "keybind-invalid-printable": "Печатные клавиши (буквы, цифры, символы) требуют модификатор, например Ctrl или Alt.",
       "keybind-invalid-super": "Клавишу Super/Windows нельзя использовать в сочетаниях клавиш командной строки.",
@@ -949,7 +949,7 @@
     },
     "enable-failed": {
       "body-error": "{plugin}: {error}",
-      "body-incompatible": "{plugin} предназначен для API версии {version}; эта версия Noctalia поддерживает API {oldest}–{current}.",
+      "body-incompatible": "{plugin} предназначен для API версии {version}; эта версия Hyprbar поддерживает API {oldest}–{current}.",
       "body-timeout": "Установка {plugin} заняла слишком много времени.",
       "title": "Плагин не включен"
     }
@@ -1245,7 +1245,7 @@
       },
       "reset-page": "Не удалось сбросить некоторые настройки.",
       "support-report": "Не удалось сохранить отчёт поддержки.",
-      "sync-greeter": "Не удалось синхронизировать внешний вид с Noctalia Greeter.",
+      "sync-greeter": "Не удалось синхронизировать внешний вид с Greeter.",
       "sync-greeter-timeout": "Синхронизация с экраном входа всё ещё ожидает авторизации. Проверьте TTY или консоль на наличие запроса polkit, включите агент polkit в разделе «Безопасность» или выполните pkexec вручную.",
       "sync-greeter-timeout-manual": "Для устаревшей синхронизации с аутентификацией по-прежнему требуется подтверждение администратора. Запустите позиционный вспомогательный инструмент применения (apply helper) в терминале, сохранив переменную NOCTALIA_GREETER_STATE_DIR, если вы используете нестандартный путь.",
       "sync-greeter-timeout-manual-pkexec": "Синхронизация с экраном входа всё ещё требует авторизации. Выполните в терминале: pkexec noctalia-greeter-apply-appearance --sync \"/run/user/$(id -u)/noctalia-greeter-sync\"",
@@ -1645,7 +1645,7 @@
         "deprecated": "Устаревший",
         "empty": "Нет включенных плагинов.",
         "held-back": "старая версия",
-        "held-back-hint": "v{version} требует API плагинов {required}; эта сборка Noctalia поддерживает API только до {current}. Обновите Noctalia, чтобы получить её.",
+        "held-back-hint": "v{version} требует API плагинов {required}; эта сборка Hyprbar поддерживает API только до {current}. Обновите Hyprbar, чтобы получить её.",
         "incompatible-plugin-api": "несовместимый API плагинов",
         "remove": "Удалить плагин",
         "requires": "Требуются: {dependencies}",
@@ -1678,8 +1678,8 @@
         },
         "kind-label": "Тип",
         "location-label": "Местоположение",
-        "location-placeholder-git": "https://github.com/me/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/me/hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "ID источника",
         "name-placeholder": "my-plugins",
         "precedence-hint": "Источники, расположенные ниже, имеют приоритет над высшими при совпадении плагинов.",
@@ -1689,19 +1689,19 @@
         "update": "Обновить"
       },
       "store": {
-        "add": "Добавить в Noctalia",
+        "add": "Добавить в Hyprbar",
         "back-to-catalog": "Вернуться в каталог плагинов",
         "categories": "Категории",
         "category-all": "Все",
         "empty": "Плагины не найдены",
         "held-back": "Старая версия",
-        "held-back-hint": "Устанавливает v{version} для API плагинов {resolved}. Последняя версия v{latest} требует API плагинов {latestRequired}; эта сборка Noctalia поддерживает API только до {current}.",
+        "held-back-hint": "Устанавливает v{version} для API плагинов {resolved}. Последняя версия v{latest} требует API плагинов {latestRequired}; эта сборка Hyprbar поддерживает API только до {current}.",
         "incompatible": "Несовместим",
-        "incompatible-hint": "Требуется API плагинов {required}; эта сборка Noctalia поддерживает {oldest}–{current}.",
+        "incompatible-hint": "Требуется API плагинов {required}; эта сборка Hyprbar поддерживает {oldest}–{current}.",
         "installed": "Установлено",
         "loading": "Загрузка каталога...",
         "no-readme": "Описание недоступно",
-        "open-page": "Открыть страницу плагина на noctalia.dev",
+        "open-page": "Открыть страницу плагина на the plugin catalog",
         "open-source": "Открыть репозиторий исходного кода плагина",
         "results-count": "{count} плагинов",
         "search-placeholder": "Поиск плагинов...",
@@ -1761,7 +1761,7 @@
           "label": "Скругление углов"
         },
         "custom-palette": {
-          "description": "Выберите палитру из ~/.config/noctalia/palettes/",
+          "description": "Выберите палитру из ~/.config/hyprbar/palettes/",
           "label": "Пользовательская палитра",
           "search-placeholder": "Поиск пользовательских палитр…"
         },
@@ -1805,8 +1805,8 @@
           "label": "Чистый черный цвет"
         },
         "shell-theme-mode": {
-          "description": "Закрепить светлый или тёмный режим Noctalia. Вариант \"Следовать\" синхронизирует его с общим режимом темы",
-          "label": "Режим темы Noctalia"
+          "description": "Закрепить светлый или тёмный режим Hyprbar. Вариант \"Следовать\" синхронизирует его с общим режимом темы",
+          "label": "Режим темы Hyprbar"
         },
         "theme-mode": {
           "description": "Выберите тёмный, светлый или автоматический режим в зависимости от времени суток; также распространяется на приложения из шаблонов",
@@ -2251,7 +2251,7 @@
             "label": "При выключении"
           },
           "started": {
-            "description": "Команда для запуска после запуска Noctalia",
+            "description": "Команда для запуска после запуска Hyprbar",
             "label": "При запуске"
           },
           "theme-mode-changed": {
@@ -2828,7 +2828,7 @@
           "placeholder": "Город, страна"
         },
         "location-auto-locate": {
-          "description": "Автоматически определять местоположение по IP-адресу через noctalia.dev",
+          "description": "Автоматически определять местоположение по IP-адресу",
           "label": "Автоматическое определение местоположения (IP)"
         },
         "longitude": {
@@ -3056,7 +3056,7 @@
           "label": "Формат даты"
         },
         "external-ip": {
-          "description": "Определять публичный WAN-адрес подключения (через api.noctalia.dev) и показывать его в Центре управления во вкладке \"Сеть\"",
+          "description": "Определять публичный WAN-адрес подключения (через the online service) и показывать его в Центре управления во вкладке \"Сеть\"",
           "label": "Показывать WAN IP"
         },
         "greeter-sync-auto": {
@@ -3072,9 +3072,9 @@
           "label": "Метки раскладки"
         },
         "launch-apps-as-systemd-services": {
-          "description": "Запускать приложения в отдельных службах systemd, чтобы они не использовали cgroup Noctalia",
+          "description": "Запускать приложения в отдельных службах systemd, чтобы они не использовали cgroup Hyprbar",
           "label": "Запускать приложения как службы systemd",
-          "requires-systemd-session": "Требует, чтобы Noctalia работала как пользовательская служба systemd (uwsm или пользовательский юнит systemd)"
+          "requires-systemd-session": "Требует, чтобы Hyprbar работала как пользовательская служба systemd (uwsm или пользовательский юнит systemd)"
         },
         "launch-apps-custom-command": {
           "description": "Оборачивает приложения, запускаемые из лаунчера, дока и панели задач; вместо $CMD подставляется исходная команда",
@@ -3086,7 +3086,7 @@
           "label": "Введите для запуска"
         },
         "offline-mode": {
-          "description": "Блокировать все исходящие сетевые запросы",
+          "description": "Блокирует новые HTTP-запросы через общий клиент Hyprbar; это не брандмауэр.",
           "label": "Автономный режим"
         },
         "osd-background-opacity": {
@@ -3309,12 +3309,12 @@
         },
         "sync-greeter": {
           "button": "Синхронизировать сейчас",
-          "description": "Скопировать текущий внешний вид и расположение мониторов в Noctalia Greeter. Потребуется подтверждение администратора, если только системная политика не разрешает беспарольную синхронизацию для вашего пользователя.",
-          "label": "Noctalia Greeter"
+          "description": "Скопировать текущий внешний вид и расположение мониторов в Greeter. Потребуется подтверждение администратора, если только системная политика не разрешает беспарольную синхронизацию для вашего пользователя.",
+          "label": "Greeter"
         },
         "telemetry": {
-          "description": "Отправлять небольшой анонимный ping при запуске с версией, ОС, композитором, разрешениями мониторов, RAM и масштабом UI",
-          "label": "Анонимный ping при запуске"
+          "description": "При включении отправляет телеметрию запуска с постоянным идентификатором установки.",
+          "label": "Телеметрия при запуске"
         },
         "time-format": {
           "description": "Формат времени по умолчанию для интерфейса оболочки, если нет отдельной настройки",
@@ -3672,7 +3672,7 @@
             "label": "Установить профиль EasyEffects"
           },
           "greeter-sync": {
-            "description": "Синхронизировать обои, цвета и расположение мониторов с Noctalia Greeter",
+            "description": "Синхронизировать обои, цвета и расположение мониторов с Greeter",
             "label": "Синхронизировать внешний вид Greeter"
           },
           "keyboard-backlight-down": {
@@ -3788,7 +3788,7 @@
             "label": "Выполнить действие последнего уведомления"
           },
           "notification-show": {
-            "description": "Показать внутреннее уведомление Noctalia",
+            "description": "Показать внутреннее уведомление Hyprbar",
             "label": "Показать уведомление"
           },
           "osd-disable": {
@@ -4715,8 +4715,8 @@
       "export-config": "Экспортировать конфигурацию…",
       "export-config-saved": "Экспорт конфигурации сохранён.",
       "filter-overridden": "Измененные",
-      "legacy-config-warning": "Устаревшая настройка: {issue}. Отредактируйте эту запись в исходном файле; Noctalia применяет замену только временно. Выполните «noctalia config validate», чтобы просмотреть список всех необходимых изменений.",
-      "native-title": "Настройки Noctalia",
+      "legacy-config-warning": "Устаревшая настройка: {issue}. Отредактируйте эту запись в исходном файле; Hyprbar применяет замену только временно. Выполните «hyprbar config validate», чтобы просмотреть список всех необходимых изменений.",
+      "native-title": "Настройки Hyprbar",
       "no-results": "Настройки не найдены",
       "no-results-hint": "Попробуйте другое имя параметра или ключ конфигурации.",
       "offline-mode-notice": {
@@ -4752,7 +4752,7 @@
     "no-wallpaper-selected": "Обои не выбраны",
     "select-wallpaper": "Выбрать обои",
     "subtitle": "Несколько быстрых вариантов для начала.",
-    "title": "Добро пожаловать в Noctalia",
+    "title": "Добро пожаловать в Hyprbar",
     "wallpaper": "Обои",
     "wallpaper-scheme": "Схема обоев"
   },

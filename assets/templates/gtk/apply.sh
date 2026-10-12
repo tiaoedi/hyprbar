@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-GTK_IMPORT='@import url("noctalia.css");'
+GTK_IMPORT='@import url("hyprbar.css");'
 
 theme_exists() {
     local name="$1"
@@ -27,32 +27,67 @@ ensure_gtk_css_import() {
     local gtk_css="$1" colors_file="$2" label="$3"
 
     if [ ! -f "$colors_file" ]; then
-        echo "Error: $label noctalia.css not found at $colors_file" >&2
+        echo "Error: $label hyprbar.css not found at $colors_file" >&2
         return 1
     fi
 
+    local target="$gtk_css" read_path="$gtk_css"
+    if [ -L "$gtk_css" ]; then
+        local resolved
+        resolved=$(readlink -f "$gtk_css" || true)
+        if [ -n "$resolved" ] && [ -f "$resolved" ] && [ -w "$resolved" ]; then
+            target="$resolved"
+            read_path="$resolved"
+        fi
+    fi
+
     if [ -e "$gtk_css" ] || [ -L "$gtk_css" ]; then
-        local content
-        content=$(cat "$gtk_css")
-        if [[ "$content" == *"noctalia.css"* ]] && [[ "$content" == *"@import"* ]]; then
+        if [ ! -f "$read_path" ]; then
+            echo "Error: $label gtk.css is not a readable regular file at $gtk_css" >&2
+            return 1
+        fi
+
+        local tmp_file
+        tmp_file=$(mktemp "${target}.tmp.XXXXXX")
+        if ! awk -v replacement="$GTK_IMPORT" '
+            /^[[:space:]]*@import[[:space:]]+url\("(noctalia|hyprbar)\.css"\);[[:space:]]*$/ {
+                if (!inserted) {
+                    print replacement
+                    inserted = 1
+                }
+                next
+            }
+            { print }
+            END {
+                if (!inserted) {
+                    if (NR > 0) print ""
+                    print replacement
+                }
+            }
+        ' "$read_path" >"$tmp_file"; then
+            rm -f -- "$tmp_file"
+            return 1
+        fi
+
+        if cmp -s "$read_path" "$tmp_file"; then
+            rm -f -- "$tmp_file"
             return 0
         fi
-        local target="$gtk_css"
-        if [ -L "$gtk_css" ]; then
-            local resolved
-            resolved=$(readlink -f "$gtk_css")
-            if [ -w "$resolved" ]; then
-                target="$resolved"
-            else
-                # Read-only symlink (e.g. NixOS): convert to a local file
-                rm "$gtk_css"
-            fi
+
+        if ! chmod --reference="$read_path" "$tmp_file"; then
+            rm -f -- "$tmp_file"
+            echo "Error: failed to preserve $label gtk.css permissions at $gtk_css" >&2
+            return 1
         fi
-        printf '%s\n\n%s\n' "$content" "$GTK_IMPORT" > "$target"
-        echo "Appended $label noctalia.css import to gtk.css"
+        if ! mv -fT -- "$tmp_file" "$target"; then
+            rm -f -- "$tmp_file"
+            echo "Error: failed to atomically update $label gtk.css at $gtk_css" >&2
+            return 1
+        fi
+        echo "Updated $label gtk.css with a single hyprbar.css import"
     else
-        printf '%s\n' "$GTK_IMPORT" > "$gtk_css"
-        echo "Created $label gtk.css with noctalia.css import"
+        printf '%s\n' "$GTK_IMPORT" >"$gtk_css"
+        echo "Created $label gtk.css with hyprbar.css import"
     fi
 }
 
@@ -132,11 +167,11 @@ main() {
 
     local gtk3_ok=true gtk4_ok=true
     if ! ensure_gtk_css_import \
-            "$config_dir/gtk-3.0/gtk.css" "$config_dir/gtk-3.0/noctalia.css" "GTK3"; then
+            "$config_dir/gtk-3.0/gtk.css" "$config_dir/gtk-3.0/hyprbar.css" "GTK3"; then
         gtk3_ok=false
     fi
     if ! ensure_gtk_css_import \
-            "$config_dir/gtk-4.0/gtk.css" "$config_dir/gtk-4.0/noctalia.css" "GTK4"; then
+            "$config_dir/gtk-4.0/gtk.css" "$config_dir/gtk-4.0/hyprbar.css" "GTK4"; then
         gtk4_ok=false
     fi
 

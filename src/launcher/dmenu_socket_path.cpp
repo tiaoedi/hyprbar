@@ -15,7 +15,7 @@ namespace noctalia::launcher {
       return {.path = {}, .error = "WAYLAND_DISPLAY is not set"};
     }
 
-    return {.path = std::string(runtime) + "/noctalia-dmenu-" + display + ".sock", .error = {}};
+    return {.path = std::string(runtime) + "/hyprbar-dmenu-" + display + ".sock", .error = {}};
   }
 
 } // namespace noctalia::launcher

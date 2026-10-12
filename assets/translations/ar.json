@@ -776,14 +776,14 @@
       "calendar-google-connect-start-failed": "تعذر بدء مصادقة Google. تحقق من اتصال الشبكة وحاول مجدداً.",
       "calendar-google-connect-start-http": "تعذر بدء مصادقة Google. أعاد وسيط OAuth الخطأ HTTP {status}.",
       "calendar-google-connect-timeout": "انتهت مهلة مصادقة Google. ابدأ الاتصال مجدداً عندما تكون مستعداً للتسجيل.",
-      "config-migration-body": "حدّث {path} في الملف المصدر. يطبّق Noctalia هذا الاستبدال مؤقتاً فقط. شغّل noctalia config validate لعرض جميع التغييرات المطلوبة.",
+      "config-migration-body": "حدّث {path} في الملف المصدر. يطبّق Hyprbar هذا الاستبدال مؤقتاً فقط. شغّل hyprbar config validate لعرض جميع التغييرات المطلوبة.",
       "config-migration-title": "يلزم تحديث الإعدادات",
       "dbus-disabled": "إشعارات D-Bus معطلة",
       "desktop-widgets-editor": "محرر ودجت",
       "desktop-widgets-editor-enabled": "محرر ودجات سطح المكتب مفعّل. انتقل إلى مساحة عمل فارغة حتى لا تغطي النوافذ المفتوحة المحرر.",
       "greeter-sync": "مزامنة شاشة الدخول",
       "greeter-sync-pending": "مزامنة المظهر مع شاشة الترحيب. إذا ظهرت مطالبة من المسؤول، فقم بالموافقة عليها؛ حيث تتبع عملية المصادقة بدون كلمة مرور سياسة النظام.",
-      "greeter-sync-pending-console": "مزامنة الهوية مع برنامج الترحيب. إذا كانت هناك حاجة إلى تفويض، فقم بالموافقة على موجه polkit في Noctalia أو على TTY أو على وحدة التحكم.",
+      "greeter-sync-pending-console": "مزامنة الهوية مع برنامج الترحيب. إذا كانت هناك حاجة إلى تفويض، فقم بالموافقة على موجه polkit في Hyprbar أو على TTY أو على وحدة التحكم.",
       "greeter-sync-pending-legacy": "المزامنة من خلال أداة المساعدة القديمة التي تتطلب المصادقة. يلزم الحصول على موافقة المسؤول.",
       "greeter-sync-pending-manual": "يتم تجهيز الملفات للمزامنة القديمة التي تتطلب المصادقة. قم بتشغيل الأداة المساعدة «apply» في محطة طرفية، مع الحفاظ على NOCTALIA_GREETER_STATE_DIR إذا كنت تستخدم مسارًا مخصصًا، أو قم بتكوين shell.greeter_sync.privilege_command ثم أعد المزامنة.",
       "greeter-sync-pending-manual-pkexec": "مزامنة المظهر مع شاشة الترحيب. إذا كانت هناك حاجة إلى تفويض من المسؤول ولم تظهر أي مطالبة، فقم بتشغيل الأمر التالي في محطة طرفية: pkexec noctalia-greeter-apply-appearance --sync ”/run/user/$(id -u)/noctalia-greeter-sync“.",
@@ -791,7 +791,7 @@
       "greeter-sync-timeout": "لا تزال عملية مزامنة Greeter في انتظار الحصول على التفويض. تحقق من وجود موجه polkit على جهاز TTY أو وحدة التحكم، أو قم بتمكين وكيل polkit في إعدادات الأمان، أو قم بتشغيل pkexec يدويًّا.",
       "greeter-sync-timeout-manual": "لا تزال عملية المزامنة القديمة المصادق عليها تتطلب موافقة المسؤول. قم بتشغيل أداة المساعدة «positional apply» في نافذة الأوامر واحتفظ بـ NOCTALIA_GREETER_STATE_DIR إذا كنت تستخدم مسارًا مخصصًا.",
       "greeter-sync-timeout-manual-pkexec": "لا تزال عملية مزامنة Greeter بحاجة إلى ترخيص. قم بتشغيل الأمر التالي في محطة الأوامر: pkexec noctalia-greeter-apply-appearance --sync ”/run/user/$(id -u)/noctalia-greeter-sync“",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "يقبل هذا الاختصار مفتاحاً واحداً بدون معدّلات.",
       "keybind-invalid-printable": "المفاتيح القابلة للطباعة (أحرف، أرقام، رموز) تتطلب معدّلاً مثل Ctrl أو Alt.",
       "keybind-invalid-super": "لا يمكن استخدام مفتاح Super/Windows في اختصارات الغلاف (واجهة الأوامر).",
@@ -863,7 +863,7 @@
     },
     "enable-failed": {
       "body-error": "{plugin}: {error}",
-      "body-incompatible": "{plugin} يستهدف واجهة API للإضافات {version}؛ يدعم هذا الإصدار من Noctalia واجهة API من {oldest} إلى {current}.",
+      "body-incompatible": "{plugin} يستهدف واجهة API للإضافات {version}؛ يدعم هذا الإصدار من Hyprbar واجهة API من {oldest} إلى {current}.",
       "body-timeout": "استغرق تثبيت {plugin} وقتاً طويلاً.",
       "title": "لم يتم تفعيل الإضافة"
     }
@@ -1154,7 +1154,7 @@
       },
       "reset-page": "فشل إعادة ضبط بعض الإعدادات.",
       "support-report": "فشل حفظ تقرير الدعم.",
-      "sync-greeter": "تعذرت مزامنة المظهر مع Noctalia Greeter.",
+      "sync-greeter": "تعذرت مزامنة المظهر مع Greeter.",
       "sync-greeter-timeout": "لا تزال عملية مزامنة Greeter في انتظار الحصول على التفويض. تحقق من وجود موجه polkit على جهاز TTY أو وحدة التحكم، أو قم بتمكين وكيل polkit في إعدادات الأمان، أو قم بتشغيل pkexec يدويًّا.",
       "sync-greeter-timeout-manual": "لا تزال عملية المزامنة القديمة المصادق عليها تتطلب موافقة المسؤول. قم بتشغيل أداة المساعدة «positional apply» في نافذة الأوامر واحتفظ بـ NOCTALIA_GREETER_STATE_DIR إذا كنت تستخدم مسارًا مخصصًا.",
       "widget": {
@@ -1532,7 +1532,7 @@
         "deprecated": "مهجور",
         "empty": "لا توجد إضافات مفعّلة.",
         "held-back": "إصدار أقدم",
-        "held-back-hint": "يحتاج v{version} إلى واجهة API للإضافات {required}؛ هذا الإصدار من Noctalia يدعم حتى {current}. قم بترقية Noctalia للحصول عليه.",
+        "held-back-hint": "يحتاج v{version} إلى واجهة API للإضافات {required}؛ هذا الإصدار من Hyprbar يدعم حتى {current}. قم بترقية Hyprbar للحصول عليه.",
         "incompatible-plugin-api": "واجهة API للإضافات غير متوافقة",
         "remove": "إزالة الإضافة",
         "requires": "يتطلب: {dependencies}",
@@ -1563,8 +1563,8 @@
         },
         "kind-label": "النوع",
         "location-label": "الموقع",
-        "location-placeholder-git": "https://github.com/me/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/me/hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "معرّف المصدر",
         "name-placeholder": "إضافاتي",
         "precedence-hint": "المصادر الأدنى تتجاوز الأعلى عندما تقدم نفس الإضافة.",
@@ -1574,19 +1574,19 @@
         "update": "تحديث"
       },
       "store": {
-        "add": "إضافة إلى Noctalia",
+        "add": "إضافة إلى Hyprbar",
         "back-to-catalog": "العودة إلى كتالوج الإضافات",
         "categories": "الفئات",
         "category-all": "الكل",
         "empty": "لم يتم العثور على إضافات",
         "held-back": "إصدار أقدم",
-        "held-back-hint": "يثبّت v{version} لواجهة API للإضافات {resolved}. يتطلب أحدث إصدار v{latest} واجهة API للإضافات {latestRequired}؛ ويدعم هذا الإصدار من Noctalia حتى {current}.",
+        "held-back-hint": "يثبّت v{version} لواجهة API للإضافات {resolved}. يتطلب أحدث إصدار v{latest} واجهة API للإضافات {latestRequired}؛ ويدعم هذا الإصدار من Hyprbar حتى {current}.",
         "incompatible": "غير متوافق",
-        "incompatible-hint": "يتطلب واجهة API للإضافات {required}؛ ويدعم هذا الإصدار من Noctalia من {oldest} إلى {current}.",
+        "incompatible-hint": "يتطلب واجهة API للإضافات {required}؛ ويدعم هذا الإصدار من Hyprbar من {oldest} إلى {current}.",
         "installed": "مثبت",
         "loading": "جاري تحميل الكتالوج...",
         "no-readme": "لا يوجد وصف متاح.",
-        "open-page": "فتح صفحة الإضافة على noctalia.dev",
+        "open-page": "فتح صفحة الإضافة على the plugin catalog",
         "open-source": "فتح مستودع مصدر الإضافة",
         "results-count": "{count} إضافة",
         "search-placeholder": "البحث في الإضافات...",
@@ -1646,7 +1646,7 @@
           "label": "انحناء الزوايا"
         },
         "custom-palette": {
-          "description": "اختر لوحة ألوان من ~/.config/noctalia/palettes/",
+          "description": "اختر لوحة ألوان من ~/.config/hyprbar/palettes/",
           "label": "لوحة ألوان مخصصة",
           "search-placeholder": "البحث في لوحات الألوان المخصصة..."
         },
@@ -1690,7 +1690,7 @@
           "label": "أسود خالص"
         },
         "shell-theme-mode": {
-          "description": "قم بتثبيت الوضع الفاتح أو الداكن الخاص بـ noctalia ؛ وتطبيق المتابعة يحافظ على تزامنه مع وضع السمة",
+          "description": "قم بتثبيت الوضع الفاتح أو الداكن الخاص بـ Hyprbar ؛ وتطبيق المتابعة يحافظ على تزامنه مع وضع السمة",
           "label": "Shell Theme Mode"
         },
         "theme-mode": {
@@ -2128,7 +2128,7 @@
             "label": "عند إيقاف التشغيل"
           },
           "started": {
-            "description": "أمر للتشغيل بعد بدء Noctalia",
+            "description": "أمر للتشغيل بعد بدء Hyprbar",
             "label": "عند البدء"
           },
           "theme-mode-changed": {
@@ -2151,7 +2151,7 @@
       },
       "idle": {
         "behaviors": {
-          "description": "إجراءات خاملة محددة مع إعدادات مسبقة (القفل، إيقاف الشاشة،   التعليق المرحلي) أو أوامر مخصصة، المهلات، استئناف الاقتران، و الترتيب",
+          "description": "إجراءات خاملة محددة مع إعدادات مسبقة (القفل، إيقاف الشاشة، التعليق المرحلي) أو أوامر مخصصة، المهلات، استئناف الاقتران، و الترتيب",
           "label": "السلوكيات"
         },
         "pre-action-fade": {
@@ -2649,7 +2649,7 @@
           "placeholder": "المدينة، الدولة"
         },
         "location-auto-locate": {
-          "description": "تحديد الموقع تلقائياً من IP عبر noctalia.dev",
+          "description": "تحديد الموقع تلقائيًا باستخدام عنوان IP",
           "label": "التحديد التلقائي للموقع (بروتوكول الإنترنت)"
         },
         "longitude": {
@@ -2872,7 +2872,7 @@
           "label": "صيغة التاريخ"
         },
         "external-ip": {
-          "description": "حل عنوان WAN العام للاتصال (عبر api.noctalia.dev) وإظهاره في علامة تبويب الشبكة في مركز التحكم",
+          "description": "حل عنوان WAN العام للاتصال (عبر the online service) وإظهاره في علامة تبويب الشبكة في مركز التحكم",
           "label": "إظهار عنوان WAN"
         },
         "greeter-sync-auto": {
@@ -2888,9 +2888,9 @@
           "label": "تسميات تخطيطات لوحة المفاتيح"
         },
         "launch-apps-as-systemd-services": {
-          "description": "تشغيل التطبيقات كخدمات systemd منفصلة لتفادي مشاركة مجموعات Noctalia",
+          "description": "تشغيل التطبيقات كخدمات systemd منفصلة لتفادي مشاركة مجموعات Hyprbar",
           "label": "تشغيل التطبيقات كخدمات systemd",
-          "requires-systemd-session": "يتطلب تشغيل Noctalia كخدمة مستخدم systemd (uwsm أو وحدة مستخدم systemd)"
+          "requires-systemd-session": "يتطلب تشغيل Hyprbar كخدمة مستخدم systemd (uwsm أو وحدة مستخدم systemd)"
         },
         "launch-apps-custom-command": {
           "description": "أمر مخصص بواسطة مشغل التطبيقات، يستبدل $CMD بالأمر الأصلي.",
@@ -2902,7 +2902,7 @@
           "label": "الكتابة للتشغيل"
         },
         "offline-mode": {
-          "description": "حظر جميع طلبات الشبكة الصادرة",
+          "description": "حظر الطلبات الجديدة عبر عميل HTTP المشترك في Hyprbar؛ ليس جدارًا ناريًا.",
           "label": "وضع عدم الاتصال"
         },
         "osd-background-opacity": {
@@ -3086,12 +3086,12 @@
         },
         "sync-greeter": {
           "button": "مزامنة الآن",
-          "description": "انسخ المظهر الحالي وترتيب الشاشات إلى «Noctalia Greeter». يلزم الحصول على موافقة المسؤول ما لم تسمح سياسة النظام بالمزامنة بدون كلمة مرور لمستخدمك.",
-          "label": "Noctalia Greeter"
+          "description": "انسخ المظهر الحالي وترتيب الشاشات إلى « Greeter». يلزم الحصول على موافقة المسؤول ما لم تسمح سياسة النظام بالمزامنة بدون كلمة مرور لمستخدمك.",
+          "label": "Greeter"
         },
         "telemetry": {
-          "description": "إرسال إشارة مجهولة عند بدء التشغيل تتضمن معلومات النظام والإصدار",
-          "label": "إرسال بينج مجهول عند بدء التشغيل"
+          "description": "عند تفعيلها، ترسل بيانات بدء التشغيل مع معرّف تثبيت مستمر.",
+          "label": "قياس بدء التشغيل"
         },
         "time-format": {
           "description": "صيغة الوقت الافتراضية لواجهة الغلاف",
@@ -3282,7 +3282,7 @@
           },
           "bar-reserve-toggle": {
             "description": "تبديل تخصيص مساحة احتياطية لشريط واحد أو لجميع الأشرطة",
-            "label": "التبديل بين تخصيص مساحة  للشريط او عدمه"
+            "label": "التبديل بين تخصيص مساحة للشريط او عدمه"
           },
           "bar-show": {
             "description": "إظهار شريط واحد أو جميع الأشرطة",
@@ -3318,7 +3318,7 @@
           },
           "brightness-osd": {
             "description": "عرض قائمة OSD الخاصة بالسطوع دون تغيير السطوع",
-            "label": "عرض قائمة OSD الخاصة بالسطوع "
+            "label": "عرض قائمة OSD الخاصة بالسطوع"
           },
           "brightness-set": {
             "description": "ضبط السطوع (القيمة الافتراضية هي إعدادات الشاشة الحالية)",
@@ -4072,8 +4072,8 @@
       "export-config": "تصدير الإعدادات…",
       "export-config-saved": "تم حفظ تصدير الإعدادات.",
       "filter-overridden": "تم تجاوزه",
-      "legacy-config-warning": "إعداد قديم: {issue}. عدّل هذا الإدخال في المصدر؛ يطبّق Noctalia الاستبدال مؤقتاً فقط. شغّل noctalia config validate لعرض جميع التغييرات المطلوبة.",
-      "native-title": "إعدادات Noctalia",
+      "legacy-config-warning": "إعداد قديم: {issue}. عدّل هذا الإدخال في المصدر؛ يطبّق Hyprbar الاستبدال مؤقتاً فقط. شغّل hyprbar config validate لعرض جميع التغييرات المطلوبة.",
+      "native-title": "إعدادات Hyprbar",
       "no-results": "لم يتم العثور على إعدادات",
       "no-results-hint": "جرب البحث باسم إعداد آخر أو مفتاح تهيئة مختلف.",
       "offline-mode-notice": {
@@ -4108,7 +4108,7 @@
     "no-wallpaper-selected": "لم يتم تحديد خلفية",
     "select-wallpaper": "اختر خلفية",
     "subtitle": "بضع خيارات سريعة لمساعدتك على البدء.",
-    "title": "مرحبًا بك في Noctalia",
+    "title": "مرحبًا بك في Hyprbar",
     "wallpaper": "خلفية الشاشة",
     "wallpaper-scheme": "مخطط ألوان الخلفية"
   },

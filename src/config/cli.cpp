@@ -18,6 +18,7 @@
 #include <expected>
 #include <filesystem>
 #include <fstream>
+#include <iterator>
 #include <map>
 #include <optional>
 #include <print>
@@ -76,7 +77,7 @@ namespace noctalia::config {
 
     int runSettingsCount(int argc, char* argv[]) {
       auto parsed = cli::parseOrReport(
-          cli::kConfigSettingsCountCmd, "noctalia config settings-count",
+          cli::kConfigSettingsCountCmd, "hyprbar config settings-count",
           std::span<char* const>{argv + 3, static_cast<std::size_t>(argc - 3)}
       );
       if (!parsed)
@@ -208,8 +209,8 @@ namespace noctalia::config {
 
       const std::filesystem::path configHome = target / "config-home";
       const std::filesystem::path stateHome = target / "state-home";
-      const std::filesystem::path configDir = configHome / "noctalia";
-      const std::filesystem::path stateDir = stateHome / "noctalia";
+      const std::filesystem::path configDir = configHome / "hyprbar";
+      const std::filesystem::path stateDir = stateHome / "hyprbar";
 
       if (options.force) {
         std::error_code ec;
@@ -312,7 +313,7 @@ namespace noctalia::config {
       std::println();
       std::println("Run with:");
       std::println(
-          "  NOCTALIA_CONFIG_HOME={} NOCTALIA_STATE_HOME={} {}", StringUtils::shellQuote(configHome.string()),
+          "  HYPRBAR_CONFIG_HOME={} HYPRBAR_STATE_HOME={} {}", StringUtils::shellQuote(configHome.string()),
           StringUtils::shellQuote(stateHome.string()), StringUtils::shellQuote(argv0)
       );
       return 0;
@@ -327,7 +328,7 @@ namespace noctalia::config {
 
     int runValidate(int argc, char* argv[]) {
       auto parsed = cli::parseOrReport(
-          cli::kConfigValidateCmd, "noctalia config validate",
+          cli::kConfigValidateCmd, "hyprbar config validate",
           std::span<char* const>{argv + 3, static_cast<std::size_t>(argc - 3)}
       );
       if (!parsed)
@@ -403,7 +404,7 @@ namespace noctalia::config {
 
     int runExport(int argc, char* argv[]) {
       auto parsed = cli::parseOrReport(
-          cli::kConfigExportCmd, "noctalia config export",
+          cli::kConfigExportCmd, "hyprbar config export",
           std::span<char* const>{argv + 3, static_cast<std::size_t>(argc - 3)}
       );
       if (!parsed)
@@ -439,23 +440,458 @@ namespace noctalia::config {
       return 0;
     }
 
+    struct ImportFile {
+      std::filesystem::path source;
+      std::filesystem::path target;
+      std::filesystem::path relative;
+      std::string kind;
+    };
+
+    std::expected<std::filesystem::path, std::string> absolutePath(std::filesystem::path path) {
+      if (path.empty()) {
+        return std::unexpected("path is empty");
+      }
+      path = FileUtils::expandUserPath(path.string());
+      std::error_code ec;
+      path = std::filesystem::absolute(path, ec);
+      if (ec) {
+        return std::unexpected("failed to resolve path: " + ec.message());
+      }
+      return path.lexically_normal();
+    }
+
+    std::expected<std::filesystem::path, std::string> comparisonPath(const std::filesystem::path& path) {
+      std::error_code ec;
+      auto resolved = std::filesystem::weakly_canonical(path, ec);
+      if (ec) {
+        return std::unexpected("failed to resolve import directory for overlap check: " + ec.message());
+      }
+      return resolved;
+    }
+
+    std::filesystem::path defaultNoctaliaDir(const char* xdgEnv, std::string_view fallback) {
+      const char* xdg = std::getenv(xdgEnv);
+      std::filesystem::path base;
+      if (xdg != nullptr && xdg[0] != '\0') {
+        base = xdg;
+      } else if (const char* home = std::getenv("HOME"); home != nullptr && home[0] != '\0') {
+        base = std::filesystem::path(home) / fallback;
+      }
+      return base.empty() ? std::filesystem::path{} : base / "noctalia";
+    }
+
+    bool isWithin(const std::filesystem::path& child, const std::filesystem::path& parent) {
+      const auto relative = child.lexically_relative(parent);
+      if (relative.empty() || relative == ".") {
+        return true;
+      }
+      return !relative.is_absolute() && *relative.begin() != "..";
+    }
+
+    bool pathsOverlap(const std::filesystem::path& first, const std::filesystem::path& second) {
+      return isWithin(first, second) || isWithin(second, first);
+    }
+
+    std::expected<void, std::string> validateSeparateRoots(
+        const std::vector<std::filesystem::path>& sourceRoots,
+        const std::vector<std::filesystem::path>& targetRoots
+    ) {
+      for (const auto& sourceRoot : sourceRoots) {
+        auto resolvedSource = comparisonPath(sourceRoot);
+        if (!resolvedSource) {
+          return std::unexpected(resolvedSource.error());
+        }
+        for (const auto& targetRoot : targetRoots) {
+          auto resolvedTarget = comparisonPath(targetRoot);
+          if (!resolvedTarget) {
+            return std::unexpected(resolvedTarget.error());
+          }
+          if (pathsOverlap(*resolvedSource, *resolvedTarget)) {
+            return std::unexpected("Noctalia source and Hyprbar target directories must not overlap");
+          }
+        }
+      }
+      return {};
+    }
+
+    std::expected<std::filesystem::path, std::string> resolveImportSymlink(
+        const std::filesystem::path& sourceRoot, const std::filesystem::path& sourceFile
+    ) {
+      std::error_code ec;
+      const auto canonicalRoot = std::filesystem::canonical(sourceRoot, ec);
+      if (ec) {
+        return std::unexpected("failed to resolve source directory " + sourceRoot.string() + ": " + ec.message());
+      }
+      const auto canonicalFile = std::filesystem::canonical(sourceFile, ec);
+      if (ec) {
+        return std::unexpected("failed to resolve symlink " + sourceFile.string() + ": " + ec.message());
+      }
+      const bool isRegular = std::filesystem::is_regular_file(canonicalFile, ec);
+      if (ec || !isRegular) {
+        return std::unexpected("symlink does not resolve to a regular file: " + sourceFile.string());
+      }
+      if (!isWithin(canonicalFile, canonicalRoot)) {
+        return std::unexpected("symlink target is outside source directory: " + sourceFile.string());
+      }
+      return canonicalFile;
+    }
+
+    std::expected<std::vector<ImportFile>, std::string> collectImportTree(
+        const std::filesystem::path& sourceRoot, const std::filesystem::path& targetRoot,
+        std::string_view kind, bool tomlOnly
+    ) {
+      std::error_code ec;
+      const auto rootStatus = std::filesystem::symlink_status(sourceRoot, ec);
+      if (ec || !std::filesystem::is_directory(rootStatus) || std::filesystem::is_symlink(rootStatus)) {
+        return std::unexpected("source directory is missing, not a directory, or a symlink: " + sourceRoot.string());
+      }
+
+      std::vector<ImportFile> files;
+      std::filesystem::recursive_directory_iterator it(sourceRoot, std::filesystem::directory_options::none, ec);
+      const std::filesystem::recursive_directory_iterator end;
+      if (ec) {
+        return std::unexpected("failed to scan source directory " + sourceRoot.string() + ": " + ec.message());
+      }
+      for (; it != end; it.increment(ec)) {
+        if (ec) {
+          return std::unexpected("failed while scanning " + sourceRoot.string() + ": " + ec.message());
+        }
+        const auto status = it->symlink_status(ec);
+        if (ec) {
+          return std::unexpected("failed to inspect " + it->path().string() + ": " + ec.message());
+        }
+        if (std::filesystem::is_symlink(status)) {
+          if (!tomlOnly) {
+            return std::unexpected("refusing to import symlink: " + it->path().string());
+          }
+          if (it->path().extension() == ".toml") {
+            auto resolved = resolveImportSymlink(sourceRoot, it->path());
+            if (!resolved) {
+              return std::unexpected("config " + resolved.error());
+            }
+            const auto relative = it->path().lexically_relative(sourceRoot).lexically_normal();
+            files.push_back(ImportFile{
+                .source = std::move(*resolved),
+                .target = targetRoot / relative,
+                .relative = relative,
+                .kind = std::string(kind) + " symlink target",
+            });
+          }
+          continue;
+        }
+        if (!std::filesystem::is_regular_file(status) || (tomlOnly && it->path().extension() != ".toml")) {
+          continue;
+        }
+        const auto relative = it->path().lexically_relative(sourceRoot).lexically_normal();
+        if (relative.empty() || relative.is_absolute()
+            || std::ranges::any_of(relative, [](const auto& part) { return part == ".."; })) {
+          return std::unexpected("unsafe relative source path: " + it->path().string());
+        }
+        files.push_back(ImportFile{
+            .source = it->path(), .target = targetRoot / relative, .relative = relative, .kind = std::string(kind),
+        });
+      }
+      if (ec) {
+        return std::unexpected("failed while scanning " + sourceRoot.string() + ": " + ec.message());
+      }
+      std::ranges::sort(files, {}, &ImportFile::relative);
+      return files;
+    }
+
+    std::expected<void, std::string> validateImportTarget(
+        const std::filesystem::path& path,
+        const std::vector<std::filesystem::path>& sourceRoots
+    ) {
+      std::error_code ec;
+      const auto status = std::filesystem::symlink_status(path, ec);
+      if (ec == std::errc::no_such_file_or_directory) {
+        ec.clear();
+      } else if (ec) {
+        return std::unexpected("failed to inspect target " + path.string() + ": " + ec.message());
+      } else if (std::filesystem::exists(status)) {
+        return std::unexpected("target already exists; import will not overwrite it: " + path.string());
+      }
+
+      auto resolvedTarget = comparisonPath(path);
+      if (!resolvedTarget) {
+        return std::unexpected(resolvedTarget.error());
+      }
+      for (const auto& sourceRoot : sourceRoots) {
+        auto resolvedSource = comparisonPath(sourceRoot);
+        if (!resolvedSource) {
+          return std::unexpected(resolvedSource.error());
+        }
+        if (pathsOverlap(*resolvedTarget, *resolvedSource)) {
+          return std::unexpected("import target overlaps a Noctalia source directory: " + path.string());
+        }
+      }
+      return {};
+    }
+
+    bool createImportDirectories(
+        const std::filesystem::path& targetParent,
+        std::vector<std::filesystem::path>& createdDirectories,
+        std::error_code& ec
+    ) {
+      std::vector<std::filesystem::path> missingDirectories;
+      for (auto current = targetParent; !current.empty();) {
+        ec.clear();
+        if (std::filesystem::is_directory(current, ec)) {
+          break;
+        }
+        if (ec && ec != std::errc::no_such_file_or_directory) {
+          return false;
+        }
+
+        ec.clear();
+        const auto linkStatus = std::filesystem::symlink_status(current, ec);
+        if (ec == std::errc::no_such_file_or_directory
+            || (!ec && linkStatus.type() == std::filesystem::file_type::not_found)) {
+          ec.clear();
+          missingDirectories.push_back(current);
+        } else if (ec) {
+          return false;
+        } else {
+          ec = std::make_error_code(std::errc::not_a_directory);
+          return false;
+        }
+
+        const auto parent = current.parent_path();
+        if (parent == current) {
+          ec = std::make_error_code(std::errc::not_a_directory);
+          return false;
+        }
+        current = parent;
+      }
+
+      std::ranges::reverse(missingDirectories);
+      for (const auto& directory : missingDirectories) {
+        const bool created = std::filesystem::create_directory(directory, ec);
+        if (ec) {
+          return false;
+        }
+        if (created) {
+          createdDirectories.push_back(directory);
+          continue;
+        }
+
+        if (!std::filesystem::is_directory(directory, ec) || ec) {
+          if (!ec) {
+            ec = std::make_error_code(std::errc::not_a_directory);
+          }
+          return false;
+        }
+      }
+      return true;
+    }
+
+    int runImportNoctalia(int argc, char* argv[]) {
+      auto parsed = cli::parseOrReport(
+          cli::kConfigImportNoctaliaCmd, "hyprbar config import-noctalia",
+          std::span<char* const>{argv + 3, static_cast<std::size_t>(argc - 3)}
+      );
+      if (!parsed)
+        return 1;
+      if (parsed->helpRequested)
+        return 0;
+
+      auto sourceConfig = absolutePath(parsed->value("--config-dir").empty()
+          ? defaultNoctaliaDir("XDG_CONFIG_HOME", ".config")
+          : std::filesystem::path(parsed->value("--config-dir")));
+      auto sourceState = absolutePath(parsed->value("--state-dir").empty()
+          ? defaultNoctaliaDir("XDG_STATE_HOME", ".local/state")
+          : std::filesystem::path(parsed->value("--state-dir")));
+      auto sourceData = absolutePath(parsed->value("--data-dir").empty()
+          ? defaultNoctaliaDir("XDG_DATA_HOME", ".local/share")
+          : std::filesystem::path(parsed->value("--data-dir")));
+      auto targetConfig = absolutePath(FileUtils::configDir());
+      auto targetState = absolutePath(FileUtils::stateDir());
+      auto targetData = absolutePath(FileUtils::dataDir());
+      if (!sourceConfig || !sourceState || !sourceData || !targetConfig || !targetState || !targetData) {
+        const std::string reason = !sourceConfig ? sourceConfig.error()
+            : !sourceState                     ? sourceState.error()
+            : !sourceData                      ? sourceData.error()
+            : !targetConfig                    ? targetConfig.error()
+            : !targetState                     ? targetState.error()
+                                               : targetData.error();
+        std::println(stderr, "error: {}", reason);
+        return 1;
+      }
+
+      std::vector<std::filesystem::path> sourceRoots{*sourceConfig, *sourceState};
+      std::vector<std::filesystem::path> targetRoots{*targetConfig, *targetState};
+      if (parsed->has("--include-local-plugins")) {
+        sourceRoots.push_back(*sourceData);
+        targetRoots.push_back(*targetData);
+      }
+      if (auto separate = validateSeparateRoots(sourceRoots, targetRoots); !separate) {
+        std::println(stderr, "error: {}", separate.error());
+        return 1;
+      }
+
+      auto configFiles = collectImportTree(*sourceConfig, *targetConfig, "config", true);
+      if (!configFiles) {
+        std::println(stderr, "error: {}", configFiles.error());
+        return 1;
+      }
+      std::vector<ImportFile> files = std::move(*configFiles);
+
+      const auto sourceSettings = *sourceState / "settings.toml";
+      std::error_code ec;
+      const auto settingsLinkStatus = std::filesystem::symlink_status(sourceSettings, ec);
+      if (ec && ec != std::errc::no_such_file_or_directory) {
+        std::println(stderr, "error: failed to inspect {}: {}", sourceSettings.string(), ec.message());
+        return 1;
+      }
+      std::string settingsKind = "settings";
+      std::filesystem::path settingsSource = sourceSettings;
+      if (!ec && std::filesystem::is_symlink(settingsLinkStatus)) {
+        auto resolved = resolveImportSymlink(*sourceState, sourceSettings);
+        if (!resolved) {
+          std::println(stderr, "error: settings {}", resolved.error());
+          return 1;
+        }
+        settingsSource = std::move(*resolved);
+        settingsKind += " symlink target";
+      }
+      if (!ec && (std::filesystem::is_regular_file(settingsLinkStatus) || std::filesystem::is_symlink(settingsLinkStatus))) {
+        files.push_back(ImportFile{
+            .source = std::move(settingsSource),
+            .target = *targetState / "settings.toml",
+            .relative = "settings.toml",
+            .kind = std::move(settingsKind),
+        });
+      }
+
+      if (parsed->has("--include-local-plugins")) {
+        const auto sourcePlugins = *sourceData / "plugins";
+        const auto targetPlugins = *targetData / "plugins";
+        if (isWithin(targetPlugins, sourcePlugins) || isWithin(sourcePlugins, targetPlugins)) {
+          std::println(stderr, "error: Noctalia and Hyprbar plugin directories must be separate");
+          return 1;
+        }
+        if (std::filesystem::exists(sourcePlugins, ec) && !ec) {
+          auto pluginFiles = collectImportTree(sourcePlugins, targetPlugins, "local plugin", false);
+          if (!pluginFiles) {
+            std::println(stderr, "error: {}", pluginFiles.error());
+            return 1;
+          }
+          files.insert(files.end(), std::make_move_iterator(pluginFiles->begin()), std::make_move_iterator(pluginFiles->end()));
+        } else if (ec) {
+          std::println(stderr, "error: failed to inspect {}: {}", sourcePlugins.string(), ec.message());
+          return 1;
+        }
+      }
+
+      if (parsed->has("--include-plugin-data")) {
+        const auto sourcePluginData = *sourceState / "plugins/data";
+        const auto targetPluginData = *targetState / "plugins/data";
+        if (isWithin(targetPluginData, sourcePluginData) || isWithin(sourcePluginData, targetPluginData)) {
+          std::println(stderr, "error: Noctalia and Hyprbar plugin data directories must be separate");
+          return 1;
+        }
+        if (std::filesystem::exists(sourcePluginData, ec) && !ec) {
+          auto pluginDataFiles = collectImportTree(sourcePluginData, targetPluginData, "plugin data", false);
+          if (!pluginDataFiles) {
+            std::println(stderr, "error: {}", pluginDataFiles.error());
+            return 1;
+          }
+          files.insert(files.end(), std::make_move_iterator(pluginDataFiles->begin()), std::make_move_iterator(pluginDataFiles->end()));
+        } else if (ec) {
+          std::println(stderr, "error: failed to inspect {}: {}", sourcePluginData.string(), ec.message());
+          return 1;
+        }
+      }
+
+      if (files.empty()) {
+        std::println(stderr, "error: no importable config, settings, or local plugin files were found");
+        return 1;
+      }
+      for (const auto& file : files) {
+        if (auto valid = validateImportTarget(file.target, sourceRoots); !valid) {
+          std::println(stderr, "error: {}", valid.error());
+          return 1;
+        }
+      }
+
+      std::println("{} {} file(s):", parsed->has("--apply") ? "Importing" : "Previewing", files.size());
+      for (const auto& file : files) {
+        std::println("  {}: {} -> {}", file.kind, file.source.string(), file.target.string());
+      }
+      if (!parsed->has("--apply")) {
+        std::println("Preview only; pass --apply to copy these files. No source or target files were changed.");
+        return 0;
+      }
+
+      std::vector<std::filesystem::path> copied;
+      std::vector<std::filesystem::path> createdDirectories;
+      for (const auto& file : files) {
+        if (!createImportDirectories(file.target.parent_path(), createdDirectories, ec)) {
+          break;
+        }
+        if (!std::filesystem::copy_file(file.source, file.target, std::filesystem::copy_options::none, ec)) {
+          if (!ec) {
+            ec = std::make_error_code(std::errc::io_error);
+          }
+          break;
+        }
+        copied.push_back(file.target);
+        std::filesystem::permissions(file.target, FileUtils::privateFileMode(), std::filesystem::perm_options::replace, ec);
+        if (ec) {
+          break;
+        }
+      }
+      if (ec) {
+        const std::string message = ec.message();
+        bool rollbackComplete = true;
+        for (const auto& path : copied) {
+          std::error_code cleanupError;
+          std::filesystem::remove(path, cleanupError);
+          rollbackComplete = rollbackComplete && !cleanupError;
+        }
+        for (auto directory = createdDirectories.rbegin(); directory != createdDirectories.rend(); ++directory) {
+          std::error_code cleanupError;
+          std::filesystem::remove(*directory, cleanupError);
+          rollbackComplete = rollbackComplete && !cleanupError;
+        }
+        if (rollbackComplete) {
+          std::println(stderr, "error: import failed and copied files were rolled back: {}", message);
+        } else {
+          std::println(stderr, "error: import failed and rollback was incomplete: {}", message);
+        }
+        return 1;
+      }
+
+      std::println("Imported {} file(s) into Hyprbar's isolated directories. Noctalia files were left unchanged.", files.size());
+      std::println("Keyring credentials, app state, plugin caches, notification history, and clipboard history were not copied.");
+      if (parsed->has("--include-local-plugins")) {
+        std::println("Local plugin code was copied; review it before starting Hyprbar.");
+      }
+      if (parsed->has("--include-plugin-data")) {
+        std::println("Persistent plugin data was copied; treat it as potentially sensitive.");
+      }
+      return 0;
+    }
+
   } // namespace
 
   int runCli(int argc, char* argv[]) {
     if (argc < 3 || std::strcmp(argv[2], "--help") == 0 || std::strcmp(argv[2], "-h") == 0) {
-      std::print("{}", cli::renderHelp(cli::kConfigCmd, "noctalia config"));
+      std::print("{}", cli::renderHelp(cli::kConfigCmd, "hyprbar config"));
       return argc < 3 ? 1 : 0;
     }
 
     if (std::strcmp(argv[2], "validate") == 0)
       return runValidate(argc, argv);
+    if (std::strcmp(argv[2], "import-noctalia") == 0)
+      return runImportNoctalia(argc, argv);
     if (std::strcmp(argv[2], "export") == 0)
       return runExport(argc, argv);
     if (std::strcmp(argv[2], "settings-count") == 0)
       return runSettingsCount(argc, argv);
     if (std::strcmp(argv[2], "replay-report") == 0) {
       auto parsed = cli::parseOrReport(
-          cli::kConfigReplayReportCmd, "noctalia config replay-report",
+          cli::kConfigReplayReportCmd, "hyprbar config replay-report",
           std::span<char* const>{argv + 3, static_cast<std::size_t>(argc - 3)}
       );
       if (!parsed)
@@ -472,7 +908,7 @@ namespace noctalia::config {
     }
 
     std::println(stderr, "error: unknown command: {}", argv[2]);
-    std::println(stderr, "Run 'noctalia config --help' for usage.");
+    std::println(stderr, "Run 'hyprbar config --help' for usage.");
     return 1;
   }
 

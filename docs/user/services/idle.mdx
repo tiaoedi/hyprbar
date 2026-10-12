@@ -5,7 +5,7 @@ sidebar:
   order: 5
 ---
 
-Idle behaviors are named entries under `[idle.behavior.*]`. When the resolved config does not define idle behaviors, Noctalia seeds built-in Lock and Monitor off behaviors, both disabled by default.
+Idle behaviors are named entries under `[idle.behavior.*]`. When the resolved config does not define idle behaviors, Hyprbar seeds built-in Lock and Monitor off behaviors, both disabled by default.
 
 Optional top-level **`[idle]`** keys apply before any behavior’s `command` runs:
 
@@ -24,7 +24,7 @@ after the listed entries; unknown names are ignored.
 
 While a fade is in progress, the overlay is click-through so pointer/keyboard activity still reaches the compositor; if the session becomes active again during that window, the pending command is cancelled. The dim is a layer-shell **overlay** that covers the full monitor (including the bar).
 
-Each behavior picks an **`action`**. The built-in actions are native - they need no `command`. Use `action = "command"` only when you want to run something Noctalia doesn't have a native action for. Command fields are normal shell commands; use `noctalia msg ...` when a shell command needs to call Noctalia IPC.
+Each behavior picks an **`action`**. The built-in actions are native - they need no `command`. Use `action = "command"` only when you want to run something Hyprbar doesn't have a native action for. Command fields are normal shell commands; use `hyprbar msg ...` when a shell command needs to call Hyprbar IPC.
 
 ```toml
 [idle.behavior.lock]
@@ -57,7 +57,7 @@ resume_command = "notify-send 'Idle' 'Back from idle'"
 | `resume_command` | string | `""` | Optional shell command to run when activity resumes |
 | `lock_before_suspend` | bool | `true` | For `action = "suspend"`, lock the session first (equivalent to `action = "lock_and_suspend"`). Set `false` to suspend without locking. |
 
-`action = "screen_off"` turns the monitors off on idle and **back on automatically** when you return. If `resume_command` is set, Noctalia restores monitor power first and then runs the command. The command still runs if monitor power restoration reports a failure.
+`action = "screen_off"` turns the monitors off on idle and **back on automatically** when you return. If `resume_command` is set, Hyprbar restores monitor power first and then runs the command. The command still runs if monitor power restoration reports a failure.
 
 For a fully custom power action, use the canonical IPC CLI as part of a shell command:
 
@@ -65,8 +65,8 @@ For a fully custom power action, use the canonical IPC CLI as part of a shell co
 [idle.behavior.custom-power]
 timeout = 660
 action = "command"
-command = "noctalia msg dpms-off"
-resume_command = "noctalia msg dpms-on && some_shell_command"
+command = "hyprbar msg dpms-off"
+resume_command = "hyprbar msg dpms-on && some_shell_command"
 ```
 
 Idle behavior uses the Wayland `ext_idle_notifier_v1` protocol and respects active idle inhibitors.
@@ -75,7 +75,7 @@ Idle behavior uses the Wayland `ext_idle_notifier_v1` protocol and respects acti
 
 Custom commands can use the canonical IPC references:
 
-- [System Controls](/noctalia/ipc/system-controls/) for caffeine and monitor power (`dpms-on` / `dpms-off`)
-- [Surfaces → Panels](/noctalia/ipc/surfaces/#panels) for launcher, clipboard, wallpaper, and control center
-- [Media & UI → Media](/noctalia/ipc/media-and-ui/#media) for media playback commands
-- [Shell → Session](/noctalia/ipc/shell/#session) for lock, suspend, and logout actions
+- [System Controls](/hyprbar/ipc/system-controls/) for caffeine and monitor power (`dpms-on` / `dpms-off`)
+- [Surfaces → Panels](/hyprbar/ipc/surfaces/#panels) for launcher, clipboard, wallpaper, and control center
+- [Media & UI → Media](/hyprbar/ipc/media-and-ui/#media) for media playback commands
+- [Shell → Session](/hyprbar/ipc/shell/#session) for lock, suspend, and logout actions

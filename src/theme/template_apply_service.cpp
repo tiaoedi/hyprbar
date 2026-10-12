@@ -45,7 +45,7 @@ namespace noctalia::theme {
     std::filesystem::path userTemplateConfigPath() {
       const std::string configDir = FileUtils::configDir();
       if (configDir.empty()) {
-        return "noctalia.toml";
+        return "hyprbar.toml";
       }
       return std::filesystem::path(configDir) / "config.toml";
     }

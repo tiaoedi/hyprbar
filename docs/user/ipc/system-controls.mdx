@@ -46,7 +46,7 @@ Default step is 5% when not specified. Output volume is clamped to 100% unless `
 | Show mic OSD | <IpcCommand command="mic-volume-osd" /> | Show the microphone OSD at the current volume without changing it. |
 | Show mic OSD at value | <IpcCommand command="mic-volume-osd 40%" /> | Show the microphone OSD at the given value without changing volume. |
 
-`volume-osd` and `mic-volume-osd` never change the level. Called with no value they show the current one, which suits a "show me the volume" bind. Called with a value they show that value instead, for scripts that manage volume outside Noctalia such as an MPD volume sync. Both start on the focused output when `[osd].follow_focused_output` is enabled and stay there until the popup disappears; otherwise they appear on the monitors configured under `[osd].monitors`. Both reflect the real mute state of the device.
+`volume-osd` and `mic-volume-osd` never change the level. Called with no value they show the current one, which suits a "show me the volume" bind. Called with a value they show that value instead, for scripts that manage volume outside Hyprbar such as an MPD volume sync. Both start on the focused output when `[osd].follow_focused_output` is enabled and stay there until the popup disappears; otherwise they appear on the monitors configured under `[osd].monitors`. Both reflect the real mute state of the device.
 
 ## Brightness
 
@@ -102,7 +102,7 @@ Caffeine IPC commands show a short OSD when they change the state.
 
 Requires `org.freedesktop.UPower.PowerProfiles` (same as the Control Center home shortcut). Profile ids come from the compositor/session; common values are `performance`, `balanced`, and `power-saver`.
 
-When another app or an IPC command changes the active profile, Noctalia shows a short OSD with the active mode's icon and profile name. Profile changes made through Noctalia's UI update the UI and fire hooks without showing extra OSD feedback.
+When another app or an IPC command changes the active profile, Hyprbar shows a short OSD with the active mode's icon and profile name. Profile changes made through Hyprbar's UI update the UI and fire hooks without showing extra OSD feedback.
 
 | Action | Command | Description |
 |--------|---------|-------------|

@@ -42,18 +42,18 @@ device = "output"
 
 ```sh
 # Output (speaker)
-noctalia msg volume-set 65
-noctalia msg volume-up
-noctalia msg volume-up 10
-noctalia msg volume-down
-noctalia msg volume-mute
+hyprbar msg volume-set 65
+hyprbar msg volume-up
+hyprbar msg volume-up 10
+hyprbar msg volume-down
+hyprbar msg volume-mute
 
 # Input (microphone)
-noctalia msg mic-volume-set 0.5
-noctalia msg mic-volume-up
-noctalia msg mic-volume-up 5%
-noctalia msg mic-volume-down
-noctalia msg mic-mute
+hyprbar msg mic-volume-set 0.5
+hyprbar msg mic-volume-up
+hyprbar msg mic-volume-up 5%
+hyprbar msg mic-volume-down
+hyprbar msg mic-mute
 ```
 
 Volume and mic IPC use a default step of 5% when no explicit step is provided. Values and steps accept normalized (`0.0`–`1.0`) or percentage-style values (`65`, `65%`, `5%`). Rule of thumb: if you include a decimal and the value is `<= 1.0`, it is treated as normalized; otherwise it is treated as a percentage.

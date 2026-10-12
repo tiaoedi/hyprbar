@@ -119,7 +119,7 @@ namespace {
 
   std::string userHostLine() { return std::format("{}@{}", sessionUserName(), hostName()); }
 
-  std::string noctaliaVersionLine() { return std::format("Noctalia {}", noctalia::build_info::displayVersion()); }
+  std::string noctaliaVersionLine() { return std::format("Hyprbar {}", noctalia::build_info::displayVersion()); }
 
   void applyHomeCardStyle(Flex& card, float scale, float fillOpacity) {
     applySectionCardStyle(card, scale, fillOpacity);
@@ -266,7 +266,7 @@ std::unique_ptr<Flex> HomeTab::create() {
         return;
       }
       notify::error(
-          "Noctalia", i18n::tr("control-center.home.avatar-error-title"),
+          "Hyprbar", i18n::tr("control-center.home.avatar-error-title"),
           i18n::tr(shell::avatarApplyErrorTranslationKey(applyResult.error))
       );
     });

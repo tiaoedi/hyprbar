@@ -5,7 +5,7 @@ sidebar:
   order: 9
 ---
 
-A palette is the set of colors selected by [`[theme]`](/noctalia/theming/). The theme config chooses the source and mode; the palette provides the actual color values used by bars, panels, widgets, templates, and other theme-aware UI.
+A palette is the set of colors selected by [`[theme]`](/hyprbar/theming/). The theme config chooses the source and mode; the palette provides the actual color values used by bars, panels, widgets, templates, and other theme-aware UI.
 
 ## Color Roles
 
@@ -30,11 +30,11 @@ User-facing color settings reference these 16 roles with lowercase `snake_case` 
 | `hover` | `mHover` | Hover and interactive highlight background. |
 | `on_hover` | `mOnHover` | Text and icons placed on hover surfaces. |
 
-Settings role pickers expose these role names first. Template files access these roles and the full Material token set through the [Template Reference](/noctalia/theming/templates/#available-color-tokens). Plugins can query the active theme's colors at runtime using [`noctalia.getColor(role)`](/noctalia/plugins/development/runtime-api/#runtime-and-settings).
+Settings role pickers expose these role names first. Template files access these roles and the full Material token set through the [Template Reference](/hyprbar/theming/templates/#available-color-tokens). Plugins can query the active theme's colors at runtime using [`hyprbar.getColor(role)`](/hyprbar/plugins/development/runtime-api/#runtime-and-settings).
 
 ## Custom Palette Files
 
-When `source = "custom"`, `custom_palette` names a JSON file in the Noctalia config directory's `palettes/` folder:
+When `source = "custom"`, `custom_palette` names a JSON file in the Hyprbar config directory's `palettes/` folder:
 
 ```toml
 [theme]
@@ -45,7 +45,7 @@ custom_palette = "MyPalette"
 With the default config location, that loads:
 
 ```text
-~/.config/noctalia/palettes/MyPalette.json
+~/.config/hyprbar/palettes/MyPalette.json
 ```
 
 The palette JSON format is the same format v4 called a color scheme. For v5, the concept is called a palette, the file lives under `palettes/`, and it is selected by `custom_palette`; v4 used `colorschemes/`.
@@ -53,13 +53,13 @@ The palette JSON format is the same format v4 called a color scheme. For v5, the
 If you are migrating a v4 color scheme, copy the JSON payload to the v5 palette location:
 
 ```text
-~/.config/noctalia/colorschemes/MyScheme/MyScheme.json
--> ~/.config/noctalia/palettes/MyScheme.json
+~/.config/hyprbar/colorschemes/MyScheme/MyScheme.json
+-> ~/.config/hyprbar/palettes/MyScheme.json
 ```
 
 ## Palette JSON
 
-Each palette can provide `dark` and `light` variants. If `light` is omitted, Noctalia uses the dark variant for both modes.
+Each palette can provide `dark` and `light` variants. If `light` is omitted, Hyprbar uses the dark variant for both modes.
 
 ```json
 {

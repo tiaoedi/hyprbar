@@ -55,7 +55,7 @@ KdeNotificationClient::KdeNotificationClient(SessionBus& bus, NotificationManage
     m_plasmaProxy->callMethod("Inhibit")
         .onInterface(kFdoNotificationsInterface)
         .withArguments(
-            std::string{}, std::string{"Noctalia handles notifications"}, std::map<std::string, sdbus::Variant>{}
+            std::string{}, std::string{"Hyprbar handles notifications"}, std::map<std::string, sdbus::Variant>{}
         )
         .storeResultsTo(m_inhibitCookie);
   } catch (const sdbus::Error& e) {

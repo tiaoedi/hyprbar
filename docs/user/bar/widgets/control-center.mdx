@@ -9,12 +9,15 @@ Opens the control center panel on click.
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
-| `glyph` | string | `"noctalia"` | Bar glyph name: Noctalia alias, Tabler icon name, or `U+` / `0x` codepoint |
-| `custom_image` | string | `""` | Path to a custom image displayed instead of the glyph. Leave empty to use the glyph |
+| `glyph` | string | existing glyph | Fallback shown only when `custom_image` is empty; retained for existing configurations |
+| `custom_image` | string | bundled Hyprbar icon | Image shown instead of the glyph |
 | `custom_image_colorize` | bool | `false` | When `true`, tint the custom image with the widget **Color** setting (same as the glyph fallback) |
 
 ```toml
 [widget.control-center]
-custom_image = "/path/to/image.png"
-custom_image_colorize = true
+custom_image = "/usr/share/hyprbar/assets/hyprbar.svg"
+custom_image_colorize = false
 ```
+
+The bundled Hyprbar icon is used by default. Set `custom_image` to another image path to replace it, or to an empty string to
+show the configured glyph. Keep `custom_image_colorize = false` to preserve the image's original colors.

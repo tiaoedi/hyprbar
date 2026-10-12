@@ -1,255 +1,43 @@
-# Packaging Noctalia
+# Packaging Hyprbar
 
-Notes for distribution packagers. End-user install docs live in the
-[README](README.md) and at [docs.noctalia.dev](https://docs.noctalia.dev/noctalia/getting-started/installation/).
+Hyprbar is an independent fork based on Noctalia v5.2.1. Upstream source and contributor credits are retained in [`CREDITS.md`](CREDITS.md). Do not treat upstream package repositories as Hyprbar releases.
 
-## Package description
+## Current package status
 
-Use this exact short description for package metadata (`pkgdesc`, `Summary`,
-AppStream, etc.):
-
-> A sleek, customizable desktop shell crafted for Wayland.
-
-Do not substitute shorter or alternate blurbs (“lightweight Wayland bar”,
-“status bar”, ...). Noctalia is a full desktop shell (bars, dock, launcher,
-notifications, lock screen, wallpaper, settings, ...), not a bar-only tool.
-
-## Packaged distributions
-
-v5 is already packaged for:
-
-- Arch Linux
-- NixOS
-- Fedora
-- openSUSE
-- KaOS
-- Gentoo
-- GNU Guix
-- Debian (including Ubuntu)
-
-[Repology](https://repology.org/project/noctalia/versions) is a useful at-a-glance
-check, but it only covers repositories it indexes (and may still list v4 as
-`noctalia-shell`). It is not a complete inventory of community packaging.
+No prebuilt package or checksum is published yet. The RPM spec targets Fedora 44 x86_64; package build/install verification is tracked separately from the successful source build and test run. Other distributions have not been validated.
 
 ## Identity
 
-| | |
+| Field | Hyprbar value |
 |---|---|
-| Name | `noctalia` |
-| Homepage | https://github.com/noctalia-dev/noctalia |
-| Docs | https://docs.noctalia.dev |
-| License | MIT ([LICENSE](LICENSE)); also see vendored licenses under `third_party/` for SPDX completeness |
-| Version | Meson `project(... version: ...)` in [`meson.build`](meson.build) |
-| Binary | `noctalia` |
-| Desktop entry | `dev.noctalia.Noctalia.desktop` |
-| Icon | `noctalia` (`share/icons/hicolor/scalable/apps/noctalia.svg`) |
+| Package | `hyprbar` |
+| Version base | `5.2.1` (upstream source version) |
+| Executable | `hyprbar` |
+| Desktop entry | `dev.hyprbar.Hyprbar.desktop` |
+| Icon | `hyprbar` (original Hyprbar vector artwork) |
+| Data | `<prefix>/share/hyprbar/` |
+| License | MIT for the upstream source; bundled components retain their own licenses |
+| Nix / Guix | Package definitions are not included or verified in this fork |
 
-## Maintenance Policy
+## Build and installed layout
 
-Releases strive to follow [semantic versioning](https://semver.org).
-The latest version is the only actively maintained version.
-No attempts are made to achieve overlapping lifecycles of major or minor versions.
-Bug reports are required to be reproducible on the latest version.
-
-## Architectures / libc
-
-First-class targets:
-
-- `x86_64` (amd64)
-- `aarch64` (arm64)
-
-Linux only. There is no intentional arch-specific code path; other little-endian
-Linux arches may build if dependencies are available, but they are not
-first-class supported.
-
-**musl**: known to build (e.g. Alpine / Void musl). Not first-class tested.
-`jemalloc` is glibc-only, on musl leave `-Djemalloc=disabled` (or `auto`, which
-skips it).
-
-## Compilers / linkers
-
-C++23 is required.
-
-| Toolchain | Minimum | Notes |
-|---|---|---|
-| GCC + libstdc++ | **GCC 13+** | Default on most distros |
-| Clang + libstdc++ or libc++ | **Clang 16+** | libc++ needs Meson’s experimental-library flags (already wired in `meson.build`) |
-
-Debian 12 “bookworm” needs a newer toolchain than the default `g++` (e.g.
-`g++-13` with `CXX=g++-13`).
-
-No special linker is required. The default linker from the compiler driver is
-fine (**GNU ld** / gold, **lld**, **mold** via `-fuse-ld=` all work). Release
-builds pass `-Wl,--gc-sections` and `-Wl,--as-needed`, which those linkers
-support.
-
-## Build
-
-- Build system: [Meson](https://mesonbuild.com/) + Ninja. The repo’s
-  [`justfile`](justfile) is convenience only; packaging can call Meson
-  directly.
-- Language / toolchain: see [Compilers / linkers](#compilers--linkers).
-- Recommended: `meson setup build --buildtype=release`, then compile/install.
-- Do **not** enable `-Dnative_optimizations=true` for distro packages (CPU-local
-  codegen; not portable).
-- Tests: `-Dtests=disabled` (or leave `auto`, which skips tests for release).
-- `jemalloc`: recommended on glibc; Meson feature option `-Djemalloc=auto|enabled|disabled`.
-  Only used on glibc builds.
-
-Prefix/datadir are baked into the binary via `NOCTALIA_INSTALL_PREFIX` /
-`NOCTALIA_INSTALL_DATADIR`. Install with the same prefix you configured.
-
-### Installed layout
+Build with Meson and Ninja as described in [`BUILDING.md`](BUILDING.md). Distribution builds must not enable native CPU optimizations. The complete `assets/` directory is required at runtime; do not package only the executable.
 
 ```text
-<prefix>/bin/noctalia
-<prefix>/share/noctalia/assets/...
-<prefix>/share/applications/dev.noctalia.Noctalia.desktop
-<prefix>/share/icons/hicolor/scalable/apps/noctalia.svg
+<prefix>/bin/hyprbar
+<prefix>/share/hyprbar/assets/...
+<prefix>/share/applications/dev.hyprbar.Hyprbar.desktop
+<prefix>/share/icons/hicolor/scalable/apps/hyprbar.svg
 ```
 
-The shipped `assets/` tree is **required at runtime**. Shipping only the binary
-breaks fonts, translations, templates, glyphs, and sounds.
+The runtime also supports a portable bundle containing `hyprbar` and `assets/`. Asset lookup is implemented in `src/core/files/resource_paths.cpp`; `HYPRBAR_ASSETS_DIR` is the explicit asset-root override. Confirm this lookup and the staged install tree whenever asset names or Meson install rules change.
 
-### Runtime asset lookup
+The RPM spec generates Bash, Zsh, and Fish completions from the freshly built executable. Its `%check` uses isolated HOME/XDG directories. See [`packaging/rpm/README.md`](packaging/rpm/README.md) for source archive and build commands.
 
-Besides the prefix layout above, portable bundle layouts are supported:
+## Runtime integrations and compatibility boundary
 
-```text
-bundle/
-  noctalia
-  assets/
-```
+Hyprbar is a Wayland shell, not a compositor, login manager, or greeter. It may claim freedesktop notification and StatusNotifier services; avoid running competing hosts for those services in the same session.
 
-```text
-bundle/
-  bin/noctalia
-  share/noctalia/assets/
-```
+Some identifiers intentionally retain upstream spelling because they are public integration contracts or persistent formats: plugin API namespace `noctalia.*`, glyph prefix `noctalia-glyph:`, encrypted-store format `NOCTALIAENC1`, and the optional Noctalia Greeter helper interface. Preserve these until a versioned migration is designed. Other internal implementation names are not product branding; review behavior, persistence, external consumers, and migration safety before changing them.
 
-Noctalia resolves the asset root in this order:
-
-1. `NOCTALIA_ASSETS_DIR` (a warning is logged if it is set but invalid)
-2. `assets/` next to the executable
-3. `assets/` one level above the executable (this is how a `build-debug/`
-   binary finds the source tree's `assets/`)
-4. `../<datadir>/noctalia/assets` relative to the executable, when the
-   configured Meson `datadir` is relative
-5. `../share/noctalia/assets` relative to the executable
-6. the compiled install path from Meson (`<prefix>/<datadir>/noctalia/assets`)
-
-A candidate is only accepted if it contains `emoji.json`,
-`fonts/noctalia-tabler.ttf`, `templates/builtin.toml`, and
-`translations/en.json`. If none qualifies, Noctalia logs a warning and uses the
-compiled install path.
-
-Not shipped (don’t look for them in the install): AppStream / metainfo XML, man
-pages, systemd units.
-
-### Shell completions
-
-Static completion files are not shipped. Generate them from the freshly built
-binary and install them in the distribution's completion directories:
-
-```text
-./build-<mode>/noctalia completions bash  → share/bash-completion/completions/noctalia
-./build-<mode>/noctalia completions zsh   → share/zsh/site-functions/_noctalia
-./build-<mode>/noctalia completions fish  → share/fish/vendor_completions.d/noctalia.fish
-```
-
-This is intentionally a packaging step rather than a Meson install rule:
-executing the target binary during installation would break cross-compilation.
-
-## Dependencies
-
-No Qt or GTK. UI is Wayland + OpenGL ES (EGL/GLES, or `libepoxy` as a fallback
-when separate EGL/GLES packages are missing).
-
-### Build-time (required)
-
-Canonical list is the `dependency(...)` / header checks in
-[`meson.build`](meson.build). Distro package names differ; [BUILDING.md](BUILDING.md)
-has copy-paste install lines for common distros.
-
-Notes packagers hit often:
-
-- **stb** must provide `stb/stb_image_resize2.h` (and `stb/stb_image_write.h`).
-  Older packages that only ship `stb_image_resize` are not enough. Meson fails
-  the configure check if `stb_image_resize2` is missing.
-- Meson requires **WirePlumber 0.5** (`wireplumber-0.5` pkg-config). 0.4 is not
-  enough.
-
-### Vendored (no system package)
-
-Shipped under `third_party/`: Wuffs, Luau, fzy, Material Color Utilities.
-Each carries its own license file beside the code.
-
-### Runtime
-
-| Dependency | Role |
-|---|---|
-| PipeWire **daemon** (+ WirePlumber 0.5) | Audio, volume OSD, privacy indicators, spectrum. Libraries alone are not enough; without a running daemon those features stay off. |
-| PAM (`login` service by default) | Lock screen authentication |
-| Fontconfig / fonts | Text rendering (users still need usable fonts installed) |
-| `git` | Plugin git sources / auto-update invoke `git` on `PATH` |
-| `upower` | Optional: battery / power devices |
-| `ddcutil` | Optional: external monitor brightness |
-| Secret Service provider | Optional but recommended for credential / encrypted-state persistence (GNOME Keyring, KWallet, KeePassXC, ...). `libsecret` is only the client library; without a session provider those features cannot persist secrets. |
-| `sound-theme-freedesktop` | Shell sounds |
-
-## Startup and IPC
-
-No systemd user unit is shipped. Typical startup is compositor autostart or the
-desktop entry (`noctalia --daemon`). Control a running instance with
-`noctalia msg ...` (Unix socket under `XDG_RUNTIME_DIR`).
-
-Keep the `.desktop` daemon Exec unless you intentionally package a different
-session integration. Prefer the canonical description above for `Comment=` /
-AppStream summary as well.
-
-## Session conflicts
-
-On non-Plasma sessions Noctalia provides and registers:
-
-- `org.freedesktop.Notifications`
-- `org.kde.StatusNotifierWatcher` (system tray host)
-
-Do not run it alongside another notification daemon or StatusNotifier host
-(mako, dunst, swaync, waybar-as-host, ...) unless those are disabled. On Plasma,
-Noctalia integrates with Plasma's notification / tray paths instead of claiming
-the freedesktop Notifications name.
-
-## User data paths
-
-| Kind | Default |
-|---|---|
-| Config | `$XDG_CONFIG_HOME/noctalia` (`~/.config/noctalia`), e.g. `config.toml` |
-| State | `$XDG_STATE_HOME/noctalia` (`~/.local/state/noctalia`), e.g. `settings.toml`, caches |
-| Data | `$XDG_DATA_HOME/noctalia` (`~/.local/share/noctalia`) |
-| Logs | `$XDG_CACHE_HOME/noctalia` (`~/.cache/noctalia`) |
-
-Override bases with `NOCTALIA_CONFIG_HOME`, `NOCTALIA_STATE_HOME`,
-`NOCTALIA_DATA_HOME` (each still appends `/noctalia`).
-
-## What Noctalia is not
-
-- Not a compositor, display manager, or greeter. Greeter support is
-  [noctalia-greeter](https://github.com/noctalia-dev/noctalia-greeter).
-- Not a replacement for file managers, screen casting, or drive mounting.
-- Compositor support varies (protocols / IPC). See the compositor docs for
-  [Niri](https://docs.noctalia.dev/noctalia/compositor-settings/niri/),
-  [Hyprland](https://docs.noctalia.dev/noctalia/compositor-settings/hyprland/),
-  [Sway / Scroll](https://docs.noctalia.dev/noctalia/compositor-settings/sway-scroll/),
-  [Mango](https://docs.noctalia.dev/noctalia/compositor-settings/mango/),
-  [Labwc](https://docs.noctalia.dev/noctalia/compositor-settings/labwc/), and
-  [KDE Plasma](https://docs.noctalia.dev/noctalia/compositor-settings/kde/).
-
-## Versioning
-
-Prefer packaging **tagged releases** rather than random `main` snapshots unless
-you maintain a `-git` / nightly package on purpose.
-
-## Contact
-
-- Issues: https://github.com/noctalia-dev/noctalia/issues
-- Discord: https://discord.noctalia.dev
+Hyprbar configuration, state, data, cache, runtime socket, and desktop identity use Hyprbar-specific names. `hyprbar config import-noctalia` is an explicit migration path: preview is the default, `--apply` is required to copy, private state is excluded by default, and destination files are not overwritten.

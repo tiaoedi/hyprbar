@@ -210,8 +210,8 @@ namespace {
     const security::SecretId id{.scope = "calendar", .owner = "personal", .name = "refresh-token"};
     const auto attributes = security::secretStoreAttributes(id);
     bool ok = true;
-    ok = expect(security::SecretStoreSchemaName == "dev.noctalia.Secret", "schema name changed") && ok;
-    ok = expect(attributes.application == "noctalia", "application attribute changed") && ok;
+    ok = expect(security::SecretStoreSchemaName == "dev.noctalia.Secret", "legacy Secret Service schema changed") && ok;
+    ok = expect(attributes.application == "noctalia", "legacy application attribute changed") && ok;
     ok = expect(attributes.scope == "calendar", "scope attribute changed") && ok;
     ok = expect(attributes.owner == "personal", "owner attribute changed") && ok;
     ok = expect(attributes.name == "refresh-token", "name attribute changed") && ok;
@@ -248,6 +248,36 @@ namespace {
     ok = dispatchCompletion(store) && ok;
     ok = expect(status == SecretStoreStatus::BackendError, "invalid id did not fail loudly") && ok;
     ok = expect(fake->calls() == 0, "invalid id reached the backend") && ok;
+    return ok;
+  }
+
+  bool legacyStoredEntryRemainsReadable() {
+    auto backend = std::make_unique<FakeSecretStoreBackend>();
+    auto* fake = backend.get();
+    const security::SecretId id{.scope = "storage", .owner = "encrypted-state", .name = "master-key"};
+    const security::SecretStoreAttributes legacyAttributes{
+        .application = "noctalia",
+        .scope = "storage",
+        .owner = "encrypted-state",
+        .name = "master-key",
+        .version = "1",
+    };
+    const std::array<std::uint8_t, 4> legacyValue{2, 4, 6, 8};
+    security::SecretStoreCancellation seedCancellation;
+    const auto seeded = fake->store(legacyAttributes, legacyValue, "legacy encrypted-state key", seedCancellation);
+    bool ok = expect(seeded.status == SecretStoreStatus::Success, "failed to seed legacy Secret Service entry");
+
+    security::SecretStore store(std::move(backend));
+    std::optional<SecretStoreStatus> status;
+    std::vector<std::uint8_t> loaded;
+    store.lookup(id, [&status, &loaded](SecretStoreStatus value, security::SecureBuffer secret) {
+      status = value;
+      loaded.assign(secret.bytes().begin(), secret.bytes().end());
+    });
+    ok = dispatchCompletion(store) && ok;
+    ok = expect(status == SecretStoreStatus::Success, "Noctalia-era Secret Service entry was not found") && ok;
+    ok = expect(loaded == std::vector<std::uint8_t>(legacyValue.begin(), legacyValue.end()), "legacy key value changed")
+        && ok;
     return ok;
   }
 
@@ -435,6 +465,7 @@ namespace {
 int main() {
   bool ok = true;
   ok = exactIdentityAndValidation() && ok;
+  ok = legacyStoredEntryRemainsReadable() && ok;
   ok = binaryReplacementAndDeletion() && ok;
   ok = statusAndThreadDispatch() && ok;
   ok = cancellationAndDestruction() && ok;

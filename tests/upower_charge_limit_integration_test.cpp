@@ -29,11 +29,10 @@ namespace {
   public:
     FakeBattery(
         sdbus::IConnection& connection, std::string path, std::string nativePath, std::string model, bool powerSupply,
-        bool registerChargeMethod, bool unregisterBeforeFirstIntrospection
+        bool registerChargeMethod
     )
         : connection(connection), path(std::move(path)), nativePath(std::move(nativePath)), model(std::move(model)),
-          powerSupply(powerSupply), chargeMethodRegistered(registerChargeMethod),
-          unregisterBeforeFirstIntrospection(unregisterBeforeFirstIntrospection) {
+          powerSupply(powerSupply), chargeMethodRegistered(registerChargeMethod) {
       registerObject();
     }
 
@@ -61,18 +60,9 @@ namespace {
               sdbus::registerProperty("EnergyRate").withGetter([]() { return 8.0; }),
               sdbus::registerProperty("Energy").withGetter([]() { return 30.0; }),
               sdbus::registerProperty("ChargeThresholdSupported").withGetter([this]() {
-                bool shouldUnregister = false;
-                bool supported = false;
-                {
-                  std::scoped_lock lock(stateMutex);
-                  ++supportedReads;
-                  shouldUnregister = unregisterBeforeFirstIntrospection && supportedReads == 1;
-                  supported = thresholdSupported;
-                }
-                if (shouldUnregister) {
-                  object->unregister();
-                }
-                return supported;
+                std::scoped_lock lock(stateMutex);
+                ++supportedReads;
+                return thresholdSupported;
               }),
               sdbus::registerProperty("ChargeThresholdEnabled").withGetter([this]() {
                 std::scoped_lock lock(stateMutex);
@@ -108,7 +98,6 @@ namespace {
     void reappearWithChargeMethod() {
       object.reset();
       chargeMethodRegistered = true;
-      unregisterBeforeFirstIntrospection = false;
       registerObject();
     }
 
@@ -181,7 +170,6 @@ namespace {
     bool present = true;
     mutable std::mutex stateMutex;
     bool chargeMethodRegistered = true;
-    bool unregisterBeforeFirstIntrospection = false;
     bool thresholdSupported = true;
     bool thresholdEnabled = false;
     std::uint32_t supportedSettings = 3;
@@ -217,13 +205,12 @@ namespace {
 
     FakeBattery& addBattery(
         std::string id, std::string model, bool emitSignal = false, bool powerSupply = true,
-        bool registerChargeMethod = true, bool unregisterBeforeFirstIntrospection = false
+        bool registerChargeMethod = true
     ) {
       const std::string path = "/org/freedesktop/UPower/devices/battery_" + id;
       batteries.push_back(
           std::make_unique<FakeBattery>(
-              *connection, path, "NOCTALIA_TEST_" + id, std::move(model), powerSupply, registerChargeMethod,
-              unregisterBeforeFirstIntrospection
+              *connection, path, "NOCTALIA_TEST_" + id, std::move(model), powerSupply, registerChargeMethod
           )
       );
       {
@@ -328,7 +315,7 @@ int main() {
   auto& bat0 = fake.addBattery("BAT0", "Primary Battery");
   auto& bat1 = fake.addBattery("BAT1", "Secondary Battery");
   auto& mouse = fake.addBattery("MOUSE0", "Wireless Mouse", false, false);
-  auto& retryBattery = fake.addBattery("RETRY", "Retry Battery", false, true, true, true);
+  auto& retryBattery = fake.addBattery("RETRY", "Retry Battery", false, true, false);
   auto& unsupportedMethod = fake.addBattery("NO_METHOD", "No Method Battery", false, true, false);
 
   {
@@ -336,8 +323,10 @@ int main() {
     UPowerService capabilityService(capabilityBus);
     auto* retryInfo = findBattery(capabilityService, retryBattery.path);
     TEST_CHECK(retryInfo != nullptr && !retryInfo->chargeLimit.methodAvailable);
+    fake.removeBattery(retryBattery);
+    drainUntil(capabilityBus, [&]() { return findBattery(capabilityService, retryBattery.path) == nullptr; });
     retryBattery.reappearWithChargeMethod();
-    retryBattery.emitChanged();
+    fake.readdBattery(retryBattery);
     drainUntil(capabilityBus, [&]() {
       const auto* current = findBattery(capabilityService, retryBattery.path);
       return current != nullptr && current->chargeLimit.methodAvailable;

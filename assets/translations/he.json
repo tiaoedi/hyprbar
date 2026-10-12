@@ -763,19 +763,19 @@
       "calendar-google-connect-start-failed": "לא ניתן היה להתחיל את אימות Google. נא לבדוק את חיבור הרשת ולנסות שוב.",
       "calendar-google-connect-start-http": "לא ניתן להתחיל את אימות Google. מתווך ה-OAuth החזיר HTTP {status}.",
       "calendar-google-connect-timeout": "פג תוקף האישור של Google. התחל את החיבור מחדש כשתהיה מוכן להתחבר.",
-      "config-migration-body": "יש לעדכן את {path} בקובץ המקור. Noctalia מיישמת החלפה זו באופן זמני בלבד. יש להריץ את noctalia config validate כדי להציג רשימה של כל השינויים הנדרשים.",
+      "config-migration-body": "יש לעדכן את {path} בקובץ המקור. Hyprbar מיישמת החלפה זו באופן זמני בלבד. יש להריץ את hyprbar config validate כדי להציג רשימה של כל השינויים הנדרשים.",
       "config-migration-title": "נדרש עדכון תצורה",
       "dbus-disabled": "התראות DBus מושבתות",
       "desktop-widgets-editor": "עורך וידג'טים",
       "desktop-widgets-editor-enabled": "עורך הווידג'טים של שולחן העבודה מופעל. מומלץ לעבור לסביבת עבודה ריקה כדי שחלונות פתוחים לא יסתירו את העורך.",
-      "greeter-sync": "מקבל הפנים של Noctalia",
+      "greeter-sync": "מקבל הפנים של",
       "greeter-sync-pending": "ממתין לאישור מנהל כדי לכתוב ל-greeter.",
-      "greeter-sync-pending-console": "ממתין לאישור מנהל. יש לאשר את בקשת ה־polkit ב־Noctalia, ב־TTY או במסוף, או להריץ את pkexec באופן ידני.",
+      "greeter-sync-pending-console": "ממתין לאישור מנהל. יש לאשר את בקשת ה־polkit ב־Hyprbar, ב־TTY או במסוף, או להריץ את pkexec באופן ידני.",
       "greeter-sync-pending-manual": "הקבצים מוכנים. הריצו במסוף: pkexec noctalia-greeter-apply-appearance \"$XDG_RUNTIME_DIR/noctalia-greeter-sync\". או הגדירו את shell.greeter_sync.privilege_command (לדוגמה ghostty -e pkexec) וסנכרנו שוב.",
       "greeter-sync-success": "המראה סונכרן. השינויים יחולו במסך הכניסה הבא.",
       "greeter-sync-timeout": "סנכרון ה-Greeter עדיין ממתין לאישור מנהל. בדוק ב-TTY או בקונסולה להנחיית polkit, הפעל את סוכן ה-polkit ב'הגדרות אבטחה', או הרץ את pkexec באופן ידני.",
       "greeter-sync-timeout-manual": "סנכרון ה-Greeter עדיין דורש אישור מנהל. הרץ בטרמינל: pkexec noctalia-greeter-apply-appearance \"$XDG_RUNTIME_DIR/noctalia-greeter-sync\"",
-      "keybind-app": "Noctalia",
+      "keybind-app": "Hyprbar",
       "keybind-invalid-modifier": "קיצור דרך זה מקבל מקש בודד ללא מקשי צירוף.",
       "keybind-invalid-printable": "מקשים הניתנים להדפסה (אותיות, מספרים, סמלים) דורשים מקש שינוי כגון Ctrl או Alt.",
       "keybind-invalid-super": "לא ניתן להשתמש במקש Super/Windows בקיצורי המקשים של המעטפת.",
@@ -847,7 +847,7 @@
     },
     "enable-failed": {
       "body-error": "{plugin}: {error}",
-      "body-incompatible": "{plugin} מכוון ל-API גרסה {version}; ‏Noctalia תומך בגרסאות API ‏{oldest}–{current}.",
+      "body-incompatible": "{plugin} מכוון ל-API גרסה {version}; ‏Hyprbar תומך בגרסאות API ‏{oldest}–{current}.",
       "body-timeout": "ההתקנה של {plugin} ארכה יותר מדי זמן.",
       "title": "התוסף אינו מופעל"
     }
@@ -1136,7 +1136,7 @@
       },
       "reset-page": "איפוס חלק מההגדרות נכשל.",
       "support-report": "שמירת דוח התמיכה נכשלה.",
-      "sync-greeter": "לא ניתן היה לסנכרן את המראה עם Noctalia Greeter.",
+      "sync-greeter": "לא ניתן היה לסנכרן את המראה עם Greeter.",
       "sync-greeter-timeout": "סנכרון Greeter עדיין ממתין לאישור מנהל. יש לבדוק ב־TTY או בקונסולה אם מופיעה בקשת polkit, להפעיל את סוכן ה־polkit בהגדרות האבטחה, או להריץ את pkexec באופן ידני.",
       "sync-greeter-timeout-manual": "סנכרון ה-Greeter עדיין דורש אישור מנהל. יש להריץ בטרמינל: pkexec noctalia-greeter-apply-appearance \"$XDG_RUNTIME_DIR/noctalia-greeter-sync\"",
       "widget": {
@@ -1505,7 +1505,7 @@
         "deprecated": "מיושן",
         "empty": "אין תוספים מאופשרים.",
         "held-back": "גרסה ישנה יותר",
-        "held-back-hint": "v{version} דורש plugin API {required}; Noctalia תומך רק עד {current}. שדרג את Noctalia כדי לקבל תמיכה.",
+        "held-back-hint": "v{version} דורש plugin API {required}; Hyprbar תומך רק עד {current}. שדרג את Hyprbar כדי לקבל תמיכה.",
         "incompatible-plugin-api": "API לא תואם של תוסף",
         "remove": "הסר תוסף",
         "requires": "דרוש: {dependencies}",
@@ -1536,8 +1536,8 @@
         },
         "kind-label": "סוג",
         "location-label": "מיקום",
-        "location-placeholder-git": "https://github.com/me/noctalia-plugins",
-        "location-placeholder-path": "~/dev/noctalia-plugins",
+        "location-placeholder-git": "https://github.com/me/hyprbar-plugins",
+        "location-placeholder-path": "~/dev/hyprbar-plugins",
         "name-label": "מזהה מקור",
         "name-placeholder": "הפלאגינים שלי",
         "precedence-hint": "מקורות נמוכים יותר דורסים את הגבוהים יותר כאשר הם מציעים את אותו התוסף.",
@@ -1547,18 +1547,18 @@
         "update": "עדכן מקור"
       },
       "store": {
-        "add": "הוסף ל-Noctalia",
+        "add": "הוסף ל-Hyprbar",
         "back-to-catalog": "חזרה לקטלוג התוספים",
         "categories": "קטגוריות",
         "category-all": "הכל",
         "empty": "לא נמצאו תוספים",
         "held-back": "גרסה ישנה יותר",
-        "held-back-hint": "מתקין את גרסה v{version} עבור plugin API {resolved}. הגרסה החדשה ביותר v{latest} דורשת plugin API {latestRequired}, ו־Noctalia זו תומכת עד {current}.",
+        "held-back-hint": "מתקין את גרסה v{version} עבור plugin API {resolved}. הגרסה החדשה ביותר v{latest} דורשת plugin API {latestRequired}, ו־Hyprbar זו תומכת עד {current}.",
         "incompatible": "לא תואם",
-        "incompatible-hint": "נדרש API תוספים {required}; ‏Noctalia תומך ב־{oldest}–{current}.",
+        "incompatible-hint": "נדרש API תוספים {required}; ‏Hyprbar תומך ב־{oldest}–{current}.",
         "loading": "טוען קטלוג…",
         "no-readme": "אין תיאור זמין.",
-        "open-page": "פתח את דף התוסף ב-noctalia.dev",
+        "open-page": "פתח את דף התוסף ב-the plugin catalog",
         "open-source": "פתח את מאגר המקור של התוסף",
         "results-count": "{count} תוספים",
         "search-placeholder": "חיפוש תוספים…",
@@ -1618,7 +1618,7 @@
           "label": "עיגול פינות"
         },
         "custom-palette": {
-          "description": "בחר פלטה מ-~/.config/noctalia/palettes/",
+          "description": "בחר פלטה מ-~/.config/hyprbar/palettes/",
           "label": "פלטת צבעים מותאמת אישית",
           "search-placeholder": "חיפוש פלטות מותאמות אישית…"
         },
@@ -2096,7 +2096,7 @@
             "label": "בכיבוי"
           },
           "started": {
-            "description": "פקודה להרצה לאחר ש-Noctalia מתחיל",
+            "description": "פקודה להרצה לאחר ש-Hyprbar מתחיל",
             "label": "בהפעלה"
           },
           "theme-mode-changed": {
@@ -2617,7 +2617,7 @@
           "placeholder": "עיר, מדינה"
         },
         "location-auto-locate": {
-          "description": "זיהוי המיקום שלך באופן אוטומטי מכתובת ה-IP שלך דרך noctalia.dev",
+          "description": "זיהוי המיקום שלך באופן אוטומטי מכתובת ה-IP שלך",
           "label": "איתור אוטומטי (IP)"
         },
         "longitude": {
@@ -2840,7 +2840,7 @@
           "label": "פורמט תאריך"
         },
         "external-ip": {
-          "description": "בצע רזולוציה לכתובת ה-WAN הציבורית של החיבור (דרך api.noctalia.dev) והצג אותה בלשונית הרשת של ה-Control Center",
+          "description": "בצע רזולוציה לכתובת ה-WAN הציבורית של החיבור (דרך the online service) והצג אותה בלשונית הרשת של ה-Control Center",
           "label": "הצג כתובת WAN IP"
         },
         "greeter-sync-auto": {
@@ -2856,9 +2856,9 @@
           "label": "תוויות פריסת מקלדת"
         },
         "launch-apps-as-systemd-services": {
-          "description": "מפעיל יישומים בשירותי systemd נפרדים כדי שלא ישתפו את ה-cgroup של Noctalia",
+          "description": "מפעיל יישומים בשירותי systemd נפרדים כדי שלא ישתפו את ה-cgroup של Hyprbar",
           "label": "הפעל אפליקציות כשירותי systemd",
-          "requires-systemd-session": "דורש מ-Noctalia לרוץ כשירות משתמש של systemd (uwsm או יחידת משתמש של systemd)"
+          "requires-systemd-session": "דורש מ-Hyprbar לרוץ כשירות משתמש של systemd (uwsm או יחידת משתמש של systemd)"
         },
         "launch-apps-custom-command": {
           "description": "עוטף אפליקציות שהופעלו מה-Launcher, מה-Dock ומה-Taskbar; מחליף את $CMD בפקודה המקורית",
@@ -2870,7 +2870,7 @@
           "label": "הקלד כדי להפעיל"
         },
         "offline-mode": {
-          "description": "חסום את כל בקשות הרשת היוצאות",
+          "description": "חסום בקשות HTTP חדשות דרך הלקוח המשותף של Hyprbar; זה אינו חומת אש.",
           "label": "מצב לא מקוון"
         },
         "osd-background-opacity": {
@@ -3054,12 +3054,12 @@
         },
         "sync-greeter": {
           "button": "סנכרן כעת",
-          "description": "העתק את הטפט והצבעים הנוכחיים ל-Noctalia Greeter (נדרש אישור מנהל)",
-          "label": "Noctalia Greeter"
+          "description": "העתק את הטפט והצבעים הנוכחיים ל- Greeter (נדרש אישור מנהל)",
+          "label": "Greeter"
         },
         "telemetry": {
-          "description": "שולח פינג אנונימי קטן בעת ההפעלה עם הגרסה, מערכת ההפעלה, ה-compositor, רזולוציות המסך, ה-RAM וקנה המידה של ממשק המשתמש",
-          "label": "פינג הפעלה אנונימי"
+          "description": "בעת הפעלה נשלחת טלמטריית אתחול עם מזהה התקנה מתמשך.",
+          "label": "טלמטריית הפעלה"
         },
         "time-format": {
           "description": "פורמט זמן ברירת מחדל עבור ממשק ה-shell ללא הגדרה משלו",
@@ -3946,8 +3946,8 @@
       "export-config": "ייצוא הגדרה…",
       "export-config-saved": "ייצוא ה-Config נשמר.",
       "filter-overridden": "עוקף",
-      "legacy-config-warning": "הגדרה מיושנת: {issue}. ערוך את רשומת המקור הזו; Noctalia מחילה את ההחלפה באופן זמני בלבד. הרץ noctalia config validate כדי להציג את כל השינויים הנדרשים.",
-      "native-title": "הגדרות Noctalia",
+      "legacy-config-warning": "הגדרה מיושנת: {issue}. ערוך את רשומת המקור הזו; Hyprbar מחילה את ההחלפה באופן זמני בלבד. הרץ hyprbar config validate כדי להציג את כל השינויים הנדרשים.",
+      "native-title": "הגדרות Hyprbar",
       "no-results": "לא נמצאו הגדרות",
       "no-results-hint": "נסה שם הגדרה או מפתח תצורה אחר.",
       "offline-mode-notice": {
@@ -3982,7 +3982,7 @@
     "no-wallpaper-selected": "לא נבחר טפט",
     "select-wallpaper": "בחר טפט",
     "subtitle": "כמה אפשרויות מהירות כדי להתחיל.",
-    "title": "ברוך הבא ל-Noctalia",
+    "title": "ברוך הבא ל-Hyprbar",
     "wallpaper": "טפט",
     "wallpaper-scheme": "ערכת טפט"
   },

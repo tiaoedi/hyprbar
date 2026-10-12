@@ -1,6 +1,6 @@
 ---
 title: Labwc
-description: Configure Labwc for the best experience with Noctalia.
+description: Configure Labwc for the best experience with Hyprbar.
 sidebar:
   order: 8
 ---
@@ -26,10 +26,10 @@ Recommended compositor settings:
   </windowSwitcher>
 ```
 
-## Autostart noctalia
+## Autostart hyprbar
 Add the following to the Labwc autostart file `~/.config/labwc/autostart`
 ```
-noctalia
+hyprbar
 ```
 
 ## IPC Keybinds
@@ -40,16 +40,16 @@ Add these binds to your `rc.xml`
     <default />
 
     <!-- Core keys -->
-    <keybind key="W-space"><action name="Execute"><command>noctalia msg panel-toggle launcher</command></action></keybind>
-    <keybind key="W-s"><action name="Execute"><command>noctalia msg panel-toggle control-center</command></action></keybind>
-    <keybind key="W-,"><action name="Execute"><command>noctalia msg settings-toggle</command></action></keybind>
+    <keybind key="W-space"><action name="Execute"><command>hyprbar msg panel-toggle launcher</command></action></keybind>
+    <keybind key="W-s"><action name="Execute"><command>hyprbar msg panel-toggle control-center</command></action></keybind>
+    <keybind key="W-,"><action name="Execute"><command>hyprbar msg settings-toggle</command></action></keybind>
 
     <!-- Media keys -->
-    <keybind key="XF86AudioRaiseVolume"><action name="Execute"><command>noctalia msg volume-up</command></action></keybind>
-    <keybind key="XF86AudioLowerVolume"><action name="Execute"><command>noctalia msg volume-down</command></action></keybind>
-    <keybind key="XF86AudioMute"><action name="Execute"><command>noctalia msg volume-mute</command></action></keybind>
-    <keybind key="XF86MonBrightnessUp"><action name="Execute"><command>noctalia msg brightness-up</command></action></keybind>
-    <keybind key="XF86MonBrightnessDown"><action name="Execute"><command>noctalia msg brightness-down</command></action></keybind>
+    <keybind key="XF86AudioRaiseVolume"><action name="Execute"><command>hyprbar msg volume-up</command></action></keybind>
+    <keybind key="XF86AudioLowerVolume"><action name="Execute"><command>hyprbar msg volume-down</command></action></keybind>
+    <keybind key="XF86AudioMute"><action name="Execute"><command>hyprbar msg volume-mute</command></action></keybind>
+    <keybind key="XF86MonBrightnessUp"><action name="Execute"><command>hyprbar msg brightness-up</command></action></keybind>
+    <keybind key="XF86MonBrightnessDown"><action name="Execute"><command>hyprbar msg brightness-down</command></action></keybind>
   </keyboard>
 ```
 

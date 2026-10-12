@@ -1,4 +1,4 @@
-project('noctalia', ['c', 'cpp'],
+project('hyprbar', ['c', 'cpp'],
   version: files('VERSION'),
   meson_version: '>=1.1',
   default_options: [
@@ -1097,9 +1097,9 @@ _noctalia_test_dependencies = _noctalia_system_dependencies + [
 ]
 
 _noctalia_compile_definitions = [
-  '-DNOCTALIA_INSTALL_PREFIX="' + get_option('prefix') + '"',
-  '-DNOCTALIA_INSTALL_DATADIR="' + get_option('datadir') + '"',
-  '-DNOCTALIA_VERSION="' + meson.project_version() + '"',
+  '-DHYPRBAR_INSTALL_PREFIX="' + get_option('prefix') + '"',
+  '-DHYPRBAR_INSTALL_DATADIR="' + get_option('datadir') + '"',
+  '-DHYPRBAR_VERSION="' + meson.project_version() + '"',
 ] + jemalloc_cpp_args
 
 _noctalia_cpp_args = [
@@ -1124,7 +1124,7 @@ noctalia_core_dep = declare_dependency(
   sources: _protocol_headers,
 )
 
-noctalia_exe = executable('noctalia',
+hyprbar_exe = executable('hyprbar',
   sources: files('src/main.cpp') + _protocol_headers,
   dependencies: _noctalia_dependencies,
   include_directories: _noctalia_inc,
@@ -1134,17 +1134,17 @@ noctalia_exe = executable('noctalia',
 )
 
 install_subdir('assets',
-  install_dir: get_option('datadir') / 'noctalia',
-  exclude_files: ['dev.noctalia.Noctalia.desktop'],
+  install_dir: get_option('datadir') / 'hyprbar',
+  exclude_files: ['dev.hyprbar.Hyprbar.desktop'],
 )
 
 install_data(
-  'assets/dev.noctalia.Noctalia.desktop',
+  'assets/dev.hyprbar.Hyprbar.desktop',
   install_dir: get_option('datadir') / 'applications',
 )
 
 install_data(
-  'assets/noctalia.svg',
+  'assets/hyprbar.svg',
   install_dir: get_option('datadir') / 'icons' / 'hicolor' / 'scalable' / 'apps',
 )
 
@@ -1162,6 +1162,8 @@ if build_tests
     'annotation_raster',
     'animation_manager',
     'app_identity',
+    'hyprbar_identity',
+    'hyprbar_asset_path',
     'audio_glyphs',
     'audio_route_selection',
     'battery_health',
@@ -1183,6 +1185,7 @@ if build_tests
     'cli_schema',
     'clipboard_service',
     'clipboard_storage_permissions',
+    'community_template_cache_compat',
     'config_migration',
     'config_override_mutation',
     'config_path_resolution',
@@ -1370,23 +1373,43 @@ if build_tests
   endif
 
   config_validate_env = environment()
-  config_validate_env.set('NOCTALIA_CONFIG_HOME', meson.current_source_dir() / 'tests/config_validate/config-home')
-  config_validate_env.set('NOCTALIA_STATE_HOME', meson.current_source_dir() / 'tests/config_validate/state-home')
-  config_validate_env.set('NOCTALIA_DATA_HOME', meson.current_source_dir() / 'tests/config_validate/data-home')
+  config_validate_env.set('HYPRBAR_CONFIG_HOME', meson.current_source_dir() / 'tests/config_validate/config-home')
+  config_validate_env.set('HYPRBAR_STATE_HOME', meson.current_source_dir() / 'tests/config_validate/state-home')
+  config_validate_env.set('HYPRBAR_DATA_HOME', meson.current_source_dir() / 'tests/config_validate/data-home')
 
   sh_program = find_program('sh')
   test('config_validate_cli',
     sh_program,
-    args: ['tests/config_validate_cli_test.sh', noctalia_exe.full_path()],
-    depends: noctalia_exe,
+    args: ['tests/config_validate_cli_test.sh', hyprbar_exe.full_path()],
+    depends: hyprbar_exe,
     workdir: meson.current_source_dir(),
     env: config_validate_env,
   )
 
   bash_program = find_program('bash')
+  test('config_import_noctalia_cli',
+    bash_program,
+    args: ['tests/config_import_noctalia_cli_test.sh', hyprbar_exe.full_path()],
+    depends: hyprbar_exe,
+    workdir: meson.current_source_dir(),
+  )
+  python3_program = find_program('python3')
+  test('hyprbar_branding',
+    python3_program,
+    args: [
+      meson.current_source_dir() / 'tests/hyprbar_branding_test.py',
+      meson.current_source_dir(),
+    ],
+    workdir: meson.current_source_dir(),
+  )
   test('template_undo_signal',
     bash_program,
     args: ['tests/template_undo_signal_test.sh', meson.current_source_dir() / 'assets/templates'],
+    workdir: meson.current_source_dir(),
+  )
+  test('gtk_template_compat',
+    bash_program,
+    args: ['tests/gtk_template_compat_test.sh', meson.current_source_dir() / 'assets/templates'],
     workdir: meson.current_source_dir(),
   )
   test('umbriel_apply_include_comment',

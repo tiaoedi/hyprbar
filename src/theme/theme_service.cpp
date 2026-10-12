@@ -51,8 +51,8 @@ namespace noctalia::theme {
     ResolvedTheme resolveBuiltin(const ThemeConfig& cfg, std::string_view mode, std::string_view shellMode) {
       const auto* palette = findBuiltinPalette(cfg.builtinPalette);
       if (palette == nullptr) {
-        kLog.warn("unknown builtin palette '{}', falling back to Noctalia", cfg.builtinPalette);
-        palette = findBuiltinPalette("Noctalia");
+        kLog.warn("unknown builtin palette '{}', falling back to Hyprbar", cfg.builtinPalette);
+        palette = findBuiltinPalette("Hyprbar");
       }
       const GeneratedPalette generated = expandBuiltinPalette(*palette);
       return {

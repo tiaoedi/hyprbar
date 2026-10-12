@@ -2393,7 +2393,7 @@ void Bar::createInstance(const WaylandOutput& output, std::size_t barIndex, cons
   );
 
   auto surfaceConfig = LayerSurfaceConfig{
-      .nameSpace = "noctalia-bar-" + barConfig.name,
+      .nameSpace = "hyprbar-bar-" + barConfig.name,
       .layer = layerShellLayerFromConfig(barConfig.layer),
       .anchor = anchor,
       .width = surfaceSpec.surfaceWidth,

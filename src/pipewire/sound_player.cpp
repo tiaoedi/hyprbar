@@ -323,9 +323,9 @@ void SoundPlayer::playBuffer(const std::string& name, const std::shared_ptr<cons
 
   pw_properties* props = pw_properties_new(
       PW_KEY_MEDIA_TYPE, "Audio", PW_KEY_MEDIA_CATEGORY, "Playback", PW_KEY_MEDIA_ROLE, "Notification", PW_KEY_APP_NAME,
-      "Noctalia", nullptr
+      "Hyprbar", nullptr
   );
-  active->stream = pw_stream_new_simple(m_loop, "noctalia-sound", props, &kStreamEvents, active.get());
+  active->stream = pw_stream_new_simple(m_loop, "hyprbar-sound", props, &kStreamEvents, active.get());
   if (active->stream == nullptr) {
     kLog.warn("failed to create stream for sound \"{}\"", name);
     return;

@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Noctalia Discord
-    url: https://discord.noctalia.dev
-    about: Join the community for support, discussions, and quick help.
-  - name: Noctalia Docs
-    url: https://docs.noctalia.dev
-    about: Browse the documentation, guides, and frequently asked questions.
+  - name: Hyprbar downloads and releases
+    url: https://github.com/tiaoedi/hyprbar/releases/latest
+    about: Check source archives and any validated release assets currently available.
+  - name: Installation guide (Português)
+    url: https://github.com/tiaoedi/hyprbar/blob/main/INSTALACAO-PT-BR.md
+    about: Install, start, and check compatibility for Hyprbar.

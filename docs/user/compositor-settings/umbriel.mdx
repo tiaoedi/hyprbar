@@ -1,6 +1,6 @@
 ---
 title: Umbriel
-description: Configure Umbriel for the best experience with Noctalia.
+description: Configure Umbriel for the best experience with Hyprbar.
 sidebar:
   order: 6
 ---
@@ -8,13 +8,13 @@ sidebar:
 Add the following settings to your Umbriel configuration file, usually located at `~/.config/umbriel/config.toml`.
 Umbriel's packaged [`examples/config.toml`](https://github.com/noctalia-dev/umbriel/blob/main/examples/config.toml) is a useful reference for the complete configuration. Umbriel also provides dedicated documentation for [configuration](/umbriel/configuration/), [window rules](/umbriel/window-rules/), and [layer rules](/umbriel/layer-rules/).
 
-## Autostart Noctalia
+## Autostart Hyprbar
 
-Add `noctalia` to the `autostart` array under `[general]`. Preserve any commands that are already in the array:
+Add `hyprbar` to the `autostart` array under `[general]`. Preserve any commands that are already in the array:
 
 ```toml
 [general]
-autostart = ["noctalia"]
+autostart = ["hyprbar"]
 ```
 
 Umbriel runs these commands once after startup and does not run them again when its configuration is reloaded.
@@ -44,7 +44,7 @@ Adjust these values to match your preferred appearance. The full list of options
 
 ## Window Rules
 
-Use a `window_rule` to configure Noctalia's settings window as floating with a predictable size. Umbriel combines matching rules in file order, so add this to your existing rules or to a dedicated included file:
+Use a `window_rule` to configure Hyprbar's settings window as floating with a predictable size. Umbriel combines matching rules in file order, so add this to your existing rules or to a dedicated included file:
 
 ```toml
 # Blur all windows
@@ -52,28 +52,28 @@ Use a `window_rule` to configure Noctalia's settings window as floating with a p
 blur = true
 blur_optimized = true
 
-# Float Noctalia's settings window
+# Float Hyprbar's settings window
 [[window_rule]]
-match.app_id = "^dev.noctalia.Noctalia$"
+match.app_id = "^dev.hyprbar.Hyprbar$"
 default_floating = true
 default_size = [1020, 900]
 ```
 
-`match.app_id` is an ECMAScript regular expression. The `^` and `$` anchors make this rule apply only to Noctalia's settings window. See Umbriel's [Window Rules](/umbriel/window-rules/) reference for placement, workspace, opacity, blur, and focus options.
+`match.app_id` is an ECMAScript regular expression. The `^` and `$` anchors make this rule apply only to Hyprbar's settings window. See Umbriel's [Window Rules](/umbriel/window-rules/) reference for placement, workspace, opacity, blur, and focus options.
 
 ## Layer Rules and Blur
 
-Noctalia publishes blur regions for its layer-shell surfaces when the compositor supports the `ext-background-effects` protocol. Enable blur for the bar, notifications, dock, panels, and OSD with the layer rule from Umbriel's example configuration:
+Hyprbar publishes blur regions for its layer-shell surfaces when the compositor supports the `ext-background-effects` protocol. Enable blur for the bar, notifications, dock, panels, and OSD with the layer rule from Umbriel's example configuration:
 
 ```toml
 [[layer_rule]]
-match.namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+match.namespace = "^hyprbar-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
 blur = true
 blur_ignore_alpha = 0.5
 blur_optimized = false
 ```
 
-The namespace expression targets Noctalia's standard surfaces without matching unrelated layer-shell clients. `blur_ignore_alpha = 0.5` avoids blurring highly transparent parts of a surface. `blur_optimized = false` makes this rule use the regular blur path instead of the optimized mode configured globally under `[appearance.blur]`.
+The namespace expression targets Hyprbar's standard surfaces without matching unrelated layer-shell clients. `blur_ignore_alpha = 0.5` avoids blurring highly transparent parts of a surface. `blur_optimized = false` makes this rule use the regular blur path instead of the optimized mode configured globally under `[appearance.blur]`.
 
 Layer-surface blur is disabled by default in Umbriel. Inspect active namespaces with:
 
@@ -85,29 +85,29 @@ For the complete set of layer-rule options, see Umbriel's [Layer Rules](/umbriel
 
 ## IPC Keybinds
 
-Umbriel can launch Noctalia IPC commands directly from its `[keybinds]` table. Add these bindings to `~/.config/umbriel/config.toml`:
+Umbriel can launch Hyprbar IPC commands directly from its `[keybinds]` table. Add these bindings to `~/.config/umbriel/config.toml`:
 
 ```toml
 [keybinds]
-"Mod+Space" = "spawn:noctalia msg panel-toggle launcher"
-"Mod+S" = "spawn:noctalia msg panel-toggle control-center"
-"Mod+Comma" = "spawn:noctalia msg settings-toggle"
-"Alt+Tab" = "spawn:noctalia msg window-switcher hold"
-"Mod+Shift+A" = "spawn:noctalia msg screenshot-annotate"
-"Mod+Ctrl+A" = "spawn:noctalia msg annotate"
+"Mod+Space" = "spawn:hyprbar msg panel-toggle launcher"
+"Mod+S" = "spawn:hyprbar msg panel-toggle control-center"
+"Mod+Comma" = "spawn:hyprbar msg settings-toggle"
+"Alt+Tab" = "spawn:hyprbar msg window-switcher hold"
+"Mod+Shift+A" = "spawn:hyprbar msg screenshot-annotate"
+"Mod+Ctrl+A" = "spawn:hyprbar msg annotate"
 
-"XF86AudioRaiseVolume" = "spawn:noctalia msg volume-up"
-"XF86AudioLowerVolume" = "spawn:noctalia msg volume-down"
-"XF86AudioMute" = "spawn:noctalia msg volume-mute"
-"XF86MonBrightnessUp" = "spawn:noctalia msg brightness-up"
-"XF86MonBrightnessDown" = "spawn:noctalia msg brightness-down"
+"XF86AudioRaiseVolume" = "spawn:hyprbar msg volume-up"
+"XF86AudioLowerVolume" = "spawn:hyprbar msg volume-down"
+"XF86AudioMute" = "spawn:hyprbar msg volume-mute"
+"XF86MonBrightnessUp" = "spawn:hyprbar msg brightness-up"
+"XF86MonBrightnessDown" = "spawn:hyprbar msg brightness-down"
 ```
 
-`Mod` uses Umbriel's configured modifier from `general.mod_key` and defaults to Super in a native session. See [Keybinds](/umbriel/keybinds/) for more Noctalia IPC examples and the complete action reference.
+`Mod` uses Umbriel's configured modifier from `general.mod_key` and defaults to Super in a native session. See [Keybinds](/umbriel/keybinds/) for more Hyprbar IPC examples and the complete action reference.
 
 ## Optional Type to Launch
 
-Noctalia can open its launcher when you start typing in umbriel's overview.
+Hyprbar can open its launcher when you start typing in umbriel's overview.
 
 A launcher opened by typing closes automatically when you leave the overview. Launchers opened normally are unaffected.
 

@@ -4,7 +4,7 @@
 
 namespace noctalia::build_info {
 
-  std::string_view version() noexcept { return NOCTALIA_VERSION; }
+  std::string_view version() noexcept { return HYPRBAR_VERSION; }
 
   std::string_view revision() noexcept { return NOCTALIA_GIT_REVISION; }
 

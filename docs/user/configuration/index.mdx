@@ -1,26 +1,26 @@
 ---
 title: How configuration works
-description: Where Noctalia reads config from, how files are merged, and when GUI settings win.
+description: Where Hyprbar reads config from, how files are merged, and when GUI settings win.
 sidebar:
   order: 0
 ---
 
-Noctalia can be configured in two ways: files you write yourself, and settings the app saves for you.
+Hyprbar can be configured in two ways: files you write yourself, and settings the app saves for you.
 
-For most people, the important rule is simple: put your own configuration in `~/.config/noctalia/`. If something changed in the GUI and now seems to ignore your file, check `~/.local/state/noctalia/settings.toml`.
+For most people, the important rule is simple: put your own configuration in `~/.config/hyprbar/`. If something changed in the GUI and now seems to ignore your file, check `~/.local/state/hyprbar/settings.toml`.
 
 ## The two layers
 
 Your hand-written config lives in:
 
-- `$NOCTALIA_CONFIG_HOME/noctalia/`
-- `$XDG_CONFIG_HOME/noctalia/`
-- or `~/.config/noctalia/`
+- `$HYPRBAR_CONFIG_HOME/hyprbar/`
+- `$XDG_CONFIG_HOME/hyprbar/`
+- or `~/.config/hyprbar/`
 
-Noctalia reads every `*.toml` file in that folder, sorts them alphabetically, and merges them into one config. A single `config.toml` is the easiest setup:
+Hyprbar reads every `*.toml` file in that folder, sorts them alphabetically, and merges them into one config. A single `config.toml` is the easiest setup:
 
 ```toml
-# ~/.config/noctalia/config.toml
+# ~/.config/hyprbar/config.toml
 [theme]
 mode = "dark"
 
@@ -31,7 +31,7 @@ position = "top"
 You can also split things up if you like tidy dotfiles:
 
 ```text
-~/.config/noctalia/
+~/.config/hyprbar/
 ├── bar.toml
 ├── theme.toml
 └── widgets.toml
@@ -39,20 +39,20 @@ You can also split things up if you like tidy dotfiles:
 
 GUI-managed overrides live in:
 
-- `$NOCTALIA_STATE_HOME/noctalia/settings.toml`
-- `$XDG_STATE_HOME/noctalia/settings.toml`
-- or `~/.local/state/noctalia/settings.toml`
+- `$HYPRBAR_STATE_HOME/hyprbar/settings.toml`
+- `$XDG_STATE_HOME/hyprbar/settings.toml`
+- or `~/.local/state/hyprbar/settings.toml`
 
-Noctalia writes this file when you change settings through the UI, setup flows, IPC-backed controls, and other runtime actions that need to persist. If the file is a symbolic link, Noctalia writes through to the link target and keeps the link in place.
+Hyprbar writes this file when you change settings through the UI, setup flows, IPC-backed controls, and other runtime actions that need to persist. If the file is a symbolic link, Hyprbar writes through to the link target and keeps the link in place.
 
-`NOCTALIA_CONFIG_HOME` and `NOCTALIA_STATE_HOME` have the same "home root" shape as the XDG variables. For example, `NOCTALIA_CONFIG_HOME=/tmp/profile` reads `/tmp/profile/noctalia/`. Use these Noctalia-specific variables when you want a separate shell profile without changing the environment inherited by apps launched from Noctalia.
+`HYPRBAR_CONFIG_HOME` and `HYPRBAR_STATE_HOME` have the same "home root" shape as the XDG variables. For example, `HYPRBAR_CONFIG_HOME=/tmp/profile` reads `/tmp/profile/hyprbar/`. Use these Hyprbar-specific variables when you want a separate shell profile without changing the environment inherited by apps launched from Hyprbar.
 
 ## Including extra files
 
 Automatic loading only sees `*.toml` files sitting directly in the config folder. To pull in files from subdirectories, load a specific file, or control load order without renaming files, add an `[include]` table:
 
 ```toml
-# ~/.config/noctalia/config.toml
+# ~/.config/hyprbar/config.toml
 [include]
 files = [
   "widgets/",                  # a directory: every *.toml inside it (sorted, non-recursive)
@@ -84,7 +84,7 @@ Includes can nest (an included file can include more files), and each file is lo
 By default, every `*.toml` in the config folder still loads automatically alongside your includes. If you keep alternative setups in the root that should not all load at once - say `profile_a.toml` and `profile_b.toml` - set `autoload = false` in your entry file. Then **only** the file(s) that set it (plus whatever they include) load, and the other root files are ignored:
 
 ```toml
-# ~/.config/noctalia/config.toml
+# ~/.config/hyprbar/config.toml
 [include]
 autoload = false
 files = ["profiles/work.toml"]
@@ -94,14 +94,14 @@ files = ["profiles/work.toml"]
 
 ## Which value wins?
 
-Noctalia loads configuration in this order:
+Hyprbar loads configuration in this order:
 
 1. Built-in defaults
 2. Your `*.toml` files in the resolved config directory - for each file, anything it pulls in via `[include]` first, then the file's own settings on top
 3. GUI-managed overrides in the resolved state directory's `settings.toml`
 
 Because `settings.toml` loads last, it wins when it contains the same setting as your hand-written config layer.
-When Settings writes a value that matches the parsed value from the lower layers, Noctalia removes that redundant key
+When Settings writes a value that matches the parsed value from the lower layers, Hyprbar removes that redundant key
 instead of keeping it as a GUI override.
 
 :::tip
@@ -110,74 +110,74 @@ If you are confused about why a hand-written value is not taking effect, inspect
 
 ## Where should I edit?
 
-Use `~/.config/noctalia/` for curated config: the things you want to keep in dotfiles, copy to another machine, or manage declaratively.
+Use `~/.config/hyprbar/` for curated config: the things you want to keep in dotfiles, copy to another machine, or manage declaratively.
 
-Treat `~/.local/state/noctalia/settings.toml` as an app-managed override file. It is useful to inspect when debugging GUI changes, and safe to delete when you want to clear those overrides. Keeping it outside `~/.config` also lets the GUI save changes when your config directory is read-only, for example on NixOS. Support reports include config sources and `settings.toml`, but omit `state.toml` contents because they can contain private runtime data.
+Treat `~/.local/state/hyprbar/settings.toml` as an app-managed override file. It is useful to inspect when debugging GUI changes, and safe to delete when you want to clear those overrides. Keeping it outside `~/.config` also lets the GUI save changes when your config directory is read-only, for example on NixOS. Support reports include config sources and `settings.toml`, but omit `state.toml` contents because they can contain private runtime data.
 
-Both layers are watched for changes and hot-reloaded. If neither layer exists, Noctalia uses its built-in defaults.
+Both layers are watched for changes and hot-reloaded. If neither layer exists, Hyprbar uses its built-in defaults.
 
 ## Automatic configuration migrations
 
-When a release changes the shape of a setting, Noctalia migrates old values before parsing them so the running shell
+When a release changes the shape of a setting, Hyprbar migrates old values before parsing them so the running shell
 keeps the intended behavior. The app-owned `settings.toml` is upgraded once and stamped with an internal
-`config_version`; Noctalia manages that marker and excludes it from exported user config.
+`config_version`; Hyprbar manages that marker and excludes it from exported user config.
 
-Files under `~/.config/noctalia/` are never rewritten. Values that need migration are normalized temporarily on every
+Files under `~/.config/hyprbar/` are never rewritten. Values that need migration are normalized temporarily on every
 load, and Settings keeps a warning visible until you update the source TOML. The warning and notification identify the
-source file, line, column, and exact legacy key to edit. Noctalia sends the notification when it first finds an affected
+source file, line, column, and exact legacy key to edit. Hyprbar sends the notification when it first finds an affected
 key, when a new affected key appears, and every three days while affected values remain.
 
 Run the validator to list every affected key, its source location, and its canonical replacement:
 
 ```sh
-noctalia config validate
+hyprbar config validate
 ```
 
-Noctalia can keep using normalized values while you update a file, but migration warnings are intentionally not
+Hyprbar can keep using normalized values while you update a file, but migration warnings are intentionally not
 permanent compatibility promises. Treat them as required config maintenance.
 
 ## File locations
 
-Where Noctalia keeps everything, by purpose:
+Where Hyprbar keeps everything, by purpose:
 
 | What | Where | Purpose |
 |------|-------|---------|
-| Your config | `~/.config/noctalia/config.toml` | hand-written / declarative - the base layer |
-| GUI overrides | `~/.local/state/noctalia/settings.toml` | written by Settings; wins over your config |
-| Internal UI state | `~/.local/state/noctalia/state.toml` | app-managed non-secret state and last-used values |
+| Your config | `~/.config/hyprbar/config.toml` | hand-written / declarative - the base layer |
+| GUI overrides | `~/.local/state/hyprbar/settings.toml` | written by Settings; wins over your config |
+| Internal UI state | `~/.local/state/hyprbar/state.toml` | app-managed non-secret state and last-used values |
 | Calendar credentials | Desktop Secret Service or an explicit CalDAV password file | CalDAV passwords and Google refresh tokens |
 | Encrypted storage key | Desktop Secret Service or an explicit key file | master key for encrypted clipboard history and calendar events |
-| Calendar event cache | `$XDG_CACHE_HOME/noctalia/calendar/events.enc` | encrypted last-known-good events |
-| Custom palettes | `~/.config/noctalia/palettes/` | your own color palette files |
-| Local plugins | `~/.local/share/noctalia/plugins/` | plugins you install or place by hand |
-| Plugin source repos | `~/.local/state/noctalia/plugins/sources/` | git-source repo caches, re-fetchable |
-| Exported plugin files | `~/.local/state/noctalia/plugins/materialized/` | runtime files exported from git sources |
-| Community palettes / templates | `~/.local/state/noctalia/community-*/` | downloaded catalogs, re-fetchable |
+| Calendar event cache | `$XDG_CACHE_HOME/hyprbar/calendar/events.enc` | encrypted last-known-good events |
+| Custom palettes | `~/.config/hyprbar/palettes/` | your own color palette files |
+| Local plugins | `~/.local/share/hyprbar/plugins/` | plugins you install or place by hand |
+| Plugin source repos | `~/.local/state/hyprbar/plugins/sources/` | git-source repo caches, re-fetchable |
+| Exported plugin files | `~/.local/state/hyprbar/plugins/materialized/` | runtime files exported from git sources |
+| Community palettes / templates | `~/.local/state/hyprbar/community-*/` | downloaded catalogs, re-fetchable |
 
 It comes down to **three storage owners**:
 
-- **Yours** - `~/.config/noctalia/` (settings you write) and `~/.local/share/noctalia/` (plugins you install).
-- **Noctalia's** - `~/.local/state/noctalia/` (GUI overrides, UI state, plugin repo caches, exported plugin files, and
+- **Yours** - `~/.config/hyprbar/` (settings you write) and `~/.local/share/hyprbar/` (plugins you install).
+- **Hyprbar's** - `~/.local/state/hyprbar/` (GUI overrides, UI state, plugin repo caches, exported plugin files, and
   downloaded catalogs).
 - **Credential provider's** - durable calendar credentials and the encrypted storage master key managed by Secret Service,
-  or explicit credential/key files managed by an external provisioner such as agenix. Deleting Noctalia's state
+  or explicit credential/key files managed by an external provisioner such as agenix. Deleting Hyprbar's state
   directory does not remove them.
 
 Every path honors the relevant standard `XDG_CONFIG_HOME` / `XDG_STATE_HOME` / `XDG_DATA_HOME` / `XDG_CACHE_HOME`
-variable (and the `NOCTALIA_CONFIG_HOME` / `NOCTALIA_STATE_HOME` / `NOCTALIA_DATA_HOME` overrides where applicable).
+variable (and the `HYPRBAR_CONFIG_HOME` / `HYPRBAR_STATE_HOME` / `HYPRBAR_DATA_HOME` overrides where applicable).
 
 ## Exporting config
 
 Export the merged user config from the command line:
 
 ```sh
-noctalia config export > noctalia-config.toml
+hyprbar config export > hyprbar-config.toml
 ```
 
 Export the full effective config, including built-in defaults:
 
 ```sh
-noctalia config export full > noctalia-full-config.toml
+hyprbar config export full > hyprbar-full-config.toml
 ```
 
 Export stops with an error (and writes nothing) if a config file fails to parse or an `[include]` points at a file that does not exist, so a broken config never produces a misleading partial export. (The running shell is more forgiving: it loads what it can and surfaces the problem as a notification.)
@@ -186,15 +186,15 @@ Because export writes TOML to stdout, you can pipe it into TOML-aware query tool
 [`yq`](https://github.com/mikefarah/yq):
 
 ```sh
-noctalia config export full | yq -p toml -r '.theme.mode'
-noctalia config export full | yq -p toml -r '.shell.offline_mode'
-noctalia config export full | yq -p toml '.bar.default'
+hyprbar config export full | yq -p toml -r '.theme.mode'
+hyprbar config export full | yq -p toml -r '.shell.offline_mode'
+hyprbar config export full | yq -p toml '.bar.default'
 ```
 
 If you prefer normal `jq` filters, convert the TOML stream to JSON first:
 
 ```sh
-noctalia config export full | yq -p toml -o json '.' | jq -r '.theme.mode'
+hyprbar config export full | yq -p toml -o json '.' | jq -r '.theme.mode'
 ```
 
 The Settings actions menu includes **Export Config...**. It opens a chooser with two export modes:
@@ -207,26 +207,26 @@ The Settings actions menu includes **Export Config...**. It opens a chooser with
 Run the validator to catch problems before they silently take effect:
 
 ```sh
-noctalia config validate
+hyprbar config validate
 ```
 
-With no argument it checks the merged configuration exactly as the shell loads it: every `*.toml` in `~/.config/noctalia/` (or `$NOCTALIA_CONFIG_HOME`), then the `settings.toml` overrides in `~/.local/state/noctalia/`. Pass a directory to validate just that directory's `*.toml` files instead:
+With no argument it checks the merged configuration exactly as the shell loads it: every `*.toml` in `~/.config/hyprbar/` (or `$HYPRBAR_CONFIG_HOME`), then the `settings.toml` overrides in `~/.local/state/hyprbar/`. Pass a directory to validate just that directory's `*.toml` files instead:
 
 ```sh
-noctalia config validate ./my-config-dir
+hyprbar config validate ./my-config-dir
 ```
 
 Pass a file to validate only that TOML file, without scanning default locations or merging `settings.toml`. This is useful for generated configs, including NixOS-managed config files:
 
 ```sh
-noctalia config validate ./config.toml
+hyprbar config validate ./config.toml
 ```
 
 Every diagnostic is prefixed with the file, line, and column it came from, followed by the dotted config path:
 
 ```
-WARN  /home/you/.config/noctalia/bar.toml:14:10: bar.main.foo: unknown setting
-ERROR /home/you/.config/noctalia/widgets.toml:22:12: widget.clock.timezone: unknown timezone "Europe/Berln"
+WARN  /home/you/.config/hyprbar/bar.toml:14:10: bar.main.foo: unknown setting
+ERROR /home/you/.config/hyprbar/widgets.toml:22:12: widget.clock.timezone: unknown timezone "Europe/Berln"
 ```
 
 With several config files in play (or `settings.toml` overriding one of them), the reported file is the one whose definition actually won the merge.
@@ -249,14 +249,14 @@ There the file is shown relative to your config directory (or as a bare file nam
 
 ## Where next?
 
-- [Shell](/noctalia/configuration/shell/) covers global behavior like fonts, scale, shadows, OSD, and keybinds.
-- [Hooks](/noctalia/automation/hooks/) covers advanced event-driven automation.
-- [Bars](/noctalia/bar/) and [Widgets](/noctalia/bar/widgets/) cover the top or side bar and everything inside it.
-- [Dock](/noctalia/dock/) covers the optional app dock.
-- [Theme](/noctalia/theming/) covers theme mode and palette source selection.
-- [Palette](/noctalia/theming/palette/) covers color roles, custom palette files, and terminal colors.
-- [App Theming](/noctalia/theming/app-theming/) covers generated themes for other apps.
-- [Template Reference](/noctalia/theming/templates/) covers template syntax, tokens, filters, and hooks.
-- [Wallpaper & backdrop](/noctalia/desktop/wallpaper/) covers wallpapers, per-monitor folders, automation, and overview backdrop.
-- Service pages cover [audio](/noctalia/services/audio/), [brightness](/noctalia/services/brightness/), [calendar](/noctalia/services/calendar/), [idle](/noctalia/services/idle/), [night light](/noctalia/services/night-light/), [notifications](/noctalia/services/notifications/), and [weather](/noctalia/services/weather/).
-- [IPC](/noctalia/ipc/) lists commands for keybinds, scripts, automation, and hooks.
+- [Shell](/hyprbar/configuration/shell/) covers global behavior like fonts, scale, shadows, OSD, and keybinds.
+- [Hooks](/hyprbar/automation/hooks/) covers advanced event-driven automation.
+- [Bars](/hyprbar/bar/) and [Widgets](/hyprbar/bar/widgets/) cover the top or side bar and everything inside it.
+- [Dock](/hyprbar/dock/) covers the optional app dock.
+- [Theme](/hyprbar/theming/) covers theme mode and palette source selection.
+- [Palette](/hyprbar/theming/palette/) covers color roles, custom palette files, and terminal colors.
+- [App Theming](/hyprbar/theming/app-theming/) covers generated themes for other apps.
+- [Template Reference](/hyprbar/theming/templates/) covers template syntax, tokens, filters, and hooks.
+- [Wallpaper & backdrop](/hyprbar/desktop/wallpaper/) covers wallpapers, per-monitor folders, automation, and overview backdrop.
+- Service pages cover [audio](/hyprbar/services/audio/), [brightness](/hyprbar/services/brightness/), [calendar](/hyprbar/services/calendar/), [idle](/hyprbar/services/idle/), [night light](/hyprbar/services/night-light/), [notifications](/hyprbar/services/notifications/), and [weather](/hyprbar/services/weather/).
+- [IPC](/hyprbar/ipc/) lists commands for keybinds, scripts, automation, and hooks.
