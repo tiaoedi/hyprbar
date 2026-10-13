@@ -1456,9 +1456,8 @@ namespace settings {
       }
     }
 
-    // The Plugins section has no registry entries — it renders fully custom
-    // content (addSettingsPlugins), so suppress the "no settings found" state.
-    if (visibleEntries == 0 && ctx.selectedSection != "plugins") {
+    // Custom Plugins and About pages have no registry entries.
+    if (visibleEntries == 0 && ctx.selectedSection != "plugins" && ctx.selectedSection != "about") {
       auto emptyState = ui::column(
           {.align = FlexAlign::Center,
            .justify = FlexJustify::Center,

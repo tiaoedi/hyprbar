@@ -997,6 +997,15 @@
     }
   },
   "settings": {
+    "about": {
+      "developer": "Desenvolvedor: {name}",
+      "developer-profile": "Desenvolvedor no GitHub",
+      "license": "Licenciado sob a licença MIT. Créditos aos autores do projeto de origem; os avisos originais de direitos autorais e permissão são preservados em LICENSE e CREDITS.md.",
+      "project": "Hyprbar no GitHub",
+      "provenance": "Hyprbar é um fork independente baseado no Noctalia v5.2.1.",
+      "version": "Versão: {version}",
+      "youtube": "YouTube — Linux Livre"
+    },
     "actions": {
       "confirm-reset": "Confirmar Redefinição",
       "reset": "Redefinir"
@@ -1375,6 +1384,7 @@
       },
       "sections": {
         "accessibility": "Acessibilidade",
+        "about": "Sobre",
         "appearance": "Aparência",
         "backdrop": "Camada de Fundo",
         "bar": "Barra",

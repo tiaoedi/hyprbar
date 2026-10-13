@@ -28,6 +28,11 @@ ALLOWED_TECHNICAL_TOKENS = re.compile(
     r"|dev\.noctalia\.[A-Za-z0-9_.]+"
 )
 BRAND = re.compile(r"(?i)noctalia")
+# Legal provenance only: exact locale, key and complete value, never a blanket brand exemption.
+ABOUT_PROVENANCE = {
+    ("en.json", "settings.about.provenance"): "Hyprbar is an independent fork based on Noctalia v5.2.1.",
+    ("pt-BR.json", "settings.about.provenance"): "Hyprbar é um fork independente baseado no Noctalia v5.2.1.",
+}
 # Known provider/endpoint attributions are unsupported by the inspected client path.
 LOCATION_SOURCE_CLAIM = re.compile(
     r"(?i)the plugin catalog|(?:api\.)?noctalia\.dev|https?://|プラグインカタログ"
@@ -192,6 +197,12 @@ def font_name_strings(path: Path) -> list[str]:
     return strings
 
 
+def unexpected_translation_branding(filename: str, key_path: str, text: str) -> bool:
+    if ABOUT_PROVENANCE.get((filename, key_path)) == text:
+        return False
+    return BRAND.search(ALLOWED_TECHNICAL_TOKENS.sub("", text)) is not None
+
+
 def main(root: Path) -> int:
     errors: list[str] = []
     translations = root / "assets" / "translations"
@@ -207,8 +218,7 @@ def main(root: Path) -> int:
                     errors.append(f"{source.name}:{key_path}: location description must identify IP-based detection")
                 if LOCATION_SOURCE_CLAIM.search(text):
                     errors.append(f"{source.name}:{key_path}: location description contains an unsupported provider or endpoint claim")
-            residual = ALLOWED_TECHNICAL_TOKENS.sub("", text)
-            if BRAND.search(residual):
+            if unexpected_translation_branding(source.name, key_path, text):
                 errors.append(f"{source.name}:{key_path}: {text}")
 
     assets = root / "assets"

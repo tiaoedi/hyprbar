@@ -716,6 +716,7 @@ _noctalia_sources = files(
   'src/shell/settings/settings_content.cpp',
   'src/shell/settings/settings_content_common.cpp',
   'src/shell/settings/settings_content_plugins.cpp',
+  'src/shell/settings/settings_content_about.cpp',
   'src/shell/settings/path_browse.cpp',
   'src/shell/settings/plugin_store_content.cpp',
   'src/shell/settings/plugin_store_tile.cpp',
@@ -1163,6 +1164,8 @@ if build_tests
     'animation_manager',
     'app_identity',
     'hyprbar_identity',
+    'hyprbar_about_metadata',
+    'settings_about',
     'hyprbar_asset_path',
     'audio_glyphs',
     'audio_route_selection',
@@ -1394,6 +1397,16 @@ if build_tests
     workdir: meson.current_source_dir(),
   )
   python3_program = find_program('python3')
+  test('hyprbar_about',
+    python3_program,
+    args: [meson.current_source_dir() / 'tests/hyprbar_about_test.py', meson.current_source_dir()],
+    workdir: meson.current_source_dir(),
+  )
+  test('hyprbar-logo',
+    python3_program,
+    args: [meson.current_source_dir() / 'tests/hyprbar_logo_test.py'],
+    workdir: meson.current_source_dir(),
+  )
   test('hyprbar_branding',
     python3_program,
     args: [

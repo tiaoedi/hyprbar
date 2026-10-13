@@ -48,6 +48,7 @@ namespace settings {
     Umbriel,
     Bar,
     Plugins,
+    About,
   };
 
   struct SettingsSectionDescriptor {

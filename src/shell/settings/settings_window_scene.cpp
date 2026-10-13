@@ -20,6 +20,7 @@
 #include "shell/settings/font_family_catalog.h"
 #include "shell/settings/settings_bar_management.h"
 #include "shell/settings/settings_content.h"
+#include "shell/settings/settings_content_about.h"
 #include "shell/settings/settings_content_common.h"
 #include "shell/settings/settings_content_plugins.h"
 #include "shell/settings/settings_sidebar.h"
@@ -1078,6 +1079,18 @@ void SettingsWindow::rebuildSettingsContent() {
 
   logSettingsProfile("rebuildContent sections", phaseProfileWatch);
   phaseProfileWatch.reset();
+
+  if (m_selectedSection == "about" && m_surface != nullptr) {
+    settings::addSettingsAbout(
+        *m_contentContainer,
+        settings::SettingsAboutContext{
+            .renderer = m_surface->renderTarget().renderer(),
+            .contentScale = scale * m_surface->effectiveBufferScale(),
+            .uiScale = scale,
+            .pageTitleRow = m_pageTitleRow,
+        }
+    );
+  }
 
   if (m_selectedSection == "plugins" && m_pluginManager != nullptr) {
     refreshPluginListIfNeeded();

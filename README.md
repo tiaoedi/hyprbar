@@ -42,6 +42,12 @@ sudo just install release
 
 Para migrar uma configuração existente, consulte a ajuda do importador de compatibilidade antes de aplicar qualquer cópia. Alguns identificadores históricos de configuração, plugins e integrações são mantidos para compatibilidade; a identidade, os caminhos novos e o desenvolvimento do projeto são próprios do Hyprbar.
 
+## Sobre o Hyprbar
+
+Abra **Configurações → Sobre** para ver a versão instalada, o desenvolvedor e os links do GitHub e do canal Linux Livre. Também é possível abrir a seção com `hyprbar msg settings-open about`.
+
+O logo fornecido pelo mantenedor (`capa-canal.jpg`) está incorporado em `assets/hyprbar.svg`, sem depender de um caminho pessoal. O mesmo asset é usado pelo ícone do aplicativo, pela seção Sobre e pelo logo padrão da Central de Controle; um `custom_image` configurado continua tendo prioridade.
+
 ## Créditos e licença
 
 O histórico do código-fonte e os créditos de origem estão em [`CREDITS.md`](CREDITS.md). A licença principal é MIT; componentes incluídos em `third_party/` e a fonte Tabler mantêm suas próprias licenças. Consulte [`LICENSE`](LICENSE) e os avisos de cada componente antes de redistribuir.
