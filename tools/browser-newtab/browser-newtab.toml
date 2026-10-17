@@ -1,0 +1,5 @@
+# Merge as ~/.config/hyprbar/browser-newtab.toml (adjust config-home if overridden).
+# Additive user template only: retain existing Chrome/Brave colors_changed hooks.
+[theme.templates.user.browser_newtab]
+input_path = "templates/browser-newtab/palette.css.in"
+output_path = "~/.local/share/hyprbar/extensions/newtab/palette.css"

@@ -1,0 +1,47 @@
+/* Nautilus-only bridge for legacy Orchis rules.
+ * Colors are supplied by Hyprbar's generated gtk-4.0/hyprbar.css.
+ * No layout, icon theme, or other application's styles are changed.
+ */
+.nautilus-window {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+.nautilus-window .view {
+  background-color: @view_bg_color;
+  color: @view_fg_color;
+}
+.nautilus-window headerbar {
+  background: @headerbar_bg_color;
+  color: @headerbar_fg_color;
+}
+.nautilus-window .sidebar,
+.nautilus-window .navigation-sidebar,
+.nautilus-window placessidebar,
+.nautilus-window .sidebar-pane,
+.nautilus-window .sidebar-pane:backdrop,
+.nautilus-window .sidebar-pane > toolbarview > placessidebar,
+.nautilus-window .sidebar-pane > toolbarview > placessidebar > scrolledwindow {
+  background-color: @sidebar_bg_color;
+  color: @sidebar_fg_color;
+}
+.nautilus-window .navigation-sidebar row:selected,
+.nautilus-window .sidebar row:selected,
+.nautilus-window placessidebar row:selected {
+  background-color: @accent_bg_color;
+  color: @accent_fg_color;
+}
+/* Match the legacy theme's specificity so its purple image/text cannot win. */
+.nautilus-window .sidebar-pane > toolbarview > placessidebar > scrolledwindow > viewport > list.navigation-sidebar > row.activatable:selected > revealer > box {
+  background-color: @accent_bg_color;
+  color: @accent_fg_color;
+  border-image-source: none;
+}
+.nautilus-window .sidebar-pane > toolbarview > placessidebar > scrolledwindow > viewport > list.navigation-sidebar > row.activatable:selected image,
+.nautilus-window .sidebar-pane > toolbarview > placessidebar > scrolledwindow > viewport > list.navigation-sidebar > row.activatable:selected label,
+.nautilus-window .sidebar-pane > toolbarview > placessidebar > scrolledwindow > viewport > list.navigation-sidebar > row.activatable:selected button.sidebar-button {
+  color: @accent_fg_color;
+}
+.nautilus-window .sidebar-pane > toolbarview > placessidebar > scrolledwindow > viewport > list.navigation-sidebar > row.activatable:hover:not(:selected) image,
+.nautilus-window .sidebar-pane > toolbarview > placessidebar > scrolledwindow > viewport > list.navigation-sidebar > row.activatable:hover:not(:selected) label {
+  color: @accent_bg_color;
+}

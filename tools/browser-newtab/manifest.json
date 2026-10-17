@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Hyprbar · Nova aba",
+  "version": "1.0.0",
+  "description": "Uma nova aba local com as cores do Hyprbar.",
+  "permissions": ["search"],
+  "chrome_url_overrides": {"newtab": "newtab.html"},
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+  }
+}

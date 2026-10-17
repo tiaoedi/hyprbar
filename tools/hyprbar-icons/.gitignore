@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+# Machine-local execution evidence; regenerate with verify.py.
+verification.json
+test-results.txt

@@ -1,0 +1,1154 @@
+{
+  "theme": "hyprbar",
+  "license": "MIT",
+  "design": "original semantic glyphs; not official application branding",
+  "canonical": [
+    {
+      "name": "folder",
+      "context": "places",
+      "path": "scalable/places/folder.svg",
+      "glyph": "folder",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "user-home",
+      "context": "places",
+      "path": "scalable/places/user-home.svg",
+      "glyph": "home",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "folder-documents",
+      "context": "places",
+      "path": "scalable/places/folder-documents.svg",
+      "glyph": "document",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "folder-download",
+      "context": "places",
+      "path": "scalable/places/folder-download.svg",
+      "glyph": "download",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "folder-music",
+      "context": "places",
+      "path": "scalable/places/folder-music.svg",
+      "glyph": "music",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "folder-pictures",
+      "context": "places",
+      "path": "scalable/places/folder-pictures.svg",
+      "glyph": "image",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "folder-videos",
+      "context": "places",
+      "path": "scalable/places/folder-videos.svg",
+      "glyph": "video",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "user-desktop",
+      "context": "places",
+      "path": "scalable/places/user-desktop.svg",
+      "glyph": "desktop",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "folder-templates",
+      "context": "places",
+      "path": "scalable/places/folder-templates.svg",
+      "glyph": "grid",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "folder-publicshare",
+      "context": "places",
+      "path": "scalable/places/folder-publicshare.svg",
+      "glyph": "people",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "folder-config",
+      "context": "places",
+      "path": "scalable/places/folder-config.svg",
+      "glyph": "sliders",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "folder-code",
+      "context": "places",
+      "path": "scalable/places/folder-code.svg",
+      "glyph": "code",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "folder-remote",
+      "context": "places",
+      "path": "scalable/places/folder-remote.svg",
+      "glyph": "network",
+      "palette": [
+        "#70ceff",
+        "#1976df"
+      ]
+    },
+    {
+      "name": "user-trash",
+      "context": "places",
+      "path": "scalable/places/user-trash.svg",
+      "glyph": "trash",
+      "palette": [
+        "#b6c9dd",
+        "#5d7898"
+      ]
+    },
+    {
+      "name": "user-trash-full",
+      "context": "places",
+      "path": "scalable/places/user-trash-full.svg",
+      "glyph": "trash-full",
+      "palette": [
+        "#b6c9dd",
+        "#5d7898"
+      ]
+    },
+    {
+      "name": "drive-harddisk",
+      "context": "devices",
+      "path": "scalable/devices/drive-harddisk.svg",
+      "glyph": "disk",
+      "palette": [
+        "#b6c9dd",
+        "#5d7898"
+      ]
+    },
+    {
+      "name": "drive-removable-media",
+      "context": "devices",
+      "path": "scalable/devices/drive-removable-media.svg",
+      "glyph": "disk",
+      "palette": [
+        "#addcd8",
+        "#508f91"
+      ]
+    },
+    {
+      "name": "drive-removable-media-usb",
+      "context": "devices",
+      "path": "scalable/devices/drive-removable-media-usb.svg",
+      "glyph": "usb",
+      "palette": [
+        "#b6c9dd",
+        "#5d7898"
+      ]
+    },
+    {
+      "name": "network-workgroup",
+      "context": "places",
+      "path": "scalable/places/network-workgroup.svg",
+      "glyph": "network",
+      "palette": [
+        "#b6c9dd",
+        "#5d7898"
+      ]
+    },
+    {
+      "name": "computer",
+      "context": "devices",
+      "path": "scalable/devices/computer.svg",
+      "glyph": "desktop",
+      "palette": [
+        "#b6c9dd",
+        "#5d7898"
+      ]
+    },
+    {
+      "name": "phone",
+      "context": "devices",
+      "path": "scalable/devices/phone.svg",
+      "glyph": "phone",
+      "palette": [
+        "#b6c9dd",
+        "#5d7898"
+      ]
+    },
+    {
+      "name": "printer",
+      "context": "devices",
+      "path": "scalable/devices/printer.svg",
+      "glyph": "printer",
+      "palette": [
+        "#b6c9dd",
+        "#5d7898"
+      ]
+    },
+    {
+      "name": "audio-headphones",
+      "context": "devices",
+      "path": "scalable/devices/audio-headphones.svg",
+      "glyph": "headphones",
+      "palette": [
+        "#b6c9dd",
+        "#5d7898"
+      ]
+    },
+    {
+      "name": "text-x-generic",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/text-x-generic.svg",
+      "glyph": "document",
+      "palette": [
+        "#f4f7ff",
+        "#d8e2f3"
+      ]
+    },
+    {
+      "name": "application-pdf",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/application-pdf.svg",
+      "glyph": "pdf",
+      "palette": [
+        "#ff7b8b",
+        "#dd324a"
+      ]
+    },
+    {
+      "name": "image-x-generic",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/image-x-generic.svg",
+      "glyph": "image",
+      "palette": [
+        "#9addbc",
+        "#36a77a"
+      ]
+    },
+    {
+      "name": "audio-x-generic",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/audio-x-generic.svg",
+      "glyph": "music",
+      "palette": [
+        "#ddadff",
+        "#9156dc"
+      ]
+    },
+    {
+      "name": "video-x-generic",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/video-x-generic.svg",
+      "glyph": "play",
+      "palette": [
+        "#9db5ff",
+        "#5968dc"
+      ]
+    },
+    {
+      "name": "package-x-generic",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/package-x-generic.svg",
+      "glyph": "archive",
+      "palette": [
+        "#e6bd88",
+        "#b77b3d"
+      ]
+    },
+    {
+      "name": "text-x-script",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/text-x-script.svg",
+      "glyph": "code",
+      "palette": [
+        "#98d9ef",
+        "#3597bc"
+      ]
+    },
+    {
+      "name": "x-office-spreadsheet",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/x-office-spreadsheet.svg",
+      "glyph": "sheet",
+      "palette": [
+        "#8dd4ae",
+        "#3b9d6a"
+      ]
+    },
+    {
+      "name": "x-office-presentation",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/x-office-presentation.svg",
+      "glyph": "presentation",
+      "palette": [
+        "#ffc190",
+        "#e07844"
+      ]
+    },
+    {
+      "name": "x-office-document",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/x-office-document.svg",
+      "glyph": "document",
+      "palette": [
+        "#9bc3ff",
+        "#4a82d8"
+      ]
+    },
+    {
+      "name": "application-x-executable",
+      "context": "mimetypes",
+      "path": "scalable/mimetypes/application-x-executable.svg",
+      "glyph": "grid",
+      "palette": [
+        "#c7c3e4",
+        "#8782b8"
+      ]
+    },
+    {
+      "name": "org.gnome.Nautilus",
+      "context": "apps",
+      "path": "scalable/apps/org.gnome.Nautilus.svg",
+      "glyph": "folder",
+      "palette": [
+        "#83d7ff",
+        "#2588ef"
+      ]
+    },
+    {
+      "name": "hyprbar",
+      "context": "apps",
+      "path": "scalable/apps/hyprbar.svg",
+      "glyph": "bar",
+      "palette": [
+        "#a899ff",
+        "#6454d9"
+      ]
+    },
+    {
+      "name": "google-chrome",
+      "context": "apps",
+      "path": "scalable/apps/google-chrome.svg",
+      "glyph": "browser",
+      "palette": [
+        "#77cce9",
+        "#2874b7"
+      ]
+    },
+    {
+      "name": "brave-browser",
+      "context": "apps",
+      "path": "scalable/apps/brave-browser.svg",
+      "glyph": "shield",
+      "palette": [
+        "#ffba7c",
+        "#ed6c3b"
+      ]
+    },
+    {
+      "name": "firefox",
+      "context": "apps",
+      "path": "scalable/apps/firefox.svg",
+      "glyph": "fox",
+      "palette": [
+        "#cc9afd",
+        "#7757d4"
+      ]
+    },
+    {
+      "name": "kitty",
+      "context": "apps",
+      "path": "scalable/apps/kitty.svg",
+      "glyph": "code",
+      "palette": [
+        "#61758d",
+        "#243448"
+      ]
+    },
+    {
+      "name": "code",
+      "context": "apps",
+      "path": "scalable/apps/code.svg",
+      "glyph": "code",
+      "palette": [
+        "#77ceef",
+        "#2577b5"
+      ]
+    },
+    {
+      "name": "vlc",
+      "context": "apps",
+      "path": "scalable/apps/vlc.svg",
+      "glyph": "play",
+      "palette": [
+        "#ffbd71",
+        "#e98436"
+      ]
+    },
+    {
+      "name": "com.obsproject.Studio",
+      "context": "apps",
+      "path": "scalable/apps/com.obsproject.Studio.svg",
+      "glyph": "capture",
+      "palette": [
+        "#667083",
+        "#272c3a"
+      ]
+    },
+    {
+      "name": "gimp",
+      "context": "apps",
+      "path": "scalable/apps/gimp.svg",
+      "glyph": "brush",
+      "palette": [
+        "#a997c7",
+        "#675583"
+      ]
+    },
+    {
+      "name": "libreoffice-writer",
+      "context": "apps",
+      "path": "scalable/apps/libreoffice-writer.svg",
+      "glyph": "document",
+      "palette": [
+        "#91c6ff",
+        "#3779cc"
+      ]
+    },
+    {
+      "name": "libreoffice-calc",
+      "context": "apps",
+      "path": "scalable/apps/libreoffice-calc.svg",
+      "glyph": "sheet",
+      "palette": [
+        "#91deb6",
+        "#31946a"
+      ]
+    },
+    {
+      "name": "libreoffice-impress",
+      "context": "apps",
+      "path": "scalable/apps/libreoffice-impress.svg",
+      "glyph": "presentation",
+      "palette": [
+        "#ffc48a",
+        "#dc7741"
+      ]
+    },
+    {
+      "name": "libreoffice-draw",
+      "context": "apps",
+      "path": "scalable/apps/libreoffice-draw.svg",
+      "glyph": "draw",
+      "palette": [
+        "#f7d57f",
+        "#ca9c32"
+      ]
+    },
+    {
+      "name": "libreoffice-startcenter",
+      "context": "apps",
+      "path": "scalable/apps/libreoffice-startcenter.svg",
+      "glyph": "grid",
+      "palette": [
+        "#b4c5d9",
+        "#657f9e"
+      ]
+    },
+    {
+      "name": "org.telegram.desktop",
+      "context": "apps",
+      "path": "scalable/apps/org.telegram.desktop.svg",
+      "glyph": "chat",
+      "palette": [
+        "#83d7f8",
+        "#3192c6"
+      ]
+    },
+    {
+      "name": "discord",
+      "context": "apps",
+      "path": "scalable/apps/discord.svg",
+      "glyph": "voice",
+      "palette": [
+        "#b7b4fc",
+        "#7069d6"
+      ]
+    },
+    {
+      "name": "bitwarden",
+      "context": "apps",
+      "path": "scalable/apps/bitwarden.svg",
+      "glyph": "lock",
+      "palette": [
+        "#90b7ff",
+        "#477ce0"
+      ]
+    },
+    {
+      "name": "org.pulseaudio.pavucontrol",
+      "context": "apps",
+      "path": "scalable/apps/org.pulseaudio.pavucontrol.svg",
+      "glyph": "sliders",
+      "palette": [
+        "#afbdd6",
+        "#657b9e"
+      ]
+    },
+    {
+      "name": "accessories-calculator",
+      "context": "apps",
+      "path": "scalable/apps/accessories-calculator.svg",
+      "glyph": "calculator",
+      "palette": [
+        "#90c6d7",
+        "#487f96"
+      ]
+    },
+    {
+      "name": "x-office-calendar",
+      "context": "apps",
+      "path": "scalable/apps/x-office-calendar.svg",
+      "glyph": "calendar",
+      "palette": [
+        "#ffabaf",
+        "#d76878"
+      ]
+    },
+    {
+      "name": "preferences-system",
+      "context": "apps",
+      "path": "scalable/apps/preferences-system.svg",
+      "glyph": "sliders",
+      "palette": [
+        "#afbcd1",
+        "#647b9a"
+      ]
+    },
+    {
+      "name": "org.gnome.Software",
+      "context": "apps",
+      "path": "scalable/apps/org.gnome.Software.svg",
+      "glyph": "bag",
+      "palette": [
+        "#8bcddd",
+        "#3b88aa"
+      ]
+    },
+    {
+      "name": "accessories-text-editor",
+      "context": "apps",
+      "path": "scalable/apps/accessories-text-editor.svg",
+      "glyph": "document",
+      "palette": [
+        "#b8dbf9",
+        "#6999c6"
+      ]
+    },
+    {
+      "name": "accessories-screenshot",
+      "context": "apps",
+      "path": "scalable/apps/accessories-screenshot.svg",
+      "glyph": "capture",
+      "palette": [
+        "#c3b1ef",
+        "#8971be"
+      ]
+    },
+    {
+      "name": "accessories-clock",
+      "context": "apps",
+      "path": "scalable/apps/accessories-clock.svg",
+      "glyph": "clock",
+      "palette": [
+        "#92d7d4",
+        "#429d99"
+      ]
+    },
+    {
+      "name": "help-browser",
+      "context": "apps",
+      "path": "scalable/apps/help-browser.svg",
+      "glyph": "bulb",
+      "palette": [
+        "#efcc8a",
+        "#c49644"
+      ]
+    },
+    {
+      "name": "system-search",
+      "context": "apps",
+      "path": "scalable/apps/system-search.svg",
+      "glyph": "search",
+      "palette": [
+        "#9dd2f7",
+        "#4e94c7"
+      ]
+    }
+  ],
+  "aliases": [
+    {
+      "name": "inode-directory",
+      "path": "scalable/places/inode-directory.svg",
+      "target": "scalable/places/folder.svg"
+    },
+    {
+      "name": "folder-home",
+      "path": "scalable/places/folder-home.svg",
+      "target": "scalable/places/user-home.svg"
+    },
+    {
+      "name": "folder-downloads",
+      "path": "scalable/places/folder-downloads.svg",
+      "target": "scalable/places/folder-download.svg"
+    },
+    {
+      "name": "folder-images",
+      "path": "scalable/places/folder-images.svg",
+      "target": "scalable/places/folder-pictures.svg"
+    },
+    {
+      "name": "folder-video",
+      "path": "scalable/places/folder-video.svg",
+      "target": "scalable/places/folder-videos.svg"
+    },
+    {
+      "name": "folder-desktop",
+      "path": "scalable/places/folder-desktop.svg",
+      "target": "scalable/places/user-desktop.svg"
+    },
+    {
+      "name": "folder-public",
+      "path": "scalable/places/folder-public.svg",
+      "target": "scalable/places/folder-publicshare.svg"
+    },
+    {
+      "name": "folder-settings",
+      "path": "scalable/places/folder-settings.svg",
+      "target": "scalable/places/folder-config.svg"
+    },
+    {
+      "name": "folder-development",
+      "path": "scalable/places/folder-development.svg",
+      "target": "scalable/places/folder-code.svg"
+    },
+    {
+      "name": "folder-network",
+      "path": "scalable/places/folder-network.svg",
+      "target": "scalable/places/folder-remote.svg"
+    },
+    {
+      "name": "user-trash-empty",
+      "path": "scalable/places/user-trash-empty.svg",
+      "target": "scalable/places/user-trash.svg"
+    },
+    {
+      "name": "drive-harddisk-system",
+      "path": "scalable/devices/drive-harddisk-system.svg",
+      "target": "scalable/devices/drive-harddisk.svg"
+    },
+    {
+      "name": "drive-harddisk-solidstate",
+      "path": "scalable/devices/drive-harddisk-solidstate.svg",
+      "target": "scalable/devices/drive-harddisk.svg"
+    },
+    {
+      "name": "media-removable",
+      "path": "scalable/devices/media-removable.svg",
+      "target": "scalable/devices/drive-removable-media.svg"
+    },
+    {
+      "name": "drive-harddisk-usb",
+      "path": "scalable/devices/drive-harddisk-usb.svg",
+      "target": "scalable/devices/drive-removable-media-usb.svg"
+    },
+    {
+      "name": "drive-removable-usb",
+      "path": "scalable/devices/drive-removable-usb.svg",
+      "target": "scalable/devices/drive-removable-media-usb.svg"
+    },
+    {
+      "name": "network-server",
+      "path": "scalable/places/network-server.svg",
+      "target": "scalable/places/network-workgroup.svg"
+    },
+    {
+      "name": "network-wired",
+      "path": "scalable/places/network-wired.svg",
+      "target": "scalable/places/network-workgroup.svg"
+    },
+    {
+      "name": "computer-laptop",
+      "path": "scalable/devices/computer-laptop.svg",
+      "target": "scalable/devices/computer.svg"
+    },
+    {
+      "name": "smartphone",
+      "path": "scalable/devices/smartphone.svg",
+      "target": "scalable/devices/phone.svg"
+    },
+    {
+      "name": "printer-network",
+      "path": "scalable/devices/printer-network.svg",
+      "target": "scalable/devices/printer.svg"
+    },
+    {
+      "name": "audio-headset",
+      "path": "scalable/devices/audio-headset.svg",
+      "target": "scalable/devices/audio-headphones.svg"
+    },
+    {
+      "name": "text-plain",
+      "path": "scalable/mimetypes/text-plain.svg",
+      "target": "scalable/mimetypes/text-x-generic.svg"
+    },
+    {
+      "name": "text-x-readme",
+      "path": "scalable/mimetypes/text-x-readme.svg",
+      "target": "scalable/mimetypes/text-x-generic.svg"
+    },
+    {
+      "name": "image-png",
+      "path": "scalable/mimetypes/image-png.svg",
+      "target": "scalable/mimetypes/image-x-generic.svg"
+    },
+    {
+      "name": "image-jpeg",
+      "path": "scalable/mimetypes/image-jpeg.svg",
+      "target": "scalable/mimetypes/image-x-generic.svg"
+    },
+    {
+      "name": "image-svg+xml",
+      "path": "scalable/mimetypes/image-svg+xml.svg",
+      "target": "scalable/mimetypes/image-x-generic.svg"
+    },
+    {
+      "name": "audio-mpeg",
+      "path": "scalable/mimetypes/audio-mpeg.svg",
+      "target": "scalable/mimetypes/audio-x-generic.svg"
+    },
+    {
+      "name": "audio-x-wav",
+      "path": "scalable/mimetypes/audio-x-wav.svg",
+      "target": "scalable/mimetypes/audio-x-generic.svg"
+    },
+    {
+      "name": "video-mp4",
+      "path": "scalable/mimetypes/video-mp4.svg",
+      "target": "scalable/mimetypes/video-x-generic.svg"
+    },
+    {
+      "name": "video-webm",
+      "path": "scalable/mimetypes/video-webm.svg",
+      "target": "scalable/mimetypes/video-x-generic.svg"
+    },
+    {
+      "name": "application-x-archive",
+      "path": "scalable/mimetypes/application-x-archive.svg",
+      "target": "scalable/mimetypes/package-x-generic.svg"
+    },
+    {
+      "name": "application-zip",
+      "path": "scalable/mimetypes/application-zip.svg",
+      "target": "scalable/mimetypes/package-x-generic.svg"
+    },
+    {
+      "name": "application-x-compressed-tar",
+      "path": "scalable/mimetypes/application-x-compressed-tar.svg",
+      "target": "scalable/mimetypes/package-x-generic.svg"
+    },
+    {
+      "name": "application-x-7z-compressed",
+      "path": "scalable/mimetypes/application-x-7z-compressed.svg",
+      "target": "scalable/mimetypes/package-x-generic.svg"
+    },
+    {
+      "name": "application-x-rar",
+      "path": "scalable/mimetypes/application-x-rar.svg",
+      "target": "scalable/mimetypes/package-x-generic.svg"
+    },
+    {
+      "name": "text-x-python",
+      "path": "scalable/mimetypes/text-x-python.svg",
+      "target": "scalable/mimetypes/text-x-script.svg"
+    },
+    {
+      "name": "text-x-shellscript",
+      "path": "scalable/mimetypes/text-x-shellscript.svg",
+      "target": "scalable/mimetypes/text-x-script.svg"
+    },
+    {
+      "name": "text-html",
+      "path": "scalable/mimetypes/text-html.svg",
+      "target": "scalable/mimetypes/text-x-script.svg"
+    },
+    {
+      "name": "application-javascript",
+      "path": "scalable/mimetypes/application-javascript.svg",
+      "target": "scalable/mimetypes/text-x-script.svg"
+    },
+    {
+      "name": "text-css",
+      "path": "scalable/mimetypes/text-css.svg",
+      "target": "scalable/mimetypes/text-x-script.svg"
+    },
+    {
+      "name": "text-x-csrc",
+      "path": "scalable/mimetypes/text-x-csrc.svg",
+      "target": "scalable/mimetypes/text-x-script.svg"
+    },
+    {
+      "name": "application-vnd.oasis.opendocument.spreadsheet",
+      "path": "scalable/mimetypes/application-vnd.oasis.opendocument.spreadsheet.svg",
+      "target": "scalable/mimetypes/x-office-spreadsheet.svg"
+    },
+    {
+      "name": "application-vnd.oasis.opendocument.presentation",
+      "path": "scalable/mimetypes/application-vnd.oasis.opendocument.presentation.svg",
+      "target": "scalable/mimetypes/x-office-presentation.svg"
+    },
+    {
+      "name": "application-vnd.oasis.opendocument.text",
+      "path": "scalable/mimetypes/application-vnd.oasis.opendocument.text.svg",
+      "target": "scalable/mimetypes/x-office-document.svg"
+    },
+    {
+      "name": "application-x-sharedlib",
+      "path": "scalable/mimetypes/application-x-sharedlib.svg",
+      "target": "scalable/mimetypes/application-x-executable.svg"
+    },
+    {
+      "name": "org.gnome.nautilus",
+      "path": "scalable/apps/org.gnome.nautilus.svg",
+      "target": "scalable/apps/org.gnome.Nautilus.svg"
+    },
+    {
+      "name": "nautilus",
+      "path": "scalable/apps/nautilus.svg",
+      "target": "scalable/apps/org.gnome.Nautilus.svg"
+    },
+    {
+      "name": "system-file-manager",
+      "path": "scalable/apps/system-file-manager.svg",
+      "target": "scalable/apps/org.gnome.Nautilus.svg"
+    },
+    {
+      "name": "file-manager",
+      "path": "scalable/apps/file-manager.svg",
+      "target": "scalable/apps/org.gnome.Nautilus.svg"
+    },
+    {
+      "name": "google-chrome-stable",
+      "path": "scalable/apps/google-chrome-stable.svg",
+      "target": "scalable/apps/google-chrome.svg"
+    },
+    {
+      "name": "chromium",
+      "path": "scalable/apps/chromium.svg",
+      "target": "scalable/apps/google-chrome.svg"
+    },
+    {
+      "name": "chromium-browser",
+      "path": "scalable/apps/chromium-browser.svg",
+      "target": "scalable/apps/google-chrome.svg"
+    },
+    {
+      "name": "org.chromium.Chromium",
+      "path": "scalable/apps/org.chromium.Chromium.svg",
+      "target": "scalable/apps/google-chrome.svg"
+    },
+    {
+      "name": "brave",
+      "path": "scalable/apps/brave.svg",
+      "target": "scalable/apps/brave-browser.svg"
+    },
+    {
+      "name": "com.brave.Browser",
+      "path": "scalable/apps/com.brave.Browser.svg",
+      "target": "scalable/apps/brave-browser.svg"
+    },
+    {
+      "name": "org.mozilla.firefox",
+      "path": "scalable/apps/org.mozilla.firefox.svg",
+      "target": "scalable/apps/firefox.svg"
+    },
+    {
+      "name": "firefox-esr",
+      "path": "scalable/apps/firefox-esr.svg",
+      "target": "scalable/apps/firefox.svg"
+    },
+    {
+      "name": "utilities-terminal",
+      "path": "scalable/apps/utilities-terminal.svg",
+      "target": "scalable/apps/kitty.svg"
+    },
+    {
+      "name": "terminal",
+      "path": "scalable/apps/terminal.svg",
+      "target": "scalable/apps/kitty.svg"
+    },
+    {
+      "name": "org.gnome.Terminal",
+      "path": "scalable/apps/org.gnome.Terminal.svg",
+      "target": "scalable/apps/kitty.svg"
+    },
+    {
+      "name": "Alacritty",
+      "path": "scalable/apps/Alacritty.svg",
+      "target": "scalable/apps/kitty.svg"
+    },
+    {
+      "name": "foot",
+      "path": "scalable/apps/foot.svg",
+      "target": "scalable/apps/kitty.svg"
+    },
+    {
+      "name": "vscode",
+      "path": "scalable/apps/vscode.svg",
+      "target": "scalable/apps/code.svg"
+    },
+    {
+      "name": "visual-studio-code",
+      "path": "scalable/apps/visual-studio-code.svg",
+      "target": "scalable/apps/code.svg"
+    },
+    {
+      "name": "com.visualstudio.code",
+      "path": "scalable/apps/com.visualstudio.code.svg",
+      "target": "scalable/apps/code.svg"
+    },
+    {
+      "name": "code-oss",
+      "path": "scalable/apps/code-oss.svg",
+      "target": "scalable/apps/code.svg"
+    },
+    {
+      "name": "VSCodium",
+      "path": "scalable/apps/VSCodium.svg",
+      "target": "scalable/apps/code.svg"
+    },
+    {
+      "name": "codium",
+      "path": "scalable/apps/codium.svg",
+      "target": "scalable/apps/code.svg"
+    },
+    {
+      "name": "org.videolan.VLC",
+      "path": "scalable/apps/org.videolan.VLC.svg",
+      "target": "scalable/apps/vlc.svg"
+    },
+    {
+      "name": "obs",
+      "path": "scalable/apps/obs.svg",
+      "target": "scalable/apps/com.obsproject.Studio.svg"
+    },
+    {
+      "name": "obs-studio",
+      "path": "scalable/apps/obs-studio.svg",
+      "target": "scalable/apps/com.obsproject.Studio.svg"
+    },
+    {
+      "name": "org.gimp.GIMP",
+      "path": "scalable/apps/org.gimp.GIMP.svg",
+      "target": "scalable/apps/gimp.svg"
+    },
+    {
+      "name": "writer",
+      "path": "scalable/apps/writer.svg",
+      "target": "scalable/apps/libreoffice-writer.svg"
+    },
+    {
+      "name": "calc",
+      "path": "scalable/apps/calc.svg",
+      "target": "scalable/apps/libreoffice-calc.svg"
+    },
+    {
+      "name": "impress",
+      "path": "scalable/apps/impress.svg",
+      "target": "scalable/apps/libreoffice-impress.svg"
+    },
+    {
+      "name": "draw",
+      "path": "scalable/apps/draw.svg",
+      "target": "scalable/apps/libreoffice-draw.svg"
+    },
+    {
+      "name": "libreoffice",
+      "path": "scalable/apps/libreoffice.svg",
+      "target": "scalable/apps/libreoffice-startcenter.svg"
+    },
+    {
+      "name": "org.libreoffice.LibreOffice",
+      "path": "scalable/apps/org.libreoffice.LibreOffice.svg",
+      "target": "scalable/apps/libreoffice-startcenter.svg"
+    },
+    {
+      "name": "telegram",
+      "path": "scalable/apps/telegram.svg",
+      "target": "scalable/apps/org.telegram.desktop.svg"
+    },
+    {
+      "name": "telegram-desktop",
+      "path": "scalable/apps/telegram-desktop.svg",
+      "target": "scalable/apps/org.telegram.desktop.svg"
+    },
+    {
+      "name": "com.discordapp.Discord",
+      "path": "scalable/apps/com.discordapp.Discord.svg",
+      "target": "scalable/apps/discord.svg"
+    },
+    {
+      "name": "com.bitwarden.desktop",
+      "path": "scalable/apps/com.bitwarden.desktop.svg",
+      "target": "scalable/apps/bitwarden.svg"
+    },
+    {
+      "name": "brave-gneipglanmgpdhiohiogfnhdpoaafoob-Default",
+      "path": "scalable/apps/brave-gneipglanmgpdhiohiogfnhdpoaafoob-Default.svg",
+      "target": "scalable/apps/bitwarden.svg"
+    },
+    {
+      "name": "pavucontrol",
+      "path": "scalable/apps/pavucontrol.svg",
+      "target": "scalable/apps/org.pulseaudio.pavucontrol.svg"
+    },
+    {
+      "name": "multimedia-volume-control",
+      "path": "scalable/apps/multimedia-volume-control.svg",
+      "target": "scalable/apps/org.pulseaudio.pavucontrol.svg"
+    },
+    {
+      "name": "org.gnome.Calculator",
+      "path": "scalable/apps/org.gnome.Calculator.svg",
+      "target": "scalable/apps/accessories-calculator.svg"
+    },
+    {
+      "name": "gnome-calculator",
+      "path": "scalable/apps/gnome-calculator.svg",
+      "target": "scalable/apps/accessories-calculator.svg"
+    },
+    {
+      "name": "calculator",
+      "path": "scalable/apps/calculator.svg",
+      "target": "scalable/apps/accessories-calculator.svg"
+    },
+    {
+      "name": "org.gnome.Calendar",
+      "path": "scalable/apps/org.gnome.Calendar.svg",
+      "target": "scalable/apps/x-office-calendar.svg"
+    },
+    {
+      "name": "calendar",
+      "path": "scalable/apps/calendar.svg",
+      "target": "scalable/apps/x-office-calendar.svg"
+    },
+    {
+      "name": "org.gnome.Settings",
+      "path": "scalable/apps/org.gnome.Settings.svg",
+      "target": "scalable/apps/preferences-system.svg"
+    },
+    {
+      "name": "gnome-control-center",
+      "path": "scalable/apps/gnome-control-center.svg",
+      "target": "scalable/apps/preferences-system.svg"
+    },
+    {
+      "name": "systemsettings",
+      "path": "scalable/apps/systemsettings.svg",
+      "target": "scalable/apps/preferences-system.svg"
+    },
+    {
+      "name": "settings",
+      "path": "scalable/apps/settings.svg",
+      "target": "scalable/apps/preferences-system.svg"
+    },
+    {
+      "name": "system-software-install",
+      "path": "scalable/apps/system-software-install.svg",
+      "target": "scalable/apps/org.gnome.Software.svg"
+    },
+    {
+      "name": "software-center",
+      "path": "scalable/apps/software-center.svg",
+      "target": "scalable/apps/org.gnome.Software.svg"
+    },
+    {
+      "name": "org.gnome.TextEditor",
+      "path": "scalable/apps/org.gnome.TextEditor.svg",
+      "target": "scalable/apps/accessories-text-editor.svg"
+    },
+    {
+      "name": "org.gnome.gedit",
+      "path": "scalable/apps/org.gnome.gedit.svg",
+      "target": "scalable/apps/accessories-text-editor.svg"
+    },
+    {
+      "name": "gedit",
+      "path": "scalable/apps/gedit.svg",
+      "target": "scalable/apps/accessories-text-editor.svg"
+    },
+    {
+      "name": "org.gnome.Screenshot",
+      "path": "scalable/apps/org.gnome.Screenshot.svg",
+      "target": "scalable/apps/accessories-screenshot.svg"
+    },
+    {
+      "name": "org.gnome.clocks",
+      "path": "scalable/apps/org.gnome.clocks.svg",
+      "target": "scalable/apps/accessories-clock.svg"
+    },
+    {
+      "name": "org.gnome.Yelp",
+      "path": "scalable/apps/org.gnome.Yelp.svg",
+      "target": "scalable/apps/help-browser.svg"
+    },
+    {
+      "name": "org.gnome.Search",
+      "path": "scalable/apps/org.gnome.Search.svg",
+      "target": "scalable/apps/system-search.svg"
+    }
+  ],
+  "totals": {
+    "canonical": 62,
+    "aliases": 104,
+    "svg_entries": 166
+  }
+}

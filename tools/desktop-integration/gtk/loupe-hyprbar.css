@@ -1,0 +1,33 @@
+/* Loupe 50: bridge legacy GTK theme rules to generated Hyprbar colors.
+ * Uses Loupe's imageview/fullscreen-osd and multi-layout property-panel nodes.
+ * Does not change image pixels, scaling, color management or transparency rendering.
+ */
+imageview.image-view {
+  background-color: @view_bg_color;
+  color: @view_fg_color;
+}
+headerbar.fullscreen-osd {
+  background: @headerbar_bg_color;
+  color: @headerbar_fg_color;
+}
+headerbar.fullscreen-osd button {
+  color: @headerbar_fg_color;
+}
+imageview.image-view .osd-box {
+  background-color: alpha(@popover_bg_color, 0.96);
+  color: @popover_fg_color;
+}
+headerbar.fullscreen-osd popover > contents {
+  background-color: @popover_bg_color;
+  color: @popover_fg_color;
+}
+/* The wide and narrow properties layouts used by Loupe. */
+toolbarview multi-layout-view overlay-split-view > .sidebar-pane,
+toolbarview multi-layout-view .bottom-properties {
+  background-color: @sidebar_bg_color;
+  color: @sidebar_fg_color;
+}
+toolbarview multi-layout-view row.property {
+  background-color: @card_bg_color;
+  color: @card_fg_color;
+}

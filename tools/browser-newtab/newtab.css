@@ -1,0 +1,30 @@
+/* No imported fonts, images, gradients, or remote resources. */
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--background); color: var(--on-surface); }
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: clamp(20px, 5vw, 64px);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+main { align-self: center; justify-self: center; width: min(100%, 560px); text-align: center; padding-block: 36px; }
+.moment { margin-bottom: clamp(32px, 6vh, 54px); }
+#clock { display: block; font-size: clamp(72px, 14vw, 128px); font-weight: 250; line-height: 1.1; letter-spacing: -.065em; font-variant-numeric: tabular-nums; }
+#date { margin: 16px 0 0; color: var(--on-surface-variant); font-size: clamp(14px, 2.5vw, 16px); letter-spacing: .015em; }
+.search-box { display: flex; align-items: center; gap: 16px; padding: 8px 9px 8px 22px; border: 1px solid var(--outline); border-radius: 18px; background: var(--surface-container); }
+.search-box:focus-within { outline: 2px solid var(--primary); outline-offset: 4px; }
+.search-icon { width: 15px; height: 15px; border: 1.5px solid var(--on-surface-variant); border-radius: 50%; position: relative; flex: none; }
+.search-icon::after { content: ""; position: absolute; width: 6px; height: 1.5px; background: var(--on-surface-variant); transform: rotate(45deg); right: -5px; bottom: -2px; }
+input { width: 100%; min-width: 0; padding: 10px 0; border: 0; outline: 0; background: transparent; color: var(--on-surface); font: inherit; font-size: 15px; }
+input::placeholder { color: var(--on-surface-variant); opacity: 1; }
+button { border: 0; border-radius: 12px; min-width: 44px; min-height: 44px; background: var(--primary); color: var(--on-primary); font: inherit; font-size: 24px; cursor: pointer; }
+button:hover { outline: 1px solid var(--on-surface); outline-offset: 2px; }
+button:focus-visible { outline: 2px solid var(--primary); outline-offset: 5px; }
+#search-status { color: var(--on-surface-variant); font-size: 13px; min-height: 1.5em; margin: 14px 0 0; }
+footer { display: flex; justify-content: center; align-items: center; gap: 9px; color: var(--on-surface-variant); font-size: 12px; letter-spacing: .16em; }
+.brand-mark { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (max-width: 380px) { .search-box { gap: 12px; padding-left: 16px; } input { font-size: 14px; } }
+@media (forced-colors: active) { .search-box, button { border: 1px solid ButtonText; } }

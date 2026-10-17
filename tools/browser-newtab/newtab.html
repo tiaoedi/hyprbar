@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nova aba · Hyprbar</title>
+  <link rel="stylesheet" href="palette.css">
+  <link rel="stylesheet" href="newtab.css">
+  <script src="newtab.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1 class="visually-hidden">Nova aba Hyprbar</h1>
+    <section class="moment" aria-label="Hora e data">
+      <time id="clock" aria-label="Horário local">--:--</time>
+      <p id="date">Seu tempo, seu espaço.</p>
+    </section>
+    <form id="search-form" role="search" aria-label="Pesquisa na web">
+      <label for="search" class="visually-hidden">Pesquisar com o buscador padrão</label>
+      <div class="search-box">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input id="search" name="q" type="search" placeholder="O que você procura?" autocomplete="off" spellcheck="false" enterkeyhint="search" required>
+        <button type="submit" aria-label="Pesquisar" title="Pesquisar">↗</button>
+      </div>
+      <p id="search-status" role="status"></p>
+    </form>
+    <noscript>Ative o JavaScript ou use a barra de endereço para pesquisar.</noscript>
+  </main>
+  <footer><span class="brand-mark" aria-hidden="true"></span><span>hyprbar</span></footer>
+</body>
+</html>

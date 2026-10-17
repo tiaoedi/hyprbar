@@ -87,6 +87,7 @@
 #include "system/easyeffects_service.h"
 #include "system/keyboard_backlight_service.h"
 #include "system/system_monitor_service.h"
+#include "theme/app_colors_changed.h"
 #include "ui/app_icon_colorization.h"
 #include "ui/controls/input.h"
 #include "ui/dialogs/color_picker_dialog.h"
@@ -718,11 +719,11 @@ void Application::initStyleThemeAndWayland() {
     }
   });
 
-  // Runs once per applied generation: the gsettings color-scheme write has to land after the
-  // gtk-theme templates, and colors_changed only concerns a palette that actually changed.
-  m_templateApplyService.setAfterApplyCallback([this](std::string_view appliedMode, bool paletteChanged) {
+  // Runs once per applied generation: the gsettings color-scheme write and colors_changed
+  // hooks must follow the templates, including when only the app-facing mode changed.
+  m_templateApplyService.setAfterApplyCallback([this](std::string_view appliedMode, bool colorsChanged) {
     syncGSettingsColorScheme(appliedMode);
-    if (paletteChanged) {
+    if (colorsChanged) {
       m_hookManager.fire(HookKind::ColorsChanged);
     }
   });
@@ -738,7 +739,8 @@ void Application::initStyleThemeAndWayland() {
     syncScriptApiWallpaperDirectory();
     const std::optional<std::string> previousMode = lastResolvedThemeMode;
     lastResolvedThemeMode = resolvedMode;
-    const bool colorsChanged = !lastGeneratedPalette.has_value() || *lastGeneratedPalette != generated;
+    const bool colorsChanged =
+        noctalia::theme::appColorsChanged(lastGeneratedPalette, generated, previousMode, resolvedMode);
     lastGeneratedPalette = generated;
     m_templateApplyService.apply(generated, mode, /*force=*/false, /*paletteChanged=*/colorsChanged);
     if (previousMode.has_value() && *previousMode != resolvedMode) {

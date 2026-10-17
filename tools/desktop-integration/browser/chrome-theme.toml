@@ -1,0 +1,4 @@
+[theme.templates.user.chrome]
+enabled = true
+input_path = "$XDG_CONFIG_HOME/hyprbar/templates/chrome/manifest.json.in"
+output_path = "$XDG_DATA_HOME/hyprbar/themes/chrome/manifest.json"
