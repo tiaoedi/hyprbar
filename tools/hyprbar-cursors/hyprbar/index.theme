@@ -1,0 +1,4 @@
+[Icon Theme]
+Name=hyprbar
+Comment=Modern, original macOS-inspired cursor theme
+Inherits=Adwaita

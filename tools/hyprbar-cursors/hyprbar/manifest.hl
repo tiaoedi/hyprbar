@@ -1,0 +1,4 @@
+name = hyprbar
+description = Original modern cursors without logos
+version = 1.0
+cursors_directory = hyprcursors
