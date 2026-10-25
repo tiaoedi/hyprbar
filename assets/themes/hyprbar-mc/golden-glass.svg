@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#463528"/>
+      <stop offset=".36" stop-color="#75624e"/>
+      <stop offset=".72" stop-color="#615b60"/>
+      <stop offset="1" stop-color="#777b87"/>
+    </linearGradient>
+    <radialGradient id="gold" cx=".1" cy=".76" r=".92">
+      <stop stop-color="#ddc6a5" stop-opacity=".9"/>
+      <stop offset=".48" stop-color="#9d8466" stop-opacity=".38"/>
+      <stop offset="1" stop-color="#403a37" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="arc1" x1="0" y1="0" x2=".9" y2="1">
+      <stop stop-color="#6f695f"/>
+      <stop offset=".4" stop-color="#b7afa0"/>
+      <stop offset=".7" stop-color="#cfc7b7"/>
+      <stop offset="1" stop-color="#8a8177"/>
+    </linearGradient>
+    <linearGradient id="arc2" x1=".2" y1="0" x2=".8" y2="1">
+      <stop stop-color="#4e4943"/>
+      <stop offset=".38" stop-color="#8b8479"/>
+      <stop offset=".76" stop-color="#d4d0c7"/>
+      <stop offset="1" stop-color="#817d79"/>
+    </linearGradient>
+    <linearGradient id="arc3" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#52483e"/>
+      <stop offset=".4" stop-color="#938a7b"/>
+      <stop offset=".76" stop-color="#c7c3bc"/>
+      <stop offset="1" stop-color="#7e818d"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#ffffff" stop-opacity=".18"/>
+      <stop offset=".46" stop-color="#fff8e9" stop-opacity=".82"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".3"/>
+    </linearGradient>
+    <linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#1c1715" stop-opacity=".38"/>
+      <stop offset=".18" stop-color="#1c1715" stop-opacity="0"/>
+      <stop offset=".9" stop-color="#1c1715" stop-opacity="0"/>
+      <stop offset="1" stop-color="#1c1715" stop-opacity=".12"/>
+    </linearGradient>
+    <filter id="shadow" x="-.2" y="-.2" width="1.4" height="1.4">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+  <rect width="3840" height="2160" fill="url(#base)"/>
+  <rect width="3840" height="2160" fill="url(#gold)"/>
+  <path d="M-520,-260 C960,-540 1530,210 740,1150 C390,1570 70,1900 -300,2280 L-520,2280 Z" fill="#211a14" opacity=".28" filter="url(#shadow)"/>
+  <path d="M-550,-300 C950,-560 1510,190 710,1130 C380,1540 70,1890 -350,2290 L-550,2290 Z" fill="url(#arc1)"/>
+  <path d="M-550,-300 C950,-560 1510,190 710,1130 C380,1540 70,1890 -350,2290" fill="none" stroke="url(#edge)" stroke-width="7"/>
+  <path d="M1130,-320 C2790,-470 3650,390 2630,1170 C1990,1660 930,1790 290,2290 L4520,2290 L4520,-320 Z" fill="#171412" opacity=".28" filter="url(#shadow)"/>
+  <path d="M1110,-350 C2760,-490 3620,360 2590,1140 C1940,1630 890,1770 250,2290 L4520,2290 L4520,-350 Z" fill="url(#arc2)"/>
+  <path d="M1110,-350 C2760,-490 3620,360 2590,1140 C1940,1630 890,1770 250,2290" fill="none" stroke="url(#edge)" stroke-width="8"/>
+  <path d="M4100,80 C4270,1120 3380,1350 2600,1810 C2150,2070 2060,2270 2010,2460 L4520,2460 Z" fill="#191717" opacity=".32" filter="url(#shadow)"/>
+  <path d="M4080,40 C4250,1080 3340,1310 2560,1770 C2100,2040 2020,2240 1970,2460 L4520,2460 Z" fill="url(#arc3)"/>
+  <path d="M4080,40 C4250,1080 3340,1310 2560,1770 C2100,2040 2020,2240 1970,2460" fill="none" stroke="url(#edge)" stroke-width="7"/>
+  <rect width="3840" height="2160" fill="url(#vignette)"/>
+</svg>

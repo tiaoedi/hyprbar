@@ -1,0 +1,150 @@
+# hyprbar-mc — complete native-shell appearance preset.
+# Installed as zz-hyprbar-mc.toml; @THEME_HOME@ is substituted by the installer.
+# Real shell actions, not fake application/global menu entries.
+
+[shell]
+font_family = "Hyprbar"
+corner_radius_scale = 1.1
+settings_window_translucent = false
+app_icon_colorize = false
+
+[shell.animation]
+enabled = true
+speed = 1.15
+
+[shell.shadow]
+direction = "down"
+alpha = 0.35
+
+[shell.panel]
+transparency_mode = "solid"
+borders = true
+shadow = true
+launcher_placement = "floating"
+launcher_position = "top_center"
+clipboard_placement = "floating"
+clipboard_position = "center"
+control_center_placement = "floating"
+control_center_position = "top_right"
+wallpaper_placement = "floating"
+wallpaper_position = "center"
+session_placement = "floating"
+session_position = "top_left"
+
+[shell.launcher]
+categories = false
+show_icons = true
+compact = true
+app_grid = false
+sort_by_usage = true
+
+[shell.window_switcher]
+style = "carousel"
+show_caption = true
+show_app_icon = true
+show_count = false
+
+[theme]
+source = "custom"
+custom_palette = "hyprbar-mc"
+mode = "dark"
+shell_mode = "dark"
+
+[bar.default]
+enabled = true
+position = "top"
+thickness = 34
+background_opacity = 1.0
+compositor_blur = true
+radius = 0
+margin_ends = 0
+margin_edge = 0
+padding = 14
+widget_spacing = 6
+scale = 1.0
+font_scale = 1.0
+font_weight = 500
+shadow = true
+border_width = 0.0
+capsule = false
+capsule_radius = 8
+color = "#F5F5F7"
+icon_color = "#F5F5F7"
+auto_hide = false
+reserve_space = true
+start = ["workspaces", "launcher", "wallpaper", "wallhaven_2", "ram", "cpu", "cat_3"]
+center = ["audio_visualizer", "cat", "gamermode"]
+end = ["weather", "tray", "notifications", "network", "bluetooth", "volume", "clock", "keybinds", "control-center", "session"]
+
+[dock]
+enabled = true
+position = "bottom"
+icon_size = 52
+main_axis_padding = 14
+cross_axis_padding = 8
+item_spacing = 7
+background_opacity = 1.0
+border = "outline"
+border_width = 1.0
+radius = 22
+radius_top_left = 22
+radius_top_right = 22
+radius_bottom_left = 22
+radius_bottom_right = 22
+concave_edge_corners = false
+margin_ends = 0
+margin_edge = 10
+shadow = true
+show_running = true
+auto_hide = false
+reserve_space = true
+layer = "top"
+active_scale = 1.0
+inactive_scale = 1.0
+magnification = true
+magnification_scale = 1.3
+active_opacity = 1.0
+inactive_opacity = 1.0
+show_dots = true
+show_instance_count = false
+launcher_position = "start"
+launcher_icon = "apps"
+active_monitor_only = false
+pinned = ["org.gnome.Nautilus", "brave-browser", "com.google.Chrome", "kitty", "com.microsoft.VSCode", "org.gnome.Calculator", "org.telegram.desktop"]
+
+[notification]
+background_opacity = 1.0
+border = true
+border_color = "outline"
+border_width = 1
+follow_focused_output = true
+offset_x = 16
+offset_y = 12
+
+[osd]
+position = "bottom_center"
+orientation = "horizontal"
+background_opacity = 1.0
+border = true
+border_width = 1
+follow_focused_output = true
+offset_y = 100
+scale = 0.95
+
+[wallpaper]
+enabled = true
+fill_mode = "crop"
+transition = ["fade"]
+transition_duration = 650
+
+[wallpaper.automation]
+enabled = false
+
+[wallpaper.default]
+path = "@THEME_HOME@/golden-glass.png"
+
+[wallpaper.monitors.DP-1]
+path = "@THEME_HOME@/golden-glass.png"
+
+[wallpaper.monitors.HDMI-A-1]
+path = "@THEME_HOME@/golden-glass.png"

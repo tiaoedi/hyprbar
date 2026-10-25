@@ -1,0 +1,29 @@
+/* hyprbar-mc: native GTK controls with macOS-like neutral chrome.
+ * Keep the existing Hyprbar generated color definitions; no web content rules.
+ * Window titlebar buttons are intentionally disabled by user preference.
+ */
+window.csd,
+window.background.csd {
+  border-radius: 14px;
+}
+headerbar,
+headerbar.titlebar {
+  min-height: 38px;
+  padding: 0 12px;
+  color: @window_fg_color;
+  background-color: @window_bg_color;
+  background-image: none;
+  box-shadow: inset 0 -1px alpha(@window_fg_color, 0.08);
+}
+headerbar .title,
+headerbar .title-label {
+  font-weight: 600;
+}
+headerbar button {
+  border-radius: 8px;
+}
+/* Window controls are disabled through gtk-decoration-layout=":". */
+.navigation-sidebar row,
+.sidebar row {
+  border-radius: 7px;
+}

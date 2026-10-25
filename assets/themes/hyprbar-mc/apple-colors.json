@@ -1,0 +1,441 @@
+{
+  "official_guidance": "https://developer.apple.com/design/human-interface-guidelines/color",
+  "data_source": "https://developer.apple.com/tutorials/data/design/human-interface-guidelines/color.json",
+  "macos27_reference": "https://www.apple.com/os/macos/",
+  "color_semantics": "Apple HIG unified palette; not an exhaustive static export of macOS 27 NSColor. Liquid Glass is adaptive, not a single hex color.",
+  "surface_semantics": "Neutral surface approximations based on the macOS 27 promotional screenshots; not claimed to be official NSColor values.",
+  "colors": {
+    "accessible-blue-dark": {
+      "rgb": [
+        92,
+        184,
+        255
+      ],
+      "hex": "#5CB8FF",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-blue-dark@2x.png"
+    },
+    "accessible-blue-light": {
+      "rgb": [
+        30,
+        110,
+        244
+      ],
+      "hex": "#1E6EF4",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-blue-light@2x.png"
+    },
+    "accessible-brown-dark": {
+      "rgb": [
+        219,
+        166,
+        121
+      ],
+      "hex": "#DBA679",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-brown-dark@2x.png"
+    },
+    "accessible-brown-light": {
+      "rgb": [
+        149,
+        109,
+        81
+      ],
+      "hex": "#956D51",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-brown-light@2x.png"
+    },
+    "accessible-cyan-dark": {
+      "rgb": [
+        109,
+        217,
+        255
+      ],
+      "hex": "#6DD9FF",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-cyan-dark@2x.png"
+    },
+    "accessible-cyan-light": {
+      "rgb": [
+        0,
+        126,
+        174
+      ],
+      "hex": "#007EAE",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-cyan-light@2x.png"
+    },
+    "accessible-green-dark": {
+      "rgb": [
+        74,
+        217,
+        104
+      ],
+      "hex": "#4AD968",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-green-dark@2x.png"
+    },
+    "accessible-green-light": {
+      "rgb": [
+        0,
+        137,
+        50
+      ],
+      "hex": "#008932",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-green-light@2x.png"
+    },
+    "accessible-indigo-dark": {
+      "rgb": [
+        167,
+        170,
+        255
+      ],
+      "hex": "#A7AAFF",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-indigo-dark@2x.png"
+    },
+    "accessible-indigo-light": {
+      "rgb": [
+        86,
+        74,
+        222
+      ],
+      "hex": "#564ADE",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-indigo-light@2x.png"
+    },
+    "accessible-mint-dark": {
+      "rgb": [
+        84,
+        223,
+        203
+      ],
+      "hex": "#54DFCB",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-mint-dark@2x.png"
+    },
+    "accessible-mint-light": {
+      "rgb": [
+        0,
+        133,
+        117
+      ],
+      "hex": "#008575",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-mint-light@2x.png"
+    },
+    "accessible-orange-dark": {
+      "rgb": [
+        255,
+        160,
+        86
+      ],
+      "hex": "#FFA056",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-orange-dark@2x.png"
+    },
+    "accessible-orange-light": {
+      "rgb": [
+        197,
+        83,
+        0
+      ],
+      "hex": "#C55300",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-orange-light@2x.png"
+    },
+    "accessible-pink-dark": {
+      "rgb": [
+        255,
+        138,
+        196
+      ],
+      "hex": "#FF8AC4",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-pink-dark@2x.png"
+    },
+    "accessible-pink-light": {
+      "rgb": [
+        231,
+        18,
+        77
+      ],
+      "hex": "#E7124D",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-pink-light@2x.png"
+    },
+    "accessible-purple-dark": {
+      "rgb": [
+        234,
+        141,
+        255
+      ],
+      "hex": "#EA8DFF",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-purple-dark@2x.png"
+    },
+    "accessible-purple-light": {
+      "rgb": [
+        176,
+        47,
+        194
+      ],
+      "hex": "#B02FC2",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-purple-light@2x.png"
+    },
+    "accessible-red-dark": {
+      "rgb": [
+        255,
+        97,
+        101
+      ],
+      "hex": "#FF6165",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-red-dark@2x.png"
+    },
+    "accessible-red-light": {
+      "rgb": [
+        233,
+        21,
+        45
+      ],
+      "hex": "#E9152D",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-red-light@2x.png"
+    },
+    "accessible-teal-dark": {
+      "rgb": [
+        59,
+        221,
+        236
+      ],
+      "hex": "#3BDDEC",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-teal-dark@2x.png"
+    },
+    "accessible-teal-light": {
+      "rgb": [
+        0,
+        129,
+        152
+      ],
+      "hex": "#008198",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-teal-light@2x.png"
+    },
+    "accessible-yellow-dark": {
+      "rgb": [
+        254,
+        223,
+        67
+      ],
+      "hex": "#FEDF43",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-yellow-dark@2x.png"
+    },
+    "accessible-yellow-light": {
+      "rgb": [
+        161,
+        106,
+        0
+      ],
+      "hex": "#A16A00",
+      "asset": "/images/com.apple.HIG/colors-unified-accessible-yellow-light@2x.png"
+    },
+    "blue-dark": {
+      "rgb": [
+        0,
+        145,
+        255
+      ],
+      "hex": "#0091FF",
+      "asset": "/images/com.apple.HIG/colors-unified-blue-dark@2x.png"
+    },
+    "blue-light": {
+      "rgb": [
+        0,
+        136,
+        255
+      ],
+      "hex": "#0088FF",
+      "asset": "/images/com.apple.HIG/colors-unified-blue-light@2x.png"
+    },
+    "brown-dark": {
+      "rgb": [
+        183,
+        138,
+        102
+      ],
+      "hex": "#B78A66",
+      "asset": "/images/com.apple.HIG/colors-unified-brown-dark@2x.png"
+    },
+    "brown-light": {
+      "rgb": [
+        172,
+        127,
+        94
+      ],
+      "hex": "#AC7F5E",
+      "asset": "/images/com.apple.HIG/colors-unified-brown-light@2x.png"
+    },
+    "cyan-dark": {
+      "rgb": [
+        60,
+        211,
+        254
+      ],
+      "hex": "#3CD3FE",
+      "asset": "/images/com.apple.HIG/colors-unified-cyan-dark@2x.png"
+    },
+    "cyan-light": {
+      "rgb": [
+        0,
+        192,
+        232
+      ],
+      "hex": "#00C0E8",
+      "asset": "/images/com.apple.HIG/colors-unified-cyan-light@2x.png"
+    },
+    "green-dark": {
+      "rgb": [
+        48,
+        209,
+        88
+      ],
+      "hex": "#30D158",
+      "asset": "/images/com.apple.HIG/colors-unified-green-dark@2x.png"
+    },
+    "green-light": {
+      "rgb": [
+        52,
+        199,
+        89
+      ],
+      "hex": "#34C759",
+      "asset": "/images/com.apple.HIG/colors-unified-green-light@2x.png"
+    },
+    "indigo-dark": {
+      "rgb": [
+        109,
+        124,
+        255
+      ],
+      "hex": "#6D7CFF",
+      "asset": "/images/com.apple.HIG/colors-unified-indigo-dark@2x.png"
+    },
+    "indigo-light": {
+      "rgb": [
+        97,
+        85,
+        245
+      ],
+      "hex": "#6155F5",
+      "asset": "/images/com.apple.HIG/colors-unified-indigo-light@2x.png"
+    },
+    "mint-dark": {
+      "rgb": [
+        0,
+        218,
+        195
+      ],
+      "hex": "#00DAC3",
+      "asset": "/images/com.apple.HIG/colors-unified-mint-dark@2x.png"
+    },
+    "mint-light": {
+      "rgb": [
+        0,
+        200,
+        179
+      ],
+      "hex": "#00C8B3",
+      "asset": "/images/com.apple.HIG/colors-unified-mint-light@2x.png"
+    },
+    "orange-dark": {
+      "rgb": [
+        255,
+        146,
+        48
+      ],
+      "hex": "#FF9230",
+      "asset": "/images/com.apple.HIG/colors-unified-orange-dark@2x.png"
+    },
+    "orange-light": {
+      "rgb": [
+        255,
+        141,
+        40
+      ],
+      "hex": "#FF8D28",
+      "asset": "/images/com.apple.HIG/colors-unified-orange-light@2x.png"
+    },
+    "pink-dark": {
+      "rgb": [
+        255,
+        55,
+        95
+      ],
+      "hex": "#FF375F",
+      "asset": "/images/com.apple.HIG/colors-unified-pink-dark@2x.png"
+    },
+    "pink-light": {
+      "rgb": [
+        255,
+        45,
+        85
+      ],
+      "hex": "#FF2D55",
+      "asset": "/images/com.apple.HIG/colors-unified-pink-light@2x.png"
+    },
+    "purple-dark": {
+      "rgb": [
+        219,
+        52,
+        242
+      ],
+      "hex": "#DB34F2",
+      "asset": "/images/com.apple.HIG/colors-unified-purple-dark@2x.png"
+    },
+    "purple-light": {
+      "rgb": [
+        203,
+        48,
+        224
+      ],
+      "hex": "#CB30E0",
+      "asset": "/images/com.apple.HIG/colors-unified-purple-light@2x.png"
+    },
+    "red-dark": {
+      "rgb": [
+        255,
+        66,
+        69
+      ],
+      "hex": "#FF4245",
+      "asset": "/images/com.apple.HIG/colors-unified-red-dark@2x.png"
+    },
+    "red-light": {
+      "rgb": [
+        255,
+        56,
+        60
+      ],
+      "hex": "#FF383C",
+      "asset": "/images/com.apple.HIG/colors-unified-red-light@2x.png"
+    },
+    "teal-dark": {
+      "rgb": [
+        0,
+        210,
+        224
+      ],
+      "hex": "#00D2E0",
+      "asset": "/images/com.apple.HIG/colors-unified-teal-dark@2x.png"
+    },
+    "teal-light": {
+      "rgb": [
+        0,
+        195,
+        208
+      ],
+      "hex": "#00C3D0",
+      "asset": "/images/com.apple.HIG/colors-unified-teal-light@2x.png"
+    },
+    "yellow-dark": {
+      "rgb": [
+        255,
+        214,
+        0
+      ],
+      "hex": "#FFD600",
+      "asset": "/images/com.apple.HIG/colors-unified-yellow-dark@2x.png"
+    },
+    "yellow-light": {
+      "rgb": [
+        255,
+        204,
+        0
+      ],
+      "hex": "#FFCC00",
+      "asset": "/images/com.apple.HIG/colors-unified-yellow-light@2x.png"
+    }
+  }
+}
