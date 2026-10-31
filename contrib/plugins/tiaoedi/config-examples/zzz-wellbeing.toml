@@ -1,0 +1,14 @@
+# Bem-estar: um acesso adicional, sem substituir os widgets existentes.
+# Remova este arquivo e desabilite tiaoedi/wellbeing para desfazer.
+[bar.default]
+end = ["weather", "tray", "notifications", "network", "bluetooth", "volume", "clock", "keybinds", "bemestar", "control-center", "session"]
+
+[widget.bemestar]
+type = "tiaoedi/wellbeing:wellbeing"
+enabled = true
+
+# Abre junto ao coração, também quando acionado pelo teclado.
+[plugin_settings."tiaoedi/wellbeing"]
+panel_placement = "floating"
+panel_position = "top_right"
+panel_open_near_click = false

@@ -1,0 +1,8 @@
+{
+  "settings.water_enabled": "Lembretes de hidratação",
+  "settings.water_minutes": "Intervalo para água (minutos)",
+  "settings.eyes_enabled": "Lembretes de descanso dos olhos",
+  "settings.eyes_minutes": "Intervalo para os olhos (minutos)",
+  "settings.stretch_enabled": "Lembretes de alongamento",
+  "settings.stretch_minutes": "Intervalo para alongamento (minutos)"
+}

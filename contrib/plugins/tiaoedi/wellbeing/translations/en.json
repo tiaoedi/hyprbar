@@ -1,0 +1,8 @@
+{
+  "settings.water_enabled": "Hydration reminders",
+  "settings.water_minutes": "Hydration interval (minutes)",
+  "settings.eyes_enabled": "Eye-rest reminders",
+  "settings.eyes_minutes": "Eye-rest interval (minutes)",
+  "settings.stretch_enabled": "Stretching reminders",
+  "settings.stretch_minutes": "Stretching interval (minutes)"
+}

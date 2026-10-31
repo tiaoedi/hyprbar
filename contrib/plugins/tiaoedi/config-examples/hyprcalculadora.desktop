@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=hyprcalculadora
+GenericName=hyprcalculadora
+Comment=hyprcalculadora integrada ao painel Hyprbar
+Exec=hyprbar msg panel-open tiaoedi/calculator:panel
+TryExec=hyprbar
+Icon=accessories-calculator
+Terminal=false
+StartupNotify=false
+DBusActivatable=false
+Categories=Utility;Calculator;
+Keywords=Calculator;Calculadora;calcular;contas;Hyprbar;

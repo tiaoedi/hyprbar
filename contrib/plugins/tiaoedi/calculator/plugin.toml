@@ -1,0 +1,23 @@
+id = "tiaoedi/calculator"
+name = "hyprcalculadora"
+version = "1.1.0"
+plugin_api = 22
+author = "tiaoedi"
+license = "MIT"
+icon = "calculator"
+description = "Calculadora nativa com teclado, porcentagem, raiz, potência e histórico de sessão."
+dependencies = []
+
+[[widget]]
+id = "calculator"
+entry = "widget.luau"
+
+[[panel]]
+id = "panel"
+entry = "panel.luau"
+width = 380
+height = 700
+placement = "floating"
+position = "center"
+open_near_click = false
+keyboard_focus = "exclusive"

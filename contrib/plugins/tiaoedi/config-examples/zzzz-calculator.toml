@@ -1,0 +1,12 @@
+# Calculadora nativa: preserva os demais itens e o painel Bem-estar.
+[bar.default]
+end = ["weather", "tray", "notifications", "network", "bluetooth", "volume", "clock", "keybinds", "calculadora", "bemestar", "control-center", "session"]
+
+[widget.calculadora]
+type = "tiaoedi/calculator:calculator"
+enabled = true
+
+[plugin_settings."tiaoedi/calculator"]
+panel_placement = "floating"
+panel_position = "center"
+panel_open_near_click = false
