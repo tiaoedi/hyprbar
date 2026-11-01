@@ -28,6 +28,16 @@ Para iniciar automaticamente no Hyprland, adicione `exec-once = hyprbar --daemon
 
 O Hyprbar usa integrações externas para alguns recursos opcionais, como catálogos de paletas e templates, localização, consulta de IP público e OAuth do Google Calendar. A telemetria é opt-in (`telemetry_enabled = false` por padrão). Os serviços externos, seus operadores e o tratamento dos dados não são verificados por este repositório; consulte [`NETWORK-PRIVACY.md`](NETWORK-PRIVACY.md) para os endpoints e detalhes técnicos. Nenhuma política externa é apresentada como política do Hyprbar. `offline_mode = true` bloqueia novos pedidos pelo cliente HTTP compartilhado do Hyprbar, mas não cancela transferências já em andamento e não é firewall: navegador, outros processos e caminhos arbitrários de plugins podem continuar usando a rede. Caches locais ainda podem ser lidos. Veja `NETWORK-PRIVACY.md` e a documentação de [localização](docs/user/services/location.mdx), [calendário](docs/user/services/calendar.mdx) e [configuração](docs/user/configuration/shell.mdx).
 
+## Instalação completa (Hyprbar + plugins próprios)
+
+Depois de instalar as dependências indicadas em [`BUILDING.md`](BUILDING.md), na raiz do repositório execute:
+
+```sh
+./tools/install-with-community-plugins.sh
+```
+
+O script compila e instala o Hyprbar e copia os plugins próprios `calculator` e `wellbeing` para o diretório do usuário. Ele não sobrescreve plugins já existentes, não ativa atalhos/configurações e não instala os catálogos externos; consulte **Configurações → Plugins** para ativar plugins e gerenciar as fontes oficial/community.
+
 ## Compilar do código-fonte
 
 Consulte [`BUILDING.md`](BUILDING.md) para dependências e instruções por distribuição. Exemplo:
