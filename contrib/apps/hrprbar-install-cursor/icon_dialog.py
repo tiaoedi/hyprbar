@@ -12,7 +12,7 @@ class IconDialog:
     def __init__(self, app):
         self.app = app
         self.themes = []; self.selected = None; self.images = []
-        self.generation = 0; self.discovery_generation = 0; self.online_dialog = None
+        self.generation = 0; self.discovery_generation = 0; self.online_dialog = None; self.catalog_dialog = None
         self.window = tk.Toplevel(app.root)
         self.window.title('Temas de ícones — instalar e trocar')
         self.window.geometry('1040x730'); self.window.minsize(880, 620)
@@ -29,6 +29,7 @@ class IconDialog:
         row = ttk.Frame(outer); row.pack(fill='x',pady=6)
         self.archive_button = ttk.Button(row,text='Instalar arquivo…',command=lambda:self.pick_install(False)); self.archive_button.pack(side='left')
         self.folder_button = ttk.Button(row,text='Instalar pasta…',command=lambda:self.pick_install(True)); self.folder_button.pack(side='left',padx=6)
+        self.catalog_button = ttk.Button(row,text='Temas GNOME-Look…',command=self.open_catalog); self.catalog_button.pack(side='left',padx=6)
         self.apply_button = ttk.Button(row,text='Aplicar ícones…',command=self.apply_selected,state='disabled'); self.apply_button.pack(side='right')
         ttk.Label(outer,text='Pacotes GitHub até 64 MiB; extração limitada a 20 mil entradas / 256 MiB. Sem scripts e sem substituir temas existentes.',wraplength=990).pack(anchor='w',pady=5)
         ttk.Style(app.root).configure('Icons.Treeview',rowheight=30)
@@ -55,15 +56,18 @@ class IconDialog:
             self.status.set('Operação em andamento; aguarde para fechar.'); return
         if self.online_dialog is not None and self.online_dialog.window.winfo_exists():
             self.online_dialog.close()
+        if self.catalog_dialog is not None and self.catalog_dialog.window.winfo_exists():
+            self.catalog_dialog.close()
         self.generation += 1; self.discovery_generation += 1
         self.window.destroy(); self.app.icon_dialog = None
 
     def controls(self, busy: bool) -> None:
         if not self.alive(): return
-        for widget in (self.refresh_button,self.archive_button,self.folder_button,self.online_button):
+        for widget in (self.refresh_button,self.archive_button,self.folder_button,self.online_button,self.catalog_button):
             widget.configure(state='disabled' if busy else 'normal')
         self.apply_button.configure(state='normal' if self.selected and not busy and not self.app.smoke else 'disabled')
         if self.online_dialog is not None and self.online_dialog.window.winfo_exists(): self.online_dialog.controls(busy)
+        if self.catalog_dialog is not None and self.catalog_dialog.window.winfo_exists(): self.catalog_dialog.controls(busy)
 
     def refresh(self, names: list[str] | None = None) -> None:
         if self.app.busy: return
@@ -133,6 +137,13 @@ class IconDialog:
             if error: self.status.set('Instalação recusada: '+str(error)); return
             self.refresh([p.name for p in paths])
         self.app.operation(lambda:icons.install(Path(path),destination),done)
+
+    def open_catalog(self) -> None:
+        if self.app.busy or self.app.smoke: return
+        if self.catalog_dialog is not None and self.catalog_dialog.window.winfo_exists():
+            self.catalog_dialog.window.lift(); return
+        from icon_catalog_dialog import IconCatalogDialog
+        self.catalog_dialog = IconCatalogDialog(self)
 
     def open_online(self) -> None:
         if self.app.busy or self.app.smoke: return

@@ -39,6 +39,16 @@ class HyprlandDialog:
         self.tabs=ttk.Notebook(outer,style='Hyprland.TNotebook');self.tabs.pack(fill='both',expand=True,pady=8)
         explorer=ttk.Frame(self.tabs,padding=8);advanced=ttk.Frame(self.tabs,padding=8)
         self.tabs.add(explorer,text='Todas as opções');self.tabs.add(advanced,text='Avançado: configuração Lua completa')
+        quick=ttk.Frame(explorer);quick.pack(fill='x',pady=(0,8))
+        ttk.Label(quick,text='Efeito de vidro (blur):',font=(app.font_family,11,'bold')).pack(side='left')
+        self.blur_value=tk.StringVar()
+        self.blur_box=ttk.Combobox(quick,textvariable=self.blur_value,values=('Ativado','Desativado'),state='disabled',width=14)
+        self.blur_box.pack(side='left',padx=8)
+        self.blur_box.bind('<<ComboboxSelected>>',self.blur_selected)
+        self.blur_status=tk.StringVar(value='Indisponível: carregando opções.')
+        ttk.Label(quick,textvariable=self.blur_status).pack(side='left')
+        self.blur_note=ttk.Label(explorer,text='Altera somente o blur de fundo das janelas, não a opacidade. Mudança pendente até Aplicar e recarregar.',wraplength=800)
+        self.blur_note.pack(anchor='w',pady=(0,8))
         bar=ttk.Frame(explorer);bar.pack(fill='x')
         ttk.Label(bar,text='Buscar nome / descrição:').pack(side='left')
         self.search=tk.StringVar();ttk.Entry(bar,textvariable=self.search,width=28).pack(side='left',padx=6)
@@ -82,6 +92,41 @@ class HyprlandDialog:
         self._poll_palette()
         self.load()
 
+    BLUR = 'decoration:blur:enabled'
+
+    def sync_blur(self,locked=False):
+        option=self.options.get(self.BLUR)
+        available=option is not None and option.editable and type(option.current) is bool
+        enabled=available and self.document is not None and not (locked or self.busy or self.app.busy or self.app.smoke)
+        self.blur_box.configure(state='readonly' if enabled else 'disabled')
+        if not available:
+            self.blur_value.set('')
+            self.blur_status.set('Indisponível: opção de blur booleana editável não fornecida pelo compositor.')
+            return
+        label=lambda value:'Ativado' if value else 'Desativado'
+        text=self.drafts.get(self.BLUR,self.display(self.staged.get(self.BLUR,option.current)))
+        self.blur_value.set(label(text=='true') if text in ('true','false') else '')
+        status='Atual: '+label(option.current)
+        if self.BLUR in self.drafts or self.BLUR in self.staged:
+            status+=' • Pendente: '+(label(text=='true') if text in ('true','false') else 'valor inválido')
+        self.blur_status.set(status)
+
+    def blur_selected(self,event=None):
+        option=self.options.get(self.BLUR)
+        if (self.document is None or self.busy or self.app.busy or self.app.smoke or
+                option is None or not option.editable or type(option.current) is not bool):
+            self.sync_blur();return
+        label=self.blur_value.get()
+        if label not in ('Ativado','Desativado'):
+            self.sync_blur();return
+        value=label=='Ativado'
+        self.staged.pop(self.BLUR,None)
+        if value==option.current:self.drafts.pop(self.BLUR,None)
+        else:self.drafts[self.BLUR]=self.display(value)
+        if self.selected==self.BLUR:self._editor_name=None
+        self.filter()
+        self.status.set('Valor pendente na memória; use Aplicar e recarregar para revisar e confirmar. Nenhuma alteração aplicada.')
+
     def _poll_palette(self):
         """Follow the app's cached palette, without IPC or global theme hooks."""
         self._palette_job=None
@@ -119,6 +164,7 @@ class HyprlandDialog:
         for button in (self.apply_button,self.refresh_button):
             button.configure(state='disabled' if locked else 'normal')
         self.code.configure(state='disabled' if locked else 'normal')
+        self.sync_blur(locked)
         self.choose()
         if locked:
             self.value_entry.configure(state='disabled');self.bool_box.configure(state='disabled')
@@ -166,6 +212,7 @@ class HyprlandDialog:
         if old and self.tree.exists(old[0]):self.tree.selection_set(old[0])
         self.choose()
         self.count.set(f'{len(set(self.staged)|set(self.drafts))} alterações pendentes • {len(self.tree.get_children())} opções visíveis / {len(self.options)} disponíveis')
+        self.sync_blur()
 
     @staticmethod
     def display(value):
@@ -207,6 +254,7 @@ class HyprlandDialog:
         else:self.drafts[option.name]=text
         if self.tree.exists(option.name):self.tree.set(option.name,'staged',self.drafts.get(option.name,self.display(self.staged[option.name]) if option.name in self.staged else ''))
         self.count.set(f'{len(set(self.staged)|set(self.drafts))} alterações pendentes • {len(self.tree.get_children())} opções visíveis / {len(self.options)} disponíveis')
+        self.sync_blur()
         try:option.parse(text)
         except ValueError as exc:self.status.set(f'{option.name}: {exc}');return
         self.status.set('Valor pendente na memória; use Aplicar e recarregar para revisar e confirmar. Nenhuma alteração aplicada.')

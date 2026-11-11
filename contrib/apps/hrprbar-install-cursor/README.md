@@ -36,6 +36,8 @@ A nova entrada **Configurações do Hyprland** (`hrprbar-config`) abre a página
 
 A interface apresenta uma única ação de configuração: **Aplicar e recarregar**. O valor editado entra na proposta sem exigir outro botão de preparação. Após revisar e confirmar o diff, a operação identifica o alvo ativo, protege contra alterações concorrentes, prepara a gravação segura, cria backup, grava, recarrega e verifica os valores. A confirmação alerta que o Lua e seus hooks serão executados; erros não são apresentados como aplicação concluída. A opção de provocar crash manual permanece bloqueada no formulário.
 
+O seletor destacado **Efeito de vidro (blur)** oferece **Ativado/Desativado** para `decoration:blur:enabled`, somente quando a versão em execução expõe essa opção booleana. Mostra o estado observado e o valor pendente; escolher não altera a sessão. Use a mesma ação **Aplicar e recarregar** para revisar, confirmar, salvar com backup e verificar o valor. A opção controla o desfoque do fundo das janelas, não força transparência, não altera opacidade e não cria um tema de vidro. Janelas opacas ou com regras que desativem blur podem continuar sem efeito visível.
+
 ## Aparência do Hyprbar
 
 A interface consulta `hyprbar msg color-scheme-get` e `hyprbar msg theme-mode-get`, somente leitura, com timeout. Para paletas comunitárias, carrega a variante claro/escuro de `$XDG_STATE_HOME/hyprbar/community-palettes/<nome codificado na URL>.json` (padrão `~/.local/state`). Atualmente acompanha **Rose Pine Alt • escuro**: fundo `#191724`, painéis `#26233a`, seleção/foco `#c4a7e7` e texto `#e0def4`. Atualiza ao receber foco e a cada cinco segundos dentro da própria interface, sem daemon, hooks, reload global nem alterações ao Hyprbar. Se a origem não estiver disponível, uma paleta de reserva é explicitamente indicada. Usa fonte Hyprbar tamanho 11 se disponível ao Tk; caso contrário Liberation Sans instalada. Prévias usam quadriculado neutro para evidenciar transparência.
@@ -82,6 +84,25 @@ Os testes automatizados do catálogo usam respostas controladas e imagens Xcurso
 O instalador exige `index.theme`, metadados e imagens reais, rejeita diretórios/links que escapem do tema e mantém os mesmos limites de extração e download. Coleções só são publicadas após validação; temas existentes nunca são substituídos. Coleções grandes podem exceder limites e dependências por symlinks entre temas são recusadas.
 
 **Aplicar ícones…** exige confirmação, preserva as demais chaves e os links simbólicos GTK3/4, salva backups dos alvos reais e do valor GSettings anterior, altera somente `gtk-icon-theme-name` / `org.gnome.desktop.interface icon-theme` e verifica a leitura posterior. Falhas tentam restaurar os valores anteriores e informam falhas de restauração. Não muda cursores nem recarrega compositor/barra; Qt, sandboxes e aplicativos com tema próprio podem ignorar os valores GTK. Prévia SVG usa librsvg/Cairo já disponíveis; sem eles, a interface informa a limitação sem instalar dependências.
+
+## Temas GNOME-Look da captura
+
+Em **Temas de ícones… → Temas GNOME-Look…**, o catálogo local apresenta os seis temas identificados na captura, com autor, licença declarada, página de origem e resultado da verificação. Abrir e filtrar não acessa a rede. **Abrir página do tema** só abre o navegador após clique; não instala. A verificação dos pacotes foi feita em 11 de novembro de 2026, em destinos isolados, sem aplicar temas no desktop.
+
+| Tema | Autor / página GNOME-Look | Resultado da verificação |
+| --- | --- | --- |
+| Mint Breeze Light Icons | dr-mccoy — [2326678](https://www.gnome-look.org/p/2326678/) | Pacote 1.4.20 recusado: link `apps/48/plasma-browser-integration.svg` aponta para destino ausente. GPL-3.0 declarada. |
+| Nordic Slot Dark Icons | l4k1 — [2378240](https://www.gnome-look.org/p/2378240/) | 36.217 entradas, acima do limite de 20.000; instalação bloqueada. GPL-3.0 declarada. |
+| Buuf For Many Desktops | nestort — [1012233](https://www.gnome-look.org/p/1012233/) | Pacote acima de 64 MiB. Licença divergente: site indica CC-BY-SA, enquanto o upstream cita CC-BY-NC-SA 2.5; não presumir permissão comercial. |
+| NeoLine | Morzilla — [2381562](https://www.gnome-look.org/p/2381562/) | Instalação verificada das variantes **NeoLine**, **NeoLine-White** e **NeoLine-Yellow**. MIT. Requer tema Breeze Dark como fallback, não instalado automaticamente. |
+| Skeuo-Silver-Art-Deco | artsailer — [2376237](https://www.gnome-look.org/p/2376237/) | Pacote declarado de 167.658 KiB, acima de 64 MiB; não baixado. GPL-3.0 declarada. |
+| Mint Breeze - Calm Green Icons | dr-mccoy — [2324617](https://www.gnome-look.org/p/2324617/) | Pacote 1.4.20 recusado: dois links quebrados, em `places/symbolic/folder-recent-symbolic.svg` e `apps/48/plasma-browser-integration.svg`. GPL-3.0 declarada. |
+
+**Somente NeoLine tem download e instalação habilitados neste catálogo.** Os demais ficam visíveis com seus motivos de bloqueio; não foram reempacotados nem tiveram links corrigidos automaticamente, e os limites de segurança não foram relaxados. Um arquivo obtido manualmente continua sujeito às mesmas validações em **Instalar arquivo…**.
+
+NeoLine não publica GitHub Releases. O catálogo usa uma exceção isolada e auditável para o snapshot do repositório do autor `Morzilla/neoline-icons`, commit `30abd1093bf2ddc3689474a4ca94c53fb21ae74e`, servido por `codeload.github.com`: **2.005.766 bytes**, SHA256 `61dc114ec3cf6c15e36a2387f0c34d95246c13c4d07c9ed7551f9ce3c5d60ec8`. O hash é fixado pelo projeto após a verificação, não uma assinatura do autor. Não acompanha `master` automaticamente. O download exige confirmação, recusa redirecionamentos e verifica tamanho/hash antes de chamar o instalador seguro; não executa scripts. Os filtros e restrições de GitHub Releases do catálogo anterior permanecem inalterados. Os arquivos dos temas não são incluídos no Git do Hyprbar; mantêm suas próprias licenças.
+
+Para atualizar uma versão ou desbloquear uma fonte, é necessário repetir a validação real do novo pacote e atualizar os dados e testes. A consulta inicial usou a API pública OCS `https://api.opendesktop.org/ocs/v1/content/data/<ID>?format=json`; URLs Pling assinadas são temporárias e não ficam gravadas no programa.
 
 ## Catálogos externos: Flaticon, Custom Cursor e GNOME-Look
 

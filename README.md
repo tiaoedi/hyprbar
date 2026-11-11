@@ -40,7 +40,7 @@ O script compila e instala o Hyprbar e copia os plugins próprios `calculator` e
 
 ## Central de configurações (aplicativo auxiliar)
 
-A nova **Central de configurações do Hyprland** reúne opções da versão em execução, editor Lua avançado com diff/backups, temas de ícones e o **hrprbar-install cursor**. Cursores têm prévias reais, tamanhos disponíveis, instalação local e nove fontes GitHub; ícones têm três fontes e aplicação separada. Ambos aceitam repositório personalizado. Catálogos externos abrem somente por clique. A interface acompanha a paleta claro/escuro do Hyprbar, sem modificar a barra.
+A nova **Central de configurações do Hyprland** reúne opções da versão em execução, seletor **Efeito de vidro (blur)**, editor Lua avançado com diff/backups, temas de ícones e o **hrprbar-install cursor**. Cursores têm prévias reais, tamanhos disponíveis, instalação local e nove fontes GitHub; ícones têm três fontes GitHub e aplicação separada, além de seis temas GNOME-Look catalogados com estado de segurança explícito — somente NeoLine habilitado para instalação verificada. Ambos aceitam repositório GitHub personalizado. Catálogos externos abrem somente por clique. A interface acompanha a paleta claro/escuro do Hyprbar, sem modificar a barra.
 
 Para baixar e abrir a central, inclusive depois de formatar (com as dependências instaladas):
 
