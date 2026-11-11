@@ -1,0 +1,24 @@
+---
+title: Gerenciador de cursores
+description: Visualizar, instalar e trocar temas com o aplicativo auxiliar hrprbar-install cursor.
+---
+
+O `hrprbar-install cursor` é um aplicativo auxiliar independente em `contrib/apps/hrprbar-install-cursor`, não um painel do núcleo nem um plugin. Não é instalado pelo instalador principal do Hyprbar.
+
+Na raiz do repositório:
+
+```sh
+./contrib/apps/hrprbar-install-cursor/run.sh
+```
+
+Requer Linux, Python 3.10+, Tkinter, Pillow, libXcursor e sessão X11/XWayland. O lançador verifica dependências e não instala pacotes. Se necessário, selecione um Python compatível com a variável `PYTHON`.
+
+A lista apresenta miniaturas reais e busca por nome. Ao selecionar um tema, é possível comparar oito formas e escolher tamanhos realmente oferecidos pelo tema. A interface lê a paleta comunitária atual do Hyprbar em modo claro/escuro, com indicação explícita de paleta de reserva quando indisponível.
+
+Os botões de instalação aceitam uma pasta ou um arquivo ZIP/TAR local. O instalador valida limites, caminhos e links internos antes de publicar temas em `$XDG_DATA_HOME/icons`, sem substituir temas existentes. Não há download de catálogos nem instalação automática de dependências. Instalar não aplica o tema.
+
+Somente **Aplicar tema**, após confirmação, altera configurações. A aplicação oferece backups, sincronização de Hyprland com configuração Lua, GTK3/GTK4, GSettings, Xresources e ambiente de ativação. Temas apenas Hyprcursor são identificados, mas não podem ser aplicados de forma unificada a GTK/XWayland.
+
+Não há garantia de atualização imediata dos cursores em aplicativos já abertos. Caches, sandboxes e escalas de monitores podem produzir diferenças. O relatório separa configuração verificada de aparência ainda não confirmada. A reabertura assistida de navegadores nativos compatíveis é opcional, exige confirmação e pode perder formulários não salvos; nunca reinicia a sessão inteira.
+
+Consulte o README em `contrib/apps/hrprbar-install-cursor/README.md` para limites, backups e testes. Execute `./run.sh --list` para JSON e `./run.sh --smoke-test` para verificar a interface sem aplicar um tema.

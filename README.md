@@ -38,6 +38,16 @@ Depois de instalar as dependências indicadas em [`BUILDING.md`](BUILDING.md), n
 
 O script compila e instala o Hyprbar e copia os plugins próprios `calculator` e `wellbeing` para o diretório do usuário. Ele não sobrescreve plugins já existentes, não ativa atalhos/configurações e não instala os catálogos externos; consulte **Configurações → Plugins** para ativar plugins e gerenciar as fontes oficial/community.
 
+## Gerenciador de cursores (aplicativo auxiliar)
+
+O **hrprbar-install cursor** lista temas instalados com prévias reais, permite escolher tamanhos disponíveis e instalar temas locais de pastas ou arquivos ZIP/TAR. A interface acompanha a paleta comunitária claro/escuro do Hyprbar, sem modificar a barra.
+
+```sh
+./contrib/apps/hrprbar-install-cursor/run.sh
+```
+
+É um aplicativo Python/Tkinter independente do núcleo, não instalado pelo instalador principal. Consulte [dependências, instalação segura e limites da troca em aplicativos abertos](contrib/apps/hrprbar-install-cursor/README.md). A aplicação sincroniza as configurações de cursor; alguns aplicativos precisam ser reabertos, sempre com confirmação.
+
 ## Compilar do código-fonte
 
 Consulte [`BUILDING.md`](BUILDING.md) para dependências e instruções por distribuição. Exemplo:
