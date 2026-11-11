@@ -46,8 +46,10 @@ class HyprlandDialog:
         self.blur_box.pack(side='left',padx=8)
         self.blur_box.bind('<<ComboboxSelected>>',self.blur_selected)
         self.blur_status=tk.StringVar(value='Indisponível: carregando opções.')
-        ttk.Label(quick,textvariable=self.blur_status).pack(side='left')
-        self.blur_note=ttk.Label(explorer,text='Altera somente o blur de fundo das janelas, não a opacidade. Mudança pendente até Aplicar e recarregar.',wraplength=800)
+        self.blur_status_label=ttk.Label(explorer,textvariable=self.blur_status,wraplength=800)
+        self.blur_status_label.pack(anchor='w')
+        self.blur_status_label.bind('<Configure>',lambda event:self.blur_status_label.configure(wraplength=max(240,explorer.winfo_width()-16)))
+        self.blur_note=ttk.Label(explorer,text='Ativado: blur e 90% de opacidade nas janelas normais inteiras (texto também). Desativado: sem blur e 100%. Tela cheia e regras não mudam. Pendente até Aplicar e recarregar.',wraplength=800)
         self.blur_note.pack(anchor='w',pady=(0,8))
         bar=ttk.Frame(explorer);bar.pack(fill='x')
         ttk.Label(bar,text='Buscar nome / descrição:').pack(side='left')
@@ -93,39 +95,69 @@ class HyprlandDialog:
         self.load()
 
     BLUR = 'decoration:blur:enabled'
+    GLASS_ON = {BLUR:True, 'decoration:active_opacity':0.9,
+                'decoration:inactive_opacity':0.9}
+    GLASS_OFF = {BLUR:False, 'decoration:active_opacity':1.0,
+                 'decoration:inactive_opacity':1.0}
+
+    def glass_schema_issue(self):
+        """The preset is atomic: both directions must validate for every key."""
+        for name,on in self.GLASS_ON.items():
+            option=self.options.get(name)
+            if option is None or not option.editable or type(option.current) is not type(on):
+                return name+' ausente ou sem tipo editável compatível'
+            try:
+                option.parse(self.display(on))
+                option.parse(self.display(self.GLASS_OFF[name]))
+            except ValueError:
+                return name+' sem limites compatíveis com o preset'
+        return None
+
+    def glass_summary(self,values):
+        on=values[self.BLUR] and all(values[name]<1 for name in self.GLASS_ON if name!=self.BLUR)
+        label='Ativado' if on else 'Desativado'
+        return label, (label+' (blur='+self.display(values[self.BLUR])+
+                       ', ativa='+self.display(values['decoration:active_opacity'])+
+                       ', inativa='+self.display(values['decoration:inactive_opacity'])+')')
 
     def sync_blur(self,locked=False):
-        option=self.options.get(self.BLUR)
-        available=option is not None and option.editable and type(option.current) is bool
-        enabled=available and self.document is not None and not (locked or self.busy or self.app.busy or self.app.smoke)
+        issue=self.glass_schema_issue()
+        enabled=not issue and self.document is not None and not (locked or self.busy or self.app.busy or self.app.smoke)
         self.blur_box.configure(state='readonly' if enabled else 'disabled')
-        if not available:
+        if issue:
             self.blur_value.set('')
-            self.blur_status.set('Indisponível: opção de blur booleana editável não fornecida pelo compositor.')
+            self.blur_status.set('Indisponível: '+issue+'. Use o explorador de opções.')
             return
-        label=lambda value:'Ativado' if value else 'Desativado'
-        text=self.drafts.get(self.BLUR,self.display(self.staged.get(self.BLUR,option.current)))
-        self.blur_value.set(label(text=='true') if text in ('true','false') else '')
-        status='Atual: '+label(option.current)
-        if self.BLUR in self.drafts or self.BLUR in self.staged:
-            status+=' • Pendente: '+(label(text=='true') if text in ('true','false') else 'valor inválido')
+        current={name:self.options[name].current for name in self.GLASS_ON}
+        label,summary=self.glass_summary(current)
+        status='Atual: '+summary
+        if any(name in self.drafts or name in self.staged for name in current):
+            try:
+                pending={name:self.options[name].parse(self.drafts.get(name,self.display(self.staged.get(name,value))))
+                         for name,value in current.items()}
+                label,summary=self.glass_summary(pending)
+            except ValueError:
+                label='';summary='valor inválido'
+            status+=' • Pendente: '+summary
+        self.blur_value.set(label)
         self.blur_status.set(status)
 
     def blur_selected(self,event=None):
-        option=self.options.get(self.BLUR)
         if (self.document is None or self.busy or self.app.busy or self.app.smoke or
-                option is None or not option.editable or type(option.current) is not bool):
+                str(self.blur_box['state'])=='disabled' or self.glass_schema_issue()):
             self.sync_blur();return
         label=self.blur_value.get()
         if label not in ('Ativado','Desativado'):
             self.sync_blur();return
-        value=label=='Ativado'
-        self.staged.pop(self.BLUR,None)
-        if value==option.current:self.drafts.pop(self.BLUR,None)
-        else:self.drafts[self.BLUR]=self.display(value)
-        if self.selected==self.BLUR:self._editor_name=None
+        values=self.GLASS_ON if label=='Ativado' else self.GLASS_OFF
+        changed=any(value!=self.options[name].current for name,value in values.items())
+        for name,value in values.items():
+            self.staged.pop(name,None)
+            if not changed:self.drafts.pop(name,None)
+            else:self.drafts[name]=self.display(value)
+        if self.selected in values:self._editor_name=None
         self.filter()
-        self.status.set('Valor pendente na memória; use Aplicar e recarregar para revisar e confirmar. Nenhuma alteração aplicada.')
+        self.status.set('Valores pendentes na memória; use Aplicar e recarregar para revisar e confirmar. Nenhuma alteração aplicada.')
 
     def _poll_palette(self):
         """Follow the app's cached palette, without IPC or global theme hooks."""

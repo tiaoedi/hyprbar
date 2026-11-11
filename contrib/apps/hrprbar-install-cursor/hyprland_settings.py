@@ -258,6 +258,13 @@ class Option:
         self.raw = dict(raw)
         self.name = raw['name']
         self.current = raw.get('current')
+        # Hyprland descriptions serialize integral FLOAT opacity values as JSON
+        # integers (1), although getoption reports float: 1.000000. Normalize
+        # only these documented scalar keys; never infer arbitrary int schemas.
+        if self.name in ('decoration:active_opacity', 'decoration:inactive_opacity',
+                         'decoration:fullscreen_opacity') and type(self.current) in (int, float):
+            self.current = float(self.current)
+            self.raw['current'] = self.current
         self.category = self.name.rsplit(':', 1)[0] if ':' in self.name else 'geral'
         native_color = isinstance(self.current,str) and (bool(re.search(r'\b[0-9a-fA-F]{8}\b',self.current)) or self.current.endswith('deg')) and any(token in self.name for token in ('col.','color','tint'))
         native_gaps = self.name in ('general:gaps_in','general:gaps_out','general:float_gaps')

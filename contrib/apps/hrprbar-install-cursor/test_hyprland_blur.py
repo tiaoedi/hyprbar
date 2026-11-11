@@ -18,6 +18,9 @@ class BlurTests(unittest.TestCase):
         option = hs.Option({'name': BLUR, 'current': current, 'default': True,
                             'description': 'enable window background blur'})
         self.dialog.options[BLUR] = option
+        for name in ('decoration:active_opacity', 'decoration:inactive_opacity'):
+            self.dialog.options[name] = hs.Option({'name': name, 'current': .9 if current else 1,
+                                                   'default': 1, 'min': 0, 'max': 1})
         self.dialog.filter()
         return self.dialog
 
@@ -75,7 +78,8 @@ class BlurTests(unittest.TestCase):
         self.assertEqual(d.category.get(), 'general')
         self.assertEqual(d.tree.selection(), ('general:border_size',))
         self.assertEqual(d.value.get(), '3')
-        self.assertEqual(d.drafts, {'general:border_size': '3', BLUR: 'false'})
+        self.assertEqual(d.drafts, {'general:border_size': '3', BLUR: 'false',
+                                   'decoration:active_opacity': '1.0', 'decoration:inactive_opacity': '1.0'})
         d.search.set(''); d.category.set('Todas'); self.root.update()
         self.assertEqual(d.tree.set(BLUR, 'staged'), 'false')
         self.assertEqual(self.events, [])
@@ -96,7 +100,9 @@ class BlurTests(unittest.TestCase):
         self.assertEqual(d.value.get(), 'false')
         self.assertEqual(d.bool_value.get(), 'Desativado')
         d.unstage()
-        self.assertEqual(d.blur_value.get(), 'Ativado')
+        self.assertEqual(d.blur_value.get(), 'Desativado')
+        self.assertIn('blur=true', d.blur_status.get())
+        self.assertIn('ativa=1.0', d.blur_status.get())
 
     def test_missing_nonboolean_or_readonly_schema_is_unavailable(self):
         d = self.dialog
@@ -143,6 +149,8 @@ class BlurTests(unittest.TestCase):
         def readback(names):
             result = original(names)
             if BLUR in names: result[BLUR] = {'bool': observed}
+            for name in ('decoration:active_opacity', 'decoration:inactive_opacity'):
+                if name in names: result[name] = {'float': .9 if observed else 1.0}
             return result
         d.runtime.readback = readback
 
@@ -158,6 +166,11 @@ class BlurTests(unittest.TestCase):
                 encoded = b'true' if requested else b'false'
                 self.assertIn(b'["decoration.blur.enabled"] = ' + encoded, self.cfg.read_bytes())
                 self.assertIn(b'["general.border_size"] = 3', self.cfg.read_bytes())
+                for name in ('decoration:active_opacity', 'decoration:inactive_opacity'):
+                    value = .9 if requested else 1.0
+                    self.assertEqual(d.options[name].current, value)
+                    self.assertEqual(d.options[name].raw['current'], value)
+                    self.assertIn(('[' + hs.lua_value(name.replace(':', '.')) + '] = ' + repr(value)).encode(), self.cfg.read_bytes())
                 self.assertIs(d.options[BLUR].current, requested)
                 self.assertEqual(d.blur_value.get(), 'Ativado' if requested else 'Desativado')
                 self.assertNotIn('Pendente', d.blur_status.get())
@@ -184,7 +197,7 @@ class BlurTests(unittest.TestCase):
         d.window.overrideredirect(True)
         d.window.geometry('900x650+60+60'); d.window.deiconify(); self.root.update()
         self.assertEqual((d.window.winfo_width(), d.window.winfo_height()), (900, 650))
-        for widget in (d.blur_box.master, d.blur_box, d.blur_note, d.apply_button):
+        for widget in (d.blur_box.master, d.blur_box, d.blur_status_label, d.blur_note, d.apply_button):
             with self.subTest(widget=widget):
                 self.assertTrue(widget.winfo_ismapped())
                 x = widget.winfo_rootx() - d.window.winfo_rootx()
@@ -193,6 +206,7 @@ class BlurTests(unittest.TestCase):
                 self.assertLessEqual(x + widget.winfo_width(), 900)
                 self.assertLessEqual(y + widget.winfo_height(), 650)
                 self.assertGreaterEqual(widget.winfo_width(), widget.winfo_reqwidth())
+                self.assertGreaterEqual(widget.winfo_height(), widget.winfo_reqheight())
         self.assertLess(d.blur_box.winfo_rooty(), d.category_box.winfo_rooty())
 
 
