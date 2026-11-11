@@ -33,7 +33,7 @@ def tile(image: Image.Image, side: int = 92) -> Image.Image:
 
 class App:
     def __init__(self, root: tk.Tk, smoke: bool = False):
-        self.root=root;self.smoke=smoke;self.themes=[];self.images={};self.detail_images=[];self.rendered=0;self.generation=0;self.busy=False;self.applied=False;self.selected=None;self.queue=queue.Queue();self.last_applied=None
+        self.root=root;self.smoke=smoke;self.themes=[];self.images={};self.detail_images=[];self.rendered=0;self.generation=0;self.load_generation=0;self.busy=False;self.applied=False;self.selected=None;self.queue=queue.Queue();self.last_applied=None
         root.title(TITLE);root.geometry('1120x820');root.minsize(900,700)
         families={f.casefold() for f in tkfont.families(root)}
         self.font_family='Hyprbar' if 'hyprbar' in families else ('Liberation Sans' if 'liberation sans' in families else 'Sans')
@@ -47,6 +47,8 @@ class App:
         ttk.Label(toolbar,text='Buscar:').pack(side='left');self.search=tk.StringVar();ttk.Entry(toolbar,textvariable=self.search,width=28).pack(side='left',padx=7)
         self.search.trace_add('write',lambda *_:self.filter())
         self.refresh_button=ttk.Button(toolbar,text='Atualizar lista',command=self.load);self.refresh_button.pack(side='left',padx=4)
+        self.online_dialog=None
+        self.online_button=ttk.Button(toolbar,text='Baixar temas…',command=self.open_online);self.online_button.pack(side='right',padx=4)
         self.archive_button=ttk.Button(toolbar,text='Instalar novo: arquivo…',command=lambda:self.pick_install(False));self.archive_button.pack(side='right',padx=4)
         self.folder_button=ttk.Button(toolbar,text='Instalar novo: pasta…',command=lambda:self.pick_install(True));self.folder_button.pack(side='right',padx=4)
         body=ttk.Panedwindow(outer,orient='horizontal');body.pack(fill='both',expand=True,pady=12)
@@ -70,6 +72,13 @@ class App:
         self.root.after(50,self.poll);self.load();self.refresh_palette()
         self.root.bind('<FocusIn>',lambda e:self.refresh_palette() if e.widget is root else None,add='+')
         self.root.after(5000,self.poll_palette)
+
+    def open_online(self) -> None:
+        if self.busy:return
+        if self.online_dialog is not None and self.online_dialog.window.winfo_exists():
+            self.online_dialog.window.lift();return
+        from online_dialog import OnlineDialog
+        self.online_dialog=OnlineDialog(self)
 
     def poll_palette(self) -> None:
         self.refresh_palette();self.root.after(5000,self.poll_palette)
@@ -122,17 +131,26 @@ class App:
     def set_report(self,text: str) -> None:
         self.report.configure(state='normal');self.report.delete('1.0','end');self.report.insert('1.0',text);self.report.configure(state='disabled')
 
-    def load(self) -> None:
+    def load(self, installed_names: list[str] | None = None) -> None:
         if self.busy: return
+        self.load_generation+=1;generation=self.load_generation
         self.status.set('Lendo temas instalados…')
-        self.worker(cm.discover,self.loaded)
+        def ready(themes,error):
+            if generation==self.load_generation:self.loaded(themes,error,installed_names)
+        self.worker(cm.discover,ready)
 
-    def loaded(self,themes,error) -> None:
+    def loaded(self,themes,error,installed_names=None) -> None:
         if error: self.status.set('Falha na leitura: '+str(error));return
         self.themes=themes;self.images={};self.filter()
         self.status.set(f'{len(themes)} temas de cursor encontrados. Temas apenas de ícones são ignorados.')
         preferred=os.environ.get('XCURSOR_THEME','')
         chosen=next((t for t in themes if t.name==preferred),next((t for t in themes if t.xcursor),None))
+        if installed_names:
+            self.search.set('')
+            chosen=next((t for t in themes if t.name==installed_names[0]),None) if len(installed_names)==1 else None
+            self.tree.selection_remove(*self.tree.selection())
+            self.clear_selection()
+            self.status.set('Instalado(s): '+', '.join(installed_names)+'. Nada foi aplicado. Confira a prévia e use Aplicar tema.')
         if chosen and self.tree.exists(chosen.name): self.tree.selection_set(chosen.name);self.tree.see(chosen.name)
         def thumbs():
             for theme in themes:
@@ -156,9 +174,18 @@ class App:
             self.tree.insert('','end',iid=t.name,text=label,image=self.images.get(t.name,''))
         if old and self.tree.exists(old[0]): self.tree.selection_set(old)
 
+    def clear_selection(self) -> None:
+        self.selected=None;self.generation+=1;self.rendered=0
+        self.apply_button.configure(state='disabled')
+        self.heading.configure(text='Escolha um tema na lista')
+        self.path_label.configure(text='')
+        self.warning.configure(text='Selecionar um tema não o aplica. Confira os tamanhos reais antes de aplicar.')
+        for widget in self.samples.winfo_children():widget.destroy()
+        self.detail_images=[]
+
     def choose(self,event=None) -> None:
         ids=self.tree.selection()
-        if not ids: return
+        if not ids:self.clear_selection();return
         self.selected=next(t for t in self.themes if t.name==ids[0]);self.heading.configure(text=self.selected.name);self.path_label.configure(text=str(self.selected.path))
         self.draw_details()
 
@@ -205,14 +232,15 @@ class App:
     def operation(self,fn,done) -> None:
         if self.busy:return
         self.busy=True
-        for w in (self.apply_button,self.archive_button,self.folder_button,self.refresh_button):w.configure(state='disabled')
+        for w in (self.apply_button,self.archive_button,self.folder_button,self.refresh_button,self.online_button):w.configure(state='disabled')
         def finished(result,error):
             self.busy=False
-            for w in (self.archive_button,self.folder_button,self.refresh_button):w.configure(state='normal')
+            for w in (self.archive_button,self.folder_button,self.refresh_button,self.online_button):w.configure(state='normal')
             self.draw_details();done(result,error)
         self.worker(fn,finished)
 
     def do_apply(self) -> None:
+        if self.busy:return
         t=self.selected
         if not t or not t.xcursor:return
         size=int(self.size.get())

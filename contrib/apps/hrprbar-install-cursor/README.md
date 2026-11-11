@@ -1,6 +1,6 @@
 # hrprbar-install cursor
 
-Aplicativo nativo Python/Tkinter para visualizar, instalar e trocar temas locais de cursor. Não instala pacotes, não cria serviços e **não modifica o cursor ao abrir, selecionar um tema, mudar tamanho ou executar testes**. Nome solicitado preservado literalmente: `hrprbar-install cursor`.
+Aplicativo nativo Python/Tkinter para visualizar, instalar e trocar temas locais de cursor. Não instala dependências do sistema, não cria serviços e **não modifica o cursor ao abrir, selecionar um tema, mudar tamanho ou executar testes**. Nome solicitado preservado literalmente: `hrprbar-install cursor`.
 
 ## Abrir
 
@@ -10,7 +10,7 @@ Aplicativo nativo Python/Tkinter para visualizar, instalar e trocar temas locais
 
 Execute a partir da raiz do repositório. Requer Linux, Python 3.10+, Tkinter, Pillow, libXcursor e uma sessão X11/XWayland para a interface. `PYTHON=/caminho/do/python ./contrib/apps/hrprbar-install-cursor/run.sh` seleciona outro interpretador. O lançador verifica dependências, sem instalar pacotes. Para aplicar são necessários Hyprland com configuração Lua, GSettings, xrdb e D-Bus/systemd do usuário.
 
-Este diretório contém um aplicativo auxiliar independente, não um painel nativo nem um plugin do núcleo do Hyprbar. Não participa da compilação C++/Meson e não é instalado pelo instalador principal. Não inclui temas de cursor de terceiros: lê os temas locais existentes. Licença MIT do repositório.
+Este diretório contém um aplicativo auxiliar independente, não um painel nativo nem um plugin do núcleo do Hyprbar. Não participa da compilação C++/Meson e não é instalado pelo instalador principal. Não inclui temas de cursor de terceiros: lê temas locais e permite baixar pacotes das fontes configuradas por ação explícita. Licença MIT do repositório.
 
 ## Aparência do Hyprbar
 
@@ -23,6 +23,29 @@ A interface consulta `hyprbar msg color-scheme-get` e `hyprbar msg theme-mode-ge
 - O seletor oferece tamanhos realmente presentes no arquivo `left_ptr`. Solicitações não exatas são ajustadas ao tamanho disponível mais próximo (empate: menor). Cada desenho também informa seus próprios tamanhos e a escolha real da biblioteca. Não há promessa de que um nominal 40 resulte em imagem 40: este tema macOS27 tem 24, 32, 48, 64 e 96. Desenhos diferentes podem ter conjuntos diferentes e recebem aviso explícito.
 - Somente **Aplicar tema**, após confirmação, grava configurações. Temas apenas Hyprcursor são identificados, mas não têm prévia nem aplicação unificada: GTK/XWayland precisam de Xcursor.
 - **Instalar novo: arquivo…** aceita ZIP, TAR e variantes comprimidas (`tar.gz`, `tgz`, `tar.xz`, `tar.bz2`, etc.); **Instalar novo: pasta…** aceita uma pasta de tema ou coleção. Todos os temas reais encontrados (`cursors/` ou `manifest.hl`) são instalados e listados ao concluir em `$XDG_DATA_HOME/icons`. Nenhum é aplicado automaticamente.
+
+## Baixar temas pela interface
+
+O botão **Baixar temas…** abre o catálogo já configurado em **Todos os repositórios**. As cinco fontes abaixo estão ativas sem configuração manual; **Buscar versões/temas** consulta em paralelo a última release publicada de cada uma. Abrir o aplicativo ou o diálogo não inicia acesso à internet. Uma fonte indisponível não descarta os resultados das demais: o estado/erro de cada repositório aparece abaixo da lista.
+
+| Família | Repositório GitHub |
+| --- | --- |
+| Bibata | `ful1e5/Bibata_Cursor` |
+| BreezeX | `ful1e5/BreezeX_Cursor` |
+| GoogleDot | `ful1e5/Google_Cursor` |
+| macOS | `ful1e5/apple_cursor` |
+| Fuchsia | `ful1e5/fuchsia-cursor` |
+
+1. Use **Buscar versões/temas** para carregar todas as fontes, ou selecione uma família. O campo editável também aceita `owner/repo` ou `https://github.com/owner/repo`; editar esse campo muda para **Personalizado**.
+2. Filtre variantes por nome, versão ou origem. Cada linha mostra pacote, tamanho comprimido, versão e repositório. Selecione para ver a URL de origem e se há SHA256 publicado. Arquivos de coleção podem instalar vários temas, não apenas a variante individual.
+3. Clique em **Baixar e instalar** e confirme o pacote/destino. O download e a validação rodam em segundo plano, sem bloquear a interface; operações simultâneas são impedidas. Erros de conexão, tempo esgotado, limite da API, ausência de release e tema já instalado aparecem no próprio diálogo. É possível tentar novamente; temas existentes não são substituídos.
+4. O destino é `$XDG_DATA_HOME/icons` (padrão `~/.local/share/icons`). Após instalar, a lista local é atualizada: um tema único é selecionado para prévia; uma coleção exige escolher um tema na lista principal. **Nada é aplicado automaticamente.** Confira o tamanho real disponível, clique em **Aplicar tema** e confirme para usar o fluxo existente de backups/verificação. Não é necessário configurar manualmente arquivos para baixar temas.
+
+**Escopo das fontes:** somente assets de GitHub Releases em `tar.xz`, `tar.gz`, `tar.bz2`, `tgz` ou `txz`, com temas empacotados. ZIPs (incluindo variantes Windows e bitmaps) e arquivos de código-fonte não são oferecidos. Extensão permitida não comprova que o pacote contém um tema: o instalador exige conteúdo válido antes de publicar. Não clona repositórios, não instala a partir da árvore de fontes e nunca executa scripts/instaladores baixados. Licenças dos temas continuam sendo as dos respectivos autores.
+
+**Rede e integridade:** `urllib` da biblioteca padrão, timeout de conexão/leitura de 20 s, metadados até 2 MiB e download até 64 MiB; tamanho recebido deve conferir com o catálogo. A URL inicial precisa pertencer ao repositório/release informado em `github.com`; só redirecionamentos HTTPS para esse caminho ou `release-assets.githubusercontent.com` são aceitos, verificados antes de seguir. URLs com credenciais/portas explícitas e destinos arbitrários/locais são recusados. SHA256 é conferido quando o GitHub o publica; quando ausente isso é indicado. HTTPS e hash publicado não equivalem a assinatura do autor. Downloads temporários são removidos tanto no sucesso como na falha. A extração mantém todos os limites abaixo, por isso coleções grandes/altamente comprimidas podem ser recusadas — prefira uma variante individual.
+
+Os testes automatizados do catálogo usam respostas controladas e imagens Xcursor geradas, sem internet, instalação no desktop real ou aplicação runtime. Referência da API: documentação oficial GitHub, `https://docs.github.com/en/rest/releases/releases#get-the-latest-release` e `https://docs.github.com/en/rest/releases/assets`.
 
 ## Aplicação, backups e limites reais
 
@@ -47,7 +70,7 @@ O relatório faz leitura posterior de GSettings, Xresources, ambiente systemd, o
 
 Extração manual, sem `extractall`. Rejeita caminhos absolutos, `..`, barras invertidas, tipos especiais, hardlinks, entradas duplicadas, links externos/quebrados/circulares e aliases que dependem de outro tema. Links simbólicos relativos internos válidos são preservados e só criados após os arquivos regulares. Limites: 20 mil entradas, 256 MiB totais, 16 MiB por arquivo, razão máxima 200:1. Temas Xcursor precisam de ao menos uma imagem decodificável; Hyprcursor requer manifesto não vazio, mas a ferramenta não valida integralmente esse formato nativo. Pacotes legítimos extremamente comprimidos podem ser recusados por segurança.
 
-Valida em diretório privado no mesmo filesystem do destino antes de instalar. Diretórios de tema são publicados com `renameat2(RENAME_NOREPLACE)` do Linux, sem sobrescrever nem em colisão concorrente. Uma coleção é pré-validada inteira; falha na publicação tenta remover só os temas novos daquela operação. Não é uma transação global atômica entre vários diretórios. A validação não substitui confiança na origem: não há antivírus nem download automático.
+Valida em diretório privado no mesmo filesystem do destino antes de instalar. Diretórios de tema são publicados com `renameat2(RENAME_NOREPLACE)` do Linux, sem sobrescrever nem em colisão concorrente. Uma coleção é pré-validada inteira; falha na publicação tenta remover só os temas novos daquela operação. Não é uma transação global atômica entre vários diretórios. A validação não substitui confiança na origem: não há antivírus; acesso à rede e download dependem de ação explícita.
 
 ## Testes e diagnóstico (somente leitura no desktop)
 
