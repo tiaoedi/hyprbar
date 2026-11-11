@@ -51,6 +51,10 @@ class App:
         self.online_button=ttk.Button(toolbar,text='Baixar temas…',command=self.open_online);self.online_button.pack(side='right',padx=4)
         self.archive_button=ttk.Button(toolbar,text='Instalar novo: arquivo…',command=lambda:self.pick_install(False));self.archive_button.pack(side='right',padx=4)
         self.folder_button=ttk.Button(toolbar,text='Instalar novo: pasta…',command=lambda:self.pick_install(True));self.folder_button.pack(side='right',padx=4)
+        modules=ttk.Frame(outer);modules.pack(fill='x',pady=(8,0))
+        self.icon_dialog=None;self.hyprland_dialog=None
+        self.icon_button=ttk.Button(modules,text='Temas de ícones…',command=self.open_icons);self.icon_button.pack(side='left',padx=4)
+        self.hyprland_button=ttk.Button(modules,text='Configurar Hyprland…',command=self.open_hyprland);self.hyprland_button.pack(side='left',padx=4)
         body=ttk.Panedwindow(outer,orient='horizontal');body.pack(fill='both',expand=True,pady=12)
         left=ttk.Frame(body);right=ttk.Frame(body,padding=(14,0,0,0));body.add(left,weight=2);body.add(right,weight=3)
         self.tree=ttk.Treeview(left,show='tree',selectmode='browse');scroll=ttk.Scrollbar(left,orient='vertical',command=self.tree.yview);self.tree.configure(yscrollcommand=scroll.set);scroll.pack(side='right',fill='y');self.tree.pack(fill='both',expand=True);self.tree.bind('<<TreeviewSelect>>',self.choose)
@@ -72,6 +76,20 @@ class App:
         self.root.after(50,self.poll);self.load();self.refresh_palette()
         self.root.bind('<FocusIn>',lambda e:self.refresh_palette() if e.widget is root else None,add='+')
         self.root.after(5000,self.poll_palette)
+
+    def open_icons(self) -> None:
+        if self.busy:return
+        if self.icon_dialog is not None and self.icon_dialog.window.winfo_exists():
+            self.icon_dialog.window.lift();return
+        from icon_dialog import IconDialog
+        self.icon_dialog=IconDialog(self)
+
+    def open_hyprland(self) -> None:
+        if self.busy:return
+        if self.hyprland_dialog is not None and self.hyprland_dialog.window.winfo_exists():
+            self.hyprland_dialog.window.lift();return
+        from hyprland_dialog import HyprlandDialog
+        self.hyprland_dialog=HyprlandDialog(self)
 
     def open_online(self) -> None:
         if self.busy:return
@@ -232,12 +250,19 @@ class App:
     def operation(self,fn,done) -> None:
         if self.busy:return
         self.busy=True
-        for w in (self.apply_button,self.archive_button,self.folder_button,self.refresh_button,self.online_button):w.configure(state='disabled')
+        for w in (self.apply_button,self.archive_button,self.folder_button,self.refresh_button,self.online_button,self.icon_button,self.hyprland_button):w.configure(state='disabled')
+        self.dialog_controls()
         def finished(result,error):
             self.busy=False
-            for w in (self.archive_button,self.folder_button,self.refresh_button,self.online_button):w.configure(state='normal')
+            for w in (self.archive_button,self.folder_button,self.refresh_button,self.online_button,self.icon_button,self.hyprland_button):w.configure(state='normal')
+            self.dialog_controls()
             self.draw_details();done(result,error)
         self.worker(fn,finished)
+
+    def dialog_controls(self) -> None:
+        for dialog in (self.online_dialog,self.icon_dialog,self.hyprland_dialog):
+            if dialog is not None and dialog.window.winfo_exists() and hasattr(dialog,'controls'):
+                dialog.controls(self.busy)
 
     def do_apply(self) -> None:
         if self.busy:return
@@ -253,7 +278,7 @@ class App:
         self.operation(lambda:settings.apply(t,size),done)
 
     def pick_install(self,folder: bool) -> None:
-        if self.smoke:return
+        if self.smoke or self.busy:return
         path=filedialog.askdirectory(title='Selecione a pasta do tema',parent=self.root) if folder else filedialog.askopenfilename(title='Selecione pacote de cursores',filetypes=[('Pacotes de tema','*.zip *.tar *.tar.gz *.tgz *.tar.xz *.tar.bz2 *.txz'),('Todos os arquivos','*')],parent=self.root)
         if not path:return
         dest=Path(os.environ.get('XDG_DATA_HOME',Path.home()/'.local/share'))/'icons'

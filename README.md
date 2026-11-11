@@ -38,11 +38,13 @@ Depois de instalar as dependências indicadas em [`BUILDING.md`](BUILDING.md), n
 
 O script compila e instala o Hyprbar e copia os plugins próprios `calculator` e `wellbeing` para o diretório do usuário. Ele não sobrescreve plugins já existentes, não ativa atalhos/configurações e não instala os catálogos externos; consulte **Configurações → Plugins** para ativar plugins e gerenciar as fontes oficial/community.
 
-## Gerenciador de cursores (aplicativo auxiliar)
+## Central de configurações (aplicativo auxiliar)
 
-O **hrprbar-install cursor** lista temas instalados com prévias reais, permite escolher tamanhos disponíveis e instalar temas locais de pastas ou arquivos ZIP/TAR. A interface acompanha a paleta comunitária claro/escuro do Hyprbar, sem modificar a barra.
+A nova **Central de configurações do Hyprland** reúne opções da versão em execução, editor Lua avançado com diff/backups, temas de ícones e o **hrprbar-install cursor**. Cursores têm prévias reais, tamanhos disponíveis, instalação local e nove fontes GitHub; ícones têm três fontes e aplicação separada. Ambos aceitam repositório personalizado. Catálogos externos abrem somente por clique. A interface acompanha a paleta claro/escuro do Hyprbar, sem modificar a barra.
 
 ```sh
+./contrib/apps/hrprbar-install-cursor/run-settings.sh
+# Entrada original de cursores:
 ./contrib/apps/hrprbar-install-cursor/run.sh
 ```
 

@@ -45,7 +45,7 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(assets[0].repo, 'ful1e5/BreezeX_Cursor')
         self.assertEqual(assets[0].version, 'v2')
         self.assertEqual(calls, [('https://api.github.com/repos/ful1e5/BreezeX_Cursor/releases/latest', 20)])
-        self.assertEqual(set(online.FAMILIES), {'Bibata', 'BreezeX', 'GoogleDot', 'macOS', 'Fuchsia'})
+        self.assertLessEqual({'Bibata', 'BreezeX', 'GoogleDot', 'macOS', 'Fuchsia'}, set(online.FAMILIES))
 
     def test_aggregate_keeps_other_repositories_when_one_fails(self):
         import online
@@ -59,9 +59,9 @@ class CatalogTests(unittest.TestCase):
         with patch('online.latest', side_effect=fixture):
             result = online.catalog()
         self.assertEqual(set(calls), set(online.FAMILIES.values()))
-        self.assertEqual(len(result.assets), 4)
+        self.assertEqual(len(result.assets), len(online.FAMILIES)-1)
         self.assertEqual({a.repo for a in result.assets}, set(calls)-{online.FAMILIES['macOS']})
-        self.assertEqual(len(result.statuses), 5)
+        self.assertEqual(len(result.statuses), len(online.FAMILIES))
         self.assertIn('limite temporário', result.statuses[online.FAMILIES['macOS']])
         for repo in set(calls)-{online.FAMILIES['macOS']}:
             self.assertIn('1 pacote', result.statuses[repo])
@@ -308,7 +308,7 @@ class OnlineGuiTests(unittest.TestCase):
             self.assertEqual(fetch.call_count, 1)
             install.assert_not_called(); self.apply.assert_not_called()
 
-    def test_all_five_presets_active_by_default_and_individual_sources_wired(self):
+    def test_all_presets_active_by_default_and_individual_sources_wired(self):
         import online
         def fixture(repo):
             return [online.Asset(repo, 'v1', 'Tema.tar.xz', 100,
@@ -321,8 +321,8 @@ class OnlineGuiTests(unittest.TestCase):
             fetch.assert_not_called()
             dialog.fetch_button.invoke()
             self.pump(lambda: not self.app.busy)
-            self.assertEqual(fetch.call_count, 5)
-            self.assertEqual(len(dialog.tree.get_children()), 5)
+            self.assertEqual(fetch.call_count, len(online.FAMILIES))
+            self.assertEqual(len(dialog.tree.get_children()), len(online.FAMILIES))
             for repo in online.FAMILIES.values():
                 self.assertIn(repo, dialog.status.get())
             for name, repo in online.FAMILIES.items():
@@ -331,7 +331,7 @@ class OnlineGuiTests(unittest.TestCase):
                 dialog.fetch_button.invoke(); self.pump(lambda: not self.app.busy)
                 self.assertEqual(len(dialog.tree.get_children()), 1)
                 self.assertEqual(dialog.assets[0].repo, repo)
-            self.assertEqual(fetch.call_count, 10)
+            self.assertEqual(fetch.call_count, 2*len(online.FAMILIES))
         self.apply.assert_not_called()
 
     def test_open_fetch_filter_and_invalidate_selection_through_real_queue(self):

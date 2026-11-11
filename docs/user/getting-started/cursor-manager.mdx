@@ -3,7 +3,13 @@ title: Gerenciador de cursores
 description: Visualizar, instalar e trocar temas com o aplicativo auxiliar hrprbar-install cursor.
 ---
 
-O `hrprbar-install cursor` é um aplicativo auxiliar independente em `contrib/apps/hrprbar-install-cursor`, não um painel do núcleo nem um plugin. Não é instalado pelo instalador principal do Hyprbar.
+O `hrprbar-install cursor` é um aplicativo auxiliar independente em `contrib/apps/hrprbar-install-cursor`, não um painel do núcleo nem um plugin. Não é instalado pelo instalador principal do Hyprbar. A nova central **Configurações do Hyprland** abre por `./contrib/apps/hrprbar-install-cursor/run-settings.sh`; a entrada original de cursores continua disponível.
+
+A central reúne cursores, temas de ícones e o explorador das opções da versão do Hyprland em execução. Há busca por categoria, valores atuais/padrão e confirmação do diff. Booleanos usam **Ativado/Desativado**. Uma única ação, **Aplicar e recarregar**, inclui o valor do editor, cria backup, salva, recarrega o Lua completo e verifica os valores escalares em execução. Não é necessário preparar ou salvar em botões separados. O editor avançado abre o Lua ativo completo para monitores, atalhos, regras, animações e inicialização; não são formulários dedicados. A confirmação alerta sobre a execução de Lua/hooks; a validação sintática não comprova efeitos arbitrários do código. Falhas distinguem o arquivo salvo de opções efetivamente aplicadas.
+
+**Temas de ícones…** oferece prévias reais, instalação local e download de três fontes GitHub, mais campo personalizado. Instalar não aplica. **Aplicar ícones…** altera somente GTK3/4 e GSettings icon-theme, com backups e leitura posterior; cursores permanecem inalterados. Aplicativos com configuração própria, Qt ou sandboxes podem não seguir GTK.
+
+Os catálogos de cursores e ícones também têm atalhos externos para Flaticon, Custom Cursor e o link GNOME-Look informado. Eles abrem somente ao clicar; não prometem converter imagens ou extensões em temas Linux, nem ignoram licenças ou bloqueios dos sites.
 
 Na raiz do repositório:
 
@@ -15,7 +21,7 @@ Requer Linux, Python 3.10+, Tkinter, Pillow, libXcursor e sessão X11/XWayland. 
 
 A lista apresenta miniaturas reais e busca por nome. Ao selecionar um tema, é possível comparar oito formas e escolher tamanhos realmente oferecidos pelo tema. A interface lê a paleta comunitária atual do Hyprbar em modo claro/escuro, com indicação explícita de paleta de reserva quando indisponível.
 
-Os botões de instalação aceitam uma pasta ou um arquivo ZIP/TAR local. O instalador valida limites, caminhos e links internos antes de publicar temas em `$XDG_DATA_HOME/icons`, sem substituir temas existentes. Não há download de catálogos nem instalação automática de dependências. Instalar não aplica o tema.
+Os botões de instalação aceitam uma pasta ou um arquivo ZIP/TAR local. O instalador valida limites, caminhos e links internos antes de publicar temas em `$XDG_DATA_HOME/icons`, sem substituir temas existentes. **Baixar temas…** consulta pacotes Linux de GitHub Releases nas fontes configuradas ou em um `owner/repo` informado. A consulta e o download exigem ação explícita; não há acesso à rede ao abrir nem instalação automática de dependências. Instalar não aplica o tema.
 
 Somente **Aplicar tema**, após confirmação, altera configurações. A aplicação oferece backups, sincronização de Hyprland com configuração Lua, GTK3/GTK4, GSettings, Xresources e ambiente de ativação. Temas apenas Hyprcursor são identificados, mas não podem ser aplicados de forma unificada a GTK/XWayland.
 

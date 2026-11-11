@@ -65,6 +65,10 @@ FAMILIES = {
     'GoogleDot': 'ful1e5/Google_Cursor',
     'macOS': 'ful1e5/apple_cursor',
     'Fuchsia': 'ful1e5/fuchsia-cursor',
+    'Banana': 'ful1e5/banana-cursor',
+    'Notwaita': 'ful1e5/notwaita-cursor',
+    'Phinger': 'phisch/phinger-cursors',
+    'Rosé Pine': 'rose-pine/cursors',
 }
 TIMEOUT = 20
 MAX_METADATA = 2 * 1024 * 1024

@@ -5,24 +5,31 @@ import os
 from pathlib import Path
 from tkinter import ttk, messagebox
 import online
+import webbrowser
 
 
 class OnlineDialog:
-    def __init__(self, app):
+    def __init__(self, app, *, icon_owner=None):
         self.app = app
+        self.icon_owner = icon_owner
+        if icon_owner is not None:
+            import icons
+            self.families = icons.FAMILIES
+        else:
+            self.families = online.FAMILIES
         self.assets: list[online.Asset] = []
         self.generation = 0
         self.window = tk.Toplevel(app.root)
         self.window.title('Baixar temas — GitHub Releases')
-        self.window.geometry('1040x680'); self.window.minsize(900, 560)
+        self.window.geometry('1040x800'); self.window.minsize(900, 680)
         self.window.protocol('WM_DELETE_WINDOW', self.close)
         outer = ttk.Frame(self.window, padding=16); outer.pack(fill='both', expand=True)
-        ttk.Label(outer, text='Baixar temas de cursor', font=(app.font_family, 18, 'bold')).pack(anchor='w')
-        ttk.Label(outer, text='Pacotes Linux publicados em GitHub Releases. Nada é baixado ao abrir; instalar não aplica o cursor.', wraplength=990).pack(anchor='w', pady=(5, 12))
+        ttk.Label(outer, text='Baixar temas de ícones' if icon_owner is not None else 'Baixar temas de cursor', font=(app.font_family, 18, 'bold')).pack(anchor='w')
+        ttk.Label(outer, text='Pacotes Linux publicados em GitHub Releases (até 64 MiB). Nada é baixado ao abrir; instalar nunca aplica o tema.', wraplength=990).pack(anchor='w', pady=(5, 12))
         line = ttk.Frame(outer); line.pack(fill='x')
         ttk.Label(line, text='Família:').pack(side='left')
         self.family = tk.StringVar(value='Todos os repositórios')
-        self.family_box = ttk.Combobox(line, textvariable=self.family, values=['Todos os repositórios']+list(online.FAMILIES)+['Personalizado'], state='readonly', width=24)
+        self.family_box = ttk.Combobox(line, textvariable=self.family, values=['Todos os repositórios']+list(self.families)+['Personalizado'], state='readonly', width=24)
         self.family_box.pack(side='left', padx=8); self.family_box.bind('<<ComboboxSelected>>', self.select_family)
         self.fetch_button = ttk.Button(line, text='Buscar versões/temas', command=self.fetch); self.fetch_button.pack(side='right')
         row = ttk.Frame(outer); row.pack(fill='x', pady=10)
@@ -30,6 +37,12 @@ class OnlineDialog:
         self.repo = tk.StringVar(value='')
         self.repo_entry = ttk.Entry(row, textvariable=self.repo); self.repo_entry.pack(side='left', fill='x', expand=True, padx=8)
         ttk.Label(outer, text='Aceita owner/repo ou https://github.com/owner/repo; não instala código-fonte nem executa scripts.', wraplength=990).pack(anchor='w')
+        external = ttk.Frame(outer); external.pack(fill='x',pady=(8,2))
+        self.flaticon_button = ttk.Button(external,text='Flaticon — imagens de cursor ↗',command=lambda:self.open_external('https://www.flaticon.com/br/icones-gratis/cursor')); self.flaticon_button.pack(side='left',padx=(0,8))
+        self.custom_cursor_button = ttk.Button(external,text='Custom Cursor — catálogo externo ↗',command=lambda:self.open_external('https://custom-cursor.com/es/top-downloaded-cursors')); self.custom_cursor_button.pack(side='left')
+        external_more = ttk.Frame(outer); external_more.pack(fill='x', pady=(2, 4))
+        self.gnome_look_button = ttk.Button(external_more, text='GNOME-Look — catálogo externo ↗', command=lambda: self.open_external('https://www.gnome-look.org/browse?cat=132&ord=latest')); self.gnome_look_button.pack(side='left')
+        ttk.Label(outer,text='Sites externos abrem no navegador somente ao clicar. Flaticon: imagens PNG/SVG; não são temas Linux instaláveis. Custom Cursor pode oferecer conteúdo para navegador/Windows. GNOME-Look: catálogo externo; conteúdo gráfico e pacotes não garantem compatibilidade. Para instalar localmente, obtenha um arquivo de tema compatível com Linux e com o tipo escolhido (ícones ou cursores). Respeite licença/atribuição; login no site, sem download ou instalação automática por este link.',wraplength=860).pack(anchor='w')
         row = ttk.Frame(outer); row.pack(fill='x', pady=10)
         ttk.Label(row, text='Filtrar variantes:').pack(side='left')
         self.search = tk.StringVar(); ttk.Entry(row, textvariable=self.search).pack(side='left', fill='x', expand=True, padx=8)
@@ -42,21 +55,27 @@ class OnlineDialog:
         scrollbar.pack(side='right', fill='y'); self.tree.pack(fill='both', expand=True)
         self.detail = tk.StringVar(value='Selecione um pacote para conferir a origem e a integridade.')
         ttk.Label(outer, textvariable=self.detail, wraplength=990).pack(anchor='w', pady=10)
-        self.status = tk.StringVar(value='5 repositórios já configurados e ativos: Bibata, BreezeX, GoogleDot, macOS e Fuchsia. Clique em Buscar versões/temas.')
+        self.status = tk.StringVar(value=f'{len(self.families)} repositórios configurados: '+', '.join(self.families)+'. Clique em Buscar versões/temas.')
         ttk.Label(outer, textvariable=self.status, wraplength=990).pack(anchor='w', pady=5)
         row = ttk.Frame(outer); row.pack(fill='x', pady=8)
-        ttk.Label(row, text='Após instalar: selecione o tema na janela principal, confira a prévia e clique em Aplicar tema.', wraplength=700).pack(side='left')
+        ttk.Label(row, text='Após instalar: escolha o tema, confira a prévia e use “Aplicar ícones…” com confirmação.' if icon_owner is not None else 'Após instalar: selecione o tema na janela principal, confira a prévia e clique em Aplicar tema.', wraplength=700).pack(side='left')
         self.install_button = ttk.Button(row, text='Baixar e instalar', command=lambda: self.install_selected(), state='disabled'); self.install_button.pack(side='right')
         self.search.trace_add('write', lambda *_: self.filter())
         self.repo.trace_add('write', self.repo_changed)
         self.tree.bind('<<TreeviewSelect>>', self.select_asset)
         self.window.update_idletasks()
 
+    def open_external(self, url: str) -> None:
+        if self.app.busy or self.app.smoke:return
+        if not webbrowser.open(url):
+            self.status.set('Não foi possível abrir o navegador; site externo: '+url)
+
     def close(self) -> None:
         if self.app.busy:
             self.status.set('Operação em andamento; aguarde a conclusão antes de fechar.'); return
         self.window.destroy()
-        self.app.online_dialog = None
+        if self.icon_owner is not None:self.icon_owner.online_dialog = None
+        else:self.app.online_dialog = None
 
     def repo_changed(self, *_) -> None:
         self.family.set('Personalizado')
@@ -64,8 +83,8 @@ class OnlineDialog:
 
     def select_family(self, _=None) -> None:
         name = self.family.get()
-        if name in online.FAMILIES:
-            self.repo.set(online.FAMILIES[name]); self.family.set(name)
+        if name in self.families:
+            self.repo.set(self.families[name]); self.family.set(name)
         elif name == 'Todos os repositórios':
             self.repo.set(''); self.family.set(name)
         self.invalidate()
@@ -97,13 +116,14 @@ class OnlineDialog:
         self.fetch_button.configure(state='disabled' if busy else 'normal')
         self.repo_entry.configure(state='disabled' if busy else 'normal')
         self.family_box.configure(state='disabled' if busy else 'readonly')
+        for button in (self.flaticon_button,self.custom_cursor_button,self.gnome_look_button):button.configure(state='disabled' if busy or self.app.smoke else 'normal')
         self.select_asset()
 
     def fetch(self) -> None:
-        if self.app.busy: return
+        if self.app.busy or self.app.smoke: return
         self.invalidate()
         generation = self.generation
-        sources = None if self.family.get() == 'Todos os repositórios' else [self.repo.get()]
+        sources = list(self.families.values()) if self.family.get() == 'Todos os repositórios' else [self.repo.get()]
         self.status.set('Buscando últimas versões publicadas nos repositórios ativos…')
         def done(result, error):
             self.controls(False)
@@ -129,6 +149,11 @@ class OnlineDialog:
             if error:
                 self.status.set('Instalação recusada: '+str(error)); return
             self.close()
-            self.app.load([path.name for path in paths])
-        self.app.operation(lambda: online.install_asset(asset, destination), done)
+            if self.icon_owner is not None:self.icon_owner.refresh([path.name for path in paths])
+            else:self.app.load([path.name for path in paths])
+        if self.icon_owner is not None:
+            import icons
+            install = icons.install_asset
+        else:install = online.install_asset
+        self.app.operation(lambda: install(asset, destination), done)
         self.controls(True)
