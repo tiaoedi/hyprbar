@@ -42,11 +42,17 @@ O script compila e instala o Hyprbar e copia os plugins próprios `calculator` e
 
 A nova **Central de configurações do Hyprland** reúne opções da versão em execução, editor Lua avançado com diff/backups, temas de ícones e o **hrprbar-install cursor**. Cursores têm prévias reais, tamanhos disponíveis, instalação local e nove fontes GitHub; ícones têm três fontes e aplicação separada. Ambos aceitam repositório personalizado. Catálogos externos abrem somente por clique. A interface acompanha a paleta claro/escuro do Hyprbar, sem modificar a barra.
 
+Para baixar e abrir a central, inclusive depois de formatar (com as dependências instaladas):
+
 ```sh
+git clone --branch main https://github.com/tiaoedi/hyprbar.git
+cd hyprbar
 ./contrib/apps/hrprbar-install-cursor/run-settings.sh
 # Entrada original de cursores:
 ./contrib/apps/hrprbar-install-cursor/run.sh
 ```
+
+O clone preserva o programa, não seus temas baixados nem configurações pessoais. Antes de formatar, faça um backup separado desses arquivos. Os comandos acima não instalam dependências nem criam atalhos no menu.
 
 É um aplicativo Python/Tkinter independente do núcleo, não instalado pelo instalador principal. Consulte [dependências, instalação segura e limites da troca em aplicativos abertos](contrib/apps/hrprbar-install-cursor/README.md). A aplicação sincroniza as configurações de cursor; alguns aplicativos precisam ser reabertos, sempre com confirmação.
 
