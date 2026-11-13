@@ -73,6 +73,7 @@ class CatalogEntrypointTests(unittest.TestCase):
         self.owner.close()
         dialog.close.assert_not_called()
         self.app.busy = False
+        dialog.close.side_effect = lambda: setattr(dialog.window.winfo_exists, 'return_value', False)
         self.owner.close()
         dialog.close.assert_called_once()
         self.assertIsNone(self.app.icon_dialog)

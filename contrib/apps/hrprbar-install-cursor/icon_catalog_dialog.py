@@ -6,6 +6,7 @@ from tkinter import ttk, messagebox
 import webbrowser
 
 import icon_catalog
+from navigation import add_home_button
 
 
 class IconCatalogDialog:
@@ -18,6 +19,7 @@ class IconCatalogDialog:
         self.window.geometry('1040x760')
         self.window.minsize(900, 680)
         self.window.protocol('WM_DELETE_WINDOW', self.close)
+        self.home_button = add_home_button(self.app, self.window, self.close)
         outer = ttk.Frame(self.window, padding=16)
         outer.pack(fill='both', expand=True)
         ttk.Label(outer, text='Catálogo curado de ícones',

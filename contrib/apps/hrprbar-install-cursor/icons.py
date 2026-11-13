@@ -2,12 +2,19 @@
 from __future__ import annotations
 import configparser
 import ctypes
+import errno
 from dataclasses import dataclass
 import os
 from pathlib import Path
 import shutil
+import stat
 import tempfile
 import installer
+
+_RESOLVE_BENEATH = 0x08
+_RESOLVE_NO_MAGICLINKS = 0x02
+MAX_ENTRIES_PER_DIRECTORY = 256
+MAX_ROOT_ENTRIES_PER_DIRECTORY = 256
 
 # Release packages verified by downloading and installing in isolated scratch.
 FAMILIES = {
@@ -23,22 +30,86 @@ def discover(roots: list[Path] | None = None) -> list[Theme]:
         roots += [Path(p)/'icons' for p in os.environ.get('XDG_DATA_DIRS', '/usr/local/share:/usr/share').split(':') if p]
     found = {}
     for root in roots:
-        if not root.is_dir(): continue
-        for path in sorted(root.iterdir()):
-            if not path.is_dir() or path.name.startswith('.') or path.name in found: continue
-            try: found[path.name] = validate_theme(path)
-            except (ValueError, OSError): continue
+        root_fd = None
+        try:
+            root_fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC)
+        except OSError:
+            continue
+        try:
+            names = []
+            try:
+                with os.scandir(root_fd) as entries:
+                    iterator = iter(entries)
+                    examined = 0
+                    while examined < MAX_ROOT_ENTRIES_PER_DIRECTORY:
+                        try:
+                            entry = next(iterator)
+                        except StopIteration:
+                            break
+                        examined += 1
+                        try:
+                            if entry.name.startswith('.') or entry.name in found or not entry.is_dir(follow_symlinks=False):
+                                continue
+                        except OSError:
+                            continue
+                        names.append(entry.name)
+            except OSError:
+                continue
+            for name in sorted(names):
+                if name in found:
+                    continue
+                try:
+                    theme_fd = _open_relative(
+                        root_fd, name,
+                        os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC | os.O_NOFOLLOW)
+                except OSError:
+                    continue
+                try:
+                    found[name] = _read_theme(root/name, audit_links=False, root_fd=theme_fd)
+                except (ValueError, OSError):
+                    continue
+                finally:
+                    os.close(theme_fd)
+        finally:
+            os.close(root_fd)
     return sorted(found.values(), key=lambda t:t.name.casefold())
 
 
-def preview(path: Path, side: int = 96):
+def preview(path: Path, side: int = 96, *, root: Path | None = None,
+            root_identity: tuple[int, int] | None = None):
     """Raster pixels, including bounded SVG through system librsvg (no scripts)."""
     import io
     from PIL import Image
-    if not 1 <= side <= 256 or path.stat().st_size > installer.MAX_FILE:
+    path = Path(path)
+    if not 1 <= side <= 256:
+        raise ValueError('Limites da prévia excedidos')
+    if root is None:
+        with path.open('rb') as stream:
+            if os.fstat(stream.fileno()).st_size > installer.MAX_FILE:
+                raise ValueError('Limites da prévia excedidos')
+            data = stream.read(installer.MAX_FILE+1)
+    else:
+        root = Path(root)
+        root_fd = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC | os.O_NOFOLLOW)
+        try:
+            identity = os.fstat(root_fd)
+            if root_identity is not None and (identity.st_dev, identity.st_ino) != root_identity:
+                raise ValueError('O tema mudou desde a listagem; atualize a lista antes da prévia')
+            try:
+                relative = path.relative_to(root).as_posix()
+            except ValueError as exc:
+                raise ValueError('A prévia está fora do tema selecionado') from exc
+            fd = _open_relative(root_fd, relative, os.O_RDONLY | os.O_CLOEXEC)
+            with os.fdopen(fd, 'rb') as stream:
+                if os.fstat(stream.fileno()).st_size > installer.MAX_FILE:
+                    raise ValueError('Limites da prévia excedidos')
+                data = stream.read(installer.MAX_FILE+1)
+        finally:
+            os.close(root_fd)
+    if len(data) > installer.MAX_FILE:
         raise ValueError('Limites da prévia excedidos')
     if path.suffix.lower() != '.svg':
-        with Image.open(path) as image:
+        with Image.open(io.BytesIO(data)) as image:
             if image.width*image.height > 16_000_000: raise ValueError('Imagem grande demais')
             image = image.convert('RGBA')
             image.thumbnail((side, side), Image.Resampling.LANCZOS)
@@ -48,7 +119,6 @@ def preview(path: Path, side: int = 96):
     import ctypes.util
     import re
     import xml.etree.ElementTree as ET
-    data = path.read_bytes()
     try: tree = ET.fromstring(data)
     except ET.ParseError as exc: raise ValueError('SVG inválido') from exc
     if tree.tag not in ('svg', '{http://www.w3.org/2000/svg}svg'):
@@ -124,66 +194,175 @@ class Theme:
     path: Path
     label: str
     samples: tuple[Path, ...]
+    root_identity: tuple[int, int] = (0, 0)
 
 
 def validate_theme(path: Path) -> Theme:
-    """Validate metadata and containment before accepting actual icon images."""
+    """Complete audit, required before installing or applying a theme."""
+    return _read_theme(path, audit_links=True)
+
+
+class _OpenHow(ctypes.Structure):
+    _fields_ = [('flags', ctypes.c_uint64), ('mode', ctypes.c_uint64), ('resolve', ctypes.c_uint64)]
+
+
+_LIBC = ctypes.CDLL(None, use_errno=True)
+try:
+    _OPENAT2 = _LIBC.openat2
+except AttributeError:
+    _OPENAT2 = None
+if _OPENAT2 is not None:
+    _OPENAT2.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.POINTER(_OpenHow), ctypes.c_size_t]
+    _OPENAT2.restype = ctypes.c_int
+
+
+def _open_relative(root_fd: int, relative: str, flags: int,
+                   resolve: int = _RESOLVE_BENEATH | _RESOLVE_NO_MAGICLINKS) -> int:
+    if _OPENAT2 is None:
+        raise OSError('openat2 indisponível; leitura segura recusada')
+    how = _OpenHow(flags, 0, resolve)
+    fd = _OPENAT2(root_fd, os.fsencode(relative), ctypes.byref(how), ctypes.sizeof(how))
+    if fd < 0:
+        error = ctypes.get_errno()
+        raise OSError(error, os.strerror(error), relative)
+    return fd
+
+
+def _audit_links(root_fd: int) -> None:
+    """Audit every link fd-relatively; internal relative links remain valid."""
+    pending = [('', os.dup(root_fd))]
+    try:
+        while pending:
+            parent, directory_fd = pending.pop()
+            try:
+                with os.scandir(directory_fd) as entries:
+                    for entry in entries:
+                        relative = f'{parent}/{entry.name}' if parent else entry.name
+                        info = os.stat(entry.name, dir_fd=directory_fd, follow_symlinks=False)
+                        entry_fd = os.open(
+                            entry.name, getattr(os, 'O_PATH', os.O_RDONLY) | os.O_NOFOLLOW | os.O_CLOEXEC,
+                            dir_fd=directory_fd)
+                        opened = os.fstat(entry_fd)
+                        if (info.st_dev, info.st_ino, stat.S_IFMT(info.st_mode)) != (
+                                opened.st_dev, opened.st_ino, stat.S_IFMT(opened.st_mode)):
+                            os.close(entry_fd)
+                            raise ValueError('Entrada mudou durante a auditoria: '+relative)
+                        if stat.S_ISLNK(opened.st_mode):
+                            os.close(entry_fd)
+                            target_fd = _open_relative(
+                                root_fd, relative, getattr(os, 'O_PATH', os.O_RDONLY) | os.O_CLOEXEC)
+                            os.close(target_fd)
+                        elif stat.S_ISDIR(opened.st_mode):
+                            os.close(entry_fd)
+                            child_fd = os.open(
+                                entry.name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC,
+                                dir_fd=directory_fd)
+                            child_stat = os.fstat(child_fd)
+                            if (opened.st_dev, opened.st_ino) != (child_stat.st_dev, child_stat.st_ino):
+                                os.close(child_fd)
+                                raise ValueError('Diretório mudou durante a auditoria: '+relative)
+                            pending.append((relative, child_fd))
+                        else:
+                            os.close(entry_fd)
+            finally:
+                os.close(directory_fd)
+    finally:
+        for _, directory_fd in pending:
+            os.close(directory_fd)
+
+
+def _read_theme(path: Path, *, audit_links: bool, root_fd: int | None = None) -> Theme:
+    """Read metadata/samples; listing does not traverse the entire icon tree."""
     from PIL import Image
     import xml.etree.ElementTree as ET
+    path = Path(path)
+    theme_name = path.name
+    owns_root_fd = root_fd is None
     try:
-        base = path.resolve(strict=True)
-        for root, dirs, files in os.walk(path, followlinks=False):
-            for name in dirs + files:
-                item = Path(root)/name
-                if item.is_symlink() and not item.resolve(strict=True).is_relative_to(base):
-                    raise ValueError('Link escapa do tema: '+str(item))
-        metadata = path/'index.theme'
-        if metadata.stat().st_size > 1024*1024:
+        if root_fd is None:
+            root_fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC | os.O_NOFOLLOW)
+        root_stat = os.fstat(root_fd)
+        base = Path(os.readlink(f'/proc/self/fd/{root_fd}'))
+        metadata_fd = _open_relative(root_fd, 'index.theme', os.O_RDONLY | os.O_CLOEXEC)
+        with os.fdopen(metadata_fd, 'rb') as stream:
+            if os.fstat(stream.fileno()).st_size > 1024*1024:
+                raise ValueError('index.theme grande demais')
+            metadata_text = stream.read(1024*1024+1)
+        if len(metadata_text) > 1024*1024:
             raise ValueError('index.theme grande demais')
         parser = configparser.ConfigParser(interpolation=None)
-        parser.read_string(metadata.read_text())
+        parser.read_string(metadata_text.decode('utf-8'))
         section = parser['Icon Theme']
         directories = [d.strip() for d in section['Directories'].split(',') if d.strip()]
         directories += [d.strip() for d in section.get('ScaledDirectories', '').split(',') if d.strip()]
         if not directories or not section.get('Name', '').strip():
             raise ValueError('Nome ou diretórios ausentes')
+        if audit_links:
+            _audit_links(root_fd)
         samples = []
         for directory in dict.fromkeys(directories):
             rel = installer.safe_name(directory)
-            if rel == Path('.') or not (path/rel).resolve().is_relative_to(base):
+            if rel == Path('.'):
                 raise ValueError('Diretório escapa do tema')
             details = parser[directory]
             if int(details['Size']) <= 0 or details.get('Type', 'Threshold') not in ('Fixed', 'Scalable', 'Threshold'):
                 raise ValueError('Metadados de diretório inválidos')
-            folder = path/rel
-            if not folder.is_dir():
-                raise ValueError('Diretório declarado não existe: '+directory)
-            for item in folder.iterdir():
-                if not item.is_file() or item.suffix.lower() not in ('.png', '.svg', '.xpm'):
-                    continue
-                # A theme needs at least one valid actual image; aliases were checked above.
-                if len(samples) >= 12:
-                    continue
-                try:
-                    if item.suffix.lower() == '.svg':
-                        if item.stat().st_size > installer.MAX_FILE:
+            folder_fd = _open_relative(
+                root_fd, rel.as_posix(), os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC)
+            if len(samples) >= 12:
+                os.close(folder_fd)
+                continue
+            try:
+                with os.scandir(folder_fd) as entries:
+                    examined = 0
+                    iterator = iter(entries)
+                    while len(samples) < 12 and examined < MAX_ENTRIES_PER_DIRECTORY:
+                        try:
+                            entry = next(iterator)
+                        except StopIteration:
+                            break
+                        examined += 1
+                        suffix = Path(entry.name).suffix.lower()
+                        if suffix not in ('.png', '.svg', '.xpm'):
                             continue
-                        tree = ET.fromstring(item.read_bytes())
-                        if tree.tag not in ('svg', '{http://www.w3.org/2000/svg}svg'):
+                        sample_relative = (rel/entry.name).as_posix()
+                        sample_path = base/rel/entry.name
+                        try:
+                            sample_fd = _open_relative(root_fd, sample_relative, os.O_RDONLY | os.O_CLOEXEC)
+                        except OSError as exc:
+                            if exc.errno == errno.EXDEV:
+                                raise ValueError('Imagem escapa do tema: '+sample_relative) from exc
                             continue
-                    else:
-                        with Image.open(item) as image:
-                            if image.width*image.height > 16_000_000:
-                                continue
-                            image.verify()
-                    samples.append(item)
-                except (OSError, ValueError, ET.ParseError):
-                    continue
+                        try:
+                            with os.fdopen(sample_fd, 'rb') as stream:
+                                file_stat = os.fstat(stream.fileno())
+                                if not stat.S_ISREG(file_stat.st_mode):
+                                    continue
+                                if suffix == '.svg':
+                                    if file_stat.st_size > installer.MAX_FILE:
+                                        continue
+                                    tree = ET.fromstring(stream.read())
+                                    if tree.tag not in ('svg', '{http://www.w3.org/2000/svg}svg'):
+                                        continue
+                                else:
+                                    with Image.open(stream) as image:
+                                        if image.width*image.height > 16_000_000:
+                                            continue
+                                        image.verify()
+                            samples.append(sample_path)
+                        except (OSError, ValueError, ET.ParseError):
+                            continue
+            finally:
+                os.close(folder_fd)
         if not samples:
             raise ValueError('Tema sem imagens de ícones válidas')
-        return Theme(path.name, path, section['Name'], tuple(samples))
+        return Theme(theme_name, base, section['Name'], tuple(samples),
+                     (root_stat.st_dev, root_stat.st_ino))
     except (KeyError, configparser.Error, OSError, RuntimeError) as exc:
         raise ValueError('Tema de ícones inválido: '+str(exc)) from exc
+    finally:
+        if owns_root_fd and root_fd is not None:
+            os.close(root_fd)
 
 
 def install(source: Path, destination: Path) -> list[Path]:
@@ -237,7 +416,9 @@ def apply(theme: Theme, *, home: Path | None = None, runner=None) -> str:
         raise ValueError('Home isolado exige runner injetado; GSettings real proibido')
     if not re.fullmatch(r'[\w .+()@-]+', theme.name):
         raise ValueError('Nome de tema não suportado')
-    validate_theme(theme.path)
+    validated = validate_theme(theme.path)
+    if theme.root_identity != (0, 0) and validated.root_identity != theme.root_identity:
+        raise ValueError('O tema mudou desde a listagem; atualize a lista antes de aplicar')
     execute = runner or settings.run
     cfg = home/'.config' if home is not None else Path(os.environ.get('XDG_CONFIG_HOME', Path.home()/'.config'))
     command = ['gsettings', 'get', 'org.gnome.desktop.interface', 'icon-theme']

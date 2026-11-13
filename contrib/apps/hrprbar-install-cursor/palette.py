@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 from urllib.parse import quote
 
@@ -30,8 +31,15 @@ def resolve(scheme: str,mode: str,base: Path) -> dict:
 
 def current() -> dict:
     try:
+        # Desktop launchers do not necessarily inherit the interactive shell PATH.
+        executable=shutil.which('hyprbar')
+        if executable is None:
+            local=Path.home()/'.local/bin/hyprbar'
+            if not local.is_file() or not os.access(local,os.X_OK):
+                raise FileNotFoundError('Hyprbar não encontrado')
+            executable=str(local)
         def query(command: str) -> str:
-            return subprocess.check_output(['hyprbar','msg',command],text=True,stderr=subprocess.DEVNULL,timeout=2).strip()
+            return subprocess.check_output([executable,'msg',command],text=True,stderr=subprocess.DEVNULL,timeout=2).strip()
         scheme=query('color-scheme-get');mode=query('theme-mode-get')
     except (OSError,subprocess.SubprocessError):scheme='';mode='dark'
     base=Path(os.environ.get('XDG_STATE_HOME',Path.home()/'.local/state'))/'hyprbar/community-palettes'

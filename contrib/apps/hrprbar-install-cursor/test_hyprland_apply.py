@@ -252,7 +252,7 @@ class ApplyTests(unittest.TestCase):
             return [child for child in widget.winfo_children() if isinstance(child, ttk.Button)] + [button for child in widget.winfo_children() for button in buttons(child)]
         labels = [str(button['text']) for button in buttons(d.window)]
         self.assertIn('Aplicar e recarregar', labels)
-        self.assertEqual(set(labels), {'Aplicar e recarregar', 'Fechar', 'Reler do compositor / arquivo'})
+        self.assertEqual(set(labels), {'Aplicar e recarregar', 'Fechar', 'Reler do compositor / arquivo', 'Voltar ao início'})
 
     def test_valid_drafts_are_visible_and_invalid_switched_draft_blocks_apply(self):
         d = self.dialog; d.value.set('true')

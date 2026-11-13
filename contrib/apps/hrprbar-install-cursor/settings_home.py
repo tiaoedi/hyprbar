@@ -6,6 +6,7 @@ import json
 import tkinter as tk
 from tkinter import ttk
 from app import App
+from navigation import HOME_LABEL
 
 TITLE = 'hrprbar-config — Central de configurações'
 
@@ -13,12 +14,13 @@ TITLE = 'hrprbar-config — Central de configurações'
 class SettingsHome:
     def __init__(self, app: App):
         self.app = app
+        app.settings_home = self
         self.root = app.root
         self.cursor_frames = [w for w in self.root.winfo_children() if w.winfo_manager() == 'pack']
         self.root.title(TITLE)
         self.navigation = ttk.Frame(self.root, padding=(14, 8))
         self.navigation.pack(side='top', fill='x', before=self.cursor_frames[0] if self.cursor_frames else None)
-        self.home_button = ttk.Button(self.navigation, text='Início — Central de configurações', command=self.show_home)
+        self.home_button = ttk.Button(self.navigation, text=HOME_LABEL, command=self.show_home)
         self.home_button.pack(side='left')
         ttk.Label(self.navigation, text='Alterações somente após confirmação.').pack(side='right')
         self.home = ttk.Frame(self.root, padding=24)
@@ -34,15 +36,39 @@ class SettingsHome:
         self.cursor_button.pack(anchor='w', fill='x', pady=8)
         ttk.Label(self.home, text='Prévias reais, nove fontes de temas e aplicação confirmada com backups.', wraplength=800).pack(anchor='w', pady=(0, 24))
         ttk.Label(self.home, text='Salvar não significa recarregar. Recarregar o Hyprland pode executar hooks da sua configuração. O editor Lua é avançado: alterações podem afetar toda a sessão.', wraplength=800).pack(anchor='w', pady=20)
-        self.show_home()
+        self._display_home()
 
     def open_module(self, name: str) -> None:
         if not self.app.busy:
             getattr(self.app, name)()
 
     def show_home(self) -> None:
-        if self.app.busy and self.home.winfo_manager():
+        if self.app.busy:
             return
+        # Normal close handlers retain busy guards and unsaved-edit confirmation.
+        self.app._returning_home = True
+        refused_window = None
+        try:
+            for window, close in reversed(list(vars(self.app).get('_home_screens', []))):
+                if window.winfo_exists():
+                    close()
+                    if window.winfo_exists():
+                        refused_window = window
+                        break
+        finally:
+            self.app._returning_home = False
+        if refused_window is not None:
+            try:
+                refused_window.deiconify()
+                refused_window.lift()
+            except tk.TclError:
+                pass
+            return
+        self._display_home()
+        self.root.deiconify()
+        self.root.lift()
+
+    def _display_home(self) -> None:
         for frame in self.cursor_frames:
             frame.pack_forget()
         self.home.pack(fill='both', expand=True)

@@ -4,6 +4,7 @@ import json
 import tkinter as tk
 from tkinter import ttk, messagebox
 import hyprland_settings as hs
+from navigation import add_home_button
 
 
 class HyprlandDialog:
@@ -25,14 +26,17 @@ class HyprlandDialog:
         self.window.geometry('1180x850')
         self.window.minsize(900,650)
         self.window.protocol('WM_DELETE_WINDOW',self.close)
+
         self.style=ttk.Style(self.window)
         self.style.configure('Hyprland.Treeview',rowheight=29)
         self.style.configure('Hyprland.Apply.TButton',font=(app.font_family,11,'bold'),padding=(12,8))
         self._palette_colors=None
         self._palette_job=None
         self.window.bind('<Destroy>',self._cancel_palette_poll,add='+')
-        outer=ttk.Frame(self.window,padding=12);outer.pack(fill='both',expand=True)
-        ttk.Label(outer,text='Central de configurações do Hyprland',font=(app.font_family,17,'bold')).pack(anchor='w')
+        outer=ttk.Frame(self.window,padding=(12,6));outer.pack(fill='both',expand=True)
+        titlebar=ttk.Frame(outer);titlebar.pack(fill='x')
+        ttk.Label(titlebar,text='Central de configurações do Hyprland',font=(app.font_family,17,'bold')).pack(side='left')
+        self.home_button=add_home_button(app,self.window,self.close,parent=titlebar)
         ttk.Label(outer,text='Editar prepara alterações apenas na memória. Aplicar e recarregar salva e executa o Lua completo e hooks somente após sua confirmação.',wraplength=850).pack(anchor='w',pady=5)
         self.location=tk.StringVar(value='Localizando sessão e configuração ativa…')
         ttk.Label(outer,textvariable=self.location,wraplength=1100).pack(anchor='w')

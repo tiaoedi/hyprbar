@@ -6,6 +6,7 @@ from pathlib import Path
 from tkinter import ttk, messagebox
 import online
 import webbrowser
+from navigation import add_home_button
 
 
 class OnlineDialog:
@@ -23,6 +24,7 @@ class OnlineDialog:
         self.window.title('Baixar temas — GitHub Releases')
         self.window.geometry('1040x800'); self.window.minsize(900, 680)
         self.window.protocol('WM_DELETE_WINDOW', self.close)
+        self.home_button = add_home_button(app, self.window, self.close)
         outer = ttk.Frame(self.window, padding=16); outer.pack(fill='both', expand=True)
         ttk.Label(outer, text='Baixar temas de ícones' if icon_owner is not None else 'Baixar temas de cursor', font=(app.font_family, 18, 'bold')).pack(anchor='w')
         ttk.Label(outer, text='Pacotes Linux publicados em GitHub Releases (até 64 MiB). Nada é baixado ao abrir; instalar nunca aplica o tema.', wraplength=990).pack(anchor='w', pady=(5, 12))

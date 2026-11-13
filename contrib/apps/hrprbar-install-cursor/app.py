@@ -14,6 +14,7 @@ from PIL import Image, ImageTk, ImageDraw
 import cursor_manager as cm
 import settings
 import palette
+from navigation import add_home_button
 
 TITLE = 'hrprbar-install cursor'
 SHAPES = [('left_ptr','Ponteiro'),('hand2','Link'),('xterm','Texto'),('watch','Ocupado'),('crosshair','Precisão'),('fleur','Mover'),('sb_h_double_arrow','Horizontal'),('sb_v_double_arrow','Vertical')]
@@ -297,6 +298,7 @@ class App:
 
     def show_apps(self,apps,theme,size) -> None:
         dialog=tk.Toplevel(self.root);dialog.title('Reabrir aplicativos — confirmação necessária');dialog.geometry('760x420')
+        add_home_button(self,dialog,dialog.destroy)
         ttk.Label(dialog,text='Ambiente antigo/ausente não prova cache incorreto. Feche trabalhos não salvos antes de reabrir.\nSomente navegadores Chromium nativos compatíveis têm reabertura assistida; demais apps: manual.',wraplength=730).pack(padx=12,pady=12)
         listing=tk.Listbox(dialog,height=10);listing.pack(fill='both',expand=True,padx=12)
         for p in apps:listing.insert('end',f"PID {p['pid']} {Path(p['exe']).name} — {p['theme']} / {p['size']}")

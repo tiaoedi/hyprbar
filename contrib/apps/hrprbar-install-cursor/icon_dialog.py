@@ -6,6 +6,7 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from PIL import ImageTk
 import icons
+from navigation import add_home_button
 
 
 class IconDialog:
@@ -17,6 +18,7 @@ class IconDialog:
         self.window.title('Temas de ícones — instalar e trocar')
         self.window.geometry('1040x730'); self.window.minsize(880, 620)
         self.window.protocol('WM_DELETE_WINDOW', self.close)
+        self.home_button = add_home_button(app, self.window, self.close)
         outer = ttk.Frame(self.window, padding=16); outer.pack(fill='both', expand=True)
         ttk.Label(outer,text='Temas de ícones',font=(app.font_family,18,'bold')).pack(anchor='w')
         ttk.Label(outer,text='Selecionar, visualizar ou instalar não aplica. Somente “Aplicar ícones…” altera GTK3/4 e GSettings icon-theme. Cursores não serão alterados.',wraplength=990).pack(anchor='w',pady=8)
@@ -56,8 +58,12 @@ class IconDialog:
             self.status.set('Operação em andamento; aguarde para fechar.'); return
         if self.online_dialog is not None and self.online_dialog.window.winfo_exists():
             self.online_dialog.close()
+            if self.online_dialog is not None and self.online_dialog.window.winfo_exists():
+                return
         if self.catalog_dialog is not None and self.catalog_dialog.window.winfo_exists():
             self.catalog_dialog.close()
+            if self.catalog_dialog is not None and self.catalog_dialog.window.winfo_exists():
+                return
         self.generation += 1; self.discovery_generation += 1
         self.window.destroy(); self.app.icon_dialog = None
 
@@ -82,7 +88,7 @@ class IconDialog:
                 self.search.set(''); self.tree.selection_remove(*self.tree.selection()); self.choose()
                 if len(names) == 1 and self.tree.exists(names[0]): self.tree.selection_set(names[0]); self.choose()
                 self.status.set('Instalado(s): '+', '.join(names)+'. Nada foi aplicado; escolha e confirme Aplicar ícones…')
-            else: self.status.set(f'{len(themes)} temas de ícones válidos. Selecionar não aplica.')
+            else: self.status.set(f'{len(themes)} temas de ícones encontrados. Validação completa antes de aplicar; selecionar não aplica.')
         self.app.worker(icons.discover,ready)
 
     def filter(self) -> None:
@@ -108,7 +114,7 @@ class IconDialog:
         def render():
             found = []; failures = []
             for sample in theme.samples[:6]:
-                try: found.append((sample.name,icons.preview(sample)))
+                try: found.append((sample.name,icons.preview(sample, root=theme.path, root_identity=theme.root_identity)))
                 except (ValueError,OSError) as exc: failures.append(str(exc))
             return found, failures
         def ready(result,error):
