@@ -13,6 +13,10 @@ O GitHub oferece arquivos ZIP/TAR do código-fonte; consulte [Releases](https://
 
 Para iniciar automaticamente no Hyprland, adicione `exec-once = hyprbar --daemon` à configuração do compositor. No Niri, consulte [`docs/user/compositor-settings/niri.mdx`](docs/user/compositor-settings/niri.mdx). A documentação complementar está em [`docs/user/getting-started/installation.mdx`](docs/user/getting-started/installation.mdx).
 
+## Instalação em outro PC: Hyprbar e aplicativos auxiliares
+
+Siga o [guia completo em português](INSTALACAO-PT-BR.md) para instalar o Hyprbar, os plugins próprios, a central de configurações, os gerenciadores de ícones/cursores, o tema `hyprbar-1`, os ícones, a fonte e a extensão **Hyprbar · Nova aba**. Também estão documentadas as integrações opcionais de cores para Chrome/Brave e GTK4. O guia separa dependências, instalação, abertura e aplicação de configurações, e informa quais adaptações locais ainda exigem backup separado. Baixar o repositório não restaura automaticamente todo o desktop nem instala todos os auxiliares.
+
 ## Compatibilidade verificada
 
 | Ambiente | Verificação deste fork |
