@@ -56,6 +56,27 @@ O clone preserva o programa, não seus temas baixados nem configurações pessoa
 
 É um aplicativo Python/Tkinter independente do núcleo, não instalado pelo instalador principal. Consulte [dependências, instalação segura e limites da troca em aplicativos abertos](contrib/apps/hrprbar-install-cursor/README.md). A aplicação sincroniza as configurações de cursor; alguns aplicativos precisam ser reabertos, sempre com confirmação.
 
+## Instalar o cursor hyprbar-1 em outro PC
+
+O tema `hyprbar-1` está incluído neste repositório, com Xcursor e Hyprcursor, fontes SVG, licença e prévia. Para instalar em outro PC Linux ou depois de formatar:
+
+```sh
+git clone --branch main https://github.com/tiaoedi/hyprbar.git
+cd hyprbar
+mkdir -p "$HOME/.local/share/icons"
+if [ -e "$HOME/.local/share/icons/hyprbar-1" ] || [ -L "$HOME/.local/share/icons/hyprbar-1" ]; then
+    printf '%s\n' 'hyprbar-1 já existe; nenhuma cópia foi realizada.'
+else
+    cp -aT --no-clobber tools/hyprbar-cursors/hyprbar-1 "$HOME/.local/share/icons/hyprbar-1"
+fi
+```
+
+Se já tiver clonado o repositório, use a pasta existente em vez de repetir `git clone` e `cd hyprbar`.
+
+Depois, selecione **hyprbar-1** nas configurações de cursor do desktop ou na central acima. Escolha **28 px** para usar o tamanho recomendado aqui; o tema também oferece 24, 32, 40, 48 e 64 px. Copiar instala apenas o tema: não o ativa, não compila o Hyprbar e não transfere configurações pessoais. Alguns aplicativos abertos podem precisar ser reabertos para atualizar o cursor. Não use `sudo`.
+
+Os arquivos ficam em [`tools/hyprbar-cursors/hyprbar-1/`](tools/hyprbar-cursors/hyprbar-1/), e os detalhes em [`tools/hyprbar-cursors/README.md`](tools/hyprbar-cursors/README.md).
+
 ## Compilar do código-fonte
 
 Consulte [`BUILDING.md`](BUILDING.md) para dependências e instruções por distribuição. Exemplo:
