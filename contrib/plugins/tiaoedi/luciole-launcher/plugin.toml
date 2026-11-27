@@ -1,0 +1,15 @@
+id = "tiaoedi/luciole-launcher"
+name = "Luciole Launcher"
+version = "1.0.0"
+plugin_api = 22
+author = "tiaoedi"
+license = "MIT"
+icon = "system-file-manager"
+description = "Abre o gerenciador de arquivos Luciole pelo launcher do Hyprbar."
+dependencies = ["luciole"]
+
+[[launcher_provider]]
+id = "luciole"
+entry = "launcher.luau"
+prefix = "luciole"
+glyph = "folder"
